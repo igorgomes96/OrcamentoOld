@@ -1,0 +1,74 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-controller="navigationCtrl as navCtrl">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <button class="btn btn-default" id="btn-collapse-menu"><i class="fa fa-bars"></i></button>
+        <a class="navbar-brand" ui-sref="containerHome.selecaoCiclo" style="margin-left: 35px;">Gestão de Funcionários e Orçamento</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+       
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href>
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <li ng-repeat="m in navCtrl.menu" ng-if="m.visible">
+                    <a ui-sref="{{m.state}}" ng-class="{'active': m.state == navCtrl.stateAtual()}" ng-click="navCtrl.toggleExpand(m, $index)">
+                        <i ng-class="m.icone" style="margin-right: 5px;"></i> 
+                        {{m.texto}}<span ng-if="m.subMenu.length > 0" class="fa fa-angle-left" style="float: right;"></span>
+                    </a>
+                    <ul class="nav nav-second-level" id="itemMenu{{$index}}" ng-if="m.subMenu.length > 0" style="display: none;">
+                        <li ng-repeat="s in m.subMenu" ng-if="s.visible">
+                            <a ui-sref="{{s.state}}" ng-class="{'active': s.state == navCtrl.stateAtual()}">{{s.texto}}</a>
+                        </li>
+                    </ul>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        //Lê o cookie
+        var navCollapse = JSON.parse($.cookie("nav-collapse"));
+
+        //Ouclta nav-bar se o valor do cookie estiver definido
+        if (navCollapse != undefined) {
+            if (!navCollapse) {
+                $('#side-menu').show();
+                $('#page-wrapper').css('marginLeft', '250px');
+            } else {
+                $('#page-wrapper').css('marginLeft', '0');
+            }
+        }
+    });
+
+</script>

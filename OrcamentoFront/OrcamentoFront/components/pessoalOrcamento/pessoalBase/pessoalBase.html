@@ -1,0 +1,207 @@
+<ui-panel titulo="Recursos da Base" nome="panel-base">
+    <div ng-if="ct.funcionarios.length">
+
+        <div class="pills-in-panel">
+            <ul class="nav nav-pills">
+                <li ng-class="{'active': aba == 'Associados'}">
+                    <a href ng-click="ct.mudaAba('Associados')">Dados</a>
+                </li>
+                <li ng-class="{'active': aba == 'Férias'}">
+                    <a href ng-click="ct.mudaAba('Férias')">Férias</a>
+                </li>
+
+                <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Horas Extras'}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href role="button" aria-haspopup="true" aria-expanded="false">
+                        Horas Extras <span ng-hide="ct.PercHE=='Aberto'">{{ct.PercHE}}<span ng-hide="!ct.PercHE">%</span></span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='170';">170%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='100';">100%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='75';">75%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='60';">60%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='50';">50%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='Aberto';">Geral (para o CR)</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Adicional Noturno'}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href role="button" aria-haspopup="true" aria-expanded="false">
+                        Horas Noturnas <span ng-hide="ct.PercHN=='Aberto'">{{ct.PercHN}}<span ng-hide="!ct.PercHN">%</span></span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='20';">20%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='30';">30%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='40';">40%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='50';">50%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='60';">60%</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Adicional Noturno');ct.PercHN='Aberto';">Geral (para o CR)</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-class="{'active': aba == 'Gratificações'}">
+                    <a href ng-click="ct.mudaAba('Gratificações')">Gratificações</a>
+                </li>
+
+                <li ng-class="{'active': aba == 'Produtividade'}">
+                    <a href ng-click="ct.mudaAba('Produtividade')">Produtividade</a>
+                </li>
+
+                <li ng-class="{'active': aba == 'Comissão'}">
+                    <a href ng-click="ct.mudaAba('Comissão')">Comissão</a>
+                </li>
+
+                <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Outros'}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href role="button" aria-haspopup="true" aria-expanded="false">
+                        Outros <span ng-hide="!ct.OutrosCategoria">({{ct.OutrosCategoria}})</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href ng-click="ct.mudaAba('Outros');ct.OutrosCategoria='Pro-Labore';">Pro-Labore</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Outros');ct.OutrosCategoria='PGP / PGI';">PGP / PGI</a>
+                        </li>
+                        <li>
+                            <a href ng-click="ct.mudaAba('Outros');ct.OutrosCategoria='Ajuda de Custo';">Ajuda de Custo</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="row" ng-if="aba == 'Associados'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/dadosAssociados.html'">
+            </div>
+        </div>
+
+
+        <div class="row" ng-if="aba == 'Férias'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/ferias.html'">
+            </div>
+        </div>
+
+
+        <div class="row" ng-if="aba == 'Horas Extras'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/horasExtras.html'">
+            </div>
+        </div>
+
+        <div class="row" ng-if="aba == 'Adicional Noturno'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/adNoturno.html'">
+            </div>
+        </div>
+
+        <div class="row" ng-if="aba == 'Gratificações' || aba == 'Produtividade' || aba == 'Comissão' || aba == 'Outros'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/outros.html'">
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="ct.saveFuncionarios(ct.funcionarios)">Salvar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-if="ct.cr && !ct.funcionarios.length">
+        Nenhum funcionário cadastrado no CR {{ct.cr.Codigo}}
+    </div>
+
+    <div ng-if="!ct.cr">
+        Selecione um CR
+    </div>
+
+</ui-panel>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-tranferir-cr" tabindex="-1" role="dialog" aria-labelledby="tranferencia-cr-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="tranferencia-cr-title">Transferência de Recursos para outro CR</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Funcionário</dt>
+                            <dd>{{ct.funcionarioTransf.FuncionarioMatricula}} - {{ct.funcionarioTransf.Funcionario.Nome}}</dd>
+                            <dt>Cargo</dt>
+                            <dd>{{ct.funcionarioTransf.Funcionario.Cargo.NomeCargo}}</dd>
+                            <dt>CR de Origem</dt>
+                            <dd>{{ct.funcionarioTransf.Funcionario.CentroCustoCod}}</dd>
+                        </dl>
+
+                        <form role="form" name="form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>CR de Destino</label>
+                                    <input class="form-control" type="text" name="input-cr" required ng-model="ct.funcionarioTransf.CRDestino">
+                                    <p class="help-block">Digite o Código do CR de destino.</p>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Data Início</label>
+                                    <input type="date" class="form-control" name="input-data" required ng-model="ct.funcionarioTransf.DataInicio">
+                                    <p class="help-block">Digite a data Início.</p>
+                                </div>
+                            </div> -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mês de Transferência</label>
+                                    <select class="form-control" ng-options="m.Codigo as (m.Mes | date:'MMM/yy') for m in ct.ciclo.Meses" required ng-model="ct.funcionarioTransf.MesTransferencia"></select>
+                                    <p class="help-block">Digite a data Início.</p>
+                                </div>
+                            </div>
+
+                            
+                        </form>
+                    </div>
+                </div>                  
+            </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ct.salvarTransferencia(ct.funcionarioTransf)">Salvar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

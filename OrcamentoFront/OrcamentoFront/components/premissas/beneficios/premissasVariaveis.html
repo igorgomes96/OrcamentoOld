@@ -1,0 +1,101 @@
+<ui-panel titulo="Variáveis" nome="panel-variaveis">
+
+	<div class="row">
+
+		<div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-empresa">Filtrar Empresa</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <select class="form-control" name="input-filtro-empresa" id="input-filtro-empresa" ng-model="ct.filtroEmpresa" ng-options="e.Codigo as e.Nome for e in ct.empresas" ng-change="ct.loadVariaveis(ct.filtroEmpresa, ct.filtroCargo)"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-cargo">Filtrar Cargo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <select class="form-control" name="input-filtro-cargo" id="input-filtro-cargo" ng-model="ct.filtroCargo" ng-options="c.Codigo as c.NomeCargo for c in ct.cargos" ng-change="ct.loadVariaveis(ct.filtroEmpresa, ct.filtroCargo)">
+                        	<option value="">(Todos os Cargos)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	</div>
+
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-expressao">Filtrar Expressão</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="text" name="input-filtro-expressao" id="input-filtro-expressao" class="form-control" ng-model="ct.filtroExpressao" placeholder="Digite uma expressão para filtrar a tabela" ng-model-options="{debounce:700}">
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<hr>
+
+	<div class="row">
+		<div class="col-md-12">
+			
+			<table class="table table-striped table-condensed">
+		        <thead>
+		            <tr>
+		                <th width="30%">Cargo</th>
+		                <th width="15%">Carga Horária</th>
+		                <th width="25%">Empresa</th>
+		                <th width="15%">Participação nos Lucros</th>
+		                <th width="15%">Remuneração Variável</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr ng-repeat="v in ct.variaveis | filter:ct.filtroExpressao">
+		            	<td>{{v.Cargo.NomeCargo}}</td>
+		                <td>{{v.CargaHoraria}} horas</td>
+		                <td>{{v.Empresa.Nome}}</td>
+		                <td>
+		                    <div class="input-group">
+		                        <input type="text" class="form-control input-sm" ng-model="v.ParticipacaoLucros">
+		                        <span class="input-group-addon">%</span>
+		                    </div>
+		                </td>
+		                <td>
+		                    <div class="input-group">
+		                        <input type="text" class="form-control input-sm" ng-model="v.RemuneracaoVariavel">
+		                        <span class="input-group-addon">%</span>
+		                    </div>
+		                </td>
+		            </tr>
+		        </tbody>
+		    </table>
+
+		    <button class="btn btn-primary" ng-click="ct.savePATs(ct.pats)">Salvar</button>
+
+
+		</div>
+	</div>
+
+</ui-panel>

@@ -1,0 +1,66 @@
+<form class="form" ng-controller="orcamentoFiltrosCtrl">
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-torre">Torre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <select class="form-control" ng-model="filtroTorre" ng-options="t for t in ['Torre 1', 'Torre 2', 'Torre 3', 'Torre 4']">
+                            <option value=''>(Todas as Torres)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-torre">Coordenação</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <select class="form-control" ng-model="filtroCoordenacao" ng-options="t for t in ['Coordenação 1', 'Coordenação 2', 'Coordenação 3', 'Coordenação 4']">
+                            <option value=''>(Todas as Coordenações)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-filtro-torre">Centro de Resultado</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <select name="input-filtro-torre" id="input-filtro-torre" ng-options="c.Codigo + ' - ' + c.Descricao for c in userContainer.CRs track by c.Codigo" class="form-control" ng-model="crAtual">
+                            <option value="">(Selecione um Centro de Resultado)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    
+</form>

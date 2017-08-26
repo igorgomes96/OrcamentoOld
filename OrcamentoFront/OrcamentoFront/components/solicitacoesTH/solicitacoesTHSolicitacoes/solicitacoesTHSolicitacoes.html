@@ -1,0 +1,25 @@
+<ui-panel titulo="Abrir Solicitação" nome="panel-abrir-solicitacao">
+
+    <form role="form" name="form">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="select-tipo-solicitacao">Tipo de Solicitação</label>
+                    <select id="select-tipo-solicitacao" class="form-control" ng-options="s for s in ['Contratação', 'Desligamento','Alteração de Cargo', 'Alteração de Salário', 'Alteração de Cargo e Salário', 'Outros']" ng-model="solicitacao">
+                        <option value=''></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHContratacoes/solicitacoesTHContratacoes.html'" ng-if="solicitacao == 'Contratação'"></div>
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHDemissoes/solicitacoesTHDemissoes.html'" ng-if="solicitacao == 'Desligamento'"></div>
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCargo.html'" ng-if="solicitacao == 'Alteração de Cargo'"></div>
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesSalario.html'" ng-if="solicitacao == 'Alteração de Salário'"></div>
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCargoSalario.html'" ng-if="solicitacao == 'Alteração de Cargo e Salário'"></div>
+        <div ng-include="'Views/components/solicitacoesTH/solicitacoesTHOutros/solicitacoesTHOutros.html'" ng-if="solicitacao == 'Outros'"></div>
+
+
+    </form>
+</ui-panel>

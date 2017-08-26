@@ -1,0 +1,141 @@
+<div id="form-alteracao-cargo" ng-controller="solicitacoesTHAlteracoesCtrl as ctAlteracoes">
+
+    <div class="row">
+        <div class="col-md-12">
+            <label for="input-matricula-alteracao-cargo-salario">Matrícula</label>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 13px;">
+
+        <div class="col-md-3">
+            <div class="input-group">
+                <input id="input-matricula-alteracao-cargo" type="text" class="form-control" ng-model="ctAlteracoes.novaSolicitacao.FuncionarioMatricula">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="ctAlteracoes.buscaFuncionario(ctAlteracoes.novaSolicitacao.FuncionarioMatricula)"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default">Listar todos <i class="fa fa-search-plus"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="input-nome-funcionario">Nome do Funcionário</label>
+                <input id="input-nome-funcionario" type="text" class="form-control" disabled ng-model="ctAlteracoes.funcionario.Nome">
+            </div>
+        </div>
+    
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="input-cargo-anterior">Cargo Anterior</label>
+                <input id="input-cargo-anterior" type="text" class="form-control" disabled ng-model="ctAlteracoes.funcionario.Cargo.NomeCargo">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="input-ch-anterior">CH Anterior</label>
+                <input id="input-ch-anterior" type="text" class="form-control" disabled ng-model="ctAlteracoes.funcionario.CargaHoraria">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="input-empresa">Empresa</label>
+                <input id="input-empresa" type="text" class="form-control" disabled ng-model="ctAlteracoes.funcionario.EmpresaNome">
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="input-salario-anterior">Salário Anterior</label>
+                <input id="input-salario-anterior" type="text" class="form-control" disabled ng-model="ctAlteracoes.funcionario.Salario">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="input-salario-novo">Novo Salário</label>
+                <input id="input-salario-novo" type="text" class="form-control" required ng-model="ctAlteracoes.novaSolicitacao.SalarioNovo" ng-disabled="!ctAlteracoes.funcionario" ng-change="ctAlteracoes.calculaPercentual(ctAlteracoes.funcionario.Salario, ctAlteracoes.novaSolicitacao.SalarioNovo)">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="input-alteracao-salario-percentual">Percentual de aumento</label>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <input id="input-alteracao-salario-percentual" disabled type="text" class="form-control" ng-model="ctAlteracoes.percentual">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+    
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="select-novo-cargo">Novo Cargo</label>
+                <select id="select-novo-cargo" class="form-control" ng-options="c.CargoNome for c in ctAlteracoes.cargosCH" ng-model="ctAlteracoes.novaSolicitacao.Cargo" ng-disabled="!ctAlteracoes.funcionario" required>
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="select-nova-ch">Nova Carga Horária</label>
+                <select id="select-nova-ch" class="form-control" ng-options="c for c in ctAlteracoes.novaSolicitacao.Cargo.CHs" ng-model="ctAlteracoes.novaSolicitacao.CHNovo" ng-disabled="!ctAlteracoes.funcionario" required>
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="textarea-info-adicionais-alteracao-salario">Informações Adicionais</label>
+                <textarea id="textarea-info-adicionais-alteracao-salario" placeholder="Digite aqui as observações e as informações adicionais" rows="3" class="form-control" ng-model="ctAlteracoes.descricao" ng-disabled="!ctAlteracoes.funcionario"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary pull-right" ng-click="ctAlteracoes.saveAlteracoes(ctAlteracoes.novaSolicitacao)" ng-disabled="form.$invalid">
+        Enviar Solicitação
+    </button>
+    <button class="btn btn-default pull-right" style="margin-right: 10px;" ng-click="ctAlteracoes.cancelarEdicao()" ng-disabled="!ctAlteracoes.funcionario">
+        Cancelar
+    </button>
+
+</div>

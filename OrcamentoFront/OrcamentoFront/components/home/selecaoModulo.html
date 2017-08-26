@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-dashboard fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Dashboard</div>
+                        <div>Relatórios e Gráficos</div>
+                    </div>
+                </div>
+            </div>
+            <a ui-sref="menuContainer.dashboard">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para Dashboard</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-money fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Orçamento</div>
+                        <div>Orçamento de pessoas</div>
+                    </div>
+                </div>
+            </div>
+            <a ui-sref="menuContainer.pessoalOrcamento">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para Orçamento</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-pencil fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Premissas</div>
+                        <div>Premissas de cálculo</div>
+                    </div>
+                </div>
+            </div>
+            <a ui-sref="menuContainer.premissasEncargos">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para Premissas</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-random fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Simulações</div>
+                        <div>Simulações de orçamento</div>
+                    </div>
+                </div>
+            </div>
+            <a ui-sref="menuContainer.simulacoes">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para Premissas</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a ui-sref="containerHome.selecaoCiclo">
+            <i class="fa fa-arrow-circle-left"></i> Voltar
+        </a>
+    </div>
+</div>
+
+<hr>
+
+<div class="row" ng-show="ct.ciclo.StatusCod == 1">
+    <div class="col-md-12">
+        <button class="btn btn-danger">
+            <i class="fa fa-lock"></i> Fechar Ciclo
+        </button>
+    </div>
+    
+</div>

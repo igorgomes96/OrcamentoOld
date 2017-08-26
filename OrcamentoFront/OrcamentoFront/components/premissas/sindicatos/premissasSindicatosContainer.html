@@ -1,0 +1,48 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Sindicatos</h1>
+        </div>
+    </div>
+
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="form-group" ng-submit="ctMain.sendFile()">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="custom-file-upload">
+                                    <input type="file" name="file">
+                                    <i class="fa fa-upload"></i> Importar base do Excel
+                                </label>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-6">
+                                <!-- style="display: none;" -->
+                                <input type="text" name="input-files-label" class="form-control" id="input-files-label" disabled style="display: none;">
+                            </div>
+                                <!--<button class="btn btn-default" ng-click="ctMain.uploadFiles(ctMain.files)" style="margin-top: 10px"/>Upload</div>-->
+                                <input type="submit" class="btn btn-success" value="Upload" id="button-upload-file" style="display: none;"/>
+                            
+                        </div>
+
+                    <!--</div> -->
+                    </form>
+                </div>
+            </div>
+
+			<div ui-view="sindicatos"></div>
+
+		</div>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->

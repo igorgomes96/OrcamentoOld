@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gestão de TH</title>
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+
+
+    <!-- Bootstrap -->
+    <!-- Última versão CSS compilada e minificada -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Tema opcional -->
+   <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+
+
+
+
+    <!-- MetisMenu CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Loader.css -->
+    <link href="lib/loader.css/loaders.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="orcamentoApp">
+
+    <div id="wrapper">
+        <div ui-view></div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script> 
+
+    <!-- Bootstrap -->
+    <!-- <script src="lib/bootstrap/js/bootstrap.min.js"></script>-->
+
+
+    <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+
+
+
+    <!-- Custom Theme JavaScript -->
+    <!-- <script src="js/sb-admin-2.js"></script> -->
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
+
+    <!-- Loader.css -->
+    <script src="lib/loader.css/loaders.css.js"></script>
+
+    <!-- App -->
+    <script src="js/app.js"></script>
+
+    <!-- Directives -->
+    <script src="lib/uiInputSiblingsDirective.js"></script>
+    <script src="lib/uiPanelDirective.js"></script>
+
+    <!-- Routes -->
+    <script src="js/config/routeConfig.js"></script>
+
+    <!-- Service -->
+    <script src="js/services/localStorageService.js"></script>
+    <script src="js/services/sharedDataService.js"></script>
+    <script src="js/services/messagesService.js"></script>
+    <script src="js/services/uploadFileService.js"></script>
+
+    <!-- APIs -->
+    <script src="js/APIs/autenticacaoAPI.js"></script>
+    <script src="js/APIs/cargosAPI.js"></script>
+    <script src="js/APIs/centrosCustosAPI.js"></script>
+    <script src="js/APIs/ciclosAPI.js"></script>
+    <script src="js/APIs/contratacoesAPI.js"></script>
+    <script src="js/APIs/contratacoesMesAPI.js"></script>
+    <script src="js/APIs/diasIndenizadosAPI.js"></script>
+    <script src="js/APIs/filiaisAPI.js"></script>
+    <script src="js/APIs/funcionariosAPI.js"></script>
+    <script src="js/APIs/usuariosAPI.js"></script>
+    <script src="js/APIs/transferenciasAPI.js"></script>
+    <script src="js/APIs/importacoesAPI.js"></script>
+    <script src="js/APIs/encargosAPI.js"></script>
+    <script src="js/APIs/empresasAPI.js"></script>
+    <script src="js/APIs/sindicatosAPI.js"></script>
+    <script src="js/APIs/mesesOrcamentoAPI.js"></script>
+    <script src="js/APIs/conveniosMedAPI.js"></script>
+    <script src="js/APIs/salariosAPI.js"></script>
+    <script src="js/APIs/cidadesAPI.js"></script>
+    <script src="js/APIs/actsAPI.js"></script>
+    <script src="js/APIs/sthsAPI.js"></script>
+    <script src="js/APIs/solicitacoesTHAPI.js"></script>
+    <script src="js/APIs/solicitacoesAlteracoesCargosAPI.js"></script>
+    <script src="js/APIs/solicitacoesAlteracoesSalariosAPI.js"></script>
+    <script src="js/APIs/solicitacoesContratacoesAPI.js"></script>
+    <script src="js/APIs/solicitacoesDesligamentosAPI.js"></script>
+    <script src="js/APIs/setoresAPI.js"></script>
+    <script src="js/APIs/perfisAcessoAPI.js"></script>
+    <script src="js/APIs/reajustesAPI.js"></script>
+    <script src="js/APIs/patAPI.js"></script>
+    <script src="js/APIs/variaveisAPI.js"></script>
+    <script src="js/APIs/reajConvenioMedicoAPI.js"></script>
+    <script src="js/APIs/hesBaseAPI.js"></script>
+    <script src="js/APIs/adNoturnosBaseAPI.js"></script>
+    <script src="js/APIs/valoresAbertosCRsAPI.js"></script>
+    <script src="js/APIs/valoresAbertosBaseAPI.js"></script>
+
+    <!-- Controllers -->
+    <script src="components/navigation/navigationCtrl.js"></script>
+    <!-- <script src="components/home/homeAdministradorCtrl.js"></script> -->
+    <script src="components/home/selecaoCicloCtrl.js"></script>
+    <script src="components/home/selecaoModuloCtrl.js"></script>
+    <script src="components/orcamentoFiltros/orcamentoFiltrosCtrl.js"></script>
+    <script src="components/pessoalOrcamento/pessoalOrcamentoCtrl.js"></script>
+    <script src="components/pessoalOrcamento/pessoalBase/pessoalBaseCtrl.js"></script>
+    <script src="components/pessoalOrcamento/pessoalContratacoes/pessoalContratacoesCtrl.js"></script>
+    <script src="components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasCtrl.js"></script>
+    <script src="components/autenticacao/autenticacaoCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHContratacoes/solicitacoesTHContratacoesCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHDemissoes/solicitacoesTHDemissoesCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHOutros/solicitacoesTHOutrosCtrl.js"></script>
+    <script src="components/solicitacoesTH/solicitacoesTHHistorico/solicitacoesTHHistoricoCtrl.js"></script>
+    <script src="components/premissas/premissasCtrl.js"></script>
+    <script src="components/premissas/encargos/encargosPorEmpresaCtrl.js"></script>
+    <script src="components/premissas/encargos/encargosPorFilialCtrl.js"></script>
+    <script src="components/premissas/cargosSalarios/premissasCargosCtrl.js"></script>
+    <script src="components/premissas/beneficios/premissasConvenioMedicoCtrl.js"></script>
+    <script src="components/premissas/beneficios/premissasReajConvenioMedicoCtrl.js"></script>
+    <script src="components/premissas/sindicatos/premissasSindicatosCtrl.js"></script>
+    <script src="components/premissas/beneficios/premissasVariaveisCtrl.js"></script>
+    <script src="components/premissas/beneficios/premissasPatCtrl.js"></script>
+    <script src="components/premissas/beneficios/premissasVTCtrl.js"></script>
+    <script src="components/usuarios/gestaoUsuariosCtrl.js"></script>
+    <script src="components/dashboard/dashboardCtrl.js"></script>
+
+    <!-- Filters -->
+    <script src="js/filters/ellipsisFilter.js"></script>
+
+
+    <!-- Interceptors -->
+    <script src="js/config/interceptorsConfig.js"></script>
+    <script src="js/interceptors/anexaTokenInterceptor.js"></script>
+    <script src="js/interceptors/errorInterceptor.js"></script>
+
+    <!-- Values -->
+    <script src="js/values/configValue.js"></script>
+
+    <!-- Lib -->
+    <script src="lib/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+</body>
+
+</html>

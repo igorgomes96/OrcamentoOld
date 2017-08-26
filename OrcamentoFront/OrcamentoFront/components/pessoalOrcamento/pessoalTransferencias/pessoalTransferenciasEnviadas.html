@@ -1,0 +1,31 @@
+<ui-panel titulo="Transferências - Solicitações Enviadas" nome="panel-transferencias-enviadas">
+    <table class="table table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Salário</th>
+                <th>CR de Destino</th>
+                <th>Data de Solicitação</th>
+                <th>Mês de Transferência</th>
+                <th>Status</th>
+                <!-- <th></th> -->
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="t in ct.transfEnviadas">
+                <td>{{t.FuncionarioMatricula}}</td>
+                <td>{{t.Funcionario.Nome | limitTo:20}}<span ng-show="t.Funcionario.Nome.length > 20">...</span></td>
+                <td>{{t.Cargo.NomeCargo | limitTo:20}}<span ng-show="t.Cargo.NomeCargo.length > 20">...</span></td>
+                <td>R$ {{t.Funcionario.Salario | number:2}}</td>
+                <td>{{t.CRDestino}}</td>
+                <td>{{t.DataSolicitacao | date:'dd-MM-yyyy'}}</td>
+                <td>{{t.DataInicio | date:'MMM-yy'}}</td>
+                <td>{{t.Status}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</ui-panel>

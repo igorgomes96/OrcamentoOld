@@ -1,0 +1,101 @@
+<table class="table table-striped table-condensed" ng-if="ct.PercHE != 'Aberto'">
+    <thead>
+        <tr>
+            <th width="7%">Matrícula</th>
+            <th width="20%">Nome</th>
+            <th width="16%">Cargo</th>
+            <th ng-repeat="m in ct.ciclo.Meses" class="text-center">
+                {{m.Mes | date:'MMM'}}
+            </th>
+        </tr>
+    </thead>
+
+    <tbody ng-if="ct.PercHE == 170">
+        <form name="formHE170">
+            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
+                <td>{{h.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in h.HEs170">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+
+    <tbody ng-if="ct.PercHE == 100">
+        <form name="formHE100">
+            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
+                <td>{{h.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in h.HEs100">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+
+    <tbody ng-if="ct.PercHE == 75">
+        <form name="formHE75">
+            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
+                <td>{{h.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in h.HEs75">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+
+    <tbody ng-if="ct.PercHE == 60">
+        <form name="formHE60">
+            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
+                <td>{{h.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in h.HEs60">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+
+    <tbody ng-if="ct.PercHE == 50">
+        <form name="formHE50">
+            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
+                <td>{{h.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in h.HEs50">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+
+
+    </tbody>
+</table>
+
+
+<table class="table table-striped table-condensed" ng-if="ct.PercHE == 'Aberto'">
+    <thead>
+        <tr>
+            <th ng-repeat="m in ct.ciclo.Meses" class="text-center">
+                {{m.Mes | date:'MMM/yy'}}
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <form name="formAberto">
+            <tr ui-input-parent>
+                <td ng-repeat="he in ct.horasExtrasAbertas | orderBy:'CodMesOrcamento'">
+                    <input type="text" class="form-control text-center input-sm" ng-model="he.Valor" required ui-input-child>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>

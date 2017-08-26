@@ -1,0 +1,81 @@
+<div id="form-demissao" ng-controller="solicitacoesTHDemissoesCtrl as ctDemissoes">
+
+    <div class="row">
+        <div class="col-md-12">
+            <label for="input-matricula-desligamento">Matrícula</label>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 13px;">
+        <div class="col-md-3">
+            <div class="input-group">
+                <input id="input-matricula-desligamento" type="text" class="form-control" ng-model="ctDemissoes.novaSolicitacao.FuncionarioMatricula" ng-disabled="ctDemissoes.NomeFuncionario" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="ctDemissoes.buscaFuncionario(ctDemissoes.novaSolicitacao.FuncionarioMatricula)"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default">Listar todos <i class="fa fa-search-plus"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="input-nome">Nome do Funcionário</label>
+                <input id="input-nome" type="text" class="form-control" ng-model="ctDemissoes.NomeFuncionario" disabled>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="input-data-desligamento">Data de Desligamento</label>
+                <input id="input-data-desligamento" name="input-data-desligamento" type="date" class="form-control" ng-model="ctDemissoes.novaSolicitacao.DataDesligamento" ng-disabled="!ctDemissoes.NomeFuncionario" required>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="select-motivo-desligamento">Motivo</label>
+                <select id="select-motivo-desligamento" name="select-motivo-desligamento" class="form-control" ng-options="m for m in ['Motivo 1', 'Motivo 2', 'Motivo 3', 'Outros (Especificar)']" ng-model="ctDemissoes.novaSolicitacao.Motivo" ng-disabled="!ctDemissoes.NomeFuncionario" required>
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="select-tipo-aviso">Tipo de Aviso</label>
+                <select id="select-tipo-aviso" name="select-tipo-aviso" class="form-control" ng-options="t for t in ['Trabalhado', 'Indenizado']" ng-model="ctDemissoes.novaSolicitacao.TipoAviso" ng-disabled="!ctDemissoes.NomeFuncionario" required>
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="textarea-info-adicionais-desligamento">Informações Adicionais</label>
+                <textarea id="textarea-info-adicionais-desligamento" name="textarea-info-adicionais-desligamento" ng-model="ctDemissoes.descricao" placeholder="Digite aqui as observações e as informações adicionais" rows="3" class="form-control" ng-disabled="!ctDemissoes.NomeFuncionario"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary pull-right" ng-click="ctDemissoes.saveSolicitacao(ctDemissoes.novaSolicitacao)" ng-disabled="form.$invalid">
+        Enviar Solicitação
+    </button>
+    <button class="btn btn-default pull-right" style="margin-right: 10px;" ng-click="ctDemissoes.cancelarEdicao()" ng-disabled="!ctDemissoes.NomeFuncionario">
+        Cancelar
+    </button>
+
+
+</div>

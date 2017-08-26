@@ -1,0 +1,90 @@
+ <div id="form-contratacao" ng-controller="solicitacoesTHContratacoesCtrl as ctContratacoes">
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="input-cidade">Empresa</label>
+                <select id="input-cidade" class="form-control" ng-options="c.Codigo as (c.Codigo + ' - ' + c.Nome) for c in ctContratacoes.empresas" ng-model="ctContratacoes.novaSolicitacao.EmpresaCod" ng-change="ctContratacoes.alteraEmpresa(ctContratacoes.novaSolicitacao.EmpresaCod)">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="select-cr-contratacao">CR de destino</label>
+                <select id="select-cr-contratacao" class="form-control" ng-options="c.Codigo as (c.Codigo + ' - ' + c.Descricao) for c in ctContratacoes.crs" ng-model="ctContratacoes.novaSolicitacao.CRDestino">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="input-cidade">Cidade</label>
+                <select id="input-cidade" class="form-control" ng-options="c for c in ctContratacoes.cidades" ng-model="ctContratacoes.novaSolicitacao.CidadeNome">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="select-cargo-contratacao">Cargo</label>
+                <select id="select-cargo-contratacao" class="form-control" ng-options="c.CargoNome for c in ctContratacoes.cargosCH" ng-model="ctContratacoes.novaSolicitacao.Cargo">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="select-ch">Carga Horária</label>
+                <select id="select-ch" class="form-control" ng-options="c for c in ctContratacoes.novaSolicitacao.Cargo.CHs" ng-model="ctContratacoes.novaSolicitacao.CargaHoraria">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="input-salario-contratacao">Salário</label>
+                <input id="input-salario-contratacao" class="form-control" type="text" ng-model="ctContratacoes.novaSolicitacao.Salario">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="input-qtda-contratacao">Qtda</label>
+                <input id="input-qtda-contratacao" class="form-control" type="number" ng-model="ctContratacoes.novaSolicitacao.Qtda">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="input-data-contratacao">Data Prevista</label>
+                <input type="date" id="input-data-contratacao" class="form-control" ng-model="ctContratacoes.novaSolicitacao.DataPrevista">
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="textarea-info-adicionais-contratacao">Informações Adicionais</label>
+                <textarea id="textarea-info-adicionais-contratacao" placeholder="Digite aqui as observações e as informações adicionais" rows="3" class="form-control" ng-model="ctContratacoes.descricao"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary pull-right" ng-click="ctContratacoes.saveSolicitacao(ctContratacoes.novaSolicitacao)">Enviar Solicitação</button>
+
+</div>

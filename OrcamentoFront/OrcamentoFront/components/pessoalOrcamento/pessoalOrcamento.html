@@ -1,0 +1,26 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Orçamento</h1>
+        </div>
+    </div>
+
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div ng-include="'components/orcamentoFiltros/orcamentoFiltros.html'"></div>
+
+            <hr>
+        
+			<div ui-view="pessoalBase"></div>
+			<div ui-view="pessoalContratacoes"></div>
+            <div ui-view="pessoalTransferenciasRecebidas"></div>
+			<div ui-view="pessoalTransferenciasEnviadas"></div>
+
+        </div>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->
