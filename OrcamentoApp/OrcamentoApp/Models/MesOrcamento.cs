@@ -20,7 +20,6 @@ namespace OrcamentoApp.Models
             this.ContratacoesMeses = new HashSet<ContratacaoMes>();
             this.Transferencias = new HashSet<Transferencia>();
             this.CalculosEventosBase = new HashSet<CalculoEventoBase>();
-            this.CalculosEventosContratacao = new HashSet<CalculoEventoContratacao>();
             this.ValoresAbertosBase = new HashSet<ValoresAbertosBase>();
             this.AdNoturnoBase = new HashSet<AdNoturnoBase>();
             this.AdNoturnoContratacao = new HashSet<AdNoturnoContratacao>();
@@ -28,6 +27,8 @@ namespace OrcamentoApp.Models
             this.HEContratacao = new HashSet<HEContratacao>();
             this.ValoresAbertosCR = new HashSet<ValoresAbertosCR>();
             this.FeriasPorCR = new HashSet<FeriasPorCR>();
+            this.ValoresAbertosContratacao = new HashSet<ValoresAbertosContratacao>();
+            this.CalculoEventoContratacao = new HashSet<CalculoEventoContratacao>();
         }
     
         public int Codigo { get; set; }
@@ -42,8 +43,6 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalculoEventoBase> CalculosEventosBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalculoEventoContratacao> CalculosEventosContratacao { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValoresAbertosBase> ValoresAbertosBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoBase> AdNoturnoBase { get; set; }
@@ -57,5 +56,9 @@ namespace OrcamentoApp.Models
         public virtual ICollection<ValoresAbertosCR> ValoresAbertosCR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FeriasPorCR> FeriasPorCR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
     }
 }

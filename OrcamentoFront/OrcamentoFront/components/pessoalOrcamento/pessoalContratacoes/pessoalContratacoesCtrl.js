@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesService', 'contratacoesAPI', 'contratacoesMesAPI', '$scope', 'sharedDataService', 'cargosAPI', 'filiaisAPI', 'numberFilter', 'sharedDataService', function(messagesService, contratacoesAPI, contratacoesMesAPI, $scope, sharedDataService, cargosAPI, filiaisAPI, numberFilter, sharedDataService) {
+angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesService', 'contratacoesAPI', 'contratacoesMesAPI', '$scope', 'sharedDataService', 'cargosAPI', 'filiaisAPI', 'numberFilter', 'sharedDataService', 'adNoturnosContratacoesAPI', 'hesContratacoesAPI', 'valoresAbertosContratacoesAPI', function(messagesService, contratacoesAPI, contratacoesMesAPI, $scope, sharedDataService, cargosAPI, filiaisAPI, numberFilter, sharedDataService, adNoturnosContratacoesAPI, hesContratacoesAPI, valoresAbertosContratacoesAPI) {
 	var self = this;
 
 	self.filiais = [];
@@ -7,6 +7,96 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
     self.cargoNovo = null;
     self.cr = null;
     self.ciclo = null;
+    self.outros = [];
+    self.adNoturnos = [];
+    self.horasExtras = [];
+    $scope.aba = "Contratações";
+
+    var outrosInsumos = sharedDataService.getOutrosInsumosFolha();
+
+
+    var loadHorasExtras = function() {
+        self.horasExtras = [];
+        self.horasExtrasAbertas = [];
+
+        self.contratacoes.forEach(function(x) {
+            hesContratacoesAPI.getContratacaoHEs(x.Codigo, self.ciclo.Codigo)
+            .then(function(dado) {
+                self.horasExtras.push(dado.data);
+            });
+        });
+
+    }
+
+    var loadAdicionaisNoturnos = function() {
+        self.adNoturnos = [];
+        self.horasNoturnasAbertas = [];
+
+        self.contratacoes.forEach(function(x) {
+            adNoturnosContratacoesAPI.getContratacaoHNs(x.Codigo, self.ciclo.Codigo)
+            .then(function(dado) {
+                self.adNoturnos.push(dado.data);
+            });
+        });
+
+    }
+
+    var loadOutros = function() {
+        self.outros = [];
+
+        self.contratacoes.forEach(function(x) {
+            valoresAbertosContratacoesAPI.getValoresAbertosContratacoes(null, x.Codigo, self.ciclo.Codigo)
+            .then(function(dado) {
+
+                
+                var f = {
+                    Codigo: x.Codigo,
+                    Cargo: x.Cargo,
+                    CargaHoraria: x.CargaHoraria
+                };
+
+                
+                outrosInsumos.forEach(function(z) {
+                    f[z] = [];
+                    self.ciclo.Meses.forEach(function(y) {
+                        f[z].push({
+                            CodEvento: z,
+                            CodMesOrcamento: y.Codigo,
+                            CodContratacao: x.Codigo,
+                            Valor: 0
+                        });
+                    });
+                });
+                
+
+                dado.data.forEach(function(y) {
+                    if (f.hasOwnProperty(y.CodEvento)) {
+
+                        var fun = f[y.CodEvento].filter(function(z) {
+                            return z.CodMesOrcamento == y.CodMesOrcamento;
+                        });
+
+                        if (fun && fun.length > 0) {
+                            fun[0].Valor = y.Valor;
+                        }
+
+                    }
+                });
+
+                self.outros.push(f);
+
+            });
+        });
+
+
+    }
+
+    self.mudaAba = function(nova) {
+        $scope.aba = nova;
+    }
+
+
+
 
     var resetCargoNovo = function() {
         self.cargoNovo = null;
@@ -55,11 +145,20 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
         .then(function(dado) {
 
             dado.data.forEach(function(x) {
+
+                cargosAPI.getCargo(x.CargoCod)
+                .then(function(retorno) {
+                    x.Cargo = retorno.data;
+                });
+
                 x.Salario = numberFilter(x.Salario, 2);
                 loadContratacoesMes(x);
             });
 
             self.contratacoes = dado.data;
+            loadHorasExtras();
+            loadAdicionaisNoturnos();
+            loadOutros();
 
         });
 
@@ -114,13 +213,16 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
         contratacoesAPI.postContratacao(contratacao)
         .then(function(dado) {
 
+            contratacao.Codigo = dado.data.Codigo;
+
             var cont = 0, total = contratacaoMeses.length;
             contratacaoMeses.forEach(function(x) {
                 x.ContratacaoCod = dado.data.Codigo;
                 contratacoesMesAPI.postContratacaoMes(x);
             });
 
-            loadContratacoesMes(contratacao);
+            loadContratacoes(self.ciclo.Codigo, self.cr.Codigo);
+            //loadContratacoesMes(contratacao);
             contratacao.Codigo = dado.data.Codigo;
             self.contratacoes.push(contratacao);
 
@@ -143,6 +245,7 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
     var listener = $scope.$on('crChanged', function($event, cr) {
         if (self.ciclo && cr) {
         	self.cr = cr;
+            self.contratacoes = [];
             loadContratacoes(self.ciclo.Codigo, cr.Codigo);
             loadCidades(cr.EmpresaCod);
             loadCargos(cr.EmpresaCod);

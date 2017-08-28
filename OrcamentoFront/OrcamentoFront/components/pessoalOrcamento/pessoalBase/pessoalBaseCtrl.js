@@ -13,7 +13,7 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
     self.ferias = [];
     $scope.aba = "Associados";
 
-    var outrosInsumos = ['GRATIF','PRODUT','COMISSAO','PRO-LAB','PGP-PGI','AJU-CUST'];
+    var outrosInsumos = sharedDataService.getOutrosInsumosFolha();
 
 	var loadFuncionarios = function(cr) {
         funcionariosAPI.getFuncionarios(cr)
@@ -214,6 +214,10 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         if ($scope.aba == "Associados") {
             if (self.funcionarios.length == 0 && self.cr){
                 loadFuncionarios(self.cr.Codigo);
+            }
+        } else if ($scope.aba == "Férias") {
+            if (self.ferias.length == 0 || self.ferias.length == 0){
+                self.loadFerias(self.cr.Codigo);
             }
         } else if ($scope.aba == "Horas Extras") {
             if (self.horasExtras.length == 0 || self.horasExtrasAbertas.length == 0){

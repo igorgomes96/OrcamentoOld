@@ -42,6 +42,7 @@ namespace OrcamentoApp.Controllers
 
         // PUT: api/HEsBase/5
         [ResponseType(typeof(void))]
+        [Route("api/HEsBase/{matricula}/{percentual}/{mesOrcamento}")]
         public IHttpActionResult PutHEBase(string matricula, int percentual, int mesOrcamento, HEBase hEBase)
         {
             if (!ModelState.IsValid)
@@ -107,6 +108,7 @@ namespace OrcamentoApp.Controllers
 
         // DELETE: api/HEsBase/5
         [ResponseType(typeof(HEBaseDTO))]
+        [Route("api/HEsBase/{matricula}/{percentual}/{mesOrcamento}")]
         public IHttpActionResult DeleteHEBase(string matricula, int percentual, int mesOrcamento)
         {
             HEBase hEBase = db.HEBase.Find(matricula, percentual, mesOrcamento);

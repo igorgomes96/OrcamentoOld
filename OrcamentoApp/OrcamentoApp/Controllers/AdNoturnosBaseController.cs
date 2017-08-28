@@ -108,9 +108,10 @@ namespace OrcamentoApp.Controllers
 
         // DELETE: api/AdNoturnosBase/5
         [ResponseType(typeof(AdNoturnoBaseDTO))]
+        [Route("api/AdNoturnosBase/{matricula}/{percentual}/{mesOrcamento}")]
         public IHttpActionResult DeleteAdNoturno(string matricula, int percentual, int mesOrcamento)
         {
-            AdNoturnoBase adNoturno = db.AdNoturnoBase.Find(matricula, percentual, mesOrcamento);
+            AdNoturnoBase adNoturno = db.AdNoturnoBase.Find(matricula, mesOrcamento, percentual);
             if (adNoturno == null)
             {
                 return NotFound();

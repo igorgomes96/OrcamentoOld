@@ -63,6 +63,10 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
                 templateUrl: 'components/pessoalOrcamento/pessoalContratacoes/pessoalContratacoes.html', 
                 controller: 'pessoalContratacoesCtrl as ct'
             },
+            'valoresAbertos@menuContainer.pessoalOrcamento': {
+                templateUrl: 'components/pessoalOrcamento/valoresPorCR/valoresPorCR.html', 
+                controller: 'valoresPorCRCtrl as ct'
+            },
             'pessoalTransferenciasEnviadas@menuContainer.pessoalOrcamento': {
                 templateUrl: 'components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasEnviadas.html', 
                 controller: 'pessoalTransferenciasCtrl as ct'
@@ -70,6 +74,10 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
             'pessoalTransferenciasRecebidas@menuContainer.pessoalOrcamento': {
                 templateUrl: 'components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasRecebidas.html', 
                 controller: 'pessoalTransferenciasCtrl as ct'
+            },
+            'resumo@menuContainer.pessoalOrcamento': {
+                templateUrl: 'components/pessoalOrcamento/resumo/resumo.html', 
+                controller: 'resumoCtrl as ct'
             }
         }/*,
         resolve: {

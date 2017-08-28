@@ -14,8 +14,8 @@
         <form name="formGratificacoes">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['GRATIF']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>
@@ -27,8 +27,8 @@
         <form name="formProdutividade">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['PRODUT']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>
@@ -41,8 +41,8 @@
         <form name="formComissao">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['COMISSAO']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>
@@ -54,8 +54,8 @@
         <form name="formProLabore">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['PRO-LAB']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>
@@ -67,8 +67,8 @@
         <form name="formPGP">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['PGP-PGI']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>
@@ -80,8 +80,8 @@
         <form name="formAjudaCusto">
             <tr ng-repeat="ou in ct.outros | orderBy:'Matricula'" ui-input-parent>
                 <td>{{ou.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{ou.Cargo}}"><p>{{ou.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou['AJU-CUST']">
                     <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
                 </td>

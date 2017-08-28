@@ -3,23 +3,23 @@ angular.module('orcamentoApp').service('feriasPorCRsAPI', ['$http', 'config', fu
     var self = this;
     var resource = 'FeriasPorCRs';
 
-    self.getFeriasPorCRs = function(cr) {
-        return $http.get(config.baseUrl + resource, {params:{cr:cr}});
+    self.getFeriasPorCRs = function(cr, codCiclo) {
+        return $http.get(config.baseUrl + resource, {params:{cr:cr, codCiclo:codCiclo}});
     }
 
-    self.getFeriasPorCR = function(id) {
-        return $http.get(config.baseUrl + resource + '/' + id);
+    self.getFeriasPorCR = function(cr, mes) {
+        return $http.get(config.baseUrl + resource + '/' + cr + '/' + mes);
     }
 
     self.postFeriasPorCR = function(FeriasPorCR) {
         return $http.post(config.baseUrl + resource, FeriasPorCR);
     }
 
-    self.putFeriasPorCR = function(id, FeriasPorCR) {
-        return $http.put(config.baseUrl + resource + '/' + id, FeriasPorCR);
+    self.putFeriasPorCR = function(cr, mes, FeriasPorCR) {
+        return $http.put(config.baseUrl + resource + '/' + cr + '/' + mes, FeriasPorCR);
     }
 
-    self.deleteFeriasPorCR = function(id) {
-        return $http.delete(config.baseUrl + resource + '/' + id);
+    self.deleteFeriasPorCR = function(cr, mes) {
+        return $http.delete(config.baseUrl + resource + '/' + cr + '/' + mes);
     }
 }]);

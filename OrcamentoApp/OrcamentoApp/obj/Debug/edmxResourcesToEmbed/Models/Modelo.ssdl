@@ -589,6 +589,17 @@
     <Property Name="MatriculaFuncionario" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Valor" Type="real" Nullable="false" />
   </EntityType>
+  <EntityType Name="ValoresAbertosContratacao">
+    <Key>
+      <PropertyRef Name="CodEvento" />
+      <PropertyRef Name="CodMesOrcamento" />
+      <PropertyRef Name="CodContratacao" />
+    </Key>
+    <Property Name="CodEvento" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
+    <Property Name="CodContratacao" Type="int" Nullable="false" />
+    <Property Name="Valor" Type="real" Nullable="false" />
+  </EntityType>
   <EntityType Name="ValoresAbertosCR">
     <Key>
       <PropertyRef Name="CodEvento" />
@@ -1654,6 +1665,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="valoresabertoscontratacao_contratacao_fk">
+    <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="1" />
+    <End Role="ValoresAbertosContratacao" Type="Self.ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contratacao">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
+        <PropertyRef Name="CodContratacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="valoresabertoscontratacao_evento_fk">
+    <End Role="EventoFolha" Type="Self.EventoFolha" Multiplicity="1" />
+    <End Role="ValoresAbertosContratacao" Type="Self.ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventoFolha">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
+        <PropertyRef Name="CodEvento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="valoresabertoscontratacao_mesorcamento_fk">
+    <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+    <End Role="ValoresAbertosContratacao" Type="Self.ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
+        <PropertyRef Name="CodMesOrcamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="valoresabertoscr_centrocusto_fk">
     <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
     <End Role="ValoresAbertosCR" Type="Self.ValoresAbertosCR" Multiplicity="*" />
@@ -1783,6 +1830,7 @@
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioPermissao" EntityType="Self.UsuarioPermissao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ValoresAbertosBase" EntityType="Self.ValoresAbertosBase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ValoresAbertosContratacao" EntityType="Self.ValoresAbertosContratacao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ValoresAbertosCR" EntityType="Self.ValoresAbertosCR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Variaveis" EntityType="Self.Variaveis" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="act_solicitacaoth_fk" Association="Self.act_solicitacaoth_fk">
@@ -2120,6 +2168,18 @@
     <AssociationSet Name="valoresabertosbase_mesorcamento_fk" Association="Self.valoresabertosbase_mesorcamento_fk">
       <End Role="MesOrcamento" EntitySet="MesOrcamento" />
       <End Role="ValoresAbertosBase" EntitySet="ValoresAbertosBase" />
+    </AssociationSet>
+    <AssociationSet Name="valoresabertoscontratacao_contratacao_fk" Association="Self.valoresabertoscontratacao_contratacao_fk">
+      <End Role="Contratacao" EntitySet="Contratacao" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="valoresabertoscontratacao_evento_fk" Association="Self.valoresabertoscontratacao_evento_fk">
+      <End Role="EventoFolha" EntitySet="EventoFolha" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="valoresabertoscontratacao_mesorcamento_fk" Association="Self.valoresabertoscontratacao_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
     </AssociationSet>
     <AssociationSet Name="valoresabertoscr_centrocusto_fk" Association="Self.valoresabertoscr_centrocusto_fk">
       <End Role="CentroCusto" EntitySet="CentroCusto" />

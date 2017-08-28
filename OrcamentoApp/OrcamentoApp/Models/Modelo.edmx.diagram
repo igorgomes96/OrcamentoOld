@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="OrcamentoModel.Afastamento" Width="1.5" PointX="13.5" PointY="26" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.CargaHoraria" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.Cargo" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
@@ -78,14 +78,10 @@
         <AssociationConnector Association="OrcamentoModel.solicitacaoalteracaocargo_solicitacaoth_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.PerfilAcesso" Width="1.5" PointX="0.75" PointY="7.25" />
         <AssociationConnector Association="OrcamentoModel.usuario_perfil_acesso_fk" />
-        <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoBase" Width="1.5" PointX="16.5" PointY="20.125" />
-        <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoContratacao" Width="1.5" PointX="13.75" PointY="29.125" />
+        <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoBase" Width="1.5" PointX="17" PointY="19.875" />
         <EntityTypeShape EntityType="OrcamentoModel.EventoFolha" Width="1.5" PointX="11.5" PointY="35" />
         <AssociationConnector Association="OrcamentoModel.calculoeventobase_eventofolha_fk" />
         <AssociationConnector Association="OrcamentoModel.calculoeventobase_mesorcamento_fk" />
-        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_contratacao_fk" />
-        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_evento_fk" />
-        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_mesorcamento_fk" />
         <AssociationConnector Association="OrcamentoModel.eventofolha_contacontabil_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosBase" Width="1.875" PointX="16.125" PointY="24.125" />
         <AssociationConnector Association="OrcamentoModel.valoresabertosbase_eventofolha_fk" />
@@ -152,6 +148,14 @@
         <EntityTypeShape EntityType="OrcamentoModel.FeriasPorCR" Width="1.5" PointX="16.75" PointY="13.5" />
         <AssociationConnector Association="OrcamentoModel.feriasporcr_centrocusto_fk" />
         <AssociationConnector Association="OrcamentoModel.feriasporcr_mesorcamento_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosContratacao" Width="2" PointX="19.75" PointY="31.25" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_evento_fk" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoContratacao" Width="1.5" PointX="13.75" PointY="29.25" />
+        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_contratacao_fk" />
+        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_evento_fk" />
+        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_mesorcamento_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

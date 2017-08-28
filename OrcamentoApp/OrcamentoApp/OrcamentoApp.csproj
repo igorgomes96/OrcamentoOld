@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ACTsController.cs" />
+    <Compile Include="Controllers\AdNoturnosContratacoesController.cs" />
     <Compile Include="Controllers\AfastamentosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\CargaHorariaController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Controllers\DiasIndenizadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EncargosController.cs" />
+    <Compile Include="Controllers\EventosFolhaController.cs" />
     <Compile Include="Controllers\FeriasPorCRsController.cs" />
     <Compile Include="Controllers\FiliaisController.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
@@ -174,11 +176,15 @@
     <Compile Include="Controllers\TransferenciasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValoresAbertosBaseController.cs" />
+    <Compile Include="Controllers\ValoresAbertosContratacoesController.cs" />
     <Compile Include="Controllers\ValoresAbertosCRsController.cs" />
     <Compile Include="Controllers\VariaveisController.cs" />
     <Compile Include="DTO\ACTDTO.cs" />
     <Compile Include="DTO\AdNoturnoBaseDTO.cs" />
+    <Compile Include="DTO\AdNoturnoContratacaoDTO.cs" />
     <Compile Include="DTO\AfastamentoDTO.cs" />
+    <Compile Include="DTO\CalculoEventoBaseDTO.cs" />
+    <Compile Include="DTO\CalculoEventoContratacaoDTO.cs" />
     <Compile Include="DTO\CargaHorariaDTO.cs" />
     <Compile Include="DTO\CargoDTO.cs" />
     <Compile Include="DTO\CentroCustoDTO.cs" />
@@ -191,9 +197,12 @@
     <Compile Include="DTO\ConvenioMedDTO.cs" />
     <Compile Include="DTO\EmpresaDTO.cs" />
     <Compile Include="DTO\EncargosDTO.cs" />
+    <Compile Include="DTO\EventoFolhaDTO.cs" />
     <Compile Include="DTO\FeriasPorCRDTO.cs" />
     <Compile Include="DTO\FilialDTO.cs" />
     <Compile Include="DTO\FuncionarioDTO.cs" />
+    <Compile Include="DTO\ContratacaoHNsDTO.cs" />
+    <Compile Include="DTO\ContratacaoHEsDTO.cs" />
     <Compile Include="DTO\FuncionarioHNsDTO.cs" />
     <Compile Include="DTO\FuncionarioHEsDTO.cs" />
     <Compile Include="DTO\HEBaseDTO.cs" />
@@ -220,6 +229,7 @@
     <Compile Include="DTO\UserInfoDTO.cs" />
     <Compile Include="DTO\UsuarioDTO.cs" />
     <Compile Include="DTO\ValoresAbertosBaseDTO.cs" />
+    <Compile Include="DTO\ValoresAbertosContratacaoDTO.cs" />
     <Compile Include="DTO\ValoresAbertosCRDTO.cs" />
     <Compile Include="DTO\VariaveisDTO.cs" />
     <Compile Include="Exceptions\AuthenticationFailureResult.cs" />
@@ -415,6 +425,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValoresAbertosBase.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ValoresAbertosContratacao.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValoresAbertosCR.cs">

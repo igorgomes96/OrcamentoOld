@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
+using OrcamentoApp.DTO;
 
 namespace OrcamentoApp.Controllers
 {
@@ -16,40 +17,45 @@ namespace OrcamentoApp.Controllers
     {
         private Contexto db = new Contexto();
 
-        // GET: api/HEContratacoes
-        public IQueryable<HEContratacao> GetHEContratacao()
+        // GET: api/HEsContratacoes
+        public IEnumerable<HEContratacaoDTO> GetHEContratacao(int? percHoras = null, int? codContratacao = null, int? codCiclo = null)
         {
-            return db.HEContratacao;
+            return db.HEContratacao.ToList()
+                .Where(x => (percHoras == null || x.PercentualHoras == percHoras) && (codContratacao == null || x.ContratacaoCod == codContratacao) || (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo))
+                .Select(x => new HEContratacaoDTO(x));
         }
 
-        // GET: api/HEContratacoes/5
-        [ResponseType(typeof(HEContratacao))]
-        public IHttpActionResult GetHEContratacao(int id)
+        [ResponseType(typeof(ContratacaoHEsDTO))]
+        [Route("api/HEsContratacoes/ContratacaoHE/{codContratacao}/{codCiclo}")]
+        public IHttpActionResult GetFuncionarioHEs(int codContratacao, int codCiclo)
         {
-            HEContratacao hEContratacao = db.HEContratacao.Find(id);
-            if (hEContratacao == null)
-            {
-                return NotFound();
-            }
+            Contratacao con = db.Contratacao.Find(codContratacao);
 
-            return Ok(hEContratacao);
+            if (con == null) return NotFound();
+
+            Ciclo c = db.Ciclo.Find(codCiclo);
+
+            if (c == null) return NotFound();
+
+            return Ok(new ContratacaoHEsDTO(con, c));
         }
 
-        // PUT: api/HEContratacoes/5
+        // PUT: api/HEsContratacoes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutHEContratacao(int id, HEContratacao hEContratacao)
+        [Route("api/HEsContratacoes/{codContratacao}/{percentual}/{mesOrcamento}")]
+        public IHttpActionResult PutHEContratacao(int codContratacao, int percentual, int mesOrcamento, HEContratacao HEContratacao)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != hEContratacao.ContratacaoCod)
+            if (codContratacao != HEContratacao.ContratacaoCod || percentual != HEContratacao.PercentualHoras || mesOrcamento != HEContratacao.CodMesOrcamento)
             {
                 return BadRequest();
             }
 
-            db.Entry(hEContratacao).State = EntityState.Modified;
+            db.Entry(HEContratacao).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +63,7 @@ namespace OrcamentoApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HEContratacaoExists(id))
+                if (!HEContratacaoExists(codContratacao, percentual, mesOrcamento))
                 {
                     return NotFound();
                 }
@@ -70,16 +76,16 @@ namespace OrcamentoApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/HEContratacoes
-        [ResponseType(typeof(HEContratacao))]
-        public IHttpActionResult PostHEContratacao(HEContratacao hEContratacao)
+        // POST: api/HEsContratacoes
+        [ResponseType(typeof(HEContratacaoDTO))]
+        public IHttpActionResult PostHEContratacao(HEContratacao HEContratacao)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.HEContratacao.Add(hEContratacao);
+            db.HEContratacao.Add(HEContratacao);
 
             try
             {
@@ -87,7 +93,7 @@ namespace OrcamentoApp.Controllers
             }
             catch (DbUpdateException)
             {
-                if (HEContratacaoExists(hEContratacao.ContratacaoCod))
+                if (HEContratacaoExists(HEContratacao.ContratacaoCod, HEContratacao.PercentualHoras, HEContratacao.CodMesOrcamento))
                 {
                     return Conflict();
                 }
@@ -97,23 +103,26 @@ namespace OrcamentoApp.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = hEContratacao.ContratacaoCod }, hEContratacao);
+            return CreatedAtRoute("DefaultApi", new { id = HEContratacao.ContratacaoCod }, new HEContratacaoDTO(HEContratacao));
         }
 
-        // DELETE: api/HEContratacoes/5
-        [ResponseType(typeof(HEContratacao))]
-        public IHttpActionResult DeleteHEContratacao(int id)
+        // DELETE: api/HEsContratacoes/5
+        [ResponseType(typeof(HEContratacaoDTO))]
+        [Route("api/HEsContratacoes/{codContratacao}/{percentual}/{mesOrcamento}")]
+        public IHttpActionResult DeleteHEContratacao(int codContratacao, int percentual, int mesOrcamento)
         {
-            HEContratacao hEContratacao = db.HEContratacao.Find(id);
-            if (hEContratacao == null)
+            HEContratacao HEContratacao = db.HEContratacao.Find(codContratacao, percentual, mesOrcamento);
+            if (HEContratacao == null)
             {
                 return NotFound();
             }
 
-            db.HEContratacao.Remove(hEContratacao);
+            HEContratacaoDTO h = new HEContratacaoDTO(HEContratacao);
+
+            db.HEContratacao.Remove(HEContratacao);
             db.SaveChanges();
 
-            return Ok(hEContratacao);
+            return Ok(h);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +134,9 @@ namespace OrcamentoApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool HEContratacaoExists(int id)
+        private bool HEContratacaoExists(int codContratacao, int percentual, int mesOrcamento)
         {
-            return db.HEContratacao.Count(e => e.ContratacaoCod == id) > 0;
+            return db.HEContratacao.Count(e => e.ContratacaoCod == codContratacao && e.PercentualHoras == percentual && e.CodMesOrcamento == mesOrcamento) > 0;
         }
     }
 }

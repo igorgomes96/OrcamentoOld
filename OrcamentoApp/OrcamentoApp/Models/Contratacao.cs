@@ -18,9 +18,10 @@ namespace OrcamentoApp.Models
         public Contratacao()
         {
             this.ContratacaoMeses = new HashSet<ContratacaoMes>();
-            this.CalculosEventosContratacoes = new HashSet<CalculoEventoContratacao>();
             this.AdNoturnoContratacao = new HashSet<AdNoturnoContratacao>();
             this.HEContratacao = new HashSet<HEContratacao>();
+            this.ValoresAbertosContratacao = new HashSet<ValoresAbertosContratacao>();
+            this.CalculoEventoContratacao = new HashSet<CalculoEventoContratacao>();
         }
     
         public int Codigo { get; set; }
@@ -42,13 +43,15 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContratacaoMes> ContratacaoMeses { get; set; }
         public virtual ConvenioMed ConvenioMed { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalculoEventoContratacao> CalculosEventosContratacoes { get; set; }
         public virtual Filial Filial { get; set; }
         public virtual Variaveis Variaveis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoContratacao> AdNoturnoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEContratacao> HEContratacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
     }
 }

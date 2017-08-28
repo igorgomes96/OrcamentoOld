@@ -18,10 +18,10 @@ namespace OrcamentoApp.Controllers
         private Contexto db = new Contexto();
 
         // GET: api/FeriasPorCRs
-        public IEnumerable<FeriasPorCRDTO> GetFeriasPorCRAll(string cr = null)
+        public IEnumerable<FeriasPorCRDTO> GetFeriasPorCRAll(string cr = null, int? codCiclo = null)
         {
             return db.FeriasPorCR.ToList()
-                .Where(x => cr == null || x.CodigoCR == cr)
+                .Where(x => (cr == null || x.CodigoCR == cr) && (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo))
                 .Select(x => new FeriasPorCRDTO(x));
         }
 

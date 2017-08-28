@@ -84,6 +84,7 @@
     <Property Name="VTFretadoFlag" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="AdNoturnoContratacao" Relationship="OrcamentoModel.adnoturnocontratacao_contratacao_fk" FromRole="Contratacao" ToRole="AdNoturnoContratacao" />
     <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="Contratacao" ToRole="HEContratacao" />
+    <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="Contratacao" ToRole="ValoresAbertosContratacao" />
   </EntityType>
   <EntityType Name="DiasIndenizados">
     <Key>
@@ -645,6 +646,19 @@
       <End Role="MesOrcamento" EntitySet="MesOrcamento" />
       <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
     </AssociationSet>
+    <EntitySet Name="ValoresAbertosContratacao" EntityType="OrcamentoModel.ValoresAbertosContratacao" />
+    <AssociationSet Name="valoresabertoscontratacao_contratacao_fk" Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk">
+      <End Role="Contratacao" EntitySet="Contratacao" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="valoresabertoscontratacao_evento_fk" Association="OrcamentoModel.valoresabertoscontratacao_evento_fk">
+      <End Role="EventoFolha" EntitySet="EventoFolha" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="valoresabertoscontratacao_mesorcamento_fk" Association="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Sessao">
     <Key>
@@ -866,6 +880,7 @@
     <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEContratacao" />
     <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosCR" />
     <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="FeriasPorCR" />
+    <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosContratacao" />
   </EntityType>
   <EntityType Name="StatusCiclo">
     <Key>
@@ -1348,6 +1363,7 @@
     <NavigationProperty Name="ContaContabil" Relationship="OrcamentoModel.eventofolha_contacontabil_fk" FromRole="EventoFolha" ToRole="ContaContabil" />
     <NavigationProperty Name="ValoresAbertosBase" Relationship="OrcamentoModel.valoresabertosbase_eventofolha_fk" FromRole="EventoFolha" ToRole="ValoresAbertosBase" />
     <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_eventofolha_fk" FromRole="EventoFolha" ToRole="ValoresAbertosCR" />
+    <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_evento_fk" FromRole="EventoFolha" ToRole="ValoresAbertosContratacao" />
   </EntityType>
   <Association Name="calculoeventobase_eventofolha_fk">
     <End Type="OrcamentoModel.EventoFolha" Role="EventoFolha" Multiplicity="1" />
@@ -2287,6 +2303,56 @@
         <PropertyRef Name="Codigo" />
       </Principal>
       <Dependent Role="FeriasPorCR">
+        <PropertyRef Name="CodMesOrcamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ValoresAbertosContratacao">
+    <Key>
+      <PropertyRef Name="CodEvento" />
+      <PropertyRef Name="CodMesOrcamento" />
+      <PropertyRef Name="CodContratacao" />
+    </Key>
+    <Property Name="CodEvento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
+    <Property Name="CodContratacao" Type="Int32" Nullable="false" />
+    <Property Name="Valor" Type="Single" Nullable="false" />
+    <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="ValoresAbertosContratacao" ToRole="Contratacao" />
+    <NavigationProperty Name="EventoFolha" Relationship="OrcamentoModel.valoresabertoscontratacao_evento_fk" FromRole="ValoresAbertosContratacao" ToRole="EventoFolha" />
+    <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" FromRole="ValoresAbertosContratacao" ToRole="MesOrcamento" />
+  </EntityType>
+  <Association Name="valoresabertoscontratacao_contratacao_fk">
+    <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+    <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contratacao">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
+        <PropertyRef Name="CodContratacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="valoresabertoscontratacao_evento_fk">
+    <End Type="OrcamentoModel.EventoFolha" Role="EventoFolha" Multiplicity="1" />
+    <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventoFolha">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
+        <PropertyRef Name="CodEvento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="valoresabertoscontratacao_mesorcamento_fk">
+    <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
+    <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ValoresAbertosContratacao">
         <PropertyRef Name="CodMesOrcamento" />
       </Dependent>
     </ReferentialConstraint>

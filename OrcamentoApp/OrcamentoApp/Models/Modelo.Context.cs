@@ -63,7 +63,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<SolicitacaoAlteracaoCargo> SolicitacaoAlteracaoCargo { get; set; }
         public virtual DbSet<PerfilAcesso> PerfilAcesso { get; set; }
         public virtual DbSet<CalculoEventoBase> CalculoEventoBase { get; set; }
-        public virtual DbSet<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
         public virtual DbSet<EventoFolha> EventoFolha { get; set; }
         public virtual DbSet<ValoresAbertosBase> ValoresAbertosBase { get; set; }
         public virtual DbSet<Filial> Filial { get; set; }
@@ -82,5 +81,7 @@ namespace OrcamentoApp.Models
         public virtual DbSet<HEContratacao> HEContratacao { get; set; }
         public virtual DbSet<ValoresAbertosCR> ValoresAbertosCR { get; set; }
         public virtual DbSet<FeriasPorCR> FeriasPorCR { get; set; }
+        public virtual DbSet<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
+        public virtual DbSet<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
     }
 }
