@@ -7,7 +7,7 @@
                     <a href ng-click="ct.mudaAba('Associados')">Dados</a>
                 </li>
                 <li ng-class="{'active': aba == 'Férias'}">
-                    <a href ng-click="ct.mudaAba('Férias')">Férias</a>
+                    <a href ng-click="ct.mudaAba('Férias');ct.loadFerias(ct.cr.Codigo)">Férias</a>
                 </li>
 
                 <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Horas Extras'}">

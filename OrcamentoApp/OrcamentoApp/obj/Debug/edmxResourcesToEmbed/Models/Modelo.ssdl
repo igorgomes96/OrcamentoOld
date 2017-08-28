@@ -215,6 +215,15 @@
     <Property Name="Descricao" Type="nvarchar" MaxLength="4000" />
     <Property Name="CodConta" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="FeriasPorCR">
+    <Key>
+      <PropertyRef Name="CodigoCR" />
+      <PropertyRef Name="CodMesOrcamento" />
+    </Key>
+    <Property Name="CodigoCR" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
+    <Property Name="Percentual" Type="real" Nullable="false" />
+  </EntityType>
   <EntityType Name="Filial">
     <Key>
       <PropertyRef Name="EmpresaCod" />
@@ -309,13 +318,6 @@
     </Key>
     <Property Name="Nivel" Type="int" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrdenadoReajustavel">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <EntityType Name="PAT">
     <Key>
@@ -951,6 +953,30 @@
       </Principal>
       <Dependent Role="EventoFolha">
         <PropertyRef Name="CodConta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="feriasporcr_centrocusto_fk">
+    <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
+    <End Role="FeriasPorCR" Type="Self.FeriasPorCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CentroCusto">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="FeriasPorCR">
+        <PropertyRef Name="CodigoCR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="feriasporcr_mesorcamento_fk">
+    <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+    <End Role="FeriasPorCR" Type="Self.FeriasPorCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="FeriasPorCR">
+        <PropertyRef Name="CodMesOrcamento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1722,6 +1748,7 @@
     <EntitySet Name="Encargos" EntityType="Self.Encargos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EscalaTrabalho" EntityType="Self.EscalaTrabalho" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventoFolha" EntityType="Self.EventoFolha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeriasPorCR" EntityType="Self.FeriasPorCR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Filial" EntityType="Self.Filial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HEBase" EntityType="Self.HEBase" Schema="dbo" store:Type="Tables" />
@@ -1729,7 +1756,6 @@
     <EntitySet Name="Importacao" EntityType="Self.Importacao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MesOrcamento" EntityType="Self.MesOrcamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel" EntityType="Self.Nivel" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrdenadoReajustavel" EntityType="Self.OrdenadoReajustavel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAT" EntityType="Self.PAT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PerfilAcesso" EntityType="Self.PerfilAcesso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Permissao" EntityType="Self.Permissao" Schema="dbo" store:Type="Tables" />
@@ -1870,6 +1896,14 @@
     <AssociationSet Name="eventofolha_contacontabil_fk" Association="Self.eventofolha_contacontabil_fk">
       <End Role="ContaContabil" EntitySet="ContaContabil" />
       <End Role="EventoFolha" EntitySet="EventoFolha" />
+    </AssociationSet>
+    <AssociationSet Name="feriasporcr_centrocusto_fk" Association="Self.feriasporcr_centrocusto_fk">
+      <End Role="CentroCusto" EntitySet="CentroCusto" />
+      <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
+    </AssociationSet>
+    <AssociationSet Name="feriasporcr_mesorcamento_fk" Association="Self.feriasporcr_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
     </AssociationSet>
     <AssociationSet Name="filial_cidade_fk" Association="Self.filial_cidade_fk">
       <End Role="Cidade" EntitySet="Cidade" />

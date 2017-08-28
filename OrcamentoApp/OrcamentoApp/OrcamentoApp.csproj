@@ -147,6 +147,7 @@
     <Compile Include="Controllers\DiasIndenizadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EncargosController.cs" />
+    <Compile Include="Controllers\FeriasPorCRsController.cs" />
     <Compile Include="Controllers\FiliaisController.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\AdNoturnosBaseController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="DTO\ConvenioMedDTO.cs" />
     <Compile Include="DTO\EmpresaDTO.cs" />
     <Compile Include="DTO\EncargosDTO.cs" />
+    <Compile Include="DTO\FeriasPorCRDTO.cs" />
     <Compile Include="DTO\FilialDTO.cs" />
     <Compile Include="DTO\FuncionarioDTO.cs" />
     <Compile Include="DTO\FuncionarioHNsDTO.cs" />
@@ -298,6 +300,9 @@
     <Compile Include="Models\EventoFolha.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeriasPorCR.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Filial.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -332,9 +337,6 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Nivel.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrdenadoReajustavel.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PAT.cs">

@@ -74,7 +74,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<AdNoturnoContratacao> AdNoturnoContratacao { get; set; }
         public virtual DbSet<ConvenioOdo> ConvenioOdo { get; set; }
         public virtual DbSet<EscalaTrabalho> EscalaTrabalho { get; set; }
-        public virtual DbSet<OrdenadoReajustavel> OrdenadoReajustavel { get; set; }
         public virtual DbSet<QtdaDias> QtdaDias { get; set; }
         public virtual DbSet<ReajConvenioOdo> ReajConvenioOdo { get; set; }
         public virtual DbSet<ReajVTFretado> ReajVTFretado { get; set; }
@@ -82,5 +81,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<HEBase> HEBase { get; set; }
         public virtual DbSet<HEContratacao> HEContratacao { get; set; }
         public virtual DbSet<ValoresAbertosCR> ValoresAbertosCR { get; set; }
+        public virtual DbSet<FeriasPorCR> FeriasPorCR { get; set; }
     }
 }

@@ -125,7 +125,6 @@
         <EntityTypeShape EntityType="OrcamentoModel.AdNoturnoContratacao" Width="1.5" PointX="19.125" PointY="16.375" />
         <EntityTypeShape EntityType="OrcamentoModel.ConvenioOdo" Width="1.5" PointX="9.375" PointY="40.375" />
         <EntityTypeShape EntityType="OrcamentoModel.EscalaTrabalho" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="OrcamentoModel.OrdenadoReajustavel" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="OrcamentoModel.QtdaDias" Width="1.5" PointX="3" PointY="2.5" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajConvenioOdo" Width="1.5" PointX="11.625" PointY="40.5" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajVTFretado" Width="1.5" PointX="6.375" PointY="40" />
@@ -150,6 +149,9 @@
         <AssociationConnector Association="OrcamentoModel.valoresabertoscr_centrocusto_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscr_eventofolha_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscr_mesorcamento_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.FeriasPorCR" Width="1.5" PointX="16.75" PointY="13.5" />
+        <AssociationConnector Association="OrcamentoModel.feriasporcr_centrocusto_fk" />
+        <AssociationConnector Association="OrcamentoModel.feriasporcr_mesorcamento_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

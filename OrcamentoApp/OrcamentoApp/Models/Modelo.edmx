@@ -220,6 +220,15 @@
           <Property Name="Descricao" Type="nvarchar" MaxLength="4000" />
           <Property Name="CodConta" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="FeriasPorCR">
+          <Key>
+            <PropertyRef Name="CodigoCR" />
+            <PropertyRef Name="CodMesOrcamento" />
+          </Key>
+          <Property Name="CodigoCR" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
+          <Property Name="Percentual" Type="real" Nullable="false" />
+        </EntityType>
         <EntityType Name="Filial">
           <Key>
             <PropertyRef Name="EmpresaCod" />
@@ -314,13 +323,6 @@
           </Key>
           <Property Name="Nivel" Type="int" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrdenadoReajustavel">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nome" Type="varchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="PAT">
           <Key>
@@ -956,6 +958,30 @@
             </Principal>
             <Dependent Role="EventoFolha">
               <PropertyRef Name="CodConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="feriasporcr_centrocusto_fk">
+          <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
+          <End Role="FeriasPorCR" Type="Self.FeriasPorCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FeriasPorCR">
+              <PropertyRef Name="CodigoCR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="feriasporcr_mesorcamento_fk">
+          <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+          <End Role="FeriasPorCR" Type="Self.FeriasPorCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesOrcamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FeriasPorCR">
+              <PropertyRef Name="CodMesOrcamento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1727,6 +1753,7 @@
           <EntitySet Name="Encargos" EntityType="Self.Encargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EscalaTrabalho" EntityType="Self.EscalaTrabalho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventoFolha" EntityType="Self.EventoFolha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeriasPorCR" EntityType="Self.FeriasPorCR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filial" EntityType="Self.Filial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HEBase" EntityType="Self.HEBase" Schema="dbo" store:Type="Tables" />
@@ -1734,7 +1761,6 @@
           <EntitySet Name="Importacao" EntityType="Self.Importacao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MesOrcamento" EntityType="Self.MesOrcamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nivel" EntityType="Self.Nivel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrdenadoReajustavel" EntityType="Self.OrdenadoReajustavel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAT" EntityType="Self.PAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PerfilAcesso" EntityType="Self.PerfilAcesso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permissao" EntityType="Self.Permissao" Schema="dbo" store:Type="Tables" />
@@ -1875,6 +1901,14 @@
           <AssociationSet Name="eventofolha_contacontabil_fk" Association="Self.eventofolha_contacontabil_fk">
             <End Role="ContaContabil" EntitySet="ContaContabil" />
             <End Role="EventoFolha" EntitySet="EventoFolha" />
+          </AssociationSet>
+          <AssociationSet Name="feriasporcr_centrocusto_fk" Association="Self.feriasporcr_centrocusto_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
+          </AssociationSet>
+          <AssociationSet Name="feriasporcr_mesorcamento_fk" Association="Self.feriasporcr_mesorcamento_fk">
+            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+            <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
           </AssociationSet>
           <AssociationSet Name="filial_cidade_fk" Association="Self.filial_cidade_fk">
             <End Role="Cidade" EntitySet="Cidade" />
@@ -2682,7 +2716,6 @@
           <EntitySet Name="AdNoturnoContratacao" EntityType="OrcamentoModel.AdNoturnoContratacao" />
           <EntitySet Name="ConvenioOdo" EntityType="OrcamentoModel.ConvenioOdo" />
           <EntitySet Name="EscalaTrabalho" EntityType="OrcamentoModel.EscalaTrabalho" />
-          <EntitySet Name="OrdenadoReajustavel" EntityType="OrcamentoModel.OrdenadoReajustavel" />
           <EntitySet Name="QtdaDias" EntityType="OrcamentoModel.QtdaDias" />
           <EntitySet Name="ReajConvenioOdo" EntityType="OrcamentoModel.ReajConvenioOdo" />
           <EntitySet Name="ReajVTFretado" EntityType="OrcamentoModel.ReajVTFretado" />
@@ -2757,6 +2790,15 @@
           <AssociationSet Name="valoresabertoscr_mesorcamento_fk" Association="OrcamentoModel.valoresabertoscr_mesorcamento_fk">
             <End Role="MesOrcamento" EntitySet="MesOrcamento" />
             <End Role="ValoresAbertosCR" EntitySet="ValoresAbertosCR" />
+          </AssociationSet>
+          <EntitySet Name="FeriasPorCR" EntityType="OrcamentoModel.FeriasPorCR" />
+          <AssociationSet Name="feriasporcr_centrocusto_fk" Association="OrcamentoModel.feriasporcr_centrocusto_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
+          </AssociationSet>
+          <AssociationSet Name="feriasporcr_mesorcamento_fk" Association="OrcamentoModel.feriasporcr_mesorcamento_fk">
+            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+            <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Sessao">
@@ -2838,6 +2880,7 @@
           <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="SolicitacaoContratacao" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_centrocusto_fk" FromRole="CentroCusto" ToRole="Funcionario" />
           <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_centrocusto_fk" FromRole="CentroCusto" ToRole="ValoresAbertosCR" />
+          <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="CentroCusto" ToRole="FeriasPorCR" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -2977,6 +3020,7 @@
           <NavigationProperty Name="HEBase" Relationship="OrcamentoModel.hebase_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEBase" />
           <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEContratacao" />
           <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosCR" />
+          <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="FeriasPorCR" />
         </EntityType>
         <EntityType Name="StatusCiclo">
           <Key>
@@ -4080,13 +4124,6 @@
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="Funcionario" />
           <NavigationProperty Name="QtdaDias" Relationship="OrcamentoModel.qtdadias_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="QtdaDias" />
         </EntityType>
-        <EntityType Name="OrdenadoReajustavel">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="QtdaDias">
           <Key>
             <PropertyRef Name="Mes" />
@@ -4370,6 +4407,41 @@
               <PropertyRef Name="Codigo" />
             </Principal>
             <Dependent Role="ValoresAbertosCR">
+              <PropertyRef Name="CodMesOrcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FeriasPorCR">
+          <Key>
+            <PropertyRef Name="CodigoCR" />
+            <PropertyRef Name="CodMesOrcamento" />
+          </Key>
+          <Property Name="CodigoCR" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
+          <Property Name="Percentual" Type="Single" Nullable="false" />
+          <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="FeriasPorCR" ToRole="CentroCusto" />
+          <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.feriasporcr_mesorcamento_fk" FromRole="FeriasPorCR" ToRole="MesOrcamento" />
+        </EntityType>
+        <Association Name="feriasporcr_centrocusto_fk">
+          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
+          <End Type="OrcamentoModel.FeriasPorCR" Role="FeriasPorCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FeriasPorCR">
+              <PropertyRef Name="CodigoCR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="feriasporcr_mesorcamento_fk">
+          <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
+          <End Type="OrcamentoModel.FeriasPorCR" Role="FeriasPorCR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesOrcamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FeriasPorCR">
               <PropertyRef Name="CodMesOrcamento" />
             </Dependent>
           </ReferentialConstraint>
@@ -4938,14 +5010,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OrdenadoReajustavel">
-            <EntityTypeMapping TypeName="OrcamentoModel.OrdenadoReajustavel">
-              <MappingFragment StoreEntitySet="OrdenadoReajustavel">
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="QtdaDias">
             <EntityTypeMapping TypeName="OrcamentoModel.QtdaDias">
               <MappingFragment StoreEntitySet="QtdaDias">
@@ -5012,6 +5076,15 @@
                 <ScalarProperty Name="CodigoCR" ColumnName="CodigoCR" />
                 <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
                 <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeriasPorCR">
+            <EntityTypeMapping TypeName="OrcamentoModel.FeriasPorCR">
+              <MappingFragment StoreEntitySet="FeriasPorCR">
+                <ScalarProperty Name="Percentual" ColumnName="Percentual" />
+                <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
+                <ScalarProperty Name="CodigoCR" ColumnName="CodigoCR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

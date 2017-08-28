@@ -27,6 +27,7 @@ namespace OrcamentoApp.Models
             this.HEBase = new HashSet<HEBase>();
             this.HEContratacao = new HashSet<HEContratacao>();
             this.ValoresAbertosCR = new HashSet<ValoresAbertosCR>();
+            this.FeriasPorCR = new HashSet<FeriasPorCR>();
         }
     
         public int Codigo { get; set; }
@@ -54,5 +55,7 @@ namespace OrcamentoApp.Models
         public virtual ICollection<HEContratacao> HEContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValoresAbertosCR> ValoresAbertosCR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FeriasPorCR> FeriasPorCR { get; set; }
     }
 }

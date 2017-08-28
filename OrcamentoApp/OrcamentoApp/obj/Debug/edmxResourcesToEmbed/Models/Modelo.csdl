@@ -561,7 +561,6 @@
     <EntitySet Name="AdNoturnoContratacao" EntityType="OrcamentoModel.AdNoturnoContratacao" />
     <EntitySet Name="ConvenioOdo" EntityType="OrcamentoModel.ConvenioOdo" />
     <EntitySet Name="EscalaTrabalho" EntityType="OrcamentoModel.EscalaTrabalho" />
-    <EntitySet Name="OrdenadoReajustavel" EntityType="OrcamentoModel.OrdenadoReajustavel" />
     <EntitySet Name="QtdaDias" EntityType="OrcamentoModel.QtdaDias" />
     <EntitySet Name="ReajConvenioOdo" EntityType="OrcamentoModel.ReajConvenioOdo" />
     <EntitySet Name="ReajVTFretado" EntityType="OrcamentoModel.ReajVTFretado" />
@@ -636,6 +635,15 @@
     <AssociationSet Name="valoresabertoscr_mesorcamento_fk" Association="OrcamentoModel.valoresabertoscr_mesorcamento_fk">
       <End Role="MesOrcamento" EntitySet="MesOrcamento" />
       <End Role="ValoresAbertosCR" EntitySet="ValoresAbertosCR" />
+    </AssociationSet>
+    <EntitySet Name="FeriasPorCR" EntityType="OrcamentoModel.FeriasPorCR" />
+    <AssociationSet Name="feriasporcr_centrocusto_fk" Association="OrcamentoModel.feriasporcr_centrocusto_fk">
+      <End Role="CentroCusto" EntitySet="CentroCusto" />
+      <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
+    </AssociationSet>
+    <AssociationSet Name="feriasporcr_mesorcamento_fk" Association="OrcamentoModel.feriasporcr_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Sessao">
@@ -717,6 +725,7 @@
     <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="SolicitacaoContratacao" />
     <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_centrocusto_fk" FromRole="CentroCusto" ToRole="Funcionario" />
     <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_centrocusto_fk" FromRole="CentroCusto" ToRole="ValoresAbertosCR" />
+    <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="CentroCusto" ToRole="FeriasPorCR" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -856,6 +865,7 @@
     <NavigationProperty Name="HEBase" Relationship="OrcamentoModel.hebase_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEBase" />
     <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEContratacao" />
     <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosCR" />
+    <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="FeriasPorCR" />
   </EntityType>
   <EntityType Name="StatusCiclo">
     <Key>
@@ -1959,13 +1969,6 @@
     <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="Funcionario" />
     <NavigationProperty Name="QtdaDias" Relationship="OrcamentoModel.qtdadias_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="QtdaDias" />
   </EntityType>
-  <EntityType Name="OrdenadoReajustavel">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="QtdaDias">
     <Key>
       <PropertyRef Name="Mes" />
@@ -2249,6 +2252,41 @@
         <PropertyRef Name="Codigo" />
       </Principal>
       <Dependent Role="ValoresAbertosCR">
+        <PropertyRef Name="CodMesOrcamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FeriasPorCR">
+    <Key>
+      <PropertyRef Name="CodigoCR" />
+      <PropertyRef Name="CodMesOrcamento" />
+    </Key>
+    <Property Name="CodigoCR" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
+    <Property Name="Percentual" Type="Single" Nullable="false" />
+    <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="FeriasPorCR" ToRole="CentroCusto" />
+    <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.feriasporcr_mesorcamento_fk" FromRole="FeriasPorCR" ToRole="MesOrcamento" />
+  </EntityType>
+  <Association Name="feriasporcr_centrocusto_fk">
+    <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
+    <End Type="OrcamentoModel.FeriasPorCR" Role="FeriasPorCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CentroCusto">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="FeriasPorCR">
+        <PropertyRef Name="CodigoCR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="feriasporcr_mesorcamento_fk">
+    <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
+    <End Type="OrcamentoModel.FeriasPorCR" Role="FeriasPorCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="FeriasPorCR">
         <PropertyRef Name="CodMesOrcamento" />
       </Dependent>
     </ReferentialConstraint>

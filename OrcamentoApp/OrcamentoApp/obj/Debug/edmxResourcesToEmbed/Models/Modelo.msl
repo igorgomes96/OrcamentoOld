@@ -559,14 +559,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrdenadoReajustavel">
-      <EntityTypeMapping TypeName="OrcamentoModel.OrdenadoReajustavel">
-        <MappingFragment StoreEntitySet="OrdenadoReajustavel">
-          <ScalarProperty Name="Nome" ColumnName="Nome" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="QtdaDias">
       <EntityTypeMapping TypeName="OrcamentoModel.QtdaDias">
         <MappingFragment StoreEntitySet="QtdaDias">
@@ -633,6 +625,15 @@
           <ScalarProperty Name="CodigoCR" ColumnName="CodigoCR" />
           <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
           <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeriasPorCR">
+      <EntityTypeMapping TypeName="OrcamentoModel.FeriasPorCR">
+        <MappingFragment StoreEntitySet="FeriasPorCR">
+          <ScalarProperty Name="Percentual" ColumnName="Percentual" />
+          <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
+          <ScalarProperty Name="CodigoCR" ColumnName="CodigoCR" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
