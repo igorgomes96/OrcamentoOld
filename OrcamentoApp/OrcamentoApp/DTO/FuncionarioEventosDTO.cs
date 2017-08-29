@@ -11,6 +11,26 @@ namespace OrcamentoApp.DTO
         private Contexto db = new Contexto();
         public FuncionarioEventosDTO(Funcionario f, Ciclo c)
         {
+            EventoCicloDTO eventoTotais = new EventoCicloDTO
+            {
+                CodEvento = "Totais",
+                NomeEvento = "Totais",
+                CodCiclo = c.Codigo
+            };
+
+            foreach (MesOrcamento m in c.MesesOrcamento)
+            {
+                CalculoEventoBaseDTO calculoTotais = new CalculoEventoBaseDTO
+                {
+                    CodEvento = "Totais",
+                    MatriculaFuncionario = MatriculaFuncionario,
+                    CodMesOrcamento = m.Codigo,
+                    Valor = 0
+                };
+                eventoTotais.ValoresMensais.Add(m.Codigo, calculoTotais);
+            }
+
+
             MatriculaFuncionario = f.Matricula;
             NomeFuncionario = f.Nome;
             Eventos = new List<EventoCicloDTO>();
@@ -40,10 +60,13 @@ namespace OrcamentoApp.DTO
                     .ToList().ForEach(x =>
                     {
                         evento.ValoresMensais[x.CodMesOrcamento].Valor = x.Valor;
+                        eventoTotais.ValoresMensais[x.CodMesOrcamento].Valor += x.Valor;
                     });
 
                 ((List<EventoCicloDTO>)Eventos).Add(evento);
             }
+
+            ((List<EventoCicloDTO>)Eventos).Add(eventoTotais);
 
         }
         public string MatriculaFuncionario { get; set; }

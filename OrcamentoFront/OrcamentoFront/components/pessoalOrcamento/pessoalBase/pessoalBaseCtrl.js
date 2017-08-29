@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService', 'transferenciasAPI', 'funcionariosAPI', '$scope', 'sharedDataService', 'cargosAPI', '$rootScope', 'hesBaseAPI', 'adNoturnosBaseAPI', 'valoresAbertosCRsAPI', 'valoresAbertosBaseAPI', 'feriasPorCRsAPI', 'numberFilter', function(messagesService, transferenciasAPI, funcionariosAPI, $scope, sharedDataService, cargosAPI, $rootScope, hesBaseAPI, adNoturnosBaseAPI, valoresAbertosCRsAPI, valoresAbertosBaseAPI, feriasPorCRsAPI, numberFilter) {
+angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService', 'transferenciasAPI', 'funcionariosAPI', '$scope', 'sharedDataService', 'cargosAPI', '$rootScope', 'hesBaseAPI', 'adNoturnosBaseAPI', 'valoresAbertosCRsAPI', 'valoresAbertosBaseAPI', 'numberFilter', function(messagesService, transferenciasAPI, funcionariosAPI, $scope, sharedDataService, cargosAPI, $rootScope, hesBaseAPI, adNoturnosBaseAPI, valoresAbertosCRsAPI, valoresAbertosBaseAPI, numberFilter) {
 
 	var self = this;
 
@@ -10,7 +10,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
     self.horasNoturnasAbertas = [];
     self.horasExtras = [];
     self.horasExtrasAbertas = [];
-    self.ferias = [];
     $scope.aba = "Associados";
 
     var outrosInsumos = sharedDataService.getOutrosInsumosFolha();
@@ -115,32 +114,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
 
     }
 
-    self.loadFerias = function(cr) {
-        var temp = [];
-        self.ciclo.Meses.forEach(function(y) {
-            temp.push({
-                CodigoCR: cr,
-                CodMesOrcamento: y.Codigo,
-                Percentual: 0
-            });
-        });
-
-        feriasPorCRsAPI.getFeriasPorCRs(cr)
-        .then(function(dado) {
-
-            dado.data.forEach(function(x) {
-                var f = temp.filter(function(y) {
-                    return y.CodMesOrcamento == x.CodMesOrcamento;
-                });
-                if (f && f.length > 0) {
-                    f[0].Percentual = numberFilter(x.Percentual * 100, 2);
-                }
-            });
-
-        });
-
-        self.ferias = temp;
-    }
 
     self.mudaAba = function(nova) {
         $scope.aba = nova;
@@ -214,10 +187,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         if ($scope.aba == "Associados") {
             if (self.funcionarios.length == 0 && self.cr){
                 loadFuncionarios(self.cr.Codigo);
-            }
-        } else if ($scope.aba == "Férias") {
-            if (self.ferias.length == 0 || self.ferias.length == 0){
-                self.loadFerias(self.cr.Codigo);
             }
         } else if ($scope.aba == "Horas Extras") {
             if (self.horasExtras.length == 0 || self.horasExtrasAbertas.length == 0){

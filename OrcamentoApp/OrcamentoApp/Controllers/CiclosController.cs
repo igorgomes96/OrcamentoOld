@@ -80,10 +80,11 @@ namespace OrcamentoApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Ciclo.Add(ciclo);
+            db.Entry(ciclo).State = EntityState.Added;
             db.SaveChanges();
+            db.Entry(ciclo).State = EntityState.Detached;
 
-            return CreatedAtRoute("DefaultApi", new { id = ciclo.Codigo }, new CicloDTO(ciclo));
+            return CreatedAtRoute("DefaultApi", new { id = ciclo.Codigo }, new CicloDTO(db.Ciclo.Find(ciclo.Codigo)));
         }
 
         // DELETE: api/Ciclos/5
