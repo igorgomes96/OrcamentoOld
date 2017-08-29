@@ -26,6 +26,7 @@ namespace OrcamentoApp.Models
             this.ValoresAbertosBase = new HashSet<ValoresAbertosBase>();
             this.AdNoturnoBase = new HashSet<AdNoturnoBase>();
             this.HEBase = new HashSet<HEBase>();
+            this.SimulacaoDemissao = new HashSet<SimulacaoDemissao>();
         }
     
         public string Matricula { get; set; }
@@ -66,9 +67,7 @@ namespace OrcamentoApp.Models
         public virtual ICollection<CalculoEventoBase> CalculoEventoBase { get; set; }
         public virtual CentroCusto CentroCusto { get; set; }
         public virtual ConvenioMed ConvenioMed { get; set; }
-        public virtual Filial Filial { get; set; }
         public virtual Sindicato Sindicato { get; set; }
-        public virtual Variaveis Variaveis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitacaoAlteracaoCargo> SolicitacaoAlteracaoCargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -85,5 +84,9 @@ namespace OrcamentoApp.Models
         public virtual EscalaTrabalho EscalaTrabalho { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEBase> HEBase { get; set; }
+        public virtual Variaveis Variaveis { get; set; }
+        public virtual Filial Filial { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SimulacaoDemissao> SimulacaoDemissao { get; set; }
     }
 }

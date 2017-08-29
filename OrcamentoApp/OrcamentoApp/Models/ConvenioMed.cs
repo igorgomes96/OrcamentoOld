@@ -23,6 +23,7 @@ namespace OrcamentoApp.Models
             this.Contratacao = new HashSet<Contratacao>();
             this.ReajConvenioMed = new HashSet<ReajConvenioMed>();
             this.Funcionario = new HashSet<Funcionario>();
+            this.SimulacaoContratacao = new HashSet<SimulacaoContratacao>();
         }
     
         public string Plano { get; set; }
@@ -42,5 +43,7 @@ namespace OrcamentoApp.Models
         public virtual ICollection<ReajConvenioMed> ReajConvenioMed { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Funcionario> Funcionario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
     }
 }

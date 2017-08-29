@@ -21,12 +21,14 @@
 		    <tbody>
 		    	<tr ng-repeat="ev in e.Eventos">
 		    		<td ng-class="{'linha-negrito':ev.NomeEvento=='Totais'}">{{ev.NomeEvento}}</td>
-		    		<td ng-class="{'linha-negrito':ev.NomeEvento=='Totais'}" ng-repeat="m in ct.ciclo.Meses" class="text-center">
+		    		<td ng-class="{'linha-negrito':ev.NomeEvento=='Totais'}" ng-repeat="m in ct.ciclo.Meses" class="text-right">
 		    			{{ev.ValoresMensais[m.Codigo].Valor}}
 		    		</td>
 		    	</tr>
 		    </tbody>
 		</table>
+
+		<hr>
 
 	</div>
 

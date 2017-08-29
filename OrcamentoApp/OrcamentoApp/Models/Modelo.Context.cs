@@ -12,6 +12,8 @@ namespace OrcamentoApp.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Contexto : DbContext
     {
@@ -65,8 +67,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<CalculoEventoBase> CalculoEventoBase { get; set; }
         public virtual DbSet<EventoFolha> EventoFolha { get; set; }
         public virtual DbSet<ValoresAbertosBase> ValoresAbertosBase { get; set; }
-        public virtual DbSet<Filial> Filial { get; set; }
-        public virtual DbSet<Variaveis> Variaveis { get; set; }
         public virtual DbSet<Reajuste> Reajuste { get; set; }
         public virtual DbSet<Funcionario> Funcionario { get; set; }
         public virtual DbSet<AdNoturnoBase> AdNoturnoBase { get; set; }
@@ -83,5 +83,24 @@ namespace OrcamentoApp.Models
         public virtual DbSet<FeriasPorCR> FeriasPorCR { get; set; }
         public virtual DbSet<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
         public virtual DbSet<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
+        public virtual DbSet<Variaveis> Variaveis { get; set; }
+        public virtual DbSet<Filial> Filial { get; set; }
+        public virtual DbSet<Simulacao> Simulacao { get; set; }
+        public virtual DbSet<SimulacaoContratacao> SimulacaoContratacao { get; set; }
+        public virtual DbSet<SimulacaoDemissao> SimulacaoDemissao { get; set; }
+        public virtual DbSet<TipoSimulacao> TipoSimulacao { get; set; }
+    
+        public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
+        {
+            var matriculaParameter = matricula != null ?
+                new ObjectParameter("matricula", matricula) :
+                new ObjectParameter("matricula", typeof(string));
+    
+            var codCicloParameter = codCiclo.HasValue ?
+                new ObjectParameter("codCiclo", codCiclo) :
+                new ObjectParameter("codCiclo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CalculaCustoPessoa", matriculaParameter, codCicloParameter);
+        }
     }
 }

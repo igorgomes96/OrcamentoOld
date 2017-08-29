@@ -396,6 +396,15 @@
     <Compile Include="Models\Setor.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Simulacao.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SimulacaoContratacao.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SimulacaoDemissao.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sindicato.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -423,6 +432,9 @@
     <Compile Include="Models\TipoCiclo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoSimulacao.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Transferencia.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -442,6 +454,7 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CalculosBaseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -12,25 +12,19 @@ namespace OrcamentoApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresa
+    public partial class TipoSimulacao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empresa()
+        public TipoSimulacao()
         {
-            this.CentroCusto = new HashSet<CentroCusto>();
-            this.Variaveis = new HashSet<Variaveis>();
-            this.Filial = new HashSet<Filial>();
+            this.Simulacao = new HashSet<Simulacao>();
         }
     
         public int Codigo { get; set; }
         public string Nome { get; set; }
+        public string Descricao { get; set; }
     
-        public virtual Encargos Encargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CentroCusto> CentroCusto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Variaveis> Variaveis { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Filial> Filial { get; set; }
+        public virtual ICollection<Simulacao> Simulacao { get; set; }
     }
 }

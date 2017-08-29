@@ -18,9 +18,9 @@ namespace OrcamentoApp.Models
         public Sindicato()
         {
             this.PATs = new HashSet<PAT>();
-            this.Filial = new HashSet<Filial>();
             this.Reajuste = new HashSet<Reajuste>();
             this.Funcionario = new HashSet<Funcionario>();
+            this.Filial = new HashSet<Filial>();
         }
     
         public string NomeSindicato { get; set; }
@@ -29,10 +29,10 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PAT> PATs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Filial> Filial { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reajuste> Reajuste { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Funcionario> Funcionario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Filial> Filial { get; set; }
     }
 }

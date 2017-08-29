@@ -12,13 +12,16 @@ namespace OrcamentoApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ReajConvenioOdo
+    public partial class SimulacaoDemissao
     {
-        public int Ano { get; set; }
-        public int CodConvenioOdo { get; set; }
-        public int MesReajuste { get; set; }
-        public float PercentualReajuste { get; set; }
+        public int Codigo { get; set; }
+        public int SimulacaoCod { get; set; }
+        public string FuncionarioMatricula { get; set; }
+        public System.DateTime DataDesligamento { get; set; }
+        public string Motivo { get; set; }
+        public string TipoAviso { get; set; }
     
-        public virtual ConvenioOdo ConvenioOdo { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual Simulacao Simulacao { get; set; }
     }
 }

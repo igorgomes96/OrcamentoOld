@@ -437,31 +437,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Filial">
-      <EntityTypeMapping TypeName="OrcamentoModel.Filial">
-        <MappingFragment StoreEntitySet="Filial">
-          <ScalarProperty Name="SAT" ColumnName="SAT" />
-          <ScalarProperty Name="SindicatoCod" ColumnName="SindicatoCod" />
-          <ScalarProperty Name="FAP" ColumnName="FAP" />
-          <ScalarProperty Name="AvisoPrevio" ColumnName="AvisoPrevio" />
-          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
-          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Variaveis">
-      <EntityTypeMapping TypeName="OrcamentoModel.Variaveis">
-        <MappingFragment StoreEntitySet="Variaveis">
-          <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
-          <ScalarProperty Name="PR" ColumnName="PR" />
-          <ScalarProperty Name="PL" ColumnName="PL" />
-          <ScalarProperty Name="RemuneracaoVariavel" ColumnName="RemuneracaoVariavel" />
-          <ScalarProperty Name="ParticipacaoLucros" ColumnName="ParticipacaoLucros" />
-          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
-          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reajuste">
       <EntityTypeMapping TypeName="OrcamentoModel.Reajuste">
         <MappingFragment StoreEntitySet="Reajuste">
@@ -644,6 +619,82 @@
           <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
           <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
           <ScalarProperty Name="CodContratacao" ColumnName="CodContratacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Variaveis">
+      <EntityTypeMapping TypeName="OrcamentoModel.Variaveis">
+        <MappingFragment StoreEntitySet="Variaveis">
+          <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
+          <ScalarProperty Name="PR" ColumnName="PR" />
+          <ScalarProperty Name="PL" ColumnName="PL" />
+          <ScalarProperty Name="RemuneracaoVariavel" ColumnName="RemuneracaoVariavel" />
+          <ScalarProperty Name="ParticipacaoLucros" ColumnName="ParticipacaoLucros" />
+          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
+          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filial">
+      <EntityTypeMapping TypeName="OrcamentoModel.Filial">
+        <MappingFragment StoreEntitySet="Filial">
+          <ScalarProperty Name="SAT" ColumnName="SAT" />
+          <ScalarProperty Name="SindicatoCod" ColumnName="SindicatoCod" />
+          <ScalarProperty Name="FAP" ColumnName="FAP" />
+          <ScalarProperty Name="AvisoPrevio" ColumnName="AvisoPrevio" />
+          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
+          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CalculaCustoPessoa" FunctionName="OrcamentoModel.Store.CalculaCustoPessoa" />
+    <EntitySetMapping Name="Simulacao">
+      <EntityTypeMapping TypeName="OrcamentoModel.Simulacao">
+        <MappingFragment StoreEntitySet="Simulacao">
+          <ScalarProperty Name="MesOrcamentoCod" ColumnName="MesOrcamentoCod" />
+          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+          <ScalarProperty Name="CodigoCR" ColumnName="CodigoCR" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="TipoSimulacaoCod" ColumnName="TipoSimulacaoCod" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimulacaoContratacao">
+      <EntityTypeMapping TypeName="OrcamentoModel.SimulacaoContratacao">
+        <MappingFragment StoreEntitySet="SimulacaoContratacao">
+          <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
+          <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
+          <ScalarProperty Name="ConvenioOdoCod" ColumnName="ConvenioOdoCod" />
+          <ScalarProperty Name="ConvenioMedCod" ColumnName="ConvenioMedCod" />
+          <ScalarProperty Name="Salario" ColumnName="Salario" />
+          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
+          <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
+          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
+          <ScalarProperty Name="SimulacaoCod" ColumnName="SimulacaoCod" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimulacaoDemissao">
+      <EntityTypeMapping TypeName="OrcamentoModel.SimulacaoDemissao">
+        <MappingFragment StoreEntitySet="SimulacaoDemissao">
+          <ScalarProperty Name="TipoAviso" ColumnName="TipoAviso" />
+          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+          <ScalarProperty Name="DataDesligamento" ColumnName="DataDesligamento" />
+          <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
+          <ScalarProperty Name="SimulacaoCod" ColumnName="SimulacaoCod" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoSimulacao">
+      <EntityTypeMapping TypeName="OrcamentoModel.TipoSimulacao">
+        <MappingFragment StoreEntitySet="TipoSimulacao">
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

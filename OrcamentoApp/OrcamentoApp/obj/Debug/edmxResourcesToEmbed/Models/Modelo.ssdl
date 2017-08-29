@@ -136,7 +136,7 @@
     <Property Name="CargaHoraria" Type="int" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="CargoCod" Type="int" />
+    <Property Name="CargoCod" Type="int" Nullable="false" />
     <Property Name="CicloCod" Type="int" Nullable="false" />
     <Property Name="ConvenioPlanoCod" Type="int" />
     <Property Name="Salario" Type="real" Nullable="false" />
@@ -193,11 +193,11 @@
     <Property Name="FGTS" Type="float" Nullable="false" />
     <Property Name="INSS" Type="float" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
-    <Property Name="INCRA" Type="real" />
-    <Property Name="SalEducacao" Type="real" />
-    <Property Name="Sebrae" Type="real" />
-    <Property Name="Senai" Type="real" />
-    <Property Name="SESI" Type="real" />
+    <Property Name="INCRA" Type="real" Nullable="false" />
+    <Property Name="SalEducacao" Type="real" Nullable="false" />
+    <Property Name="Sebrae" Type="real" Nullable="false" />
+    <Property Name="Senai" Type="real" Nullable="false" />
+    <Property Name="SESI" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="EscalaTrabalho">
     <Key>
@@ -231,10 +231,10 @@
     </Key>
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="AvisoPrevio" Type="float" />
-    <Property Name="FAP" Type="float" />
+    <Property Name="AvisoPrevio" Type="real" Nullable="false" />
+    <Property Name="FAP" Type="real" Nullable="false" />
     <Property Name="SindicatoCod" Type="int" />
-    <Property Name="SAT" Type="float" />
+    <Property Name="SAT" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="Funcionario">
     <Key>
@@ -280,7 +280,7 @@
     </Key>
     <Property Name="FuncionarioMatricula" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="PercentualHoras" Type="int" Nullable="false" />
-    <Property Name="QtdaHoras" Type="int" />
+    <Property Name="QtdaHoras" Type="int" Nullable="false" />
     <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HEContratacao">
@@ -359,7 +359,7 @@
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
     <Property Name="PercentualReajuste" Type="float" Nullable="false" />
-    <Property Name="MesReajuste" Type="int" />
+    <Property Name="MesReajuste" Type="int" Nullable="false" />
     <Property Name="ConvenioMedCod" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ReajConvenioOdo">
@@ -369,7 +369,7 @@
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
     <Property Name="CodConvenioOdo" Type="int" Nullable="false" />
-    <Property Name="MesReajuste" Type="int" />
+    <Property Name="MesReajuste" Type="int" Nullable="false" />
     <Property Name="PercentualReajuste" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="Reajuste">
@@ -392,7 +392,7 @@
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
     <Property Name="PercentualReajuste" Type="float" Nullable="false" />
-    <Property Name="MesReajuste" Type="int" />
+    <Property Name="MesReajuste" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <EntityType Name="ReajVTPasse">
@@ -402,7 +402,7 @@
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
     <Property Name="PercentualReajuste" Type="float" Nullable="false" />
-    <Property Name="MesReajuste" Type="int" />
+    <Property Name="MesReajuste" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
   </EntityType>
   <EntityType Name="Receita">
@@ -427,10 +427,10 @@
     <Property Name="CargaHoraria" Type="int" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="Faixa1" Type="real" />
-    <Property Name="Faixa2" Type="real" />
-    <Property Name="Faixa3" Type="real" />
-    <Property Name="Faixa4" Type="real" />
+    <Property Name="Faixa1" Type="real" Nullable="false" />
+    <Property Name="Faixa2" Type="real" Nullable="false" />
+    <Property Name="Faixa3" Type="real" Nullable="false" />
+    <Property Name="Faixa4" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="SalarioMinimo">
     <Key>
@@ -457,6 +457,44 @@
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SetorPai" Type="int" />
     <Property Name="NomeSetor2" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Simulacao">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoSimulacaoCod" Type="int" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CodigoCR" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DataCriacao" Type="date" Nullable="false" />
+    <Property Name="MesOrcamentoCod" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SimulacaoContratacao">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SimulacaoCod" Type="int" Nullable="false" />
+    <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="CargoCod" Type="int" Nullable="false" />
+    <Property Name="EmpresaCod" Type="int" Nullable="false" />
+    <Property Name="CargaHoraria" Type="int" Nullable="false" />
+    <Property Name="Salario" Type="real" Nullable="false" />
+    <Property Name="ConvenioMedCod" Type="int" />
+    <Property Name="ConvenioOdoCod" Type="int" />
+    <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
+    <Property Name="Periculosidade" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SimulacaoDemissao">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SimulacaoCod" Type="int" Nullable="false" />
+    <Property Name="FuncionarioMatricula" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DataDesligamento" Type="date" Nullable="false" />
+    <Property Name="Motivo" Type="varchar" MaxLength="255" />
+    <Property Name="TipoAviso" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Sindicato">
     <Key>
@@ -547,6 +585,14 @@
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <EntityType Name="TipoSimulacao">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Transferencia">
     <Key>
       <PropertyRef Name="CRDestino" />
@@ -621,8 +667,8 @@
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="ParticipacaoLucros" Type="float" Nullable="false" />
     <Property Name="RemuneracaoVariavel" Type="float" Nullable="false" />
-    <Property Name="PL" Type="float" />
-    <Property Name="PR" Type="float" />
+    <Property Name="PL" Type="real" Nullable="false" />
+    <Property Name="PR" Type="real" Nullable="false" />
     <Property Name="CargoCod" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="act_solicitacaoth_fk">
@@ -904,7 +950,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="contratacao_variaveis_fk">
-    <End Role="Variaveis" Type="Self.Variaveis" Multiplicity="0..1" />
+    <End Role="Variaveis" Type="Self.Variaveis" Multiplicity="1" />
     <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Variaveis">
@@ -1363,6 +1409,132 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="simulacao_centrocusto_fk">
+    <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
+    <End Role="Simulacao" Type="Self.Simulacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CentroCusto">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Simulacao">
+        <PropertyRef Name="CodigoCR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacao_mesorcamento_fk">
+    <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+    <End Role="Simulacao" Type="Self.Simulacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Simulacao">
+        <PropertyRef Name="MesOrcamentoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacao_tiposimulacao_fk">
+    <End Role="TipoSimulacao" Type="Self.TipoSimulacao" Multiplicity="1" />
+    <End Role="Simulacao" Type="Self.Simulacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoSimulacao">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Simulacao">
+        <PropertyRef Name="TipoSimulacaoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaoconstratacao_conveniomed_fk">
+    <End Role="ConvenioMed" Type="Self.ConvenioMed" Multiplicity="0..1" />
+    <End Role="SimulacaoContratacao" Type="Self.SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConvenioMed">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="ConvenioMedCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaoconstratacao_convenioodo_fk">
+    <End Role="ConvenioOdo" Type="Self.ConvenioOdo" Multiplicity="0..1" />
+    <End Role="SimulacaoContratacao" Type="Self.SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConvenioOdo">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="ConvenioOdoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaocontratacao_filial_fk">
+    <End Role="Filial" Type="Self.Filial" Multiplicity="1" />
+    <End Role="SimulacaoContratacao" Type="Self.SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaocontratacao_simulacao_fk">
+    <End Role="Simulacao" Type="Self.Simulacao" Multiplicity="1" />
+    <End Role="SimulacaoContratacao" Type="Self.SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Simulacao">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="SimulacaoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaocontratacao_variaveis_fk">
+    <End Role="Variaveis" Type="Self.Variaveis" Multiplicity="1" />
+    <End Role="SimulacaoContratacao" Type="Self.SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Variaveis">
+        <PropertyRef Name="CargaHoraria" />
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CargoCod" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="CargaHoraria" />
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CargoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaodemissao_funcionario_fk">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="SimulacaoDemissao" Type="Self.SimulacaoDemissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="Matricula" />
+      </Principal>
+      <Dependent Role="SimulacaoDemissao">
+        <PropertyRef Name="FuncionarioMatricula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaodemissao_simulacao_fk">
+    <End Role="Simulacao" Type="Self.Simulacao" Multiplicity="1" />
+    <End Role="SimulacaoDemissao" Type="Self.SimulacaoDemissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Simulacao">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="SimulacaoDemissao">
+        <PropertyRef Name="SimulacaoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="solicitacao_usuario_fk">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="SolicitacaoTH" Type="Self.SolicitacaoTH" Multiplicity="*" />
@@ -1773,6 +1945,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="CalculaCustoPessoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="matricula" Type="varchar" Mode="In" />
+    <Parameter Name="codCiclo" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="OrcamentoModelStoreContainer">
     <EntitySet Name="ACT" EntityType="Self.ACT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AdNoturnoBase" EntityType="Self.AdNoturnoBase" Schema="dbo" store:Type="Tables" />
@@ -1817,6 +1993,9 @@
     <EntitySet Name="SalarioMinimo" EntityType="Self.SalarioMinimo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sessao" EntityType="Self.Sessao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Setor" EntityType="Self.Setor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Simulacao" EntityType="Self.Simulacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SimulacaoContratacao" EntityType="Self.SimulacaoContratacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SimulacaoDemissao" EntityType="Self.SimulacaoDemissao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sindicato" EntityType="Self.Sindicato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitacaoAlteracaoCargo" EntityType="Self.SolicitacaoAlteracaoCargo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitacaoAlteracaoSalario" EntityType="Self.SolicitacaoAlteracaoSalario" Schema="dbo" store:Type="Tables" />
@@ -1826,6 +2005,7 @@
     <EntitySet Name="StatusCiclo" EntityType="Self.StatusCiclo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STH" EntityType="Self.STH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCiclo" EntityType="Self.TipoCiclo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoSimulacao" EntityType="Self.TipoSimulacao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transferencia" EntityType="Self.Transferencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioPermissao" EntityType="Self.UsuarioPermissao" Schema="dbo" store:Type="Tables" />
@@ -2072,6 +2252,46 @@
     <AssociationSet Name="setor_setorpai_fk" Association="Self.setor_setorpai_fk">
       <End Role="Setor" EntitySet="Setor" />
       <End Role="Setor1" EntitySet="Setor" />
+    </AssociationSet>
+    <AssociationSet Name="simulacao_centrocusto_fk" Association="Self.simulacao_centrocusto_fk">
+      <End Role="CentroCusto" EntitySet="CentroCusto" />
+      <End Role="Simulacao" EntitySet="Simulacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacao_mesorcamento_fk" Association="Self.simulacao_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="Simulacao" EntitySet="Simulacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacao_tiposimulacao_fk" Association="Self.simulacao_tiposimulacao_fk">
+      <End Role="TipoSimulacao" EntitySet="TipoSimulacao" />
+      <End Role="Simulacao" EntitySet="Simulacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaoconstratacao_conveniomed_fk" Association="Self.simulacaoconstratacao_conveniomed_fk">
+      <End Role="ConvenioMed" EntitySet="ConvenioMed" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaoconstratacao_convenioodo_fk" Association="Self.simulacaoconstratacao_convenioodo_fk">
+      <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaocontratacao_filial_fk" Association="Self.simulacaocontratacao_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaocontratacao_simulacao_fk" Association="Self.simulacaocontratacao_simulacao_fk">
+      <End Role="Simulacao" EntitySet="Simulacao" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaocontratacao_variaveis_fk" Association="Self.simulacaocontratacao_variaveis_fk">
+      <End Role="Variaveis" EntitySet="Variaveis" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaodemissao_funcionario_fk" Association="Self.simulacaodemissao_funcionario_fk">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="SimulacaoDemissao" EntitySet="SimulacaoDemissao" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaodemissao_simulacao_fk" Association="Self.simulacaodemissao_simulacao_fk">
+      <End Role="Simulacao" EntitySet="Simulacao" />
+      <End Role="SimulacaoDemissao" EntitySet="SimulacaoDemissao" />
     </AssociationSet>
     <AssociationSet Name="solicitacao_usuario_fk" Association="Self.solicitacao_usuario_fk">
       <End Role="Usuario" EntitySet="Usuario" />

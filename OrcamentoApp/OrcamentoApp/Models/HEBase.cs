@@ -16,7 +16,7 @@ namespace OrcamentoApp.Models
     {
         public string FuncionarioMatricula { get; set; }
         public int PercentualHoras { get; set; }
-        public Nullable<int> QtdaHoras { get; set; }
+        public int QtdaHoras { get; set; }
         public int CodMesOrcamento { get; set; }
     
         public virtual Funcionario Funcionario { get; set; }

@@ -18,19 +18,20 @@ namespace OrcamentoApp.Models
         public Variaveis()
         {
             this.Contratacao = new HashSet<Contratacao>();
+            this.Funcionario = new HashSet<Funcionario>();
             this.Salario = new HashSet<Salario>();
             this.SolicitacaoAlteracaoCargo = new HashSet<SolicitacaoAlteracaoCargo>();
             this.SolicitacaoAlteracaoCargo1 = new HashSet<SolicitacaoAlteracaoCargo>();
             this.SolicitacaoContratacao = new HashSet<SolicitacaoContratacao>();
-            this.Funcionario = new HashSet<Funcionario>();
+            this.SimulacaoContratacao = new HashSet<SimulacaoContratacao>();
         }
     
         public int CargaHoraria { get; set; }
         public int EmpresaCod { get; set; }
         public double ParticipacaoLucros { get; set; }
         public double RemuneracaoVariavel { get; set; }
-        public Nullable<double> PL { get; set; }
-        public Nullable<double> PR { get; set; }
+        public float PL { get; set; }
+        public float PR { get; set; }
         public int CargoCod { get; set; }
     
         public virtual CargaHoraria CargaHoraria1 { get; set; }
@@ -38,6 +39,8 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contratacao> Contratacao { get; set; }
         public virtual Empresa Empresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Funcionario> Funcionario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Salario> Salario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,6 +50,6 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitacaoContratacao> SolicitacaoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Funcionario> Funcionario { get; set; }
+        public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
     }
 }

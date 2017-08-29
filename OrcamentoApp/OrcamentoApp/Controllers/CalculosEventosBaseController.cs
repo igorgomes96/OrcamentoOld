@@ -51,6 +51,25 @@ namespace OrcamentoApp.Controllers
             return Ok(c.Funcionario.ToList().Select(x => new FuncionarioEventosDTO(x, ciclo)));
         }
 
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        [Route("api/CalculosEventosBase/Calcula/PorCiclo/PorCR/{cr}/{codCiclo}")]
+        public IHttpActionResult CalculaBasePorCR(string cr, int codCiclo)
+        {
+            CentroCusto c = db.CentroCusto.Find(cr);
+            if (c == null) return NotFound();
+
+            Ciclo ciclo = db.Ciclo.Find(codCiclo);
+            if (ciclo == null) return NotFound();
+
+            c.Funcionario.ToList().ForEach(x =>
+            {
+                db.CalculaCustoPessoa(x.Matricula, codCiclo);
+            });
+
+            return Ok();
+        }
+
         // PUT: api/CalculosEventosBase/5
         [ResponseType(typeof(void))]
         [Route("api/CalculosEventosBase/{evento}/{matricula}/{mes}")]

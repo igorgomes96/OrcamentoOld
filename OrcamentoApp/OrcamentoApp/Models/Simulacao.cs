@@ -12,26 +12,28 @@ namespace OrcamentoApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cidade
+    public partial class Simulacao
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cidade()
+        public Simulacao()
         {
-            this.ReajVTFretado = new HashSet<ReajVTFretado>();
-            this.ReajVTPasse = new HashSet<ReajVTPasse>();
-            this.Filial = new HashSet<Filial>();
+            this.SimulacaoContratacao = new HashSet<SimulacaoContratacao>();
+            this.SimulacaoDemissao = new HashSet<SimulacaoDemissao>();
         }
     
-        public string NomeCidade { get; set; }
-        public double VTPasse { get; set; }
-        public bool EhCapital { get; set; }
-        public Nullable<double> VTFretadoValor { get; set; }
+        public int Codigo { get; set; }
+        public int TipoSimulacaoCod { get; set; }
+        public string Descricao { get; set; }
+        public string CodigoCR { get; set; }
+        public System.DateTime DataCriacao { get; set; }
+        public int MesOrcamentoCod { get; set; }
     
+        public virtual CentroCusto CentroCusto { get; set; }
+        public virtual MesOrcamento MesOrcamento { get; set; }
+        public virtual TipoSimulacao TipoSimulacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReajVTFretado> ReajVTFretado { get; set; }
+        public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReajVTPasse> ReajVTPasse { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Filial> Filial { get; set; }
+        public virtual ICollection<SimulacaoDemissao> SimulacaoDemissao { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace OrcamentoApp.Models
     {
         public int Ano { get; set; }
         public double PercentualReajuste { get; set; }
-        public Nullable<int> MesReajuste { get; set; }
+        public int MesReajuste { get; set; }
         public int ConvenioMedCod { get; set; }
     
         public virtual ConvenioMed ConvenioMed { get; set; }

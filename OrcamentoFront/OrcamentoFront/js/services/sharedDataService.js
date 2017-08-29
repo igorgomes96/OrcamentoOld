@@ -6,7 +6,9 @@ angular.module('orcamentoApp').service('sharedDataService', ['centrosCustosAPI',
     var cicloAtual = null;
     var outrosInsumosFolha = ['GRATIF','PRODUT','COMISSAO','PRO-LAB','PGP-PGI','AJU-CUST'];
     var insumosAbertosFolha = ['GRATIF','PRODUT','COMISSAO','PRO-LAB','PGP-PGI','AJU-CUST', 'AD-ABERTO', 'HE-ABERTO'];
-    
+    self.mensagensAutomaticas = true;  // Se true, exibe mensagens de erro automaticamente ao receber resposta de erro do servidor (errorInterceptor)
+
+
     self.setUsuario = function(user) {
         usuario = user;
         centrosCustosAPI.getCentrosCustos(user.SetorCod)
@@ -42,5 +44,6 @@ angular.module('orcamentoApp').service('sharedDataService', ['centrosCustosAPI',
     self.getInsumosAbertosFolha = function() {
         return insumosAbertosFolha;
     }
+
 
 }]);

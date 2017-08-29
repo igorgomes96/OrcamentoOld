@@ -18,12 +18,12 @@ namespace OrcamentoApp.Models
         public int CargaHoraria { get; set; }
         public int EmpresaCod { get; set; }
         public string CidadeNome { get; set; }
-        public Nullable<float> Faixa1 { get; set; }
-        public Nullable<float> Faixa2 { get; set; }
-        public Nullable<float> Faixa3 { get; set; }
-        public Nullable<float> Faixa4 { get; set; }
+        public float Faixa1 { get; set; }
+        public float Faixa2 { get; set; }
+        public float Faixa3 { get; set; }
+        public float Faixa4 { get; set; }
     
-        public virtual Filial Filial { get; set; }
         public virtual Variaveis Variaveis { get; set; }
+        public virtual Filial Filial { get; set; }
     }
 }

@@ -20,11 +20,11 @@ namespace OrcamentoApp.Models
         public double FGTS { get; set; }
         public double INSS { get; set; }
         public int EmpresaCod { get; set; }
-        public Nullable<float> INCRA { get; set; }
-        public Nullable<float> SalEducacao { get; set; }
-        public Nullable<float> Sebrae { get; set; }
-        public Nullable<float> Senai { get; set; }
-        public Nullable<float> SESI { get; set; }
+        public float INCRA { get; set; }
+        public float SalEducacao { get; set; }
+        public float Sebrae { get; set; }
+        public float Senai { get; set; }
+        public float SESI { get; set; }
     
         public virtual Empresa Empresa { get; set; }
     }

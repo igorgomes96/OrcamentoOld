@@ -24,8 +24,8 @@ namespace OrcamentoApp.Models
         public int CHNovo { get; set; }
     
         public virtual SolicitacaoTH SolicitacaoTH { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
         public virtual Variaveis Variaveis { get; set; }
         public virtual Variaveis Variaveis1 { get; set; }
-        public virtual Funcionario Funcionario { get; set; }
     }
 }

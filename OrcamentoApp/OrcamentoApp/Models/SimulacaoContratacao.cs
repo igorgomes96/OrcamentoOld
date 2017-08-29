@@ -12,21 +12,24 @@ namespace OrcamentoApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SolicitacaoContratacao
+    public partial class SimulacaoContratacao
     {
-        public int SolicitacaoCod { get; set; }
+        public int Codigo { get; set; }
+        public int SimulacaoCod { get; set; }
         public string CidadeNome { get; set; }
         public int CargoCod { get; set; }
-        public int CargaHoraria { get; set; }
         public int EmpresaCod { get; set; }
-        public string CRDestino { get; set; }
+        public int CargaHoraria { get; set; }
         public float Salario { get; set; }
-        public int Qtda { get; set; }
-        public System.DateTime DataPrevista { get; set; }
+        public Nullable<int> ConvenioMedCod { get; set; }
+        public Nullable<int> ConvenioOdoCod { get; set; }
+        public bool VTFretadoFlag { get; set; }
+        public bool Periculosidade { get; set; }
     
-        public virtual CentroCusto CentroCusto { get; set; }
-        public virtual SolicitacaoTH SolicitacaoTH { get; set; }
-        public virtual Variaveis Variaveis { get; set; }
+        public virtual ConvenioMed ConvenioMed { get; set; }
+        public virtual ConvenioOdo ConvenioOdo { get; set; }
         public virtual Filial Filial { get; set; }
+        public virtual Simulacao Simulacao { get; set; }
+        public virtual Variaveis Variaveis { get; set; }
     }
 }

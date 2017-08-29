@@ -14,6 +14,56 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
 
     var outrosInsumos = sharedDataService.getOutrosInsumosFolha();
 
+    var loadContratacoes = function(ciclo, cr) {
+        contratacoesAPI.getContratacoes(ciclo, cr)
+        .then(function(dado) {
+
+            dado.data.forEach(function(x) {
+
+                cargosAPI.getCargo(x.CargoCod)
+                .then(function(retorno) {
+                    x.Cargo = retorno.data;
+                });
+
+                x.Salario = numberFilter(x.Salario, 2);
+                loadContratacoesMes(x);
+            });
+
+            self.contratacoes = dado.data;
+            loadHorasExtras();
+            loadAdicionaisNoturnos();
+            loadOutros();
+
+        });
+
+    }
+
+    var loadContratacoesMes = function(contratacao) {
+        contratacoesMesAPI.getContratacoesMes(contratacao.Codigo)
+        .then(function(dado) {
+
+            contratacao.ContratacaoMeses = getContratacoesMes(self.ciclo, contratacao.Codigo); //Seta Meses como contratacoes = 0
+
+            //Atribui os valores do retorno da requisição ao array
+            dado.data.forEach(function(y) {
+                var mes = contratacao.ContratacaoMeses.filter(function(z) {
+                    return z.MesOrcamentoCod == y.MesOrcamentoCod;
+                });
+                contratacao.ContratacaoMeses[contratacao.ContratacaoMeses.indexOf(mes[0])] = y;
+            });
+
+            return cargosAPI.getCargo(contratacao.CargoCod);
+            
+        }).then(function(dado3) {
+
+            contratacao.CargoNome = dado3.data.NomeCargo;
+            contratacao.ExcluirVisivel = true;  //Exibe o botão de excluir
+            
+        }, function(error) { 
+            console.log(error); 
+        });
+
+    }
 
     var loadHorasExtras = function() {
         self.horasExtras = [];
@@ -138,57 +188,6 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
                 x.FaixasSalarios = [1000, 2000, 1500, 2500];
             });
         });
-    }
-
-    var loadContratacoes = function(ciclo, cr) {
-        contratacoesAPI.getContratacoes(ciclo, cr)
-        .then(function(dado) {
-
-            dado.data.forEach(function(x) {
-
-                cargosAPI.getCargo(x.CargoCod)
-                .then(function(retorno) {
-                    x.Cargo = retorno.data;
-                });
-
-                x.Salario = numberFilter(x.Salario, 2);
-                loadContratacoesMes(x);
-            });
-
-            self.contratacoes = dado.data;
-            loadHorasExtras();
-            loadAdicionaisNoturnos();
-            loadOutros();
-
-        });
-
-    }
-
-    var loadContratacoesMes = function(contratacao) {
-        contratacoesMesAPI.getContratacoesMes(contratacao.Codigo)
-        .then(function(dado) {
-
-            contratacao.ContratacaoMeses = getContratacoesMes(self.ciclo, contratacao.Codigo); //Seta Meses como contratacoes = 0
-
-            //Atribui os valores do retorno da requisição ao array
-            dado.data.forEach(function(y) {
-                var mes = contratacao.ContratacaoMeses.filter(function(z) {
-                    return z.MesOrcamentoCod == y.MesOrcamentoCod;
-                });
-                contratacao.ContratacaoMeses[contratacao.ContratacaoMeses.indexOf(mes[0])] = y;
-            });
-
-            return cargosAPI.getCargo(contratacao.CargoCod);
-            
-        }).then(function(dado3) {
-
-            contratacao.CargoNome = dado3.data.NomeCargo;
-            contratacao.ExcluirVisivel = true;  //Exibe o botão de excluir
-            
-        }, function(error) { 
-            console.log(error); 
-        });
-
     }
 
     var getContratacoesMes = function(ciclo, codContratacao) {

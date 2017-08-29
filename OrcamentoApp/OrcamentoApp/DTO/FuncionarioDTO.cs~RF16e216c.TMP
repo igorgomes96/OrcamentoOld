@@ -40,7 +40,7 @@ namespace OrcamentoApp.DTO
             AdCondutor = f.AdCondutor;
             VTFretadoFlag = f.VTFretadoFlag;
             CodEscalaTrabalho = f.CodEscalaTrabalho;
-            CodConvenioOdo = f.CodConvenioOdo;
+            CodConvenioOdo = f.CodConvenioOdo.;
 
         }
 

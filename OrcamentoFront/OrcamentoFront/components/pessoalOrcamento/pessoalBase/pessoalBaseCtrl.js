@@ -1,7 +1,8 @@
-angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService', 'transferenciasAPI', 'funcionariosAPI', '$scope', 'sharedDataService', 'cargosAPI', '$rootScope', 'hesBaseAPI', 'adNoturnosBaseAPI', 'valoresAbertosCRsAPI', 'valoresAbertosBaseAPI', 'numberFilter', function(messagesService, transferenciasAPI, funcionariosAPI, $scope, sharedDataService, cargosAPI, $rootScope, hesBaseAPI, adNoturnosBaseAPI, valoresAbertosCRsAPI, valoresAbertosBaseAPI, numberFilter) {
+angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService', 'transferenciasAPI', 'funcionariosAPI', '$scope', 'sharedDataService', 'cargosAPI', '$rootScope', 'hesBaseAPI', 'adNoturnosBaseAPI', 'valoresAbertosBaseAPI', 'numberFilter', 'sharedDataWithoutInjectionService', 'calculosEventosBaseAPI', function(messagesService, transferenciasAPI, funcionariosAPI, $scope, sharedDataService, cargosAPI, $rootScope, hesBaseAPI, adNoturnosBaseAPI, valoresAbertosBaseAPI, numberFilter, sharedDataWithoutInjectionService, calculosEventosBaseAPI) {
 
 	var self = this;
 
+    sharedDataWithoutInjectionService.mensagensAutomaticas = false;
     self.cr = null;
     self.funcionarioTransf = null;
     self.funcionarios = [];
@@ -17,14 +18,19 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
 	var loadFuncionarios = function(cr) {
         funcionariosAPI.getFuncionarios(cr)
         .then(function(dado) {
-            self.funcionarios = dado.data;
 
-            self.funcionarios.forEach(function(x) {
+            dado.data.forEach(function(x) {
                 cargosAPI.getCargo(x.CargoCod)
                 .then(function(dado2){
                     x.Cargo = dado2.data;
                 });
             });
+
+            self.funcionarios = dado.data;
+            loadHorasExtras();
+            loadAdicionaisNoturnos();
+            loadOutros();
+
         }, function(error) {
             console.log(error);
         });
@@ -41,10 +47,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
             });
         });
 
-        valoresAbertosCRsAPI.getValoresAbertosCRs(self.cr.Codigo, 'HE-ABERTO', self.ciclo.Codigo)
-        .then(function(dado) {
-            self.horasExtrasAbertas = dado.data;
-        });
     }
 
     var loadAdicionaisNoturnos = function() {
@@ -58,10 +60,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
             });
         });
 
-        valoresAbertosCRsAPI.getValoresAbertosCRs(self.cr.Codigo, 'AD-ABERTO', self.ciclo.Codigo)
-        .then(function(dado) {
-            self.horasNoturnasAbertas = dado.data;
-        });
     }
 
     var loadOutros = function() {
@@ -74,9 +72,13 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
                 
                 var f = {
                     Matricula: x.Matricula,
-                    Nome: x.Nome,
-                    Cargo: x.Cargo.NomeCargo
+                    Nome: x.Nome
                 };
+
+                cargosAPI.getCargo(x.CargoCod)
+                .then(function(retorno){
+                    f.Cargo = retorno.data.NomeCargo;
+                });
 
                 
                 outrosInsumos.forEach(function(z) {
@@ -119,13 +121,95 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         $scope.aba = nova;
     }
 
-    self.saveFuncionarios = function(funcionarios) {
-        var cont = 0; total = funcionarios.length;
+
+    self.saveAll = function() {
+
+        self.funcionarios.forEach(function(x) {
+            funcionariosAPI.putFuncionario(x.Matricula, x);
+        });
+
+        self.horasExtras.forEach(function(x) {
+            var listas = ['HEs170', 'HEs100', 'HEs75', 'HEs60', 'HEs50'];
+
+            listas.forEach(function(y) {
+                x[y].forEach(function(z) {
+
+                    z.FuncionarioMatricula = x.Matricula;
+
+                    if (z.QtdaHoras == 0) {
+                        hesBaseAPI.deleteHEBase(z.FuncionarioMatricula, z.PercentualHoras, z.CodMesOrcamento);
+                    } else {
+                        hesBaseAPI.postHEBase(z)
+                        .then(function(){}, function(error) {
+                            if (error.status && error.status == 201) {
+                                hesBaseAPI.putHEBase(z.FuncionarioMatricula, z.PercentualHoras, z.CodMesOrcamento, z);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        self.adNoturnos.forEach(function(x) {
+            var listas = ['HNs20', 'HNs30', 'HNs40', 'HNs50', 'HNs60'];
+
+            listas.forEach(function(y) {
+                x[y].forEach(function(z) {
+
+                    z.FuncionarioMatricula = x.Matricula;
+
+                    if (z.QtdaHoras == 0) {
+                        adNoturnosBaseAPI.deleteAdNoturnoBase(z.FuncionarioMatricula, z.PercentualHoras, z.CodMesOrcamento);
+                    } else {
+                        adNoturnosBaseAPI.postAdNoturnoBase(z)
+                        .then(function(){}, function(error) {
+                            if (error.status && error.status == 201) {
+                                adNoturnosBaseAPI.putAdNoturnoBase(z.FuncionarioMatricula, z.PercentualHoras, z.CodMesOrcamento, z);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+
+        self.outros.forEach(function(x) {
+            for (var prop in x) {
+                if (Array.isArray(x[prop])) {
+                    x[prop].forEach(function(y) {
+                        if (y.Valor == 0)
+                            valoresAbertosBaseAPI.deleteValorAbertoBase(y.CodEvento, y.CodMesOrcamento, y.MatriculaFuncionario);
+                        else {
+                            valoresAbertosBaseAPI.postValorAbertoBase(y)
+                            .then(function() {}, function(error) {
+                                if (error.status && error.status == 201) {
+                                    valoresAbertosBaseAPI.putValorAbertoBase(y.CodEvento, y.CodMesOrcamento, y.MatriculaFuncionario, y);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
+        messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
+
+    }
+
+    self.calcula = function() {
+        calculosEventosBaseAPI.postCalculaBasePorCR(self.cr.Codigo, self.ciclo.Codigo)
+        .then(function(dado) {
+            messagesService.exibeMensagemSucesso("Cálculos realizados com sucesso!");
+            $rootScope.$broadcast('calculoRealizado');
+        });
+    }
+
+    /*self.saveFuncionarios = function(funcionarios) {
     	funcionarios.forEach(function(x) {
             funcionariosAPI.putFuncionario(x.Matricula, x);
     	});
         messagesService.exibeMensagemSucesso("Alterações salvas com sucesso!");
-    }
+    }*/
     
     self.salvarTransferencia = function(transf) {
         var copia = angular.copy(transf.Funcionario);
@@ -171,7 +255,7 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         if (cr) {
             self.cr = cr;
             loadFuncionarios(self.cr.Codigo);
-            mudaAba();
+            //mudaAba();
         }
         else
             self.funcionarios = [];
@@ -183,32 +267,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         listenerCR();
     });
 
-    mudaAba = function() {
-        if ($scope.aba == "Associados") {
-            if (self.funcionarios.length == 0 && self.cr){
-                loadFuncionarios(self.cr.Codigo);
-            }
-        } else if ($scope.aba == "Horas Extras") {
-            if (self.horasExtras.length == 0 || self.horasExtrasAbertas.length == 0){
-                loadHorasExtras();
-            }
-        } else if ($scope.aba == "Adicional Noturno") {
-            if (self.adNoturnos.length == 0){
-                loadAdicionaisNoturnos();
-            }
-        } else if ($scope.aba == "Gratificações" || $scope.aba == "Produtividade" || $scope.aba == "Comissão" || $scope.aba == "Outros") {
-            if (self.outros.length == 0){
-                loadOutros();
-            }
-        }
-    }
-
-
-    $scope.$watch('aba', function() {
-        mudaAba();
-    });
-
-    //loadFuncionarios();
     self.ciclo = sharedDataService.getCicloAtual();
 
 

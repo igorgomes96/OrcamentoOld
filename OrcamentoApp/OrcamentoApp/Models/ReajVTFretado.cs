@@ -16,7 +16,7 @@ namespace OrcamentoApp.Models
     {
         public int Ano { get; set; }
         public double PercentualReajuste { get; set; }
-        public Nullable<int> MesReajuste { get; set; }
+        public int MesReajuste { get; set; }
         public string CidadeNome { get; set; }
     
         public virtual Cidade Cidade { get; set; }

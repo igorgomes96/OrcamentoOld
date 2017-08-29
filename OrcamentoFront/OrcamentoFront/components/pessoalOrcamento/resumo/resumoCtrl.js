@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('resumoCtrl', ['calculosEventosBaseAPI', 'sharedDataService', '$scope', 'numberFilter', function(calculosEventosBaseAPI, sharedDataService, $scope, numberFilter) {
+angular.module('orcamentoApp').controller('resumoCtrl', ['calculosEventosBaseAPI', 'sharedDataService', '$scope', 'numberFilter', '$scope', function(calculosEventosBaseAPI, sharedDataService, $scope, numberFilter, $scope) {
 
 	var self = this;
 
@@ -20,6 +20,10 @@ angular.module('orcamentoApp').controller('resumoCtrl', ['calculosEventosBaseAPI
 		});
 	}
 
+	$scope.$on('calculoRealizado', function($event) {
+		if (self.cr && self.ciclo)
+			loadEventosBasePorFuncionario(self.cr.Codigo, self.ciclo.Codigo);
+	});
 
 	//Adiciona um listener para capturar as mudanças de seleção de CR
     var listenerCR = $scope.$on('crChanged', function($event, cr) {
