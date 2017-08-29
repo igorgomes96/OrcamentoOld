@@ -417,16 +417,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CalculoEventoContratacao">
-      <EntityTypeMapping TypeName="OrcamentoModel.CalculoEventoContratacao">
-        <MappingFragment StoreEntitySet="CalculoEventoContratacao">
-          <ScalarProperty Name="Valor" ColumnName="Valor" />
-          <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
-          <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
-          <ScalarProperty Name="CodContratacao" ColumnName="CodContratacao" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EventoFolha">
       <EntityTypeMapping TypeName="OrcamentoModel.EventoFolha">
         <MappingFragment StoreEntitySet="EventoFolha">
@@ -644,6 +634,16 @@
           <ScalarProperty Name="CodContratacao" ColumnName="CodContratacao" />
           <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
           <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalculoEventoContratacao">
+      <EntityTypeMapping TypeName="OrcamentoModel.CalculoEventoContratacao">
+        <MappingFragment StoreEntitySet="CalculoEventoContratacao">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
+          <ScalarProperty Name="CodEvento" ColumnName="CodEvento" />
+          <ScalarProperty Name="CodContratacao" ColumnName="CodContratacao" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

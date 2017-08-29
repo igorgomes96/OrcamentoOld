@@ -60,7 +60,7 @@
     <Property Name="CodContratacao" Type="int" Nullable="false" />
     <Property Name="CodEvento" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
-    <Property Name="Valor" Type="real" />
+    <Property Name="Valor" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="CargaHoraria">
     <Key>

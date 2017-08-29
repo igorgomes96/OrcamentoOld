@@ -136,6 +136,7 @@
     <Compile Include="Controllers\AdNoturnosContratacoesController.cs" />
     <Compile Include="Controllers\AfastamentosController.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
+    <Compile Include="Controllers\CalculosEventosBaseController.cs" />
     <Compile Include="Controllers\CargaHorariaController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CentrosCustosController.cs" />
@@ -197,12 +198,14 @@
     <Compile Include="DTO\ConvenioMedDTO.cs" />
     <Compile Include="DTO\EmpresaDTO.cs" />
     <Compile Include="DTO\EncargosDTO.cs" />
+    <Compile Include="DTO\EventoCicloDTO.cs" />
     <Compile Include="DTO\EventoFolhaDTO.cs" />
     <Compile Include="DTO\FeriasPorCRDTO.cs" />
     <Compile Include="DTO\FilialDTO.cs" />
     <Compile Include="DTO\FuncionarioDTO.cs" />
     <Compile Include="DTO\ContratacaoHNsDTO.cs" />
     <Compile Include="DTO\ContratacaoHEsDTO.cs" />
+    <Compile Include="DTO\FuncionarioEventosDTO.cs" />
     <Compile Include="DTO\FuncionarioHNsDTO.cs" />
     <Compile Include="DTO\FuncionarioHEsDTO.cs" />
     <Compile Include="DTO\HEBaseDTO.cs" />

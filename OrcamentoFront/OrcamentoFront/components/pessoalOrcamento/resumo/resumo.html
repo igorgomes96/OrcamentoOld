@@ -1,0 +1,29 @@
+<ui-panel titulo="Resumo" nome="panel-resumo">
+	<div ng-if="ct.cr">
+
+	<div ng-repeat="e in ct.eventosBaseFuncionario">
+		<h4>{{e.MatriculaFuncionario}} - {{e.NomeFuncionario}}</h4>
+
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<td width="15%">Evento</td>
+					<th ng-repeat="m in ct.ciclo.Meses" class="text-center">
+                		{{m.Mes | date:'MMM/yy'}}
+            		</th>
+				</tr>
+			</thead>
+		    <tbody>
+		    	<tr ng-repeat="ev in e.Eventos">
+		    		<td>{{ev.CodEvento}}</td>
+		    		<td ng-repeat="m in ct.ciclo.Meses" class="text-center">
+		    			{{ev.ValoresMensais[m.Codigo].Valor}}
+		    		</td>
+		    	</tr>
+		    </tbody>
+		</table>
+
+	</div>
+
+	</div>
+</ui-panel>
