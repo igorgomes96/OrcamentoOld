@@ -114,10 +114,27 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
         url: '/simulacoes',
         views: {
             '': {
-                templateUrl: 'components/temp/simulacoes.html'
+                templateUrl: 'components/simulacoes/container.html'
+            },
+            'simulacoes@menuContainer.simulacoes': {
+                templateUrl: 'components/simulacoes/simulacoes.html', 
+                controller: 'simulacoesCtrl as ct'
+            },
+            'historico@menuContainer.simulacoes': {
+                templateUrl: 'components/simulacoes/simulacoesHistorico/simulacoesHistorico.html', 
+                controller: 'simulacoesHistoricoCtrl as ct'
             }
         }
     })
+
+    // .state('menuContainer.simulacoes', {
+    //     url: '/simulacoes',
+    //     views: {
+    //         '': {
+    //             templateUrl: 'components/temp/simulacoes.html'
+    //         }
+    //     }
+    // })
 
     .state('menuContainer.filaSolicitacoes', {
         url: '/filaSolicitacoes',
