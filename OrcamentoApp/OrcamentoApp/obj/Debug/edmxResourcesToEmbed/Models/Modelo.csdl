@@ -42,12 +42,13 @@
       <PropertyRef Name="NomeCidade" />
     </Key>
     <Property Name="NomeCidade" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="VTPasse" Type="Double" Nullable="false" />
+    <Property Name="VTPasse" Type="Single" Nullable="false" />
     <Property Name="EhCapital" Type="Boolean" Nullable="false" />
-    <Property Name="VTFretadoValor" Type="Double" />
+    <Property Name="VTFretadoValor" Type="Single" Nullable="false" />
     <NavigationProperty Name="ReajVTFretado" Relationship="OrcamentoModel.reajvtfretado_cidade_fk" FromRole="Cidade" ToRole="ReajVTFretado" />
     <NavigationProperty Name="ReajVTPasse" Relationship="OrcamentoModel.reajvtpasse_cidade_fk" FromRole="Cidade" ToRole="ReajVTPasse" />
     <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Cidade" ToRole="Filial" />
+    <Property Name="VTValorMensal" Type="Single" />
   </EntityType>
   <EntityType Name="ContaContabil">
     <Key>
@@ -108,11 +109,11 @@
     <Key>
       <PropertyRef Name="EmpresaCod" />
     </Key>
-    <Property Name="Enc13" Type="Double" Nullable="false" />
-    <Property Name="AvisoPrevio" Type="Double" Nullable="false" />
-    <Property Name="Ferias" Type="Double" Nullable="false" />
-    <Property Name="FGTS" Type="Double" Nullable="false" />
-    <Property Name="INSS" Type="Double" Nullable="false" />
+    <Property Name="Enc13" Type="Single" Nullable="false" />
+    <Property Name="AvisoPrevio" Type="Single" Nullable="false" />
+    <Property Name="Ferias" Type="Single" Nullable="false" />
+    <Property Name="FGTS" Type="Single" Nullable="false" />
+    <Property Name="INSS" Type="Single" Nullable="false" />
     <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Empresa" Relationship="Self.encargos_empresa_fk" FromRole="Encargos" ToRole="Empresa" />
     <Property Name="INCRA" Type="Single" Nullable="false" />
@@ -135,7 +136,7 @@
       <PropertyRef Name="SindicatoCod" />
     </Key>
     <Property Name="CargaHoraria" Type="Int32" Nullable="false" />
-    <Property Name="Valor" Type="Double" Nullable="false" />
+    <Property Name="Valor" Type="Single" Nullable="false" />
     <Property Name="SindicatoCod" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CargaHorariaObj" Relationship="Self.pat_cargahoraria_fk" FromRole="PAT" ToRole="CargaHoraria" />
     <NavigationProperty Name="Sindicato" Relationship="Self.pat_sindicato_fk" FromRole="PAT" ToRole="Sindicato" />
@@ -145,6 +146,7 @@
     <Key>
       <PropertyRef Name="Ano" />
       <PropertyRef Name="ConvenioMedCod" />
+      <PropertyRef Name="MesReajuste" />
     </Key>
     <Property Name="Ano" Type="Int32" Nullable="false" />
     <Property Name="PercentualReajuste" Type="Double" Nullable="false" />
@@ -181,6 +183,7 @@
     <NavigationProperty Name="Reajuste" Relationship="OrcamentoModel.reajuste_sindicato_fk" FromRole="Sindicato" ToRole="Reajuste" />
     <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_sindicato_fk" FromRole="Sindicato" ToRole="Funcionario" />
     <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Sindicato" ToRole="Filial" />
+    <NavigationProperty Name="ReajPAT" Relationship="OrcamentoModel.reajpat_sindicato_fk" FromRole="Sindicato" ToRole="ReajPAT" />
   </EntityType>
   <EntityType Name="Transferencia">
     <Key>
@@ -706,6 +709,11 @@
     <AssociationSet Name="simulacaocontratacao_variaveis_fk" Association="OrcamentoModel.simulacaocontratacao_variaveis_fk">
       <End Role="Variaveis" EntitySet="Variaveis" />
       <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <EntitySet Name="ReajPAT" EntityType="OrcamentoModel.ReajPAT" />
+    <AssociationSet Name="reajpat_sindicato_fk" Association="OrcamentoModel.reajpat_sindicato_fk">
+      <End Role="Sindicato" EntitySet="Sindicato" />
+      <End Role="ReajPAT" EntitySet="ReajPAT" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Sessao">
@@ -1486,7 +1494,7 @@
     <Property Name="PercentualReajuste" Type="Double" Nullable="false" />
     <Property Name="MesFechamento" Type="Int32" Nullable="false" />
     <Property Name="MesReajuste" Type="Int32" Nullable="false" />
-    <Property Name="PisoSalarial" Type="Double" Nullable="false" />
+    <Property Name="PisoSalarial" Type="Single" Nullable="false" />
     <Property Name="SindicatoCod" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Sindicato" Relationship="OrcamentoModel.reajuste_sindicato_fk" FromRole="Reajuste" ToRole="Sindicato" />
   </EntityType>
@@ -1507,11 +1515,11 @@
       <PropertyRef Name="Matricula" />
     </Key>
     <Property Name="Matricula" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="AuxCreche" Type="Double" Nullable="false" />
-    <Property Name="AuxEducacao" Type="Double" Nullable="false" />
-    <Property Name="AuxFilhoExc" Type="Double" Nullable="false" />
-    <Property Name="PrevidenciaPrivada" Type="Double" Nullable="false" />
-    <Property Name="AuxSeguro" Type="Double" Nullable="false" />
+    <Property Name="AuxCreche" Type="Single" Nullable="false" />
+    <Property Name="AuxEducacao" Type="Single" Nullable="false" />
+    <Property Name="AuxFilhoExc" Type="Single" Nullable="false" />
+    <Property Name="PrevidenciaPrivada" Type="Single" Nullable="false" />
+    <Property Name="AuxSeguro" Type="Single" Nullable="false" />
     <Property Name="AvosFerias" Type="Int32" Nullable="false" />
     <Property Name="DataAdmissao" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="MesDesligamento" Type="DateTime" Precision="3" />
@@ -1520,9 +1528,9 @@
     <Property Name="Periculosidade" Type="Boolean" Nullable="false" />
     <Property Name="QtdaDependentes" Type="Int32" Nullable="false" />
     <Property Name="QtdaDiasVendidosFerias" Type="Int32" Nullable="false" />
-    <Property Name="Salario" Type="Double" Nullable="false" />
+    <Property Name="Salario" Type="Single" Nullable="false" />
     <Property Name="TipoAviso" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="VT" Type="Double" Nullable="false" />
+    <Property Name="VT" Type="Single" Nullable="false" />
     <Property Name="CentroCustoCod" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="CidadeNome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
@@ -1736,6 +1744,7 @@
     <Key>
       <PropertyRef Name="Ano" />
       <PropertyRef Name="CodConvenioOdo" />
+      <PropertyRef Name="MesReajuste" />
     </Key>
     <Property Name="Ano" Type="Int32" Nullable="false" />
     <Property Name="CodConvenioOdo" Type="Int32" Nullable="false" />
@@ -1747,6 +1756,7 @@
     <Key>
       <PropertyRef Name="Ano" />
       <PropertyRef Name="CidadeNome" />
+      <PropertyRef Name="MesReajuste" />
     </Key>
     <Property Name="Ano" Type="Int32" Nullable="false" />
     <Property Name="PercentualReajuste" Type="Double" Nullable="false" />
@@ -1758,6 +1768,7 @@
     <Key>
       <PropertyRef Name="Ano" />
       <PropertyRef Name="CidadeNome" />
+      <PropertyRef Name="MesReajuste" />
     </Key>
     <Property Name="Ano" Type="Int32" Nullable="false" />
     <Property Name="PercentualReajuste" Type="Double" Nullable="false" />
@@ -2594,6 +2605,30 @@
         <PropertyRef Name="CargaHoraria" />
         <PropertyRef Name="EmpresaCod" />
         <PropertyRef Name="CargoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReajPAT">
+    <Key>
+      <PropertyRef Name="Ano" />
+      <PropertyRef Name="MesReajuste" />
+      <PropertyRef Name="SindicatoCod" />
+    </Key>
+    <Property Name="Ano" Type="Int32" Nullable="false" />
+    <Property Name="PercentualReajuste" Type="Single" Nullable="false" />
+    <Property Name="MesReajuste" Type="Int32" Nullable="false" />
+    <Property Name="SindicatoCod" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sindicato" Relationship="OrcamentoModel.reajpat_sindicato_fk" FromRole="ReajPAT" ToRole="Sindicato" />
+  </EntityType>
+  <Association Name="reajpat_sindicato_fk">
+    <End Type="OrcamentoModel.Sindicato" Role="Sindicato" Multiplicity="1" />
+    <End Type="OrcamentoModel.ReajPAT" Role="ReajPAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sindicato">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ReajPAT">
+        <PropertyRef Name="SindicatoCod" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

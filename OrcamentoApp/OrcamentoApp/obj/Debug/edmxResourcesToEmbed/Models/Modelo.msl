@@ -37,6 +37,7 @@
     <EntitySetMapping Name="Cidade">
       <EntityTypeMapping TypeName="OrcamentoModel.Cidade">
         <MappingFragment StoreEntitySet="Cidade">
+          <ScalarProperty Name="VTValorMensal" ColumnName="VTValorMensal" />
           <ScalarProperty Name="VTFretadoValor" ColumnName="VTFretadoValor" />
           <ScalarProperty Name="EhCapital" ColumnName="EhCapital" />
           <ScalarProperty Name="VTPasse" ColumnName="VTPasse" />
@@ -695,6 +696,16 @@
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReajPAT">
+      <EntityTypeMapping TypeName="OrcamentoModel.ReajPAT">
+        <MappingFragment StoreEntitySet="ReajPAT">
+          <ScalarProperty Name="SindicatoCod" ColumnName="SindicatoCod" />
+          <ScalarProperty Name="MesReajuste" ColumnName="MesReajuste" />
+          <ScalarProperty Name="PercentualReajuste" ColumnName="PercentualReajuste" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

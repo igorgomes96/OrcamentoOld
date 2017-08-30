@@ -241,6 +241,8 @@
     <Compile Include="Excel\ImportacaoOleDB.cs" />
     <Compile Include="Exceptions\CargoNaoEncontrado.cs" />
     <Compile Include="Exceptions\CargaHorariaNaoEncontrada .cs" />
+    <Compile Include="Exceptions\EncargosNaoEncontradosException.cs" />
+    <Compile Include="Exceptions\PATNaoCadastradaException.cs" />
     <Compile Include="Exceptions\SalarioNaoEncontrado.cs" />
     <Compile Include="Exceptions\CidadeNaoEncontrada.cs" />
     <Compile Include="Exceptions\ConvenioNaoEncontrado.cs" />
@@ -370,6 +372,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReajConvenioOdo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReajPAT.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reajuste.cs">

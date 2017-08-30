@@ -89,6 +89,7 @@ namespace OrcamentoApp.Models
         public virtual DbSet<SimulacaoContratacao> SimulacaoContratacao { get; set; }
         public virtual DbSet<SimulacaoDemissao> SimulacaoDemissao { get; set; }
         public virtual DbSet<TipoSimulacao> TipoSimulacao { get; set; }
+        public virtual DbSet<ReajPAT> ReajPAT { get; set; }
     
         public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
         {

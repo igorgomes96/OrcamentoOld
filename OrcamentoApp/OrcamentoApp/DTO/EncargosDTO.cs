@@ -16,14 +16,24 @@ namespace OrcamentoApp.DTO
             FGTS = e.FGTS;
             INSS = e.INSS;
             EmpresaCod = e.EmpresaCod;
+            INCRA = e.INCRA;
+            SalEducacao = e.SalEducacao;
+            Sebrae = e.Sebrae;
+            Senai = e.Senai;
+            SESI = e.SESI;
         }
-        public double Enc13 { get; set; }
-        public double AvisoPrevio { get; set; }
-        public double Ferias { get; set; }
-        public double FGTS { get; set; }
-        public double INSS { get; set; }
-        public double SistemaS { get; set; }
+        public float Enc13 { get; set; }
+        public float AvisoPrevio { get; set; }
+        public float Ferias { get; set; }
+        public float FGTS { get; set; }
+        public float INSS { get; set; }
+        public float SistemaS { get; set; }
         public int EmpresaCod { get; set; }
-    
+        public float INCRA { get; set; }
+        public float SalEducacao { get; set; }
+        public float Sebrae { get; set; }
+        public float Senai { get; set; }
+        public float SESI { get; set; }
+
     }
 }

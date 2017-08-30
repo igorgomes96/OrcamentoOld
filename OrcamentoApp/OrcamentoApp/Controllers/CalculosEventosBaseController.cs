@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using OrcamentoApp.Services;
 
 namespace OrcamentoApp.Controllers
 {
@@ -62,10 +63,27 @@ namespace OrcamentoApp.Controllers
             Ciclo ciclo = db.Ciclo.Find(codCiclo);
             if (ciclo == null) return NotFound();
 
-            c.Funcionario.ToList().ForEach(x =>
+            /*c.Funcionario.ToList().ForEach(x =>
             {
                 db.CalculaCustoPessoa(x.Matricula, codCiclo);
+            });*/
+
+            db.Database.ExecuteSqlCommand("delete a from CalculoEventoBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Funcionario c on a.MatriculaFuncionario = c.Matricula where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
+            //db.Database.ExecuteSqlCommand("insert into CalculoEventoBase (CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor) select CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Funcionario c on a.MatriculaFuncionario = c.Matricula where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
+
+            c.Funcionario.ToList().ForEach(x =>
+            {
+                CalculosBaseService.CalculaFuncionarioCiclo(x, ciclo).ToList()
+                    .ForEach(y => db.Entry(y).State = EntityState.Added);
             });
+
+            try
+            {
+                db.SaveChanges();
+            } catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
 
             return Ok();
         }

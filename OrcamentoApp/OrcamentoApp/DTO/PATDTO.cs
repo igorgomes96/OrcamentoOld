@@ -15,7 +15,7 @@ namespace OrcamentoApp.DTO
             SindicatoCod = p.SindicatoCod;
         }
         public int CargaHoraria { get; set; }
-        public double Valor { get; set; }
+        public float Valor { get; set; }
         public int SindicatoCod { get; set; }
 
     }

@@ -23,9 +23,10 @@ namespace OrcamentoApp.Models
         }
     
         public string NomeCidade { get; set; }
-        public double VTPasse { get; set; }
+        public float VTPasse { get; set; }
         public bool EhCapital { get; set; }
-        public Nullable<double> VTFretadoValor { get; set; }
+        public float VTFretadoValor { get; set; }
+        public Nullable<float> VTValorMensal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReajVTFretado> ReajVTFretado { get; set; }

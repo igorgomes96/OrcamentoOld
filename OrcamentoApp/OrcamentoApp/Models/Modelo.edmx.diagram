@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="37">
+      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="OrcamentoModel.Afastamento" Width="1.5" PointX="13.5" PointY="26" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.CargaHoraria" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.Cargo" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
@@ -86,7 +86,7 @@
         <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosBase" Width="1.875" PointX="16.125" PointY="24.125" />
         <AssociationConnector Association="OrcamentoModel.valoresabertosbase_eventofolha_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertosbase_mesorcamento_fk" />
-        <EntityTypeShape EntityType="OrcamentoModel.Reajuste" Width="1.5" PointX="5.875" PointY="36.5" />
+        <EntityTypeShape EntityType="OrcamentoModel.Reajuste" Width="1.875" PointX="5.875" PointY="36.5" />
         <AssociationConnector Association="OrcamentoModel.reajuste_sindicato_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Funcionario" Width="1.5" PointX="11.25" PointY="21.125" />
         <AssociationConnector Association="OrcamentoModel.afastamento_funcionario_fk" />
@@ -105,7 +105,7 @@
         <EntityTypeShape EntityType="OrcamentoModel.EscalaTrabalho" Width="1.5" PointX="1" PointY="4.75" />
         <EntityTypeShape EntityType="OrcamentoModel.QtdaDias" Width="1.5" PointX="5" PointY="4.5" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajConvenioOdo" Width="1.5" PointX="11.625" PointY="40.5" />
-        <EntityTypeShape EntityType="OrcamentoModel.ReajVTFretado" Width="1.5" PointX="6.375" PointY="40" />
+        <EntityTypeShape EntityType="OrcamentoModel.ReajVTFretado" Width="1.875" PointX="6.375" PointY="40" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajVTPasse" Width="1.5" PointX="6.375" PointY="42.75" />
         <AssociationConnector Association="OrcamentoModel.adnoturnobase_funcionario_fk" />
         <AssociationConnector Association="OrcamentoModel.adnoturnobase_mesorcamento_fk" />
@@ -170,6 +170,8 @@
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_simulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaodemissao_simulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_variaveis_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.ReajPAT" Width="1.5" PointX="6" PointY="45.75" />
+        <AssociationConnector Association="OrcamentoModel.reajpat_sindicato_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

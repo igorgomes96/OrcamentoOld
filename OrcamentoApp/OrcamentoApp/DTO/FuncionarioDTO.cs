@@ -45,11 +45,11 @@ namespace OrcamentoApp.DTO
         }
 
         public string Matricula { get; set; }
-        public double AuxCreche { get; set; }
-        public double AuxEducacao { get; set; }
-        public double AuxFilhoExc { get; set; }
-        public double PrevidenciaPrivada { get; set; }
-        public double AuxSeguro { get; set; }
+        public float AuxCreche { get; set; }
+        public float AuxEducacao { get; set; }
+        public float AuxFilhoExc { get; set; }
+        public float PrevidenciaPrivada { get; set; }
+        public float AuxSeguro { get; set; }
         public int AvosFerias { get; set; }
         public System.DateTime DataAdmissao { get; set; }
         public Nullable<System.DateTime> MesDesligamento { get; set; }
@@ -58,9 +58,9 @@ namespace OrcamentoApp.DTO
         public bool Periculosidade { get; set; }
         public int QtdaDependentes { get; set; }
         public int QtdaDiasVendidosFerias { get; set; }
-        public double Salario { get; set; }
+        public float Salario { get; set; }
         public string TipoAviso { get; set; }
-        public double VT { get; set; }
+        public float VT { get; set; }
         public string CentroCustoCod { get; set; }
         public string CidadeNome { get; set; }
         public int EmpresaCod { get; set; }

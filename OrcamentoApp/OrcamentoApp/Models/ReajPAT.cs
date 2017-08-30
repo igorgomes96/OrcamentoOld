@@ -12,14 +12,13 @@ namespace OrcamentoApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PAT
+    public partial class ReajPAT
     {
-        public int CargaHoraria { get; set; }
-        public float Valor { get; set; }
+        public int Ano { get; set; }
+        public float PercentualReajuste { get; set; }
+        public int MesReajuste { get; set; }
         public int SindicatoCod { get; set; }
-        public float Percentual { get; set; }
     
-        public virtual CargaHoraria CargaHorariaObj { get; set; }
         public virtual Sindicato Sindicato { get; set; }
     }
 }

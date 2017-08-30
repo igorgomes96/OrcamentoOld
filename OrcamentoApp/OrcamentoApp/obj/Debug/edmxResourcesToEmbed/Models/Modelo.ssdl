@@ -112,9 +112,10 @@
       <PropertyRef Name="NomeCidade" />
     </Key>
     <Property Name="NomeCidade" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="VTPasse" Type="float" Nullable="false" />
+    <Property Name="VTPasse" Type="real" Nullable="false" />
     <Property Name="EhCapital" Type="bit" Nullable="false" />
-    <Property Name="VTFretadoValor" Type="float" />
+    <Property Name="VTFretadoValor" Type="real" Nullable="false" />
+    <Property Name="VTValorMensal" Type="real" />
   </EntityType>
   <EntityType Name="ContaContabil">
     <Key>
@@ -187,11 +188,11 @@
     <Key>
       <PropertyRef Name="EmpresaCod" />
     </Key>
-    <Property Name="Enc13" Type="float" Nullable="false" />
-    <Property Name="AvisoPrevio" Type="float" Nullable="false" />
-    <Property Name="Ferias" Type="float" Nullable="false" />
-    <Property Name="FGTS" Type="float" Nullable="false" />
-    <Property Name="INSS" Type="float" Nullable="false" />
+    <Property Name="Enc13" Type="real" Nullable="false" />
+    <Property Name="AvisoPrevio" Type="real" Nullable="false" />
+    <Property Name="Ferias" Type="real" Nullable="false" />
+    <Property Name="FGTS" Type="real" Nullable="false" />
+    <Property Name="INSS" Type="real" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="INCRA" Type="real" Nullable="false" />
     <Property Name="SalEducacao" Type="real" Nullable="false" />
@@ -241,11 +242,11 @@
       <PropertyRef Name="Matricula" />
     </Key>
     <Property Name="Matricula" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="AuxCreche" Type="float" Nullable="false" />
-    <Property Name="AuxEducacao" Type="float" Nullable="false" />
-    <Property Name="AuxFilhoExc" Type="float" Nullable="false" />
-    <Property Name="PrevidenciaPrivada" Type="float" Nullable="false" />
-    <Property Name="AuxSeguro" Type="float" Nullable="false" />
+    <Property Name="AuxCreche" Type="real" Nullable="false" />
+    <Property Name="AuxEducacao" Type="real" Nullable="false" />
+    <Property Name="AuxFilhoExc" Type="real" Nullable="false" />
+    <Property Name="PrevidenciaPrivada" Type="real" Nullable="false" />
+    <Property Name="AuxSeguro" Type="real" Nullable="false" />
     <Property Name="AvosFerias" Type="int" Nullable="false" />
     <Property Name="DataAdmissao" Type="date" Nullable="false" />
     <Property Name="MesDesligamento" Type="datetime" />
@@ -254,9 +255,9 @@
     <Property Name="Periculosidade" Type="bit" Nullable="false" />
     <Property Name="QtdaDependentes" Type="int" Nullable="false" />
     <Property Name="QtdaDiasVendidosFerias" Type="int" Nullable="false" />
-    <Property Name="Salario" Type="float" Nullable="false" />
+    <Property Name="Salario" Type="real" Nullable="false" />
     <Property Name="TipoAviso" Type="varchar" MaxLength="20" />
-    <Property Name="VT" Type="float" Nullable="false" />
+    <Property Name="VT" Type="real" Nullable="false" />
     <Property Name="CentroCustoCod" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
@@ -325,7 +326,7 @@
       <PropertyRef Name="SindicatoCod" />
     </Key>
     <Property Name="CargaHoraria" Type="int" Nullable="false" />
-    <Property Name="Valor" Type="float" Nullable="false" />
+    <Property Name="Valor" Type="real" Nullable="false" />
     <Property Name="SindicatoCod" Type="int" Nullable="false" />
     <Property Name="Percentual" Type="real" Nullable="false" />
   </EntityType>
@@ -355,6 +356,7 @@
   <EntityType Name="ReajConvenioMed">
     <Key>
       <PropertyRef Name="Ano" />
+      <PropertyRef Name="MesReajuste" />
       <PropertyRef Name="ConvenioMedCod" />
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
@@ -366,11 +368,23 @@
     <Key>
       <PropertyRef Name="Ano" />
       <PropertyRef Name="CodConvenioOdo" />
+      <PropertyRef Name="MesReajuste" />
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
     <Property Name="CodConvenioOdo" Type="int" Nullable="false" />
     <Property Name="MesReajuste" Type="int" Nullable="false" />
     <Property Name="PercentualReajuste" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReajPAT">
+    <Key>
+      <PropertyRef Name="Ano" />
+      <PropertyRef Name="MesReajuste" />
+      <PropertyRef Name="SindicatoCod" />
+    </Key>
+    <Property Name="Ano" Type="int" Nullable="false" />
+    <Property Name="PercentualReajuste" Type="real" Nullable="false" />
+    <Property Name="MesReajuste" Type="int" Nullable="false" />
+    <Property Name="SindicatoCod" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Reajuste">
     <Key>
@@ -382,12 +396,13 @@
     <Property Name="PercentualReajuste" Type="float" Nullable="false" />
     <Property Name="MesFechamento" Type="int" Nullable="false" />
     <Property Name="MesReajuste" Type="int" Nullable="false" />
-    <Property Name="PisoSalarial" Type="float" Nullable="false" />
+    <Property Name="PisoSalarial" Type="real" Nullable="false" />
     <Property Name="SindicatoCod" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ReajVTFretado">
     <Key>
       <PropertyRef Name="Ano" />
+      <PropertyRef Name="MesReajuste" />
       <PropertyRef Name="CidadeNome" />
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
@@ -398,6 +413,7 @@
   <EntityType Name="ReajVTPasse">
     <Key>
       <PropertyRef Name="Ano" />
+      <PropertyRef Name="MesReajuste" />
       <PropertyRef Name="CidadeNome" />
     </Key>
     <Property Name="Ano" Type="int" Nullable="false" />
@@ -1295,6 +1311,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="reajpat_sindicato_fk">
+    <End Role="Sindicato" Type="Self.Sindicato" Multiplicity="1" />
+    <End Role="ReajPAT" Type="Self.ReajPAT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sindicato">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="ReajPAT">
+        <PropertyRef Name="SindicatoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="reajuste_sindicato_fk">
     <End Role="Sindicato" Type="Self.Sindicato" Multiplicity="1" />
     <End Role="Reajuste" Type="Self.Reajuste" Multiplicity="*" />
@@ -1985,6 +2013,7 @@
     <EntitySet Name="QtdaDias" EntityType="Self.QtdaDias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReajConvenioMed" EntityType="Self.ReajConvenioMed" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReajConvenioOdo" EntityType="Self.ReajConvenioOdo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReajPAT" EntityType="Self.ReajPAT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reajuste" EntityType="Self.Reajuste" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReajVTFretado" EntityType="Self.ReajVTFretado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReajVTPasse" EntityType="Self.ReajVTPasse" Schema="dbo" store:Type="Tables" />
@@ -2216,6 +2245,10 @@
     <AssociationSet Name="reajconvenioodo_convenioodo_fk" Association="Self.reajconvenioodo_convenioodo_fk">
       <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
       <End Role="ReajConvenioOdo" EntitySet="ReajConvenioOdo" />
+    </AssociationSet>
+    <AssociationSet Name="reajpat_sindicato_fk" Association="Self.reajpat_sindicato_fk">
+      <End Role="Sindicato" EntitySet="Sindicato" />
+      <End Role="ReajPAT" EntitySet="ReajPAT" />
     </AssociationSet>
     <AssociationSet Name="reajuste_sindicato_fk" Association="Self.reajuste_sindicato_fk">
       <End Role="Sindicato" EntitySet="Sindicato" />

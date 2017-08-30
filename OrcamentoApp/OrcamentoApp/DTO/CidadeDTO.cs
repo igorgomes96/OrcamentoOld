@@ -13,11 +13,14 @@ namespace OrcamentoApp.DTO
             NomeCidade = c.NomeCidade;
             VTPasse = c.VTPasse;
             EhCapital = c.EhCapital;
+            VTFretadoValor = c.VTFretadoValor;
+            VTValorMensal = c.VTValorMensal;
         }
     
         public string NomeCidade { get; set; }
-        public double VTPasse { get; set; }
+        public float VTPasse { get; set; }
         public bool EhCapital { get; set; }
-    
+        public float VTFretadoValor { get; set; }
+        public Nullable<float> VTValorMensal { get; set; } 
     }
 }

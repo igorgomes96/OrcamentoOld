@@ -20,7 +20,7 @@ namespace OrcamentoApp.DTO
         public double PercentualReajuste { get; set; }
         public int MesFechamento { get; set; }
         public int MesReajuste { get; set; }
-        public double PisoSalarial { get; set; }
+        public float PisoSalarial { get; set; }
         public int SindicatoCod { get; set; }
     
     }
