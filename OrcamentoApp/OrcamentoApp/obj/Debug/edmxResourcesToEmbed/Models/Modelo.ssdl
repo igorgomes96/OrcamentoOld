@@ -106,6 +106,7 @@
     <Property Name="DataFim" Type="date" />
     <Property Name="StatusCod" Type="int" />
     <Property Name="TipoCod" Type="int" Nullable="false" />
+    <Property Name="Descricao" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="Cidade">
     <Key>
@@ -250,7 +251,6 @@
     <Property Name="AvosFerias" Type="int" Nullable="false" />
     <Property Name="DataAdmissao" Type="date" Nullable="false" />
     <Property Name="MesDesligamento" Type="datetime" />
-    <Property Name="MesFerias" Type="datetime" />
     <Property Name="Nome" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="Periculosidade" Type="bit" Nullable="false" />
     <Property Name="QtdaDependentes" Type="int" Nullable="false" />
@@ -272,6 +272,15 @@
     <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
     <Property Name="CodEscalaTrabalho" Type="int" Nullable="false" />
     <Property Name="CodConvenioOdo" Type="int" />
+  </EntityType>
+  <EntityType Name="FuncionarioFerias">
+    <Key>
+      <PropertyRef Name="MatriculaFuncionario" />
+      <PropertyRef Name="CodMesOrcamento" />
+    </Key>
+    <Property Name="MatriculaFuncionario" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CodMesOrcamento" Type="int" Nullable="false" />
+    <Property Name="QtdaDias" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HEBase">
     <Key>
@@ -311,7 +320,7 @@
     </Key>
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Mes" Type="date" Nullable="false" />
-    <Property Name="CicloCod" Type="int" />
+    <Property Name="CicloCod" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Nivel">
     <Key>
@@ -1240,7 +1249,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="mesorcamento_ciclo_fk">
-    <End Role="Ciclo" Type="Self.Ciclo" Multiplicity="0..1" />
+    <End Role="Ciclo" Type="Self.Ciclo" Multiplicity="1" />
     <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ciclo">
@@ -2002,6 +2011,7 @@
     <EntitySet Name="FeriasPorCR" EntityType="Self.FeriasPorCR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Filial" EntityType="Self.Filial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncionarioFerias" EntityType="Self.FuncionarioFerias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HEBase" EntityType="Self.HEBase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HEContratacao" EntityType="Self.HEContratacao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Importacao" EntityType="Self.Importacao" Schema="dbo" store:Type="Tables" />

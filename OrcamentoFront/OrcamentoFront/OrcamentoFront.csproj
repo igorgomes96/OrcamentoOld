@@ -67,6 +67,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="components\home\containerHomeCtrl.js" />
     <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="lib\angular-ui-router.min.js" />

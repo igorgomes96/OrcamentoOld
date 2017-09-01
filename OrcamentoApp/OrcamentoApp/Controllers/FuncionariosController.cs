@@ -37,6 +37,29 @@ namespace OrcamentoApp.Controllers
             return Ok(new FuncionarioDTO(funcionario));
         }
 
+        [ResponseType(typeof(void))]
+        [Route("api/Funcionarios/SaveAll")]
+        [HttpPost]
+        public IHttpActionResult SaveFuncionarios(IEnumerable<Funcionario> funcionarios)
+        {
+            funcionarios.ToList().ForEach(x =>
+            {
+                db.Entry(x).State = EntityState.Modified;
+            });
+
+            try
+            {
+                db.SaveChanges();
+            } catch(Exception e)
+            {
+                throw e;
+            }
+
+            return Ok();
+        }
+
+
+
         // PUT: api/Funcionarios/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFuncionario(string id, Funcionario funcionario)

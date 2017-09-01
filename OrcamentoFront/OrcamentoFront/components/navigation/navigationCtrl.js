@@ -1,6 +1,7 @@
-angular.module("orcamentoApp").controller('navigationCtrl', ['$scope', '$state', 'sharedDataService', function($scope, $state, sharedDataService) {
+angular.module("orcamentoApp").controller('navigationCtrl', ['$scope', '$state', 'sharedDataService', 'config', function ($scope, $state, sharedDataService, config) {
 	
 	var self = this;
+    self.nomeSistema = config.nomeSistema;
 
 	self.getUser = function() {
 		return sharedDataService.getUsuario();
@@ -81,7 +82,7 @@ angular.module("orcamentoApp").controller('navigationCtrl', ['$scope', '$state',
 			{
 				state: '#',
 				icone: 'fa fa-users fa-fw',
-				texto: 'Gestão de Funcionários',
+				texto: 'Gestão de Associados',
 				visible: user.Perfil == 'Administrador' || user.Perfil == 'Gestor de CR' || user.Perfil == 'BP',
 				subMenu: [
 					{

@@ -20,7 +20,7 @@ namespace OrcamentoApp.Models
         public float Valor { get; set; }
     
         public virtual EventoFolha EventoFolha { get; set; }
-        public virtual MesOrcamento MesOrcamento { get; set; }
         public virtual Funcionario Funcionario { get; set; }
+        public virtual MesOrcamento MesOrcamento { get; set; }
     }
 }

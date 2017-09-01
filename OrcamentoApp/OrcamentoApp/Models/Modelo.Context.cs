@@ -49,7 +49,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<CentroCusto> CentroCusto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Ciclo> Ciclo { get; set; }
-        public virtual DbSet<MesOrcamento> MesOrcamento { get; set; }
         public virtual DbSet<StatusCiclo> StatusCiclo { get; set; }
         public virtual DbSet<TipoCiclo> TipoCiclo { get; set; }
         public virtual DbSet<ContratacaoMes> ContratacaoMes { get; set; }
@@ -90,6 +89,8 @@ namespace OrcamentoApp.Models
         public virtual DbSet<SimulacaoDemissao> SimulacaoDemissao { get; set; }
         public virtual DbSet<TipoSimulacao> TipoSimulacao { get; set; }
         public virtual DbSet<ReajPAT> ReajPAT { get; set; }
+        public virtual DbSet<MesOrcamento> MesOrcamento { get; set; }
+        public virtual DbSet<FuncionarioFerias> FuncionarioFerias { get; set; }
     
         public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
         {

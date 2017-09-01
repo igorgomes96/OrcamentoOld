@@ -15,6 +15,7 @@ namespace OrcamentoApp.DTO
             DataInicio = c.DataInicio;
             DataFim = c.DataFim;
             StatusCod = c.StatusCod;
+            Descricao = c.Descricao;
             StatusNome = c.StatusCiclo.Nome;
             TipoCod = c.TipoCod;
             TipoNome = c.TipoCiclo.Nome;
@@ -24,6 +25,7 @@ namespace OrcamentoApp.DTO
         public int Codigo { get; set; }
         public System.DateTime DataInicio { get; set; }
         public Nullable<System.DateTime> DataFim { get; set; }
+        public string Descricao { get; set; }
         public Nullable<int> StatusCod { get; set; }
         public string StatusNome { get; set; }
         public int TipoCod { get; set; }

@@ -326,6 +326,9 @@
     <Compile Include="Models\Funcionario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FuncionarioFerias.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HEBase.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

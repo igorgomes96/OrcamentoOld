@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('hesBaseAPI', ['$http', 'config', functio
         return $http.get(config.baseUrl + resource + '/FuncionarioHE/' + matricula + '/' + codCiclo);
     }
 
+    self.saveAllFuncionariosHEs = function(funcionarios) {
+        return $http.post(config.baseUrl + resource + '/FuncionariosHEs', funcionarios);
+    }
+
     self.postHEBase = function(HEBase) {
         return $http.post(config.baseUrl + resource, HEBase);
     }

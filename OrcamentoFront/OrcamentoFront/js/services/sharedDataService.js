@@ -2,6 +2,7 @@ angular.module('orcamentoApp').service('sharedDataService', ['centrosCustosAPI',
 
     var self = this;
     
+    var ultimoCR = null;
     var usuario = null;
     var cicloAtual = null;
     var outrosInsumosFolha = ['GRATIF','PRODUT','COMISSAO','PRO-LAB','PGP-PGI','AJU-CUST'];
@@ -43,6 +44,14 @@ angular.module('orcamentoApp').service('sharedDataService', ['centrosCustosAPI',
 
     self.getInsumosAbertosFolha = function() {
         return insumosAbertosFolha;
+    }
+
+    self.setUltimoCR = function(cr) {
+        ultimoCR = cr;
+    }
+
+    self.getUltimoCR = function() {
+        return ultimoCR;
     }
 
 

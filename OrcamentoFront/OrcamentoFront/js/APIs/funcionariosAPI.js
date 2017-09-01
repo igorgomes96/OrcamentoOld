@@ -14,6 +14,10 @@ angular.module('orcamentoApp').service('funcionariosAPI', ['config', '$http', fu
         return $http.get(config.baseUrl + resource + '/' + matricula);
     }
 
+    self.saveAllFuncionarios = function(funcionarios) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', funcionarios);
+    }
+
     self.postFuncionario = function(funcionario) {
         return $http.post(config.baseUrl + resource, funcionario);
     }

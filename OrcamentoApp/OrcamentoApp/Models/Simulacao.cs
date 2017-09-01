@@ -29,11 +29,11 @@ namespace OrcamentoApp.Models
         public int MesOrcamentoCod { get; set; }
     
         public virtual CentroCusto CentroCusto { get; set; }
-        public virtual MesOrcamento MesOrcamento { get; set; }
         public virtual TipoSimulacao TipoSimulacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoDemissao> SimulacaoDemissao { get; set; }
+        public virtual MesOrcamento MesOrcamento { get; set; }
     }
 }

@@ -89,5 +89,40 @@ namespace OrcamentoApp.DTO
         public IEnumerable<QtdaHorasMesDTO> HEs75 { get; set; }
         public IEnumerable<QtdaHorasMesDTO> HEs60 { get; set; }
         public IEnumerable<QtdaHorasMesDTO> HEs50 { get; set; }
+
+        public IEnumerable<HEBase> GetHorasExtras()
+        {
+            return HEs170.Select(x => new HEBase
+            {
+                FuncionarioMatricula = Matricula,
+                PercentualHoras = x.PercentualHoras,
+                CodMesOrcamento = x.CodMesOrcamento,
+                QtdaHoras = x.QtdaHoras
+            }).Concat(HEs100.Select(x => new HEBase
+            {
+                FuncionarioMatricula = Matricula,
+                PercentualHoras = x.PercentualHoras,
+                CodMesOrcamento = x.CodMesOrcamento,
+                QtdaHoras = x.QtdaHoras
+            })).Concat(HEs75.Select(x => new HEBase
+            {
+                FuncionarioMatricula = Matricula,
+                PercentualHoras = x.PercentualHoras,
+                CodMesOrcamento = x.CodMesOrcamento,
+                QtdaHoras = x.QtdaHoras
+            })).Concat(HEs60.Select(x => new HEBase
+            {
+                FuncionarioMatricula = Matricula,
+                PercentualHoras = x.PercentualHoras,
+                CodMesOrcamento = x.CodMesOrcamento,
+                QtdaHoras = x.QtdaHoras
+            })).Concat(HEs50.Select(x => new HEBase
+            {
+                FuncionarioMatricula = Matricula,
+                PercentualHoras = x.PercentualHoras,
+                CodMesOrcamento = x.CodMesOrcamento,
+                QtdaHoras = x.QtdaHoras
+            }));
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace OrcamentoApp.Models
         public int MesTransferencia { get; set; }
     
         public virtual CentroCusto CentroCusto { get; set; }
-        public virtual MesOrcamento MesOrcamento { get; set; }
         public virtual Funcionario Funcionario { get; set; }
+        public virtual MesOrcamento MesOrcamento { get; set; }
     }
 }

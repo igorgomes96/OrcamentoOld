@@ -39,8 +39,16 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
 
     .state('menuContainer.dashboard', {
         url: '/dashboard',
-        templateUrl: 'components/dashboard/dashboard.html',
-        controller: 'dashboardCtrl as ct'
+        views: {
+            '': {
+                templateUrl: 'components/dashboard/dashboard.html',
+                controller: 'dashboardCtrl as ct'
+            },
+            'resumoFolha@menuContainer.dashboard': {
+                templateUrl: 'components/dashboard/resumoFolha/resumoFolha.html',
+                controller: 'resumoFolhaCtrl as ct'
+            }
+        }
     })
 
     .state('menuContainer.unauthenticated', {
@@ -74,10 +82,6 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
             'pessoalTransferenciasRecebidas@menuContainer.pessoalOrcamento': {
                 templateUrl: 'components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasRecebidas.html', 
                 controller: 'pessoalTransferenciasCtrl as ct'
-            },
-            'resumo@menuContainer.pessoalOrcamento': {
-                templateUrl: 'components/pessoalOrcamento/resumo/resumo.html', 
-                controller: 'resumoCtrl as ct'
             }
         }/*,
         resolve: {

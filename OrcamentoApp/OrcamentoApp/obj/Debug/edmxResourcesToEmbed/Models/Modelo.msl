@@ -240,19 +240,11 @@
     <EntitySetMapping Name="Ciclo">
       <EntityTypeMapping TypeName="OrcamentoModel.Ciclo">
         <MappingFragment StoreEntitySet="Ciclo">
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="TipoCod" ColumnName="TipoCod" />
           <ScalarProperty Name="StatusCod" ColumnName="StatusCod" />
           <ScalarProperty Name="DataFim" ColumnName="DataFim" />
           <ScalarProperty Name="DataInicio" ColumnName="DataInicio" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MesOrcamento">
-      <EntityTypeMapping TypeName="OrcamentoModel.MesOrcamento">
-        <MappingFragment StoreEntitySet="MesOrcamento">
-          <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
-          <ScalarProperty Name="Mes" ColumnName="Mes" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -474,7 +466,6 @@
           <ScalarProperty Name="QtdaDependentes" ColumnName="QtdaDependentes" />
           <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
-          <ScalarProperty Name="MesFerias" ColumnName="MesFerias" />
           <ScalarProperty Name="MesDesligamento" ColumnName="MesDesligamento" />
           <ScalarProperty Name="DataAdmissao" ColumnName="DataAdmissao" />
           <ScalarProperty Name="AvosFerias" ColumnName="AvosFerias" />
@@ -706,6 +697,24 @@
           <ScalarProperty Name="MesReajuste" ColumnName="MesReajuste" />
           <ScalarProperty Name="PercentualReajuste" ColumnName="PercentualReajuste" />
           <ScalarProperty Name="Ano" ColumnName="Ano" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MesOrcamento">
+      <EntityTypeMapping TypeName="OrcamentoModel.MesOrcamento">
+        <MappingFragment StoreEntitySet="MesOrcamento">
+          <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FuncionarioFerias">
+      <EntityTypeMapping TypeName="OrcamentoModel.FuncionarioFerias">
+        <MappingFragment StoreEntitySet="FuncionarioFerias">
+          <ScalarProperty Name="QtdaDias" ColumnName="QtdaDias" />
+          <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
+          <ScalarProperty Name="MatriculaFuncionario" ColumnName="MatriculaFuncionario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

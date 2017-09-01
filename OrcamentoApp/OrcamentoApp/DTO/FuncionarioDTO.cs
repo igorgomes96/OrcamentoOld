@@ -19,7 +19,6 @@ namespace OrcamentoApp.DTO
             AvosFerias = f.AvosFerias;
             DataAdmissao = f.DataAdmissao;
             MesDesligamento = f.MesDesligamento;
-            MesFerias = f.MesFerias;
             Nome = f.Nome;
             Periculosidade = f.Periculosidade;
             QtdaDependentes = f.QtdaDependentes;
@@ -53,7 +52,6 @@ namespace OrcamentoApp.DTO
         public int AvosFerias { get; set; }
         public System.DateTime DataAdmissao { get; set; }
         public Nullable<System.DateTime> MesDesligamento { get; set; }
-        public Nullable<System.DateTime> MesFerias { get; set; }
         public string Nome { get; set; }
         public bool Periculosidade { get; set; }
         public int QtdaDependentes { get; set; }

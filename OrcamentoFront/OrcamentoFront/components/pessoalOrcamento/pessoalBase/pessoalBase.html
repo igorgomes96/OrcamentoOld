@@ -8,6 +8,10 @@
                     <a href ng-click="ct.mudaAba('Associados')">Desligamentos</a>
                 </li>
 
+                <li ng-class="{'active': aba == 'Férias'}">
+                    <a href ng-click="ct.mudaAba('Férias')">Férias</a>
+                </li>
+
                 <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Horas Extras'}">
                     <a class="dropdown-toggle" data-toggle="dropdown" href role="button" aria-haspopup="true" aria-expanded="false">
                         Horas Extras {{ct.PercHE}}<span ng-hide="!ct.PercHE">%</span> <span class="caret"></span>
@@ -120,14 +124,13 @@
         <div class="row">
             <div class="col-md-12">
                 <button class="btn btn-primary" ng-click="ct.saveAll()">Salvar</button>
-                <button class="btn btn-success" ng-click="ct.calcula()">Calcular</button>
             </div>
         </div>
 
     </div>
 
     <div ng-if="ct.cr && !ct.funcionarios.length">
-        Nenhum funcionário cadastrado no CR {{ct.cr.Codigo}}
+        Nenhum Associado cadastrado no CR {{ct.cr.Codigo}}
     </div>
 
     <div ng-if="!ct.cr">
@@ -150,7 +153,7 @@
                     <div class="col-md-12">
 
                         <dl class="dl-horizontal">
-                            <dt>Funcionário</dt>
+                            <dt>Associado</dt>
                             <dd>{{ct.funcionarioTransf.FuncionarioMatricula}} - {{ct.funcionarioTransf.Funcionario.Nome}}</dd>
                             <dt>Cargo</dt>
                             <dd>{{ct.funcionarioTransf.Funcionario.Cargo.NomeCargo}}</dd>

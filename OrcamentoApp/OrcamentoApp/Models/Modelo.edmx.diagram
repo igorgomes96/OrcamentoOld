@@ -40,16 +40,13 @@
         <AssociationConnector Association="OrcamentoModel.usuario_setor_fk" />
         <AssociationConnector Association="OrcamentoModel.UsuarioPermissao" />
         <EntityTypeShape EntityType="OrcamentoModel.Ciclo" Width="1.5" PointX="8.25" PointY="33.25" />
-        <EntityTypeShape EntityType="OrcamentoModel.MesOrcamento" Width="1.5" PointX="11.5" PointY="14.875" />
         <EntityTypeShape EntityType="OrcamentoModel.StatusCiclo" Width="1.5" PointX="3.75" PointY="36.875" />
         <EntityTypeShape EntityType="OrcamentoModel.TipoCiclo" Width="1.5" PointX="1.875" PointY="35.25" />
         <AssociationConnector Association="OrcamentoModel.ciclo_statusciclo_fk" />
         <AssociationConnector Association="OrcamentoModel.ciclo_tipociclo_fk" />
-        <AssociationConnector Association="OrcamentoModel.mesorcamento_ciclo_fk" />
         <AssociationConnector Association="OrcamentoModel.contratacao_ciclo_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ContratacaoMes" Width="1.875" PointX="13.75" PointY="22.125" />
         <AssociationConnector Association="OrcamentoModel.contratacaomes_contratacao_fk" />
-        <AssociationConnector Association="OrcamentoModel.contratacaomes_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ConvenioMed" Width="1.5" PointX="1.5" PointY="25.125" />
         <AssociationConnector Association="OrcamentoModel.cargo_plano1_fk" />
         <AssociationConnector Association="OrcamentoModel.cargo_plano2_fk" />
@@ -58,7 +55,6 @@
         <AssociationConnector Association="OrcamentoModel.reajconveniomed_conveniomed_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Importacao" Width="1.5" PointX="0.5" PointY="11.625" />
         <AssociationConnector Association="OrcamentoModel.importacao_usuario_fk" />
-        <AssociationConnector Association="OrcamentoModel.transferencia_mesorcamento_pk" />
         <EntityTypeShape EntityType="OrcamentoModel.Salario" Width="1.5" PointX="8.25" PointY="28.875" />
         <EntityTypeShape EntityType="OrcamentoModel.ACT" Width="1.5" PointX="8.25" PointY="7" />
         <EntityTypeShape EntityType="OrcamentoModel.SolicitacaoAlteracaoSalario" Width="2.25" PointX="19.5" PointY="20.25" />
@@ -81,11 +77,9 @@
         <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoBase" Width="1.5" PointX="17" PointY="19.875" />
         <EntityTypeShape EntityType="OrcamentoModel.EventoFolha" Width="1.5" PointX="11.5" PointY="35" />
         <AssociationConnector Association="OrcamentoModel.calculoeventobase_eventofolha_fk" />
-        <AssociationConnector Association="OrcamentoModel.calculoeventobase_mesorcamento_fk" />
         <AssociationConnector Association="OrcamentoModel.eventofolha_contacontabil_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosBase" Width="1.875" PointX="16.125" PointY="24.125" />
         <AssociationConnector Association="OrcamentoModel.valoresabertosbase_eventofolha_fk" />
-        <AssociationConnector Association="OrcamentoModel.valoresabertosbase_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Reajuste" Width="1.875" PointX="5.875" PointY="36.5" />
         <AssociationConnector Association="OrcamentoModel.reajuste_sindicato_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Funcionario" Width="1.5" PointX="11.25" PointY="21.125" />
@@ -108,9 +102,7 @@
         <EntityTypeShape EntityType="OrcamentoModel.ReajVTFretado" Width="1.875" PointX="6.375" PointY="40" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajVTPasse" Width="1.5" PointX="6.375" PointY="42.75" />
         <AssociationConnector Association="OrcamentoModel.adnoturnobase_funcionario_fk" />
-        <AssociationConnector Association="OrcamentoModel.adnoturnobase_mesorcamento_fk" />
         <AssociationConnector Association="OrcamentoModel.adnoturnocontratacao_contratacao_fk" />
-        <AssociationConnector Association="OrcamentoModel.adnoturnocontratacao_mesorcamento_fk" />
         <AssociationConnector Association="OrcamentoModel.reajvtfretado_cidade_fk" />
         <AssociationConnector Association="OrcamentoModel.reajvtpasse_cidade_fk" />
         <AssociationConnector Association="OrcamentoModel.funcionario_convenioodo_fk" />
@@ -121,23 +113,17 @@
         <EntityTypeShape EntityType="OrcamentoModel.HEContratacao" Width="1.5" PointX="13.75" PointY="18.375" />
         <AssociationConnector Association="OrcamentoModel.hecontratacao_contratacao_fk" />
         <AssociationConnector Association="OrcamentoModel.hebase_funcionario_fk" />
-        <AssociationConnector Association="OrcamentoModel.hebase_mesorcamento_fk" />
-        <AssociationConnector Association="OrcamentoModel.hecontratacao_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosCR" Width="2.25" PointX="16.75" PointY="31.75" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscr_centrocusto_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscr_eventofolha_fk" />
-        <AssociationConnector Association="OrcamentoModel.valoresabertoscr_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.FeriasPorCR" Width="1.5" PointX="16.75" PointY="13.5" />
         <AssociationConnector Association="OrcamentoModel.feriasporcr_centrocusto_fk" />
-        <AssociationConnector Association="OrcamentoModel.feriasporcr_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ValoresAbertosContratacao" Width="2" PointX="19.75" PointY="31.25" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_evento_fk" />
-        <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.CalculoEventoContratacao" Width="1.5" PointX="13.75" PointY="29.25" />
         <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_contratacao_fk" />
         <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_evento_fk" />
-        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_mesorcamento_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Variaveis" Width="1.5" PointX="6" PointY="22.25" />
         <AssociationConnector Association="OrcamentoModel.variaveis_cargahoraria_fk" />
         <AssociationConnector Association="OrcamentoModel.variaveis_cargo_fk" />
@@ -165,13 +151,28 @@
         <AssociationConnector Association="OrcamentoModel.simulacaoconstratacao_convenioodo_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_filial_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaodemissao_funcionario_fk" />
-        <AssociationConnector Association="OrcamentoModel.simulacao_mesorcamento_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacao_tiposimulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_simulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaodemissao_simulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_variaveis_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.ReajPAT" Width="1.5" PointX="6" PointY="45.75" />
         <AssociationConnector Association="OrcamentoModel.reajpat_sindicato_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.MesOrcamento" Width="1.5" PointX="10.5" PointY="47.625" />
+        <AssociationConnector Association="OrcamentoModel.adnoturnobase_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.adnoturnocontratacao_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.calculoeventobase_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.calculoeventocontratacao_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.mesorcamento_ciclo_fk" />
+        <AssociationConnector Association="OrcamentoModel.contratacaomes_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.feriasporcr_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.hebase_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.hecontratacao_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.simulacao_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.transferencia_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertosbase_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" />
+        <AssociationConnector Association="OrcamentoModel.valoresabertoscr_mesorcamento_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.FuncionarioFerias" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

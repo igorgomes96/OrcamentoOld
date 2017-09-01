@@ -124,7 +124,21 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
 
     self.saveAll = function() {
 
-        self.funcionarios.forEach(function(x) {
+        exibeLoader();
+        funcionariosAPI.saveAllFuncionarios(self.funcionarios)
+        .then(function(dado) {
+            return hesBaseAPI.saveAllFuncionariosHEs(self.horasExtras);
+        }).then(function(dado) {
+            return adNoturnosBaseAPI.saveAllFuncionariosHNs(self.adNoturnos);
+        }).then(function(dado) {
+            messagesService.exibeMensagemSucesso("Informações salvas com sucesso! Os cálculos estão sendo realizados em background.");
+            ocultaLoader();
+            return calculosEventosBaseAPI.postCalculaBasePorCR(self.cr.Codigo, self.ciclo.Codigo);
+        }).then(function(dado) {
+            $rootScope.$broadcast('calculoRealizado');
+        });
+
+        /*self.funcionarios.forEach(function(x) {
             funcionariosAPI.putFuncionario(x.Matricula, x);
         });
 
@@ -190,18 +204,10 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
                     });
                 }
             }
-        });
+        });*/
 
-        messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
+        //messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
 
-    }
-
-    self.calcula = function() {
-        calculosEventosBaseAPI.postCalculaBasePorCR(self.cr.Codigo, self.ciclo.Codigo)
-        .then(function(dado) {
-            messagesService.exibeMensagemSucesso("Cálculos realizados com sucesso!");
-            $rootScope.$broadcast('calculoRealizado');
-        });
     }
 
     /*self.saveFuncionarios = function(funcionarios) {

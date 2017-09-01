@@ -17,51 +17,51 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MesOrcamento()
         {
-            this.ContratacoesMeses = new HashSet<ContratacaoMes>();
-            this.Transferencias = new HashSet<Transferencia>();
-            this.CalculosEventosBase = new HashSet<CalculoEventoBase>();
-            this.ValoresAbertosBase = new HashSet<ValoresAbertosBase>();
             this.AdNoturnoBase = new HashSet<AdNoturnoBase>();
             this.AdNoturnoContratacao = new HashSet<AdNoturnoContratacao>();
+            this.CalculoEventoBase = new HashSet<CalculoEventoBase>();
+            this.CalculoEventoContratacao = new HashSet<CalculoEventoContratacao>();
+            this.ContratacaoMes = new HashSet<ContratacaoMes>();
+            this.FeriasPorCR = new HashSet<FeriasPorCR>();
             this.HEBase = new HashSet<HEBase>();
             this.HEContratacao = new HashSet<HEContratacao>();
-            this.ValoresAbertosCR = new HashSet<ValoresAbertosCR>();
-            this.FeriasPorCR = new HashSet<FeriasPorCR>();
-            this.ValoresAbertosContratacao = new HashSet<ValoresAbertosContratacao>();
-            this.CalculoEventoContratacao = new HashSet<CalculoEventoContratacao>();
             this.Simulacao = new HashSet<Simulacao>();
+            this.Transferencia = new HashSet<Transferencia>();
+            this.ValoresAbertosBase = new HashSet<ValoresAbertosBase>();
+            this.ValoresAbertosContratacao = new HashSet<ValoresAbertosContratacao>();
+            this.ValoresAbertosCR = new HashSet<ValoresAbertosCR>();
         }
     
         public int Codigo { get; set; }
         public System.DateTime Mes { get; set; }
-        public Nullable<int> CicloCod { get; set; }
+        public int CicloCod { get; set; }
     
-        public virtual Ciclo Ciclo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContratacaoMes> ContratacoesMeses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transferencia> Transferencias { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalculoEventoBase> CalculosEventosBase { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ValoresAbertosBase> ValoresAbertosBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoBase> AdNoturnoBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoContratacao> AdNoturnoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalculoEventoBase> CalculoEventoBase { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
+        public virtual Ciclo Ciclo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContratacaoMes> ContratacaoMes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FeriasPorCR> FeriasPorCR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEBase> HEBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEContratacao> HEContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ValoresAbertosCR> ValoresAbertosCR { get; set; }
+        public virtual ICollection<Simulacao> Simulacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FeriasPorCR> FeriasPorCR { get; set; }
+        public virtual ICollection<Transferencia> Transferencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ValoresAbertosBase> ValoresAbertosBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Simulacao> Simulacao { get; set; }
+        public virtual ICollection<ValoresAbertosCR> ValoresAbertosCR { get; set; }
     }
 }

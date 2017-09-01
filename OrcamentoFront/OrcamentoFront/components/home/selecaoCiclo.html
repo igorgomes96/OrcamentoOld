@@ -109,7 +109,7 @@
 
 <h3>Novo Ciclo</h3>
 
-<form role="form" name="form-novo-ciclo">
+<form role="form" name="formNovoCiclo">
 
     <div class="row">
         <div class="col-md-3">
@@ -120,9 +120,9 @@
                 </select>
             </div>
         </div>
-   <!--  </div> -->
+   </div>
 
-   <!--  <div class="row"> -->
+   <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <div class="row">
@@ -144,18 +144,18 @@
             </div>
         </div>
 
-       <!--  <div class="col-md-3">
-            <div class="form-group">
+       <div class="col-md-3">
+            <div class="form-group" ng-class="{'has-error':ct.novoCiclo.DataFim < ct.novoCiclo.DataInicio}">
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="input-data-fim">Data Fim</label>
+                        <label for="inputDataFim">Data Fim</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group">
-                            <input type="date" class="form-control" required name="input-data-fim" id="input-data-fim" ng-model="ct.novoCiclo.DataFim">
+                            <input type="date" class="form-control" required name="inputDataFim" id="inputDataFim" ng-model="ct.novoCiclo.DataFim">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
@@ -163,12 +163,32 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="input-descrica">Descrição do Ciclo</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea class="form-control" required name="input-descricao" id="input-descricao" ng-model="ct.novoCiclo.Descricao"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="row" style="margin-bottom: 10px;">
         <div class="col-md-12">
-            <button class="btn btn-primary" ng-disabled="formNovoCiclo.$invalid" ng-click="ct.salvarCiclo(ct.novoCiclo)">Salvar</button>
+            <button class="btn btn-primary" ng-disabled="formNovoCiclo.$invalid || ct.novoCiclo.DataFim < ct.novoCiclo.DataInicio" ng-click="ct.salvarCiclo(ct.novoCiclo)">Salvar</button>
         </div>
     </div>
 

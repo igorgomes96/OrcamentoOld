@@ -17,8 +17,8 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ciclo()
         {
-            this.MesesOrcamento = new HashSet<MesOrcamento>();
             this.Contratacao = new HashSet<Contratacao>();
+            this.MesesOrcamento = new HashSet<MesOrcamento>();
         }
     
         public int Codigo { get; set; }
@@ -26,12 +26,13 @@ namespace OrcamentoApp.Models
         public Nullable<System.DateTime> DataFim { get; set; }
         public Nullable<int> StatusCod { get; set; }
         public int TipoCod { get; set; }
+        public string Descricao { get; set; }
     
         public virtual StatusCiclo StatusCiclo { get; set; }
         public virtual TipoCiclo TipoCiclo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MesOrcamento> MesesOrcamento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contratacao> Contratacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MesOrcamento> MesesOrcamento { get; set; }
     }
 }

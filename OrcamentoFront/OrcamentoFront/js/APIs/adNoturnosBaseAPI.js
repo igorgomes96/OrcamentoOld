@@ -11,6 +11,11 @@ angular.module('orcamentoApp').service('adNoturnosBaseAPI', ['$http', 'config', 
         return $http.get(config.baseUrl + resource + '/FuncionarioHN/' + matricula + '/' + codCiclo);
     }
 
+    self.saveAllFuncionariosHNs = function(funcionarios) {
+        return $http.post(config.baseUrl + resource + '/FuncionariosHNs', funcionarios);
+    }
+
+
     self.postAdNoturnoBase = function(AdNoturnoBase) {
         return $http.post(config.baseUrl + resource, AdNoturnoBase);
     }

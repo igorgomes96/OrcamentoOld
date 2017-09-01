@@ -40,6 +40,40 @@ namespace OrcamentoApp.Controllers
             return Ok(new FuncionarioHNsDTO(f, c));
         }
 
+        [ResponseType(typeof(void))]
+        [Route("api/AdNoturnosBase/FuncionariosHNs")]
+        [HttpPost]
+        public IHttpActionResult SaveAllFuncionariosHNs(IEnumerable<FuncionarioHNsDTO> funcionarios)
+        {
+
+            foreach (FuncionarioHNsDTO func in funcionarios)
+            {
+                foreach (AdNoturnoBase h in func.GetHorasNoturnas())
+                {
+                    if (AdNoturnoExists(h.FuncionarioMatricula, h.PercentualHoras, h.CodMesOrcamento))
+                    {
+                        if (h.QtdaHoras == 0) db.Entry(h).State = EntityState.Deleted;
+                        else db.Entry(h).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Entry(h).State = EntityState.Added;
+                    }
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            return Ok();
+
+        }
+
         // PUT: api/AdNoturnosBase/5
         [ResponseType(typeof(void))]
         [Route("api/AdNoturnosBase/{matricula}/{percentual}/{mesOrcamento}")]

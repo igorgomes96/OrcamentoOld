@@ -38,7 +38,6 @@ namespace OrcamentoApp.Models
         public int AvosFerias { get; set; }
         public System.DateTime DataAdmissao { get; set; }
         public Nullable<System.DateTime> MesDesligamento { get; set; }
-        public Nullable<System.DateTime> MesFerias { get; set; }
         public string Nome { get; set; }
         public bool Periculosidade { get; set; }
         public int QtdaDependentes { get; set; }

@@ -40,6 +40,38 @@ namespace OrcamentoApp.Controllers
             return Ok(new FuncionarioHEsDTO(f, c));
         }
 
+        [ResponseType(typeof(void))]
+        [Route("api/HEsBase/FuncionariosHEs")]
+        [HttpPost]
+        public IHttpActionResult SaveAllFuncionariosHE(IEnumerable<FuncionarioHEsDTO> funcionarios)
+        {
+
+            foreach (FuncionarioHEsDTO func in funcionarios)
+            {
+                foreach (HEBase h in func.GetHorasExtras())
+                {
+                    if (HEBaseExists(h.FuncionarioMatricula, h.PercentualHoras, h.CodMesOrcamento))
+                    {
+                        if (h.QtdaHoras == 0) db.Entry(h).State = EntityState.Deleted;
+                        else db.Entry(h).State = EntityState.Modified;
+                    } else
+                    {
+                        db.Entry(h).State = EntityState.Added;
+                    }
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+            return Ok();
+
+        }
+
         // PUT: api/HEsBase/5
         [ResponseType(typeof(void))]
         [Route("api/HEsBase/{matricula}/{percentual}/{mesOrcamento}")]
