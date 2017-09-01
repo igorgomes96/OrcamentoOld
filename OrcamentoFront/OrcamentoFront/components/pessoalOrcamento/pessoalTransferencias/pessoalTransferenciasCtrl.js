@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOrcamentoAPI', 'transferenciasAPI','funcionariosAPI', 'cargosAPI', '$scope', '$rootScope', 'sharedDataService', function(mesesOrcamentoAPI, transferenciasAPI, funcionariosAPI, cargosAPI, $scope, $rootScope, sharedDataService) {
+angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOrcamentoAPI', 'transferenciasAPI','funcionariosAPI', 'cargosAPI', '$scope', '$rootScope', 'sharedDataService', 'messagesService', function(mesesOrcamentoAPI, transferenciasAPI, funcionariosAPI, cargosAPI, $scope, $rootScope, sharedDataService, messagesService) {
 
 	var self = this;
 	self.ciclo = null;
@@ -6,8 +6,8 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 	self.transfRecebidas = [];
 	self.transfEnviadas = [];
 
-	var loadTransferenciasRecebidas = function(crDestino, idCiclo) {
-		transferenciasAPI.getTransferencias(null, crDestino, idCiclo)
+	var loadTransferenciasRecebidas = function(crDestino, idCiclo, pendente) {
+		transferenciasAPI.getTransferencias(null, crDestino, idCiclo, pendente)
 		.then(function(dado) {
 			self.transfRecebidas = dado.data;
 
@@ -23,13 +23,8 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 				}).then(function(retorno) {
 					cont++;
 					x.Cargo = retorno.data;
-					//Notifica o cabeçalho
-            		if (cont >= total)
-            			$rootScope.$broadcast('transferenciasNotify', self.transfRecebidas);
 				});
 			});
-
-			if (total == 0) $rootScope.$broadcast('transferenciasNotify', self.transfRecebidas);
 
 		});
 	}
@@ -55,6 +50,17 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 		});
 	}
 
+	self.aprovarTrans = function(transf) {
+		transf.Aprovado = true;
+		transferenciasAPI.putTransferencia(transf.CRDestino, transf.FuncionarioMatricula, transf.MesTransferencia, transf)
+		.then(function(dado) {
+			messagesService.exibeMensagemSucesso('Transferência aprovada!');
+			loadTransferenciasRecebidas(self.cr.Codigo, self.ciclo.Codigo, true);
+			$rootScope.$broadcast('transAprovada', transf.FuncionarioMatricula);
+		});
+	}
+
+
 	var listenerNovaTransf = $scope.$on('transCREvent', function() {
 		loadTransferenciasEnviadas(self.cr.Codigo, self.ciclo.Codigo);
 	});
@@ -64,7 +70,7 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
     var listenerCRChanged = $scope.$on('crChanged', function($event, cr) {
         if (self.ciclo && cr) {
         	self.cr = cr;
-            loadTransferenciasRecebidas(cr.Codigo, self.ciclo.Codigo);
+            loadTransferenciasRecebidas(cr.Codigo, self.ciclo.Codigo, true);
             loadTransferenciasEnviadas(cr.Codigo, self.ciclo.Codigo);
         } else {
             self.transfRecebidas = [];

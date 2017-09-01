@@ -48,7 +48,7 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
 
     if (self.ciclo && self.cr) {
     	console.log('Carregando cálculos.');
-    	loadEventosBasePorFuncionario(self.cr, self.ciclo);
+    	loadEventosBasePorFuncionario(self.cr.Codigo, self.ciclo.Codigo);
     }
 
 

@@ -1,13 +1,22 @@
+using OrcamentoApp.Exceptions;
 using OrcamentoApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OrcamentoApp.DTO
 {
-    
+    public partial class HistoricoCRsFuncionario {
+        public string MatriculaFuncionario { get; set; }
+        public string CR { get; set; }
+        public DateTime? Inicio { get; set; }
+        public DateTime? Fim { get; set; }
+    }
+
     public partial class FuncionarioDTO
     {
-        public FuncionarioDTO(Funcionario f)
+
+        public void SetFuncionario(Funcionario f)
         {
             if (f == null) return;
             Matricula = f.Matricula;
@@ -25,7 +34,6 @@ namespace OrcamentoApp.DTO
             QtdaDiasVendidosFerias = f.QtdaDiasVendidosFerias;
             Salario = f.Salario;
             TipoAviso = f.TipoAviso;
-            VT = f.VT;
             CentroCustoCod = f.CentroCustoCod;
             CidadeNome = f.CidadeNome;
             ConvenioMedCod = f.ConvenioMedCod;
@@ -40,8 +48,91 @@ namespace OrcamentoApp.DTO
             VTFretadoFlag = f.VTFretadoFlag;
             CodEscalaTrabalho = f.CodEscalaTrabalho;
             CodConvenioOdo = f.CodConvenioOdo;
+        }
+        public FuncionarioDTO(Funcionario f)
+        {
+            SetFuncionario(f);
+            Historico = GetHistoricoGeral(f);
+        }
+
+        public FuncionarioDTO(Funcionario f, Ciclo c)
+        {
+            SetFuncionario(f);
+
+            Historico = GetHistoricoGeral(f)
+                .Where(x => (x.Inicio == null && x.Fim > c.DataInicio) ||
+                (x.Fim == null && x.Inicio < c.DataFim.Value) ||
+                (x.Inicio < c.DataFim && x.Fim > c.DataInicio));
+            
 
         }
+
+        public FuncionarioDTO(Funcionario f, string cr)
+        {
+            SetFuncionario(f);
+            Historico = GetHistoricoGeral(f).Where(x => x.CR == cr);
+
+        }
+
+        public FuncionarioDTO(Funcionario f, Ciclo c, string cr)
+        {
+            SetFuncionario(f);
+
+            Historico = GetHistoricoGeral(f)
+                .Where(x => x.CR == cr && ((x.Inicio == null && x.Fim > c.DataInicio) ||
+                (x.Fim == null && x.Inicio < c.DataFim.Value) ||
+                (x.Inicio < c.DataFim && x.Fim > c.DataInicio)));
+
+
+        }
+
+
+        private HashSet<HistoricoCRsFuncionario> GetHistoricoGeral(Funcionario f)
+        {
+            Contexto db = new Contexto();
+            HashSet<HistoricoCRsFuncionario> retorno = new HashSet<HistoricoCRsFuncionario>();
+            IEnumerable<Transferencia> transfs = db.Transferencia
+                .Where(x => x.Aprovado.Value && x.FuncionarioMatricula == f.Matricula)
+                .OrderBy(x => x.MesOrcamento.Mes)
+                .ToList();
+
+            //Adiciona o primeiro
+            if (transfs.Count() > 0)
+            {
+                HistoricoCRsFuncionario anterior = new HistoricoCRsFuncionario
+                {
+                    MatriculaFuncionario = f.Matricula,
+                    CR = transfs.First().CROrigem
+                };
+                retorno.Add(anterior);
+
+                //Adiciona os demais
+                foreach (Transferencia t in transfs)
+                {
+                    if (anterior != null && anterior.CR != t.CROrigem)
+                    {
+                        throw new TransferenciaInconsistenteException();
+                    }
+
+                    anterior.Fim = (new DateTime(t.MesOrcamento.Mes.Year, t.MesOrcamento.Mes.Month, 1)).AddDays(-1);
+
+                    HistoricoCRsFuncionario h = new HistoricoCRsFuncionario
+                    {
+                        MatriculaFuncionario = f.Matricula,
+                        CR = t.CRDestino,
+                        Inicio = t.MesOrcamento.Mes
+                    };
+
+                    retorno.Add(h);
+                    anterior = h;
+                }
+            }
+
+            return retorno;
+        }
+
+
+
 
         public string Matricula { get; set; }
         public float AuxCreche { get; set; }
@@ -58,7 +149,6 @@ namespace OrcamentoApp.DTO
         public int QtdaDiasVendidosFerias { get; set; }
         public float Salario { get; set; }
         public string TipoAviso { get; set; }
-        public float VT { get; set; }
         public string CentroCustoCod { get; set; }
         public string CidadeNome { get; set; }
         public int EmpresaCod { get; set; }
@@ -73,6 +163,7 @@ namespace OrcamentoApp.DTO
         public bool VTFretadoFlag { get; set; }
         public int CodEscalaTrabalho { get; set; }
         public Nullable<int> CodConvenioOdo { get; set; }
+        public IEnumerable<HistoricoCRsFuncionario> Historico { get; set; }
 
     }
 }

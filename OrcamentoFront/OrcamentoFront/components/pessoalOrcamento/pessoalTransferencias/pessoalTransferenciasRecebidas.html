@@ -1,4 +1,4 @@
-<ui-panel titulo="Transferências - Solicitações Recebidas" nome="panel-transferencias-recebidas">
+<ui-panel titulo="Transferências - Solicitações Recebidas" nome="panel-transferencias-recebidas" ng-if="ct.transfRecebidas && ct.transfRecebidas.length > 0">
     <table class="table table-striped">
         <thead>
             <tr class="text-center">
@@ -17,14 +17,14 @@
 
             <tr ng-repeat="t in ct.transfRecebidas">
                 <td>{{t.FuncionarioMatricula}}</td>
-                <td>{{t.Funcionario.Nome | limitTo:20}}<span ng-show="t.Funcionario.Nome.length > 20">...</span></td>
-                <td>{{t.Cargo.NomeCargo | limitTo:20}}<span ng-show="t.Cargo.NomeCargo.length > 20">...</span></td>
+                <td>{{t.Funcionario.Nome | ellipsis:12:5}}</td>
+                <td>{{t.Cargo.NomeCargo | ellipsis:12:5}}</td>
                 <td>R$ {{t.Funcionario.Salario | number:2}}</td>
                 <td>{{t.Funcionario.CentroCustoCod}}</td>
                 <td>{{t.DataSolicitacao | date:'dd-MM-yyyy'}}</td>
                 <td>{{t.DataInicio | date:'MMM-yy'}}</td>
-                <td><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></td>
-                <td><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></td>
+                <td><button class="btn btn-success btn-xs" ng-click="ct.aprovarTrans(t)"><i class="fa fa-check"></i></button></td>
+                <td><button class="btn btn-danger btn-xs" ng-click="ct.rejeitarTrans(t)"><i class="fa fa-times"></i></button></td>
             </tr>
             
         </tbody>

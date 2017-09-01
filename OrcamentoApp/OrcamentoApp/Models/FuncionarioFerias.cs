@@ -17,5 +17,8 @@ namespace OrcamentoApp.Models
         public string MatriculaFuncionario { get; set; }
         public int CodMesOrcamento { get; set; }
         public int QtdaDias { get; set; }
+    
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual MesOrcamento MesOrcamento { get; set; }
     }
 }

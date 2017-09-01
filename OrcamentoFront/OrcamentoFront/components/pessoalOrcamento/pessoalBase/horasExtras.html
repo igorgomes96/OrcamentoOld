@@ -12,12 +12,12 @@
 
     <tbody ng-if="ct.PercHE == 170">
         <form name="formHE170">
-            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
-                <td>{{h.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
-                <td ng-repeat="he in h.HEs170">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+            <tr ng-repeat="f in ct.funcionarios | orderBy:'Matricula'" ui-input-parent>
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in f.horasExtras.HEs170">
+                    <input type="text" class="form-control text-center input-sm" ng-disabled="!he.FlagEnabled" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -25,11 +25,11 @@
 
     <tbody ng-if="ct.PercHE == 100">
         <form name="formHE100">
-            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
-                <td>{{h.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
-                <td ng-repeat="he in h.HEs100">
+            <tr ng-repeat="f in ct.funcionarios | orderBy:'Matricula'" ui-input-parent>
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in f.horasExtras.HEs100">
                     <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
@@ -38,11 +38,11 @@
 
     <tbody ng-if="ct.PercHE == 75">
         <form name="formHE75">
-            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
-                <td>{{h.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
-                <td ng-repeat="he in h.HEs75">
+            <tr ng-repeat="f in ct.funcionarios | orderBy:'Matricula'" ui-input-parent>
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in f.horasExtras.HEs75">
                     <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
@@ -51,11 +51,11 @@
 
     <tbody ng-if="ct.PercHE == 60">
         <form name="formHE60">
-            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
-                <td>{{h.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
-                <td ng-repeat="he in h.HEs60">
+            <tr ng-repeat="f in ct.funcionarios | orderBy:'Matricula'" ui-input-parent>
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in f.horasExtras.HEs60">
                     <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
@@ -64,11 +64,11 @@
 
     <tbody ng-if="ct.PercHE == 50">
         <form name="formHE50">
-            <tr ng-repeat="h in ct.horasExtras | orderBy:'Matricula'" ui-input-parent>
-                <td>{{h.Matricula}}</td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{h.Nome | ellipsis:15:5}}</p></td>
-                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo}}"><p>{{h.Cargo | ellipsis:15:5}}</p></td>
-                <td ng-repeat="he in h.HEs50">
+            <tr ng-repeat="f in ct.funcionarios | orderBy:'Matricula'" ui-input-parent>
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
+                <td ng-repeat="he in f.horasExtras.HEs50">
                     <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>

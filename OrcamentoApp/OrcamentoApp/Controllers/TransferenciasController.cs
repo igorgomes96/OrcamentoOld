@@ -18,26 +18,20 @@ namespace OrcamentoApp.Controllers
         private Contexto db = new Contexto();
 
         // GET: api/Transferencias
-        public IEnumerable<TransferenciaDTO> GetTransferencias(string centroCustoOrigem = null, string centroCustoDestino = null, int? idCiclo = null)
+        public IEnumerable<TransferenciaDTO> GetTransferencias(string centroCustoOrigem = null, string centroCustoDestino = null, int? idCiclo = null, bool? pendente = null)
         {
-            if (centroCustoOrigem != null && centroCustoDestino != null)
-                return db.Transferencia.ToList().Where(x => x.Funcionario.CentroCustoCod == centroCustoOrigem && x.CRDestino == centroCustoDestino && (idCiclo == null || x.MesOrcamento.CicloCod == idCiclo)).Select(x => new TransferenciaDTO(x));
-            
-            if (centroCustoOrigem != null)
-                return db.Transferencia.ToList().Where(x => x.Funcionario.CentroCustoCod == centroCustoOrigem && (idCiclo == null || x.MesOrcamento.CicloCod == idCiclo)).Select(x => new TransferenciaDTO(x));
-
-            if (centroCustoDestino != null)
-                return db.Transferencia.ToList().Where(x => x.CRDestino == centroCustoDestino && (idCiclo == null || x.MesOrcamento.CicloCod == idCiclo)).Select(x => new TransferenciaDTO(x));
-
-            return db.Transferencia.ToList().Where(x => idCiclo == null || x.MesOrcamento.CicloCod == idCiclo).Select(x => new TransferenciaDTO(x));
+            return db.Transferencia.ToList()
+                .Where(x => (centroCustoOrigem == null || x.CROrigem == centroCustoOrigem) && (centroCustoDestino == null || x.CRDestino == centroCustoDestino) && 
+                (idCiclo == null || x.MesOrcamento.CicloCod == idCiclo) && (pendente == null || (x.Aprovado == null && pendente.Value) || (x.Aprovado != null && !pendente.Value)))
+                .Select(x => new TransferenciaDTO(x));
         }
 
         // GET: api/Transferencias/5
-        [Route("api/Transferencias/{crDestino}/{funcMatricula}")]
+        [Route("api/Transferencias/{crDestino}/{funcMatricula}/{mesTrans}")]
         [ResponseType(typeof(TransferenciaDTO))]
-        public IHttpActionResult GetTransferencia(string crDestino, string funcMatricula)
+        public IHttpActionResult GetTransferencia(string crDestino, string funcMatricula, int mesTrans)
         {
-            Transferencia transferencia = db.Transferencia.Find(crDestino, funcMatricula);
+            Transferencia transferencia = db.Transferencia.Find(crDestino, funcMatricula, mesTrans);
             if (transferencia == null)
             {
                 return NotFound();
@@ -48,14 +42,15 @@ namespace OrcamentoApp.Controllers
 
         // PUT: api/Transferencias/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTransferencia(string crDestino, string funcMatricula, Transferencia transferencia)
+        [Route("api/Transferencias/{crDestino}/{funcMatricula}/{mesTrans}")]
+        public IHttpActionResult PutTransferencia(string crDestino, string funcMatricula, int mesTrans, Transferencia transferencia)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (crDestino != transferencia.CRDestino && funcMatricula != transferencia.FuncionarioMatricula)
+            if (crDestino != transferencia.CRDestino || funcMatricula != transferencia.FuncionarioMatricula || mesTrans != transferencia.MesTransferencia)
             {
                 return BadRequest();
             }
@@ -68,7 +63,7 @@ namespace OrcamentoApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TransferenciaExists(crDestino, funcMatricula))
+                if (!TransferenciaExists(crDestino, funcMatricula, mesTrans))
                 {
                     return NotFound();
                 }
@@ -90,21 +85,24 @@ namespace OrcamentoApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (transferencia.CRDestino == null || transferencia.CRDestino == "" ||  db.CentroCusto.Find(transferencia.CRDestino) == null)
+                return NotFound();
+
             db.Transferencia.Add(transferencia);
 
             try
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException e)
+            catch (Exception e)
             {
-                if (TransferenciaExists(transferencia.CRDestino, transferencia.FuncionarioMatricula))
+                if (TransferenciaExists(transferencia.CRDestino, transferencia.FuncionarioMatricula, transferencia.MesTransferencia))
                 {
                     return Conflict();
                 }
                 else
                 {
-                    throw e;
+                    return InternalServerError(e);
                 }
             }
 
@@ -113,9 +111,10 @@ namespace OrcamentoApp.Controllers
 
         // DELETE: api/Transferencias/5
         [ResponseType(typeof(TransferenciaDTO))]
-        public IHttpActionResult DeleteTransferencia(string crDestino, string funcMatricula)
+        [Route("api/Transferencias/{crDestino}/{funcMatricula}/{mesTrans}")]
+        public IHttpActionResult DeleteTransferencia(string crDestino, string funcMatricula, int mesTrans)
         {
-            Transferencia transferencia = db.Transferencia.Find(crDestino, funcMatricula);
+            Transferencia transferencia = db.Transferencia.Find(crDestino, funcMatricula, mesTrans);
             if (transferencia == null)
             {
                 return NotFound();
@@ -137,9 +136,9 @@ namespace OrcamentoApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TransferenciaExists(string crDestino, string funcMatricula)
+        private bool TransferenciaExists(string crDestino, string funcMatricula, int mesTrans)
         {
-            return db.Transferencia.Count(e => e.CRDestino == crDestino && e.FuncionarioMatricula == funcMatricula) > 0;
+            return db.Transferencia.Count(e => e.CRDestino == crDestino && e.FuncionarioMatricula == funcMatricula && e.MesTransferencia == mesTrans) > 0;
         }
     }
 }

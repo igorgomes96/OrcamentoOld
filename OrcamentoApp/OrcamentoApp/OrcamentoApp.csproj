@@ -154,6 +154,7 @@
     <Compile Include="Controllers\FiliaisController.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\AdNoturnosBaseController.cs" />
+    <Compile Include="Controllers\FuncionariosFeriasController.cs" />
     <Compile Include="Controllers\HEsBaseController.cs" />
     <Compile Include="Controllers\HEsContratacoesController.cs" />
     <Compile Include="Controllers\ImportacoesController.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="DTO\ContratacaoHNsDTO.cs" />
     <Compile Include="DTO\ContratacaoHEsDTO.cs" />
     <Compile Include="DTO\FuncionarioEventosDTO.cs" />
+    <Compile Include="DTO\FuncionarioFeriasDTO.cs" />
     <Compile Include="DTO\FuncionarioHNsDTO.cs" />
     <Compile Include="DTO\FuncionarioHEsDTO.cs" />
     <Compile Include="DTO\HEBaseDTO.cs" />
@@ -249,6 +251,7 @@
     <Compile Include="Exceptions\EmpresaNaoEncontrada.cs" />
     <Compile Include="Exceptions\ExcelException.cs" />
     <Compile Include="Exceptions\SindicatoNaoEncontrado.cs" />
+    <Compile Include="Exceptions\TransferenciaInconsistenteException.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Filters\CustomIdentity.cs" />
     <Compile Include="Global.asax.cs">

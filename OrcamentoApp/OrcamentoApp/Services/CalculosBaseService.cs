@@ -27,7 +27,7 @@ namespace OrcamentoApp.Services
 
             float baseEncargos = 0;
             float somaHEs, somaHNs;
-            float salario = func.Salario;
+            float salario = func.Salario, salarioBase = func.Salario;
             double valorConvMed = func.ValorConvMedico;
             double valorConvOdo = func.ValorConvOdontologico;
             double passe = func.Filial.Cidade.VTPasse;
@@ -47,8 +47,8 @@ namespace OrcamentoApp.Services
 
                 if (reajSal != null)
                 {
-                    salario *= (float)(reajSal.PercentualReajuste + 1);
-                    if (salario < reajSal.PisoSalarial) salario = reajSal.PisoSalarial;
+                    salarioBase *= (float)(reajSal.PercentualReajuste + 1);
+                    if (salarioBase < reajSal.PisoSalarial) salarioBase = reajSal.PisoSalarial;
                 }
 
                 if (reajMed != null)
@@ -73,7 +73,12 @@ namespace OrcamentoApp.Services
                     .Where(x => x.FuncionarioMatricula == func.Matricula && x.CodMesOrcamento == m.Codigo)
                     .ToList();
 
+                FuncionarioFerias ferias = func.FuncionarioFerias.Where(x => x.CodMesOrcamento == m.Codigo).FirstOrDefault();
 
+                if (ferias == null)
+                    salario = salarioBase;
+                else
+                    salario = salarioBase * (30 - ferias.QtdaDias) / 30;   //Encontra salário proporcional aos dias trabalhados
 
                 // ********************** SALÁRIOS E ADICIONAIS **********************
                 CalculoEventoBase calculoSalario = new CalculoEventoBase

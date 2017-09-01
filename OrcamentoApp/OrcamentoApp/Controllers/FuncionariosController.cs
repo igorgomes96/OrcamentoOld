@@ -18,10 +18,43 @@ namespace OrcamentoApp.Controllers
         private Contexto db = new Contexto();
 
         // GET: api/Funcionarios
-        public IEnumerable<FuncionarioDTO> GetFuncionarios(string cr="")
+        public IEnumerable<FuncionarioDTO> GetFuncionarios(string cr=null, int? codCiclo = null)
         {
-            return cr == "" ? db.Funcionario.ToList().Select(x => new FuncionarioDTO(x)) : 
-                db.Funcionario.ToList().Where(x => x.CentroCustoCod == cr).Select(x => new FuncionarioDTO(x));
+            if (codCiclo == null)
+                return db.Funcionario.ToList().Where(x => cr == null || x.CentroCustoCod == cr)
+                        .Union(db.Transferencia.ToList()
+                        .Where(x => x.Aprovado.HasValue && x.Aprovado.Value && (x.CRDestino == cr || x.CROrigem == cr))
+                        .Select(x => x.Funcionario)).Distinct()
+                        .Select(x => cr == null ? new FuncionarioDTO(x) : new FuncionarioDTO(x, cr));
+            else
+            {
+                Ciclo c = db.Ciclo.Find(codCiclo);
+                if (c != null) { 
+                    return db.Funcionario.ToList().Where(x => cr == null || x.CentroCustoCod == cr)
+                        .Union(db.Transferencia.ToList()
+                        .Where(x => x.Aprovado.HasValue && x.Aprovado.Value && ((x.CRDestino == cr || x.CROrigem == cr) && x.MesOrcamento.CicloCod == codCiclo))
+                        .Select(x => x.Funcionario)).Distinct()
+                        .Select(x => new FuncionarioDTO(x, c, cr));
+                }
+                return null;
+            }
+
+        }
+
+        // GET: api/Funcionarios/5
+        [ResponseType(typeof(FuncionarioDTO))]
+        [Route("api/Funcionarios/{matricula}/{cr}/{codCiclo}")]
+        public IHttpActionResult GetFuncionarioHistorico(string matricula, string cr, int codCiclo)
+        {
+            Funcionario funcionario = db.Funcionario.Find(matricula);
+            CentroCusto ce = db.CentroCusto.Find(cr);
+            Ciclo c = db.Ciclo.Find(codCiclo);
+            if (funcionario == null || cr == null || c == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new FuncionarioDTO(funcionario, c, cr));
         }
 
         // GET: api/Funcionarios/5
@@ -155,5 +188,7 @@ namespace OrcamentoApp.Controllers
         {
             return db.Funcionario.Count(e => e.Matricula == id) > 0;
         }
+
+        
     }
 }

@@ -262,7 +262,6 @@
           <Property Name="QtdaDiasVendidosFerias" Type="int" Nullable="false" />
           <Property Name="Salario" Type="real" Nullable="false" />
           <Property Name="TipoAviso" Type="varchar" MaxLength="20" />
-          <Property Name="VT" Type="real" Nullable="false" />
           <Property Name="CentroCustoCod" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="EmpresaCod" Type="int" Nullable="false" />
@@ -277,6 +276,7 @@
           <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
           <Property Name="CodEscalaTrabalho" Type="int" Nullable="false" />
           <Property Name="CodConvenioOdo" Type="int" />
+          <Property Name="RecebeVT" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="FuncionarioFerias">
           <Key>
@@ -627,12 +627,16 @@
           <Key>
             <PropertyRef Name="CRDestino" />
             <PropertyRef Name="FuncionarioMatricula" />
+            <PropertyRef Name="MesTransferencia" />
           </Key>
           <Property Name="CRDestino" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="FuncionarioMatricula" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DataSolicitacao" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="MesTransferencia" Type="int" Nullable="false" />
+          <Property Name="CROrigem" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Resposta" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Aprovado" Type="bit" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1190,6 +1194,30 @@
               <PropertyRef Name="CargaHoraria" />
               <PropertyRef Name="EmpresaCod" />
               <PropertyRef Name="CargoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="funcionarioferias_funcionario_fk">
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+          <End Role="FuncionarioFerias" Type="Self.FuncionarioFerias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="FuncionarioFerias">
+              <PropertyRef Name="MatriculaFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="funcionarioferias_mesorcamento_fk">
+          <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+          <End Role="FuncionarioFerias" Type="Self.FuncionarioFerias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesOrcamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FuncionarioFerias">
+              <PropertyRef Name="CodMesOrcamento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1759,6 +1787,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="transferenci_crorigem_fk">
+          <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
+          <End Role="Transferencia" Type="Self.Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Transferencia">
+              <PropertyRef Name="CROrigem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="transferencia_centrocusto_fk">
           <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
           <End Role="Transferencia" Type="Self.Transferencia" Multiplicity="*" />
@@ -2217,6 +2257,14 @@
             <End Role="Variaveis" EntitySet="Variaveis" />
             <End Role="Funcionario" EntitySet="Funcionario" />
           </AssociationSet>
+          <AssociationSet Name="funcionarioferias_funcionario_fk" Association="Self.funcionarioferias_funcionario_fk">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarioferias_mesorcamento_fk" Association="Self.funcionarioferias_mesorcamento_fk">
+            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+            <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+          </AssociationSet>
           <AssociationSet Name="hebase_funcionario_fk" Association="Self.hebase_funcionario_fk">
             <End Role="Funcionario" EntitySet="Funcionario" />
             <End Role="HEBase" EntitySet="HEBase" />
@@ -2396,6 +2444,10 @@
           <AssociationSet Name="sth_solicitacaoth_fk" Association="Self.sth_solicitacaoth_fk">
             <End Role="SolicitacaoTH" EntitySet="SolicitacaoTH" />
             <End Role="STH" EntitySet="STH" />
+          </AssociationSet>
+          <AssociationSet Name="transferenci_crorigem_fk" Association="Self.transferenci_crorigem_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="Transferencia" EntitySet="Transferencia" />
           </AssociationSet>
           <AssociationSet Name="transferencia_centrocusto_fk" Association="Self.transferencia_centrocusto_fk">
             <End Role="CentroCusto" EntitySet="CentroCusto" />
@@ -2663,20 +2715,6 @@
           <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Sindicato" ToRole="Filial" />
           <NavigationProperty Name="ReajPAT" Relationship="OrcamentoModel.reajpat_sindicato_fk" FromRole="Sindicato" ToRole="ReajPAT" />
         </EntityType>
-        <EntityType Name="Transferencia">
-          <Key>
-            <PropertyRef Name="CRDestino" />
-            <PropertyRef Name="FuncionarioMatricula" />
-          </Key>
-          <Property Name="CRDestino" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FuncionarioMatricula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="Transferencia" ToRole="CentroCusto" />
-          <Property Name="DataSolicitacao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MesTransferencia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Transferencia" ToRole="Funcionario" />
-          <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.transferencia_mesorcamento_fk" FromRole="Transferencia" ToRole="MesOrcamento" />
-        </EntityType>
         <Association Name="pat_cargahoraria_fk">
           <End Role="CargaHoraria" Type="Self.CargaHoraria" Multiplicity="1" />
           <End Role="PAT" Type="Self.PAT" Multiplicity="*" />
@@ -2729,7 +2767,6 @@
           <EntitySet Name="Receita" EntityType="Self.Receita" />
           <EntitySet Name="SalarioMinimo" EntityType="Self.SalarioMinimo" />
           <EntitySet Name="Sindicato" EntityType="Self.Sindicato" />
-          <EntitySet Name="Transferencia" EntityType="Self.Transferencia" />
           <AssociationSet Name="pat_cargahoraria_fk" Association="Self.pat_cargahoraria_fk">
             <End Role="CargaHoraria" EntitySet="CargaHoraria" />
             <End Role="PAT" EntitySet="PAT" />
@@ -2770,10 +2807,6 @@
           <AssociationSet Name="receita_centrocusto_fk" Association="OrcamentoModel.receita_centrocusto_fk">
             <End Role="CentroCusto" EntitySet="CentroCusto" />
             <End Role="Receita" EntitySet="Receita" />
-          </AssociationSet>
-          <AssociationSet Name="transferencia_centrocusto_fk" Association="OrcamentoModel.transferencia_centrocusto_fk">
-            <End Role="CentroCusto" EntitySet="CentroCusto" />
-            <End Role="Transferencia" EntitySet="Transferencia" />
           </AssociationSet>
           <AssociationSet Name="sessao_usuario_fk" Association="OrcamentoModel.sessao_usuario_fk">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -2930,10 +2963,6 @@
           <AssociationSet Name="solicitacaodesligamento_funcionario_fk" Association="OrcamentoModel.solicitacaodesligamento_funcionario_fk">
             <End Role="Funcionario" EntitySet="Funcionario" />
             <End Role="SolicitacaoDesligamento" EntitySet="SolicitacaoDesligamento" />
-          </AssociationSet>
-          <AssociationSet Name="transferencia_funcionario_fk" Association="OrcamentoModel.transferencia_funcionario_fk">
-            <End Role="Funcionario" EntitySet="Funcionario" />
-            <End Role="Transferencia" EntitySet="Transferencia" />
           </AssociationSet>
           <AssociationSet Name="valoresabertosbase_funcionario_fk" Association="OrcamentoModel.valoresabertosbase_funcionario_fk">
             <End Role="Funcionario" EntitySet="Funcionario" />
@@ -3177,10 +3206,6 @@
             <End Role="MesOrcamento" EntitySet="MesOrcamento" />
             <End Role="Simulacao" EntitySet="Simulacao" />
           </AssociationSet>
-          <AssociationSet Name="transferencia_mesorcamento_fk" Association="OrcamentoModel.transferencia_mesorcamento_fk">
-            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
-            <End Role="Transferencia" EntitySet="Transferencia" />
-          </AssociationSet>
           <AssociationSet Name="valoresabertosbase_mesorcamento_fk" Association="OrcamentoModel.valoresabertosbase_mesorcamento_fk">
             <End Role="MesOrcamento" EntitySet="MesOrcamento" />
             <End Role="ValoresAbertosBase" EntitySet="ValoresAbertosBase" />
@@ -3194,6 +3219,31 @@
             <End Role="ValoresAbertosCR" EntitySet="ValoresAbertosCR" />
           </AssociationSet>
           <EntitySet Name="FuncionarioFerias" EntityType="OrcamentoModel.FuncionarioFerias" />
+          <AssociationSet Name="funcionarioferias_funcionario_fk" Association="OrcamentoModel.funcionarioferias_funcionario_fk">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarioferias_mesorcamento_fk" Association="OrcamentoModel.funcionarioferias_mesorcamento_fk">
+            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+            <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+          </AssociationSet>
+          <EntitySet Name="Transferencia" EntityType="OrcamentoModel.Transferencia" />
+          <AssociationSet Name="transferenci_crorigem_fk" Association="OrcamentoModel.transferenci_crorigem_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="Transferencia" EntitySet="Transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="transferencia_centrocusto_fk" Association="OrcamentoModel.transferencia_centrocusto_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="Transferencia" EntitySet="Transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="transferencia_funcionario_fk" Association="OrcamentoModel.transferencia_funcionario_fk">
+            <End Role="Funcionario" EntitySet="Funcionario" />
+            <End Role="Transferencia" EntitySet="Transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="transferencia_mesorcamento_fk" Association="OrcamentoModel.transferencia_mesorcamento_fk">
+            <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+            <End Role="Transferencia" EntitySet="Transferencia" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Sessao">
           <Key>
@@ -3269,13 +3319,14 @@
           <NavigationProperty Name="Setor" Relationship="OrcamentoModel.centrocusto_setor_fk" FromRole="CentroCusto" ToRole="Setor" />
           <NavigationProperty Name="Contratacoes" Relationship="OrcamentoModel.contratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="Contratacao" />
           <NavigationProperty Name="Receitas" Relationship="OrcamentoModel.receita_centrocusto_fk" FromRole="CentroCusto" ToRole="Receita" />
-          <NavigationProperty Name="Transferencias" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="CentroCusto" ToRole="Transferencia" />
           <Property Name="Descricao2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="SolicitacaoContratacao" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_centrocusto_fk" FromRole="CentroCusto" ToRole="Funcionario" />
           <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_centrocusto_fk" FromRole="CentroCusto" ToRole="ValoresAbertosCR" />
           <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="CentroCusto" ToRole="FeriasPorCR" />
           <NavigationProperty Name="Simulacao" Relationship="OrcamentoModel.simulacao_centrocusto_fk" FromRole="CentroCusto" ToRole="Simulacao" />
+          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferenci_crorigem_fk" FromRole="CentroCusto" ToRole="Transferencia" />
+          <NavigationProperty Name="Transferencia1" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="CentroCusto" ToRole="Transferencia" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -3340,18 +3391,6 @@
             </Principal>
             <Dependent Role="Receita">
               <PropertyRef Name="CentroCustoCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="transferencia_centrocusto_fk">
-          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
-          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroCusto">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Transferencia">
-              <PropertyRef Name="CRDestino" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3927,7 +3966,6 @@
           <Property Name="QtdaDiasVendidosFerias" Type="Int32" Nullable="false" />
           <Property Name="Salario" Type="Single" Nullable="false" />
           <Property Name="TipoAviso" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="VT" Type="Single" Nullable="false" />
           <Property Name="CentroCustoCod" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="CidadeNome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
@@ -3947,7 +3985,6 @@
           <NavigationProperty Name="SolicitacaoAlteracaoCargo" Relationship="OrcamentoModel.solicitacaoalteracaocargo_funcionario_fk" FromRole="Funcionario" ToRole="SolicitacaoAlteracaoCargo" />
           <NavigationProperty Name="SolicitacaoAlteracaoSalario" Relationship="OrcamentoModel.solicitacaoalteracaosalario_funcionario_fk" FromRole="Funcionario" ToRole="SolicitacaoAlteracaoSalario" />
           <NavigationProperty Name="SolicitacaoDesligamento" Relationship="OrcamentoModel.solicitacaodesligamento_funcionario_fk" FromRole="Funcionario" ToRole="SolicitacaoDesligamento" />
-          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Funcionario" ToRole="Transferencia" />
           <NavigationProperty Name="ValoresAbertosBase" Relationship="OrcamentoModel.valoresabertosbase_funcionario_fk" FromRole="Funcionario" ToRole="ValoresAbertosBase" />
           <Property Name="VTFretadoFlag" Type="Boolean" Nullable="false" />
           <Property Name="CodEscalaTrabalho" Type="Int32" Nullable="false" />
@@ -3959,6 +3996,9 @@
           <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.funcionario_variaveis_fk" FromRole="Funcionario" ToRole="Variaveis" />
           <NavigationProperty Name="Filial" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Funcionario" ToRole="Filial" />
           <NavigationProperty Name="SimulacaoDemissao" Relationship="OrcamentoModel.simulacaodemissao_funcionario_fk" FromRole="Funcionario" ToRole="SimulacaoDemissao" />
+          <NavigationProperty Name="FuncionarioFerias" Relationship="OrcamentoModel.funcionarioferias_funcionario_fk" FromRole="Funcionario" ToRole="FuncionarioFerias" />
+          <Property Name="RecebeVT" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Funcionario" ToRole="Transferencia" />
         </EntityType>
         <Association Name="afastamento_funcionario_fk">
           <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
@@ -4052,18 +4092,6 @@
               <PropertyRef Name="Matricula" />
             </Principal>
             <Dependent Role="SolicitacaoDesligamento">
-              <PropertyRef Name="FuncionarioMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="transferencia_funcionario_fk">
-          <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
-          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Funcionario">
-              <PropertyRef Name="Matricula" />
-            </Principal>
-            <Dependent Role="Transferencia">
               <PropertyRef Name="FuncionarioMatricula" />
             </Dependent>
           </ReferentialConstraint>
@@ -4938,10 +4966,11 @@
           <NavigationProperty Name="HEBase" Relationship="OrcamentoModel.hebase_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEBase" />
           <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="HEContratacao" />
           <NavigationProperty Name="Simulacao" Relationship="OrcamentoModel.simulacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="Simulacao" />
-          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_mesorcamento_fk" FromRole="MesOrcamento" ToRole="Transferencia" />
           <NavigationProperty Name="ValoresAbertosBase" Relationship="OrcamentoModel.valoresabertosbase_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosBase" />
           <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosContratacao" />
           <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_mesorcamento_fk" FromRole="MesOrcamento" ToRole="ValoresAbertosCR" />
+          <NavigationProperty Name="FuncionarioFerias" Relationship="OrcamentoModel.funcionarioferias_mesorcamento_fk" FromRole="MesOrcamento" ToRole="FuncionarioFerias" />
+          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_mesorcamento_fk" FromRole="MesOrcamento" ToRole="Transferencia" />
         </EntityType>
         <Association Name="adnoturnobase_mesorcamento_fk">
           <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
@@ -5063,18 +5092,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="transferencia_mesorcamento_fk">
-          <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
-          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MesOrcamento">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Transferencia">
-              <PropertyRef Name="MesTransferencia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="valoresabertosbase_mesorcamento_fk">
           <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
           <End Type="OrcamentoModel.ValoresAbertosBase" Role="ValoresAbertosBase" Multiplicity="*" />
@@ -5119,7 +5136,100 @@
           <Property Name="MatriculaFuncionario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
           <Property Name="QtdaDias" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionarioferias_funcionario_fk" FromRole="FuncionarioFerias" ToRole="Funcionario" />
+          <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.funcionarioferias_mesorcamento_fk" FromRole="FuncionarioFerias" ToRole="MesOrcamento" />
         </EntityType>
+        <Association Name="funcionarioferias_funcionario_fk">
+          <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
+          <End Type="OrcamentoModel.FuncionarioFerias" Role="FuncionarioFerias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="FuncionarioFerias">
+              <PropertyRef Name="MatriculaFuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="funcionarioferias_mesorcamento_fk">
+          <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
+          <End Type="OrcamentoModel.FuncionarioFerias" Role="FuncionarioFerias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesOrcamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="FuncionarioFerias">
+              <PropertyRef Name="CodMesOrcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Transferencia">
+          <Key>
+            <PropertyRef Name="CRDestino" />
+            <PropertyRef Name="FuncionarioMatricula" />
+            <PropertyRef Name="MesTransferencia" />
+          </Key>
+          <Property Name="CRDestino" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FuncionarioMatricula" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataSolicitacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MesTransferencia" Type="Int32" Nullable="false" />
+          <Property Name="CROrigem" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Resposta" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Aprovado" Type="Boolean" />
+          <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.transferenci_crorigem_fk" FromRole="Transferencia" ToRole="CentroCusto" />
+          <NavigationProperty Name="CentroCusto1" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="Transferencia" ToRole="CentroCusto" />
+          <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Transferencia" ToRole="Funcionario" />
+          <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.transferencia_mesorcamento_fk" FromRole="Transferencia" ToRole="MesOrcamento" />
+        </EntityType>
+        <Association Name="transferenci_crorigem_fk">
+          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
+          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Transferencia">
+              <PropertyRef Name="CROrigem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transferencia_centrocusto_fk">
+          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
+          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Transferencia">
+              <PropertyRef Name="CRDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transferencia_funcionario_fk">
+          <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
+          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcionario">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Transferencia">
+              <PropertyRef Name="FuncionarioMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="transferencia_mesorcamento_fk">
+          <End Type="OrcamentoModel.MesOrcamento" Role="MesOrcamento" Multiplicity="1" />
+          <End Type="OrcamentoModel.Transferencia" Role="Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MesOrcamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Transferencia">
+              <PropertyRef Name="MesTransferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5282,17 +5392,6 @@
               <MappingFragment StoreEntitySet="Sindicato">
                 <ScalarProperty Name="NomeSindicato" ColumnName="NomeSindicato" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transferencia">
-            <EntityTypeMapping TypeName="OrcamentoModel.Transferencia">
-              <MappingFragment StoreEntitySet="Transferencia">
-                <ScalarProperty Name="MesTransferencia" ColumnName="MesTransferencia" />
-                <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
-                <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
-                <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5570,6 +5669,7 @@
           <EntitySetMapping Name="Funcionario">
             <EntityTypeMapping TypeName="OrcamentoModel.Funcionario">
               <MappingFragment StoreEntitySet="Funcionario">
+                <ScalarProperty Name="RecebeVT" ColumnName="RecebeVT" />
                 <ScalarProperty Name="CodConvenioOdo" ColumnName="CodConvenioOdo" />
                 <ScalarProperty Name="CodEscalaTrabalho" ColumnName="CodEscalaTrabalho" />
                 <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
@@ -5584,7 +5684,6 @@
                 <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
                 <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
                 <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
-                <ScalarProperty Name="VT" ColumnName="VT" />
                 <ScalarProperty Name="TipoAviso" ColumnName="TipoAviso" />
                 <ScalarProperty Name="Salario" ColumnName="Salario" />
                 <ScalarProperty Name="QtdaDiasVendidosFerias" ColumnName="QtdaDiasVendidosFerias" />
@@ -5840,6 +5939,20 @@
                 <ScalarProperty Name="QtdaDias" ColumnName="QtdaDias" />
                 <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
                 <ScalarProperty Name="MatriculaFuncionario" ColumnName="MatriculaFuncionario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transferencia">
+            <EntityTypeMapping TypeName="OrcamentoModel.Transferencia">
+              <MappingFragment StoreEntitySet="Transferencia">
+                <ScalarProperty Name="Aprovado" ColumnName="Aprovado" />
+                <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+                <ScalarProperty Name="CROrigem" ColumnName="CROrigem" />
+                <ScalarProperty Name="MesTransferencia" ColumnName="MesTransferencia" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
+                <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
+                <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

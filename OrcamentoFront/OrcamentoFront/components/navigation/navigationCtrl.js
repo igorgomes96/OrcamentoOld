@@ -1,4 +1,4 @@
-angular.module("orcamentoApp").controller('navigationCtrl', ['$scope', '$state', 'sharedDataService', 'config', function ($scope, $state, sharedDataService, config) {
+angular.module("orcamentoApp").controller('navigationCtrl', ['$state', 'sharedDataService', 'config', function ($state, sharedDataService, config) {
 	
 	var self = this;
     self.nomeSistema = config.nomeSistema;
@@ -111,17 +111,6 @@ angular.module("orcamentoApp").controller('navigationCtrl', ['$scope', '$state',
 		];
 
 	}
-
-
-	//Adiciona um listener para capturar as mudanças de seleção de CR
-    var listener = $scope.$on('transferenciasNotify', function($event, transferencias) {
-        self.transferencias = transferencias;
-    });
-
-    //Remove o Listener
-    $scope.$on('$destroy', function () {
-        listener();
-    });
 
     setMenu();
 

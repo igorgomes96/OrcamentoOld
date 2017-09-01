@@ -19,12 +19,13 @@ namespace OrcamentoApp.Models
         {
             this.Contratacoes = new HashSet<Contratacao>();
             this.Receitas = new HashSet<Receita>();
-            this.Transferencias = new HashSet<Transferencia>();
             this.SolicitacaoContratacao = new HashSet<SolicitacaoContratacao>();
             this.Funcionario = new HashSet<Funcionario>();
             this.ValoresAbertosCR = new HashSet<ValoresAbertosCR>();
             this.FeriasPorCR = new HashSet<FeriasPorCR>();
             this.Simulacao = new HashSet<Simulacao>();
+            this.Transferencia = new HashSet<Transferencia>();
+            this.Transferencia1 = new HashSet<Transferencia>();
         }
     
         public string Codigo { get; set; }
@@ -45,8 +46,6 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Receita> Receitas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transferencia> Transferencias { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitacaoContratacao> SolicitacaoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Funcionario> Funcionario { get; set; }
@@ -56,5 +55,9 @@ namespace OrcamentoApp.Models
         public virtual ICollection<FeriasPorCR> FeriasPorCR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Simulacao> Simulacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transferencia> Transferencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transferencia> Transferencia1 { get; set; }
     }
 }

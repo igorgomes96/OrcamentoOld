@@ -16,11 +16,15 @@ namespace OrcamentoApp.Models
     {
         public string CRDestino { get; set; }
         public string FuncionarioMatricula { get; set; }
-        public string Status { get; set; }
         public System.DateTime DataSolicitacao { get; set; }
+        public string Status { get; set; }
         public int MesTransferencia { get; set; }
+        public string CROrigem { get; set; }
+        public string Resposta { get; set; }
+        public Nullable<bool> Aprovado { get; set; }
     
         public virtual CentroCusto CentroCusto { get; set; }
+        public virtual CentroCusto CentroCusto1 { get; set; }
         public virtual Funcionario Funcionario { get; set; }
         public virtual MesOrcamento MesOrcamento { get; set; }
     }

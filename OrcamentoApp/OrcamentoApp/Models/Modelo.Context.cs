@@ -42,7 +42,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<Receita> Receita { get; set; }
         public virtual DbSet<SalarioMinimo> SalarioMinimo { get; set; }
         public virtual DbSet<Sindicato> Sindicato { get; set; }
-        public virtual DbSet<Transferencia> Transferencia { get; set; }
         public virtual DbSet<Sessao> Sessao { get; set; }
         public virtual DbSet<Permissao> Permissao { get; set; }
         public virtual DbSet<Setor> Setor { get; set; }
@@ -91,6 +90,7 @@ namespace OrcamentoApp.Models
         public virtual DbSet<ReajPAT> ReajPAT { get; set; }
         public virtual DbSet<MesOrcamento> MesOrcamento { get; set; }
         public virtual DbSet<FuncionarioFerias> FuncionarioFerias { get; set; }
+        public virtual DbSet<Transferencia> Transferencia { get; set; }
     
         public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
         {

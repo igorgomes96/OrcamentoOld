@@ -160,17 +160,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Transferencia">
-      <EntityTypeMapping TypeName="OrcamentoModel.Transferencia">
-        <MappingFragment StoreEntitySet="Transferencia">
-          <ScalarProperty Name="MesTransferencia" ColumnName="MesTransferencia" />
-          <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
-          <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
-          <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Sessao">
       <EntityTypeMapping TypeName="OrcamentoModel.Sessao">
         <MappingFragment StoreEntitySet="Sessao">
@@ -445,6 +434,7 @@
     <EntitySetMapping Name="Funcionario">
       <EntityTypeMapping TypeName="OrcamentoModel.Funcionario">
         <MappingFragment StoreEntitySet="Funcionario">
+          <ScalarProperty Name="RecebeVT" ColumnName="RecebeVT" />
           <ScalarProperty Name="CodConvenioOdo" ColumnName="CodConvenioOdo" />
           <ScalarProperty Name="CodEscalaTrabalho" ColumnName="CodEscalaTrabalho" />
           <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
@@ -459,7 +449,6 @@
           <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
           <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
           <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
-          <ScalarProperty Name="VT" ColumnName="VT" />
           <ScalarProperty Name="TipoAviso" ColumnName="TipoAviso" />
           <ScalarProperty Name="Salario" ColumnName="Salario" />
           <ScalarProperty Name="QtdaDiasVendidosFerias" ColumnName="QtdaDiasVendidosFerias" />
@@ -715,6 +704,20 @@
           <ScalarProperty Name="QtdaDias" ColumnName="QtdaDias" />
           <ScalarProperty Name="CodMesOrcamento" ColumnName="CodMesOrcamento" />
           <ScalarProperty Name="MatriculaFuncionario" ColumnName="MatriculaFuncionario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transferencia">
+      <EntityTypeMapping TypeName="OrcamentoModel.Transferencia">
+        <MappingFragment StoreEntitySet="Transferencia">
+          <ScalarProperty Name="Aprovado" ColumnName="Aprovado" />
+          <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+          <ScalarProperty Name="CROrigem" ColumnName="CROrigem" />
+          <ScalarProperty Name="MesTransferencia" ColumnName="MesTransferencia" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
+          <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
+          <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

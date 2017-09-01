@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\igorg\OneDrive\Orçamento\Sistema\DotNet\Orcamento\OrcamentoApp\OrcamentoApp\Models\Modelo.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\igorago\Documents\GitHub\Orcamento\OrcamentoApp\OrcamentoApp\Models\Modelo.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

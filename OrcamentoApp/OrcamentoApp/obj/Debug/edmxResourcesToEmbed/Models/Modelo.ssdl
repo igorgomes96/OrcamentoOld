@@ -257,7 +257,6 @@
     <Property Name="QtdaDiasVendidosFerias" Type="int" Nullable="false" />
     <Property Name="Salario" Type="real" Nullable="false" />
     <Property Name="TipoAviso" Type="varchar" MaxLength="20" />
-    <Property Name="VT" Type="real" Nullable="false" />
     <Property Name="CentroCustoCod" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
@@ -272,6 +271,7 @@
     <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
     <Property Name="CodEscalaTrabalho" Type="int" Nullable="false" />
     <Property Name="CodConvenioOdo" Type="int" />
+    <Property Name="RecebeVT" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="FuncionarioFerias">
     <Key>
@@ -622,12 +622,16 @@
     <Key>
       <PropertyRef Name="CRDestino" />
       <PropertyRef Name="FuncionarioMatricula" />
+      <PropertyRef Name="MesTransferencia" />
     </Key>
     <Property Name="CRDestino" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="FuncionarioMatricula" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="DataSolicitacao" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="MesTransferencia" Type="int" Nullable="false" />
+    <Property Name="CROrigem" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Resposta" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Aprovado" Type="bit" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -1185,6 +1189,30 @@
         <PropertyRef Name="CargaHoraria" />
         <PropertyRef Name="EmpresaCod" />
         <PropertyRef Name="CargoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="funcionarioferias_funcionario_fk">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="FuncionarioFerias" Type="Self.FuncionarioFerias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="Matricula" />
+      </Principal>
+      <Dependent Role="FuncionarioFerias">
+        <PropertyRef Name="MatriculaFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="funcionarioferias_mesorcamento_fk">
+    <End Role="MesOrcamento" Type="Self.MesOrcamento" Multiplicity="1" />
+    <End Role="FuncionarioFerias" Type="Self.FuncionarioFerias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesOrcamento">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="FuncionarioFerias">
+        <PropertyRef Name="CodMesOrcamento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1754,6 +1782,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="transferenci_crorigem_fk">
+    <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
+    <End Role="Transferencia" Type="Self.Transferencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CentroCusto">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Transferencia">
+        <PropertyRef Name="CROrigem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="transferencia_centrocusto_fk">
     <End Role="CentroCusto" Type="Self.CentroCusto" Multiplicity="1" />
     <End Role="Transferencia" Type="Self.Transferencia" Multiplicity="*" />
@@ -2212,6 +2252,14 @@
       <End Role="Variaveis" EntitySet="Variaveis" />
       <End Role="Funcionario" EntitySet="Funcionario" />
     </AssociationSet>
+    <AssociationSet Name="funcionarioferias_funcionario_fk" Association="Self.funcionarioferias_funcionario_fk">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+    </AssociationSet>
+    <AssociationSet Name="funcionarioferias_mesorcamento_fk" Association="Self.funcionarioferias_mesorcamento_fk">
+      <End Role="MesOrcamento" EntitySet="MesOrcamento" />
+      <End Role="FuncionarioFerias" EntitySet="FuncionarioFerias" />
+    </AssociationSet>
     <AssociationSet Name="hebase_funcionario_fk" Association="Self.hebase_funcionario_fk">
       <End Role="Funcionario" EntitySet="Funcionario" />
       <End Role="HEBase" EntitySet="HEBase" />
@@ -2391,6 +2439,10 @@
     <AssociationSet Name="sth_solicitacaoth_fk" Association="Self.sth_solicitacaoth_fk">
       <End Role="SolicitacaoTH" EntitySet="SolicitacaoTH" />
       <End Role="STH" EntitySet="STH" />
+    </AssociationSet>
+    <AssociationSet Name="transferenci_crorigem_fk" Association="Self.transferenci_crorigem_fk">
+      <End Role="CentroCusto" EntitySet="CentroCusto" />
+      <End Role="Transferencia" EntitySet="Transferencia" />
     </AssociationSet>
     <AssociationSet Name="transferencia_centrocusto_fk" Association="Self.transferencia_centrocusto_fk">
       <End Role="CentroCusto" EntitySet="CentroCusto" />

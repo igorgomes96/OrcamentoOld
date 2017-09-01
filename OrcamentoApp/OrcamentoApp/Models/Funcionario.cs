@@ -22,11 +22,12 @@ namespace OrcamentoApp.Models
             this.SolicitacaoAlteracaoCargo = new HashSet<SolicitacaoAlteracaoCargo>();
             this.SolicitacaoAlteracaoSalario = new HashSet<SolicitacaoAlteracaoSalario>();
             this.SolicitacaoDesligamento = new HashSet<SolicitacaoDesligamento>();
-            this.Transferencia = new HashSet<Transferencia>();
             this.ValoresAbertosBase = new HashSet<ValoresAbertosBase>();
             this.AdNoturnoBase = new HashSet<AdNoturnoBase>();
             this.HEBase = new HashSet<HEBase>();
             this.SimulacaoDemissao = new HashSet<SimulacaoDemissao>();
+            this.FuncionarioFerias = new HashSet<FuncionarioFerias>();
+            this.Transferencia = new HashSet<Transferencia>();
         }
     
         public string Matricula { get; set; }
@@ -44,7 +45,6 @@ namespace OrcamentoApp.Models
         public int QtdaDiasVendidosFerias { get; set; }
         public float Salario { get; set; }
         public string TipoAviso { get; set; }
-        public float VT { get; set; }
         public string CentroCustoCod { get; set; }
         public string CidadeNome { get; set; }
         public int EmpresaCod { get; set; }
@@ -59,6 +59,7 @@ namespace OrcamentoApp.Models
         public bool VTFretadoFlag { get; set; }
         public int CodEscalaTrabalho { get; set; }
         public Nullable<int> CodConvenioOdo { get; set; }
+        public bool RecebeVT { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Afastamento> Afastamento { get; set; }
@@ -74,8 +75,6 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitacaoDesligamento> SolicitacaoDesligamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transferencia> Transferencia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValoresAbertosBase> ValoresAbertosBase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoBase> AdNoturnoBase { get; set; }
@@ -87,5 +86,9 @@ namespace OrcamentoApp.Models
         public virtual Filial Filial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoDemissao> SimulacaoDemissao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FuncionarioFerias> FuncionarioFerias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transferencia> Transferencia { get; set; }
     }
 }

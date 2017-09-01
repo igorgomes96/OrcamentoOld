@@ -3,11 +3,12 @@ angular.module('orcamentoApp').service('funcionariosAPI', ['config', '$http', fu
     var self = this;
     var resource = 'Funcionarios';
 
-    self.getFuncionarios = function(cr) {
-        if (cr)
-            return $http.get(config.baseUrl + resource + "?cr=" + cr);
-        else
-            return $http.get(config.baseUrl + resource);
+    self.getFuncionarios = function(cr, codCiclo) {
+        return $http.get(config.baseUrl + resource, {params:{cr:cr, codCiclo:codCiclo}});
+    }
+
+    self.getFuncionarioHistorico = function(matricula, cr, ciclo) {
+        return $http.get(config.baseUrl + resource + '/' + matricula + '/' + cr + '/' + ciclo);
     }
 
     self.getFuncionario = function(matricula) {
