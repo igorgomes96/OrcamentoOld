@@ -74,7 +74,7 @@ angular.module("orcamentoApp").controller('navigationCtrl', ['$state', 'sharedDa
 					},
 					{
 						state: 'menuContainer.premissasSindicatos',
-						texto: 'Sindicatos',
+						texto: 'Acordos Coletivos',
 						visible: true
 					}
 				]

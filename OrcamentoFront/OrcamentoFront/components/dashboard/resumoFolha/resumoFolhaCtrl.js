@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBaseAPI', 'sharedDataService', '$scope', 'numberFilter', '$scope', function(calculosEventosBaseAPI, sharedDataService, $scope, numberFilter, $scope) {
+angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBaseAPI', 'sharedDataService', '$scope', 'numberFilter', '$scope', 'valoresAbertosCRsAPI', function(calculosEventosBaseAPI, sharedDataService, $scope, numberFilter, $scope, valoresAbertosCRsAPI) {
 
 	var self = this;
 
@@ -6,6 +6,9 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
 	self.cr = null;
 	self.ciclo = null;
 	self.eventosBaseFuncionario = [];
+	self.valoresAbertos = [];
+
+	var insumosAbertos = sharedDataService.getInsumosAbertosFolha();
 
 	var loadEventosBasePorFuncionario = function(cr, ciclo) {
 		calculosEventosBaseAPI.getValoresPorCicloPorCR(cr, ciclo)
@@ -16,24 +19,39 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
 						y.ValoresMensais[mes].Valor = numberFilter(y.ValoresMensais[mes].Valor, 2);
 					}
 				});
-			})
+			});
 			self.eventosBaseFuncionario = dado.data;
 		});
 	}
+
+	var loadValoresAbertosCR = function(cr, ciclo) {
+		self.valoresAbertos = [];
+        insumosAbertos.forEach(function(z) {
+            valoresAbertosCRsAPI.getValoresAbertosCRsPorCiclo(cr, z, ciclo)
+            .then(function(dado) {
+				self.valoresAbertos.push(dado.data);
+            });
+        });
+
+    }
 
 	//Adiciona um listener para capturar as mudanças de seleção de CR
     var listenerCR = $scope.$on('crChanged', function($event, cr) {
         if (cr && self.ciclo) {
             self.cr = cr;
             loadEventosBasePorFuncionario(self.cr.Codigo, self.ciclo.Codigo);
+            loadValoresAbertosCR(self.cr.Codigo, self.ciclo.Codigo);
         }
         else
             self.funcionarios = [];
     });
 
 	var listenerCalculoRealizado = $scope.$on('calculoRealizado', function($event) {
-		if (self.cr && self.ciclo)
+		if (self.cr && self.ciclo){
 			loadEventosBasePorFuncionario(self.cr.Codigo, self.ciclo.Codigo);
+			loadValoresAbertosCR(self.cr.Codigo, self.ciclo.Codigo);
+		}
+
 	});
 
 
@@ -47,8 +65,8 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
 	self.cr = sharedDataService.getUltimoCR();
 
     if (self.ciclo && self.cr) {
-    	console.log('Carregando cálculos.');
     	loadEventosBasePorFuncionario(self.cr.Codigo, self.ciclo.Codigo);
+    	loadValoresAbertosCR(self.cr.Codigo, self.ciclo.Codigo);
     }
 
 

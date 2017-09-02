@@ -12,8 +12,8 @@ angular.module('orcamentoApp').controller('premissasVariaveisCtrl', ['variaveisA
 		.then(function(dado) {
 			dado.data.forEach(function(x) {
 
-				x.ParticipacaoLucros = numberFilter(x.ParticipacaoLucros * 100, 2);
-				x.RemuneracaoVariavel = numberFilter(x.RemuneracaoVariavel * 100, 2);
+				x.ParticipacaoLucros = numberFilter(x.ParticipacaoLucros, 2);
+				x.RemuneracaoVariavel = numberFilter(x.RemuneracaoVariavel, 2);
 				
 				empresasAPI.getEmpresa(x.EmpresaCod)
 				.then(function(retorno) {

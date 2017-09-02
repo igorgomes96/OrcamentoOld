@@ -5,7 +5,11 @@
         <div class="pills-in-panel">
             <ul class="nav nav-pills">
                 <li ng-class="{'active': aba == 'Associados'}">
-                    <a href ng-click="ct.mudaAba('Associados')">Desligamentos</a>
+                    <a href ng-click="ct.mudaAba('Associados')">Dados</a>
+                </li>
+
+                <li ng-class="{'active': aba == 'Desligamentos'}">
+                    <a href ng-click="ct.mudaAba('Desligamentos')">Desligamentos</a>
                 </li>
 
                 <li ng-class="{'active': aba == 'Férias'}">
@@ -93,7 +97,12 @@
 
 
         <div class="row" ng-if="aba == 'Associados'">
-            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/dadosAssociados.html'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/info.html'">
+            </div>
+        </div>
+
+        <div class="row" ng-if="aba == 'Desligamentos'">
+            <div class="col-md-12" ng-include="'components/pessoalOrcamento/pessoalBase/desligamentos.html'">
             </div>
         </div>
 
@@ -139,71 +148,3 @@
 
 </ui-panel>
 
-
-<!-- Modal -->
-<div class="modal fade" id="modal-tranferir-cr" tabindex="-1" role="dialog" aria-labelledby="tranferencia-cr-title" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="tranferencia-cr-title">Transferência de Recursos para outro CR</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <dl class="dl-horizontal">
-                            <dt>Associado</dt>
-                            <dd>{{ct.funcionarioTransf.FuncionarioMatricula}} - {{ct.funcionarioTransf.Funcionario.Nome}}</dd>
-                            <dt>Cargo</dt>
-                            <dd>{{ct.funcionarioTransf.Funcionario.Cargo.NomeCargo}}</dd>
-                            <dt>CR de Origem</dt>
-                            <dd>{{ct.funcionarioTransf.Funcionario.CentroCustoCod}}</dd>
-                        </dl>
-
-                        <form role="form" name="form">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>CR de Destino</label>
-                                    <input class="form-control" type="text" name="input-cr" required ng-model="ct.funcionarioTransf.CRDestino">
-                                    <p class="help-block">Digite o Código do CR de destino.</p>
-                                </div>
-                            </div>
-
-                            <!-- <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Data Início</label>
-                                    <input type="date" class="form-control" name="input-data" required ng-model="ct.funcionarioTransf.DataInicio">
-                                    <p class="help-block">Digite a data Início.</p>
-                                </div>
-                            </div> -->
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Mês de Transferência</label>
-                                    <select class="form-control" ng-options="m.Codigo as (m.Mes | date:'MMM/yy') for m in ct.ciclo.Meses" required ng-model="ct.funcionarioTransf.MesTransferencia"></select>
-                                    <p class="help-block">Digite a data Início.</p>
-                                </div>
-                            </div>
-
-                            
-                        </form>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p style="color: red;">{{ct.erroTransf}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>                  
-            </div>  
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ct.salvarTransferencia(ct.funcionarioTransf)">Salvar</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

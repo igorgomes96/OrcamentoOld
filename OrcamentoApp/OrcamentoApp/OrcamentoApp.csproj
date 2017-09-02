@@ -237,6 +237,7 @@
     <Compile Include="DTO\UsuarioDTO.cs" />
     <Compile Include="DTO\ValoresAbertosBaseDTO.cs" />
     <Compile Include="DTO\ValoresAbertosContratacaoDTO.cs" />
+    <Compile Include="DTO\ValoresAbertosCRCicloDTO.cs" />
     <Compile Include="DTO\ValoresAbertosCRDTO.cs" />
     <Compile Include="DTO\VariaveisDTO.cs" />
     <Compile Include="Exceptions\AuthenticationFailureResult.cs" />

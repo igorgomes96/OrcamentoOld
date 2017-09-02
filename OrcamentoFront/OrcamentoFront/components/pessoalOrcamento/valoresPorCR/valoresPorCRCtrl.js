@@ -39,47 +39,25 @@ angular.module('orcamentoApp').controller('valoresPorCRCtrl', ['valoresAbertosCR
     var loadValores = function(cr, ciclo) {
 
         self.valores = [];
-                
+
         insumosAbertos.forEach(function(z) {
-
-
-            eventosFolhaAPI.getEventoFolha(z)
+            valoresAbertosCRsAPI.getValoresAbertosCRsPorCiclo(cr, z, ciclo)
             .then(function(dado) {
-                var atual = dado.data;
-                atual.Valores = [];
-                self.valores.push(atual);
-                self.ciclo.Meses.forEach(function(y) {
-                    atual.Valores.push({
-                        CodigoCR: cr,
-                        CodEvento: z,
-                        CodMesOrcamento: y.Codigo,
-                        Valor: 0
-                    });
-                });
-
-                valoresAbertosCRsAPI.getValoresAbertosCRs(cr, z, ciclo)
-                .then(function(dado) {
-
-                    dado.data.forEach(function(x) {
-                        var v = atual.Valores.filter(function(y) {
-                            return y.CodMesOrcamento == x.CodMesOrcamento;
-                        });
-
-                        if (v && v.length > 0) {
-                            v[0].Valor = x.Valor;
-                        }
-                    });
-                    
-
-                });
-
+                self.valores.push(dado.data);
             });
+        });
+    }
 
-
+    self.saveAll = function() {
+        var valores = [];
+        self.valores.forEach(function(x) {
+            valores = valores.concat(x.Valores.map(function(y) { return y; }));
         });
 
-
-
+        valoresAbertosCRsAPI.postValorAbertoCRSaveAll(valores)
+        .then(function(dado) {
+            console.log("Salvo");
+        });
     }
 
 

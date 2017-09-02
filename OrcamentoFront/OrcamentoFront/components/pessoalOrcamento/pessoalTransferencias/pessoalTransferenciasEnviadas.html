@@ -1,4 +1,4 @@
-<ui-panel titulo="Transferências - Solicitações Enviadas" nome="panel-transferencias-enviadas">
+<ui-panel titulo="Transferências - Solicitações Enviadas" nome="panel-transferencias-enviadas" ng-if="ct.transfEnviadas && ct.transfEnviadas.length > 0">
     <table class="table table-striped">
         <thead>
             <tr class="text-center">
@@ -10,20 +10,23 @@
                 <th>Data de Solicitação</th>
                 <th>Mês de Transferência</th>
                 <th>Status</th>
-                <!-- <th></th> -->
+                <th></th>
             </tr>
         </thead>
         <tbody>
 
-            <tr ng-repeat="t in ct.transfEnviadas">
+            <tr ng-repeat="t in ct.transfEnviadas | orderBy:'-DataSolicitacao'">
                 <td>{{t.FuncionarioMatricula}}</td>
-                <td>{{t.Funcionario.Nome | limitTo:20}}<span ng-show="t.Funcionario.Nome.length > 20">...</span></td>
-                <td>{{t.Cargo.NomeCargo | limitTo:20}}<span ng-show="t.Cargo.NomeCargo.length > 20">...</span></td>
-                <td>R$ {{t.Funcionario.Salario | number:2}}</td>
+                <td>{{t.NomeFuncionario | limitTo:20}}</td>
+                <td>{{t.Cargo | limitTo:20}}</td>
+                <td>R$ {{t.Salario | number:2}}</td>
                 <td>{{t.CRDestino}}</td>
                 <td>{{t.DataSolicitacao | date:'dd-MM-yyyy'}}</td>
-                <td>{{t.DataInicio | date:'MMM-yy'}}</td>
+                <td>{{t.MesTransferenciaData | date:'MMM-yy'}}</td>
                 <td>{{t.Status}}</td>
+                <td>
+                    <button class="btn btn-default btn-xs"><i class="fa fa-info"></i></button>
+                </td>
             </tr>
 
         </tbody>

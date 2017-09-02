@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="52">
+      <Diagram DiagramId="fd8765e47f6549b3a3ecdb2351110e1a" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="OrcamentoModel.Afastamento" Width="1.5" PointX="13.5" PointY="26" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.CargaHoraria" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrcamentoModel.Cargo" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />

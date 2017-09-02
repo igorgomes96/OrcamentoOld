@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -54,6 +55,34 @@ namespace OrcamentoApp.Controllers
             return db.ValoresAbertosBase.ToList()
                 .Where(x => (codEvento == null || x.CodEvento == codEvento) && (matricula == null || x.MatriculaFuncionario == matricula) && (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo))
                 .Select(x => new ValoresAbertosBaseDTO(x));
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        [Route("api/ValoresAbertosBase/SaveAll")]
+        public IHttpActionResult SaveAll(IEnumerable<ValoresAbertosBase> valores)
+        {
+            foreach (ValoresAbertosBase v in valores)
+            {
+                if (v.Valor == 0)
+                {
+                    if (ValoresAbertosBaseExists(v.CodEvento, v.CodMesOrcamento, v.MatriculaFuncionario))
+                        db.ValoresAbertosBase.Remove(v);
+                } else
+                {
+                    db.ValoresAbertosBase.AddOrUpdate(v);
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // GET: api/ValoresAbertosBase/5

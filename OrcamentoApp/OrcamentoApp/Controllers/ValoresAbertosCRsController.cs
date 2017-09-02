@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -20,49 +21,54 @@ namespace OrcamentoApp.Controllers
         // GET: api/ValoresAbertosCRs
         public IEnumerable<ValoresAbertosCRDTO> GetValoresAbertosCR(string cr = null, string codEvento = null, int? codCiclo = null)
         {
-            if (cr != null && codEvento != null && codCiclo != null)
-            {
-                IEnumerable<ValoresAbertosCRDTO> lista = new HashSet<ValoresAbertosCRDTO>();
-                Ciclo ciclo = db.Ciclo.Find(codCiclo);
-                if (ciclo == null) return null;
-
-                foreach (MesOrcamento m in ciclo.MesesOrcamento)
-                {
-                    ValoresAbertosCR v = db.ValoresAbertosCR.Find(codEvento, m.Codigo, cr);
-
-                    if (v == null)
-                    {
-                        ((HashSet<ValoresAbertosCRDTO>)lista).Add(new ValoresAbertosCRDTO
-                        {
-                            CodEvento = codEvento,
-                            CodMesOrcamento = m.Codigo,
-                            CodigoCR = cr,
-                            Valor = 0
-                        });
-                    }
-                    else
-                        ((HashSet<ValoresAbertosCRDTO>)lista).Add(new ValoresAbertosCRDTO(v));
-                }
-
-                return lista;
-            }
             return db.ValoresAbertosCR.ToList()
                 .Where(x => (cr == null || x.CodigoCR == cr) && (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo) && (codEvento == null || x.CodEvento == codEvento))
                 .Select(x => new ValoresAbertosCRDTO(x));
         }
 
-        // GET: api/ValoresAbertosCRs/5
-        /*[ResponseType(typeof(ValoresAbertosCRDTO))]
-        public IHttpActionResult GetValoresAbertosCR(string id)
+        [ResponseType(typeof(ValoresAbertosCRCicloDTO))]
+        [HttpGet]
+        [Route("api/ValoresAbertosCRs/PorCiclo/{cr}/{codEvento}/{codCiclo}")]
+        public IHttpActionResult GetValoresPorCiclo(string cr, string codEvento, int codCiclo)
         {
-            ValoresAbertosCR valoresAbertosCR = db.ValoresAbertosCR.Find(id);
-            if (valoresAbertosCR == null)
+            Ciclo ciclo = db.Ciclo.Find(codCiclo);
+            if (ciclo == null) return null;
+
+            CentroCusto centroCusto = db.CentroCusto.Find(cr);
+            if (centroCusto == null) return null;
+
+            EventoFolha evento = db.EventoFolha.Find(codEvento);
+            if (evento == null) return null;
+
+            return Ok(new ValoresAbertosCRCicloDTO(centroCusto, evento, ciclo));
+
+        }
+
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        [Route("api/ValoresAbertosCRs/SaveAll")]
+        public IHttpActionResult SaveAll (IEnumerable<ValoresAbertosCR> valores)
+        {
+            foreach(ValoresAbertosCR v in valores)
             {
-                return NotFound();
+                if (v.Valor == 0)
+                {
+                    if (ValoresAbertosCRExists(v.CodEvento, v.CodMesOrcamento, v.CodigoCR))
+                        db.ValoresAbertosCR.Remove(v);
+                }
+                else
+                    db.ValoresAbertosCR.AddOrUpdate(v);
             }
 
-            return Ok(valoresAbertosCR);
-        }*/
+            try
+            {
+                db.SaveChanges();
+            } catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+            return Ok();
+        }
 
         // PUT: api/ValoresAbertosCRs/5
         [ResponseType(typeof(void))]

@@ -17,10 +17,12 @@ namespace OrcamentoApp.DTO
             CodMesOrcamento = v.CodMesOrcamento;
             MatriculaFuncionario = v.MatriculaFuncionario;
             Valor = v.Valor;
+            if (v.MesOrcamento != null) Mes = v.MesOrcamento.Mes;
         }
         public string CodEvento { get; set; }
         public int CodMesOrcamento { get; set; }
         public string MatriculaFuncionario { get; set; }
         public float Valor { get; set; }
+        public DateTime Mes { get; set; }
     }
 }

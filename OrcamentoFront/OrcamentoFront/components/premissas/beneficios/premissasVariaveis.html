@@ -78,21 +78,19 @@
 		                <td>{{v.Empresa.Nome}}</td>
 		                <td>
 		                    <div class="input-group">
-		                        <input type="text" class="form-control input-sm" ng-model="v.ParticipacaoLucros">
-		                        <span class="input-group-addon">%</span>
+		                        <input type="text" class="form-control input-sm text-right" ng-model="v.ParticipacaoLucros">
 		                    </div>
 		                </td>
 		                <td>
 		                    <div class="input-group">
-		                        <input type="text" class="form-control input-sm" ng-model="v.RemuneracaoVariavel">
-		                        <span class="input-group-addon">%</span>
+		                        <input type="text" class="form-control input-sm text-right" ng-model="v.RemuneracaoVariavel">
 		                    </div>
 		                </td>
 		            </tr>
 		        </tbody>
 		    </table>
 
-		    <button class="btn btn-primary" ng-click="ct.savePATs(ct.pats)">Salvar</button>
+		    <button class="btn btn-primary" ng-click="ct.saveVariaveis(ct.variaveis)">Salvar</button>
 
 
 		</div>

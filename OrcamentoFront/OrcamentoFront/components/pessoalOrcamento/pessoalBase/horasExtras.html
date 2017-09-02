@@ -17,7 +17,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="he in f.horasExtras.HEs170">
-                    <input type="text" class="form-control text-center input-sm" ng-disabled="!he.FlagEnabled" ng-model="he.QtdaHoras" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="he.Visivel" ng-show="he.Visivel" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -30,7 +30,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="he in f.horasExtras.HEs100">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="he.Visivel" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -43,7 +43,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="he in f.horasExtras.HEs75">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="he.Visivel" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -56,7 +56,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="he in f.horasExtras.HEs60">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="he.Visivel" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -69,7 +69,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{f.horasExtras.Cargo}}"><p>{{f.horasExtras.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="he in f.horasExtras.HEs50">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.QtdaHoras" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="he.Visivel" ng-model="he.QtdaHoras" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -80,24 +80,3 @@
 </table>
 
 
-<table class="table table-striped table-condensed" ng-if="ct.PercHE == 'Aberto'">
-    <thead>
-        <tr>
-            <th width="13%"></th>
-            <th ng-repeat="m in ct.ciclo.Meses" class="text-center">
-                {{m.Mes | date:'MMM/yy'}}
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <form name="formAberto">
-            <tr ui-input-parent>
-                <td>Valor (R$)</td>
-                <td ng-repeat="he in ct.horasExtrasAbertas | orderBy:'CodMesOrcamento'">
-                    <input type="text" class="form-control text-center input-sm" ng-model="he.Valor" required ui-input-child>
-                </td>
-            </tr>
-        </form>
-    </tbody>
-</table>

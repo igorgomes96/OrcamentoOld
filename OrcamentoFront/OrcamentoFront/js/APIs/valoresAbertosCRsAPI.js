@@ -7,9 +7,13 @@ angular.module('orcamentoApp').service('valoresAbertosCRsAPI', ['$http', 'config
         return $http.get(config.baseUrl + resource, {params:{cr:cr, codEvento:codEvento, codCiclo:codCiclo}});
     }
 
-    /*self.getValorAbertoCR = function(id) {
-        return $http.get(config.baseUrl + resource + '/' + id);
-    }*/
+    self.getValoresAbertosCRsPorCiclo = function(cr, codEvento, codCiclo) {
+        return $http.get(config.baseUrl + resource + '/PorCiclo/' + cr + '/' + codEvento + '/' + codCiclo);
+    }
+
+    self.postValorAbertoCRSaveAll = function(valores) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', valores);
+    }
 
     self.postValorAbertoCR = function(valorAbertoCR) {
         return $http.post(config.baseUrl + resource, valorAbertoCR);

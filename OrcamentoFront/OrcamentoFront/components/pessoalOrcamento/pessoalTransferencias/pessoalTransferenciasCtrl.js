@@ -10,22 +10,6 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 		transferenciasAPI.getTransferencias(null, crDestino, idCiclo, pendente)
 		.then(function(dado) {
 			self.transfRecebidas = dado.data;
-
-			var total = self.transfRecebidas.length, cont = 0;
-			self.transfRecebidas.forEach(function(x) {
-				funcionariosAPI.getFuncionario(x.FuncionarioMatricula)
-				.then(function(retorno) {
-					x.Funcionario = retorno.data;
-					return mesesOrcamentoAPI.getMesOrcamento(x.MesTransferencia);
-				}).then(function(retorno) {
-					x.DataInicio = retorno.data.Mes;
-					return cargosAPI.getCargo(x.Funcionario.CargoCod);
-				}).then(function(retorno) {
-					cont++;
-					x.Cargo = retorno.data;
-				});
-			});
-
 		});
 	}
 
@@ -33,20 +17,6 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 		transferenciasAPI.getTransferencias(crOrigem, null, idCiclo)
 		.then(function(dado) {
 			self.transfEnviadas = dado.data;
-
-			self.transfEnviadas.forEach(function(x) {
-				funcionariosAPI.getFuncionario(x.FuncionarioMatricula)
-				.then(function(retorno) {
-					x.Funcionario = retorno.data;
-					return mesesOrcamentoAPI.getMesOrcamento(x.MesTransferencia);
-				}).then(function(retorno) {
-					x.DataInicio = retorno.data.Mes;
-					return cargosAPI.getCargo(x.Funcionario.CargoCod);
-				}).then(function(retorno) {
-					x.Cargo = retorno.data;
-				});
-			});
-
 		});
 	}
 
@@ -60,6 +30,21 @@ angular.module('orcamentoApp').controller('pessoalTransferenciasCtrl', ['mesesOr
 		});
 	}
 
+	self.rejeitarTrans = function(transf) {
+		self.funcionarioTransf = transf;
+	}
+
+	self.salvarTransferenciaRejeitada = function(transf) {
+		transf.Aprovado = false;
+		transferenciasAPI.putTransferencia(transf.CRDestino, transf.FuncionarioMatricula, transf.MesTransferencia, transf)
+		.then(function(dado) {
+			$('#modal-rejeitar-transf').fadeOut();
+            $('.modal-backdrop').fadeOut();
+            $('body').removeClass('modal-open');
+			messagesService.exibeMensagemSucesso('Transferência Rejeitada!');
+			loadTransferenciasRecebidas(self.cr.Codigo, self.ciclo.Codigo, true);
+		});
+	}
 
 	var listenerNovaTransf = $scope.$on('transCREvent', function() {
 		loadTransferenciasEnviadas(self.cr.Codigo, self.ciclo.Codigo);

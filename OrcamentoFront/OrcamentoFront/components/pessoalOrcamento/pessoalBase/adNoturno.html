@@ -18,8 +18,8 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{h.adNoturnos.Cargo}}"><p>{{h.adNoturnos.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="hn in h.adNoturnos.HNs20">
                     <!-- <span>{{hn.QtdaHoras}}</span> -->
-                    <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child>
-                    <!-- <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child> -->
+                    <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child>
+                    <!-- <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child> -->
                 </td>
             </tr>
         </form>
@@ -33,8 +33,8 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{h.adNoturnos.Cargo}}"><p>{{h.adNoturnos.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="hn in h.adNoturnos.HNs30">
                     <!-- <span>{{hn.QtdaHoras}}</span> -->
-                    <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child>
-                    <!-- <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child> -->
+                    <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child>
+                    <!-- <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child> -->
                 </td>
             </tr>
         </form>
@@ -48,8 +48,8 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{h.adNoturnos.Cargo}}"><p>{{h.adNoturnos.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="hn in h.adNoturnos.HNs40">
                     <!-- <span>{{hn.QtdaHoras}}</span> -->
-                    <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child>
-                    <!-- <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child> -->
+                    <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child>
+                    <!-- <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child> -->
                 </td>
             </tr>
         </form>
@@ -63,8 +63,8 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{h.adNoturnos.Cargo}}"><p>{{h.adNoturnos.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="hn in h.adNoturnos.HNs50">
                     <!-- <span>{{hn.QtdaHoras}}</span> -->
-                    <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child>
-                    <!-- <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child> -->
+                    <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child>
+                    <!-- <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child> -->
                 </td>
             </tr>
         </form>
@@ -78,8 +78,8 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{h.adNoturnos.Cargo}}"><p>{{h.adNoturnos.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="hn in h.adNoturnos.HNs60">
                     <!-- <span>{{hn.QtdaHoras}}</span> -->
-                    <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child>
-                    <!-- <input type="text" class="form-control text-center input-sm" ng-model="hn.QtdaHoras" required ui-input-child> -->
+                    <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child>
+                    <!-- <input type="text" class="form-control text-center input-sm" ng-show="hn.Visivel" ng-model="hn.QtdaHoras" required ui-input-child> -->
                 </td>
             </tr>
         </form>
@@ -88,26 +88,3 @@
 
     </tbody>
 </table>
-
-<table class="table table-striped table-condensed" ng-if="ct.PercHN == 'Aberto'">
-    <thead>
-        <tr>
-            <th width="13%"></th>
-            <th ng-repeat="m in ct.ciclo.Meses" class="text-center">
-                {{m.Mes | date:'MMM/yy'}}
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <form name="formAberto">
-            <tr ui-input-parent>
-                <td>Valor (R$)</td>
-                <td ng-repeat="h in ct.horasNoturnasAbertas">
-                    <input type="text" class="form-control text-center input-sm" ng-model="h.Valor" required ui-input-child>
-                </td>
-            </tr>
-        </form>
-    </tbody>
-</table>
-

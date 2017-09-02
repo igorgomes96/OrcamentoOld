@@ -6,9 +6,6 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
     self.cr = null;
     self.funcionarioTransf = null;
     self.funcionarios = [];
-    // self.outros = [];
-    // self.adNoturnos = [];
-    // self.horasExtras = [];
     self.erroTransf = null;
     $scope.aba = "Associados";
 
@@ -36,18 +33,25 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         });
     }
 
+    var setMesesVisivel = function(funcionario, meses) {
+        meses.forEach(function(y) { //Para cada mês
+            y.Visivel = funcionario.Historico.length == 0 || funcionario.Historico.some(function(z) {
+                return (z.Inicio == null && z.Fim >= y.Mes) || (z.Fim == null && z.Inicio < y.Mes) || (y.Mes >= z.Inicio && y.Mes < z.Fim);
+            });
+        });
+    }
+
     var loadHorasExtras = function(funcionarios) {
         self.horasExtras = [];
 
         funcionarios.forEach(function(x) {
             hesBaseAPI.getFuncionarioHEs(x.Matricula, self.ciclo.Codigo)
             .then(function(dado) {
-                dado.data.forEach(function(y) {
-                    h.FlagEnabled = x.Historico.some(function(z) {  //Deixa habilitado somente campos em meses em que o funcionário estava no cr
-                        return (z.Inicio == null && y.Mes < z.Fim) || (z.Fim == null && y.Mes >= z.Inicio) || (y.Mes >= z.Inicio && y.Mes < z.Fim)
-                    });
-                });
-
+                for (var prop in dado.data) {
+                    if (Array.isArray(dado.data[prop])) {  // Se for um array (HEs170, HEs100...)
+                        setMesesVisivel(x, dado.data[prop]);
+                    }
+                }
                 x.horasExtras = dado.data;
             });
         });
@@ -60,7 +64,11 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         funcionarios.forEach(function(x) {
             adNoturnosBaseAPI.getFuncionarioHNs(x.Matricula, self.ciclo.Codigo)
             .then(function(dado) {
-                // self.adNoturnos.push(dado.data);
+                for (var prop in dado.data) {
+                    if (Array.isArray(dado.data[prop])) {  // Se for um array (HNs20, HNs30...)
+                        setMesesVisivel(x, dado.data[prop]);
+                    }
+                }
                 x.adNoturnos = dado.data;
             });
         });
@@ -94,17 +102,19 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
         valoresAbertosBaseAPI.getValoresAbertosBase(null, funcionario.Matricula, self.ciclo.Codigo)
         .then(function(dado) {
 
+            //Inicializando algumas propriedades
             var f = {
                 Matricula: funcionario.Matricula,
                 Nome: funcionario.Nome
             };
 
+            //Carrega o cargo
             cargosAPI.getCargo(funcionario.CargoCod)
             .then(function(retorno){
                 f.Cargo = retorno.data.NomeCargo;
             });
 
-            
+            //Cria um propriedade para cada evento no array Outros Insumo, inicializando com valor 0
             outrosInsumos.forEach(function(z) {
                 f[z] = [];
                 self.ciclo.Meses.forEach(function(y) {
@@ -112,11 +122,13 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
                         CodEvento: z,
                         CodMesOrcamento: y.Codigo,
                         MatriculaFuncionario: funcionario.Matricula,
-                        Valor: 0
+                        Valor: 0,
+                        Mes: y.Mes
                     });
                 });
+                //Seta meses visíveis e não visíveis
+                setMesesVisivel(funcionario, f[z]);
             });
-            
 
             dado.data.forEach(function(y) {
                 if (f.hasOwnProperty(y.CodEvento)) {
@@ -171,14 +183,31 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
             }
         });
 
+        var allHE = [];
+        var allHN = [];
+        var allOutros = [];
+        self.funcionarios.forEach(function(x) {
+            allHE.concat(x.horasExtras);
+            allHN.concat(x.adNoturnos);
+            for (var prop in x.Outros) {
+                if (Array.isArray(x.Outros[prop])) {
+                    allOutros = allOutros.concat(x.Outros[prop].map(function(y) { return y; }));
+                }
+            }
+            
+        });
+
+
         exibeLoader();
         funcionariosAPI.saveAllFuncionarios(self.funcionarios)
         .then(function(dado) {
-            return hesBaseAPI.saveAllFuncionariosHEs(self.horasExtras);
+            return hesBaseAPI.saveAllFuncionariosHEs(allHE);
         }).then(function(dado) {
-            return adNoturnosBaseAPI.saveAllFuncionariosHNs(self.adNoturnos);
+            return adNoturnosBaseAPI.saveAllFuncionariosHNs(allHN);
         }).then(function(dado) {
             return funcionariosFeriasAPI.saveAllFuncionariosFerias(self.ciclo.Codigo, allFerias);
+        }).then(function(dado) {
+            return valoresAbertosBaseAPI.postValorAbertoBaseSaveAll(allOutros);
         }).then(function(dado) {
             messagesService.exibeMensagemSucesso("Informações salvas com sucesso! Os cálculos estão sendo realizados em background.");
             ocultaLoader();
@@ -241,29 +270,7 @@ angular.module('orcamentoApp').controller('pessoalBaseCtrl', ['messagesService',
     var listenerTransAprovada = $scope.$on('transAprovada', function($event, matricula) {
 
         if (!self.cr || !self.ciclo) return;
-        var funcionario = null;
-        funcionariosAPI.getFuncionarioHistorico(matricula, self.cr.Codigo, self.ciclo.Codigo)
-        .then(function(dado) {
-            funcionario = dado.data;
-            self.funcionarios.push(dado.data);
-            return cargosAPI.getCargo(funcionario.CargoCod);
-        }).then(function(dado) {
-            funcionario.Cargo = dado.data;
-            return hesBaseAPI.getFuncionarioHEs(matricula, self.ciclo.Codigo);
-        }).then(function(dado) {
-            self.horasExtras.push(dado.data);
-            return adNoturnosBaseAPI.getFuncionarioHNs(matricula, self.ciclo.Codigo);
-        }).then(function(dado) {
-            self.adNoturnos.push(dado.data);
-            return valoresAbertosBaseAPI.getValoresAbertosBase(null, matricula, self.ciclo.Codigo);
-        }).then(function(dado) {
-
-            loadOutrosFuncionario(funcionario);
-            return funcionariosFeriasAPI.getFuncionariosFerias(matricula, self.ciclo.Codigo);
-
-        }).then(function() {
-            loadFeriasFuncionario(funcionario);
-        });
+        loadFuncionarios(self.cr.Codigo, self.ciclo.Codigo);
 
     });
 

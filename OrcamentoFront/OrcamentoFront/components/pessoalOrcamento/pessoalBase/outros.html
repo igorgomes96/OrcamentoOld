@@ -17,7 +17,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['GRATIF']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -30,7 +30,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['PRODUT']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -44,7 +44,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['COMISSAO']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -57,7 +57,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['PRO-LAB']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -70,7 +70,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['PGP-PGI']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>
@@ -83,7 +83,7 @@
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Nome}}"><p>{{ou.Nome | ellipsis:15:5}}</p></td>
                 <td data-toggle="tooltip" data-placement="left" title="{{ou.Outros.Cargo}}"><p>{{ou.Outros.Cargo | ellipsis:15:5}}</p></td>
                 <td ng-repeat="o in ou.Outros['AJU-CUST']">
-                    <input type="text" class="form-control text-center input-sm" ng-model="o.Valor" required ui-input-child>
+                    <input type="text" class="form-control text-center input-sm" ng-show="o.Visivel" ng-model="o.Valor" required ui-input-child>
                 </td>
             </tr>
         </form>

@@ -55,6 +55,14 @@ namespace OrcamentoApp.Controllers
                 return BadRequest();
             }
 
+            if (transferencia.Aprovado.HasValue)
+            {
+                if (transferencia.Aprovado.Value)
+                    transferencia.Status = "Aprovado";
+                else
+                    transferencia.Status = "Rejeitado";
+            }
+
             db.Entry(transferencia).State = EntityState.Modified;
 
             try
@@ -87,6 +95,14 @@ namespace OrcamentoApp.Controllers
 
             if (transferencia.CRDestino == null || transferencia.CRDestino == "" ||  db.CentroCusto.Find(transferencia.CRDestino) == null)
                 return NotFound();
+
+            if (transferencia.Aprovado.HasValue)
+            {
+                if (transferencia.Aprovado.Value)
+                    transferencia.Status = "Aprovado";
+                else
+                    transferencia.Status = "Rejeitado";
+            }
 
             db.Transferencia.Add(transferencia);
 

@@ -15,18 +15,74 @@
         </thead>
         <tbody>
 
-            <tr ng-repeat="t in ct.transfRecebidas">
+            <tr ng-repeat="t in ct.transfRecebidas | orderBy:'-DataSolicitacao'">
                 <td>{{t.FuncionarioMatricula}}</td>
-                <td>{{t.Funcionario.Nome | ellipsis:12:5}}</td>
-                <td>{{t.Cargo.NomeCargo | ellipsis:12:5}}</td>
-                <td>R$ {{t.Funcionario.Salario | number:2}}</td>
-                <td>{{t.Funcionario.CentroCustoCod}}</td>
+                <td>{{t.NomeFuncionario | ellipsis:12:5}}</td>
+                <td>{{t.Cargo | ellipsis:12:5}}</td>
+                <td>R$ {{t.Salario | number:2}}</td>
+                <td>{{t.CROrigem}}</td>
                 <td>{{t.DataSolicitacao | date:'dd-MM-yyyy'}}</td>
-                <td>{{t.DataInicio | date:'MMM-yy'}}</td>
+                <td>{{t.MesTransferenciaData | date:'MMM-yy'}}</td>
                 <td><button class="btn btn-success btn-xs" ng-click="ct.aprovarTrans(t)"><i class="fa fa-check"></i></button></td>
-                <td><button class="btn btn-danger btn-xs" ng-click="ct.rejeitarTrans(t)"><i class="fa fa-times"></i></button></td>
+                <td><button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-rejeitar-transf" ng-click="ct.rejeitarTrans(t)"><i class="fa fa-times"></i></button></td>
             </tr>
             
         </tbody>
     </table>
 </ui-panel>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-rejeitar-transf" tabindex="-1" role="dialog" aria-labelledby="rejeitar-transf-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="rejeitar-transf-title">Rejeitar Transferência</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Associado</dt>
+                            <dd>{{ct.funcionarioTransf.FuncionarioMatricula}} - {{ct.funcionarioTransf.NomeFuncionario}}</dd>
+                            <dt>Cargo</dt>
+                            <dd>{{ct.funcionarioTransf.Cargo}}</dd>
+                            <dt>CR de Origem</dt>
+                            <dd>{{ct.funcionarioTransf.CROrigem}}</dd>
+                            <dt>Mês de Transferência</dt>
+                            <dd>{{ct.funcionarioTransf.MesTransferenciaData | date:'MMM/yy'}}</dd>
+                        </dl>
+
+                        <form role="form" name="formRejeitarTransf">
+
+                            <div class="col-md-12">
+                                <div class="form-group" ng-class="{'has-error': !ct.funcionarioTransf.Resposta}">
+                                    <label for="textareaMotivoRej">Motivo da Rejeição</label>
+                                    <textarea class="form-control" ng-model="ct.funcionarioTransf.Resposta" id="textareaMotivoRej" required></textarea>
+                                    <p class="help-block">Digite o motivo para não receber a transferência.</p>
+                                </div>
+                            </div>
+
+                            
+                        </form>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p style="color: red;">{{ct.erroTransf}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                  
+            </div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-disabled="formRejeitarTransf.$invalid" ng-click="ct.salvarTransferenciaRejeitada(ct.funcionarioTransf)">Salvar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
