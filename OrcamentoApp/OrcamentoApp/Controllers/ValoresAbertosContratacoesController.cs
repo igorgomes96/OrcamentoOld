@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -54,6 +55,34 @@ namespace OrcamentoApp.Controllers
             return db.ValoresAbertosContratacao.ToList()
                 .Where(x => (codEvento == null || x.CodEvento == codEvento) && (codContratacao == null || x.CodContratacao == codContratacao) && (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo))
                 .Select(x => new ValoresAbertosContratacaoDTO(x));
+        }
+
+        [HttpPost]
+        [Route("api/ValoresAbertosContratacoes/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll(IEnumerable<ValoresAbertosContratacao> contratacoes)
+        {
+            foreach(ValoresAbertosContratacao v in contratacoes)
+            {
+                if (v.Valor == 0)
+                {
+                    if (ValoresAbertosContratacaoExists(v.CodEvento, v.CodMesOrcamento, v.CodContratacao))
+                        db.ValoresAbertosContratacao.Remove(v);
+                } else
+                {
+                    db.ValoresAbertosContratacao.AddOrUpdate(v);
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/ValoresAbertosContratacoes/5

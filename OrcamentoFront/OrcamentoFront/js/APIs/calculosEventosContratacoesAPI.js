@@ -15,7 +15,7 @@ angular.module('orcamentoApp').service('calculosEventosContratacoesAPI', ['$http
         return $http.get(config.baseUrl + resource + '/PorCiclo/PorCR/' + cr + '/' + codCiclo);
     }
 
-    self.postCalculaBasePorCR = function(cr, codCiclo) {
+    self.postCalculaContratacaoPorCicloPorCR = function(cr, codCiclo) {
         return $http.post(config.baseUrl + resource + '/Calcula/PorCiclo/PorCR/' + cr + '/' + codCiclo);
     }
 

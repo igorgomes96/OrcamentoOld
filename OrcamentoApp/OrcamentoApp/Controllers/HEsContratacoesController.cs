@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -38,6 +39,36 @@ namespace OrcamentoApp.Controllers
             if (c == null) return NotFound();
 
             return Ok(new ContratacaoHEsDTO(con, c));
+        }
+
+        [ResponseType(typeof(void))]
+        [Route("api/HEsContratacoes/SaveAll")]
+        [HttpPost]
+        public IHttpActionResult SaveAllContratacoesHE(IEnumerable<HEContratacao> contratacoes)
+        {
+
+            foreach (HEContratacao cont in contratacoes)
+            {
+                if (cont.QtdaHoras == 0)
+                {
+                    if (HEContratacaoExists(cont.ContratacaoCod, cont.PercentualHoras, cont.CodMesOrcamento))
+                        db.HEContratacao.Remove(cont);
+                } else
+                {
+                    db.HEContratacao.AddOrUpdate(cont);
+                }
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            return Ok();
+
         }
 
         // PUT: api/HEsContratacoes/5

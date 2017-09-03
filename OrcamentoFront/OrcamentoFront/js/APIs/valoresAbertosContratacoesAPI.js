@@ -7,6 +7,10 @@ angular.module('orcamentoApp').service('valoresAbertosContratacoesAPI', ['$http'
         return $http.get(config.baseUrl + resource, {params:{codEvento:codEvento, codContratacao:codContratacao, codCiclo:codCiclo}});
     }
 
+    self.postValorAbertoContratacaoSaveAll = function(valores) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', valores);
+    }
+
     self.postValorAbertoContratacao = function(valorAbertoContratacao) {
         return $http.post(config.baseUrl + resource, valorAbertoContratacao);
     }

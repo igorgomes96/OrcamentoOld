@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesService', 'contratacoesAPI', 'contratacoesMesAPI', '$scope', 'sharedDataService', 'cargosAPI', 'filiaisAPI', 'numberFilter', 'sharedDataService', 'adNoturnosContratacoesAPI', 'hesContratacoesAPI', 'valoresAbertosContratacoesAPI', function(messagesService, contratacoesAPI, contratacoesMesAPI, $scope, sharedDataService, cargosAPI, filiaisAPI, numberFilter, sharedDataService, adNoturnosContratacoesAPI, hesContratacoesAPI, valoresAbertosContratacoesAPI) {
+angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesService', 'contratacoesAPI', 'contratacoesMesAPI', '$scope', 'sharedDataService', 'cargosAPI', 'filiaisAPI', 'numberFilter', 'sharedDataService', 'adNoturnosContratacoesAPI', 'hesContratacoesAPI', 'valoresAbertosContratacoesAPI', 'calculosEventosContratacoesAPI', '$rootScope', function(messagesService, contratacoesAPI, contratacoesMesAPI, $scope, sharedDataService, cargosAPI, filiaisAPI, numberFilter, sharedDataService, adNoturnosContratacoesAPI, hesContratacoesAPI, valoresAbertosContratacoesAPI, calculosEventosContratacoesAPI, $rootScope) {
 	var self = this;
 
 	self.filiais = [];
@@ -141,8 +141,6 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
     }
 
 
-
-
     var resetCargoNovo = function() {
         self.cargoNovo = null;
         self.cargoNovo = {
@@ -230,6 +228,57 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
             messagesService.exibeMensagemSucesso("Contratação salva com sucesso!");
             resetCargoNovo();
         });
+    }
+
+    self.saveAll = function() {
+
+        var horasExtras = [];
+        self.horasExtras.forEach(function(x) {
+            for (var prop in x) {
+                if (Array.isArray(x[prop])) {
+                    x[prop].forEach(function(y) {
+                        y.ContratacaoCod = x.Codigo;
+                    });
+                    horasExtras = horasExtras.concat(x[prop]);
+                }
+            }
+        });
+
+        var adNoturnos = [];
+        self.adNoturnos.forEach(function(x) {
+            for (var prop in x) {
+                if (Array.isArray(x[prop])) {
+                    x[prop].forEach(function(y) {
+                        y.CodContratacao = x.Codigo;
+                    });
+                    adNoturnos = adNoturnos.concat(x[prop]);
+                }
+            }
+        });
+
+        var outros = [];
+        self.outros.forEach(function(x) {
+            for (var prop in x) {
+                if (Array.isArray(x[prop])) {
+                    outros = outros.concat(x[prop]);
+                }
+            }
+        });
+        
+
+        hesContratacoesAPI.postHEContratacaoSaveAll(horasExtras)
+        .then(function(dado) {
+            return adNoturnosContratacoesAPI.postAdNoturnoContratacaoSaveAll(adNoturnos);
+        }).then(function(dado) {
+            return valoresAbertosContratacoesAPI.postValorAbertoContratacaoSaveAll(outros);
+        }).then(function(dado) {
+            messagesService.exibeMensagemSucesso("Salvo com sucesso!");
+            return calculosEventosContratacoesAPI.postCalculaContratacaoPorCicloPorCR(self.cr.Codigo, self.ciclo.Codigo);
+        }).then(function(dado) {
+            $rootScope.$broadcast('calculoRealizado');
+        }, function(error) {
+            console.log(error);
+        });  
     }
 
     self.deleteContratacao = function(contratacaoCod) {

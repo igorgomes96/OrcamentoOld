@@ -87,7 +87,7 @@ namespace OrcamentoApp.Services
                 if (reajPAT != null)
                     valorPat *= (reajPAT.PercentualReajuste + 1);
 
-                ReajVTPasse reajPasse = db.ReajVTPasse.Find(numAno, numMes, cont.CidadeNome);
+                ReajVTPasse reajPasse = db.ReajVTPasse.Find(numAno, cont.CidadeNome, numMes);
                 if (reajPasse != null)
                     valorPasse *= (float)(reajPasse.PercentualReajuste + 1);
 

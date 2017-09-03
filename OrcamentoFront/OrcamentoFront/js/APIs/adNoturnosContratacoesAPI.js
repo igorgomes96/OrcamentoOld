@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('adNoturnosContratacoesAPI', ['$http', 'c
         return $http.get(config.baseUrl + resource + '/ContratacaoHN/' + contratacao + '/' + codCiclo);
     }
 
+    self.postAdNoturnoContratacaoSaveAll = function(adNoturnos) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', adNoturnos);
+    }
+
     self.postAdNoturnoContratacao = function(AdNoturnoContratacao) {
         return $http.post(config.baseUrl + resource, AdNoturnoContratacao);
     }

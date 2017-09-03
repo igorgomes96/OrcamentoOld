@@ -52,6 +52,7 @@ namespace OrcamentoApp.Controllers
             return Ok(c.Contratacoes.ToList().Select(x => new ContratacaoEventosDTO(x, ciclo)));
         }
 
+
         [HttpPost]
         [ResponseType(typeof(void))]
         [Route("api/CalculosEventosContratacoes/Calcula/PorCiclo/PorCR/{cr}/{codCiclo}")]
@@ -64,7 +65,7 @@ namespace OrcamentoApp.Controllers
             if (ciclo == null) return NotFound();
 
             db.Database.ExecuteSqlCommand("delete a from CalculoEventoContratacao a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Contratacao c on a.CodContratacao = c.Codigo where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
-            db.Database.ExecuteSqlCommand("insert into CalculoEventoContratacao (CodEvento, CodContratacao, CodMesOrcamento, Valor) select CodEvento, CodContratacao, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Contratacao c on a.CodContratacao = c.Codigo where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
+            db.Database.ExecuteSqlCommand("insert into CalculoEventoContratacao (CodEvento, CodContratacao, CodMesOrcamento, Valor) select CodEvento, CodContratacao, CodMesOrcamento, Valor from ValoresAbertosContratacao a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Contratacao c on a.CodContratacao = c.Codigo where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
 
             c.Contratacoes.ToList().ForEach(x =>
             {

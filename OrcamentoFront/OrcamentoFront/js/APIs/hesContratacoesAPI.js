@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('hesContratacoesAPI', ['$http', 'config',
         return $http.get(config.baseUrl + resource + '/ContratacaoHE/' + codContratacao + '/' + codCiclo);
     }
 
+    self.postHEContratacaoSaveAll = function(hes) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', hes);
+    }
+
     self.postHEContratacao = function(HEContratacao) {
         return $http.post(config.baseUrl + resource, HEContratacao);
     }
