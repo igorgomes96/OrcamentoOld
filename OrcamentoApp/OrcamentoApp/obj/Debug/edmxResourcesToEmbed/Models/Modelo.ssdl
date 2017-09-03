@@ -67,7 +67,7 @@
       <PropertyRef Name="CargaHoraria" />
     </Key>
     <Property Name="CargaHoraria" Type="int" Nullable="false" />
-    <Property Name="QtdaPassesDiario" Type="int" />
+    <Property Name="QtdaPassesDiario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Cargo">
     <Key>
@@ -103,7 +103,7 @@
     </Key>
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DataInicio" Type="date" Nullable="false" />
-    <Property Name="DataFim" Type="date" />
+    <Property Name="DataFim" Type="date" Nullable="false" />
     <Property Name="StatusCod" Type="int" />
     <Property Name="TipoCod" Type="int" Nullable="false" />
     <Property Name="Descricao" Type="varchar" MaxLength="255" Nullable="false" />
@@ -131,7 +131,6 @@
       <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Insalubridade" Type="float" Nullable="false" />
     <Property Name="Motivo" Type="varchar" MaxLength="255" />
     <Property Name="Periculosidade" Type="bit" Nullable="false" />
     <Property Name="CentroCustoCod" Type="varchar" MaxLength="15" Nullable="false" />
@@ -143,6 +142,9 @@
     <Property Name="ConvenioPlanoCod" Type="int" />
     <Property Name="Salario" Type="real" Nullable="false" />
     <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
+    <Property Name="ConvenioOdoCod" Type="int" />
+    <Property Name="CodEscala" Type="int" Nullable="false" />
+    <Property Name="AdCondutor" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ContratacaoMes">
     <Key>
@@ -169,7 +171,6 @@
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Plano" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Valor" Type="real" Nullable="false" />
-    <Property Name="ValorDependentes" Type="real" Nullable="false" />
   </EntityType>
   <EntityType Name="DiasIndenizados">
     <Key>
@@ -961,6 +962,30 @@
       </Principal>
       <Dependent Role="Contratacao">
         <PropertyRef Name="ConvenioPlanoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="contratacao_convenioodo_fk">
+    <End Role="ConvenioOdo" Type="Self.ConvenioOdo" Multiplicity="0..1" />
+    <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConvenioOdo">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Contratacao">
+        <PropertyRef Name="ConvenioOdoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="contratacao_escalatrabalho_fk">
+    <End Role="EscalaTrabalho" Type="Self.EscalaTrabalho" Multiplicity="1" />
+    <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EscalaTrabalho">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Contratacao">
+        <PropertyRef Name="CodEscala" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2178,6 +2203,14 @@
     </AssociationSet>
     <AssociationSet Name="contratacao_conveniomed_fk" Association="Self.contratacao_conveniomed_fk">
       <End Role="ConvenioMed" EntitySet="ConvenioMed" />
+      <End Role="Contratacao" EntitySet="Contratacao" />
+    </AssociationSet>
+    <AssociationSet Name="contratacao_convenioodo_fk" Association="Self.contratacao_convenioodo_fk">
+      <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
+      <End Role="Contratacao" EntitySet="Contratacao" />
+    </AssociationSet>
+    <AssociationSet Name="contratacao_escalatrabalho_fk" Association="Self.contratacao_escalatrabalho_fk">
+      <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
       <End Role="Contratacao" EntitySet="Contratacao" />
     </AssociationSet>
     <AssociationSet Name="contratacao_filial_fk" Association="Self.contratacao_filial_fk">

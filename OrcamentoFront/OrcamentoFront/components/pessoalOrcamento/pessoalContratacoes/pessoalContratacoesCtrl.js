@@ -52,11 +52,6 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
                 contratacao.ContratacaoMeses[contratacao.ContratacaoMeses.indexOf(mes[0])] = y;
             });
 
-            return cargosAPI.getCargo(contratacao.CargoCod);
-            
-        }).then(function(dado3) {
-
-            contratacao.CargoNome = dado3.data.NomeCargo;
             contratacao.ExcluirVisivel = true;  //Exibe o botão de excluir
             
         }, function(error) { 
@@ -205,23 +200,30 @@ angular.module('orcamentoApp').controller('pessoalContratacoesCtrl', ['messagesS
     }
 
     self.saveContratacao = function(contratacao) {
+        if (contratacao.CodEscala === undefined || contratacao.CodEscala === 0)
+            contratacao.CodEscala = 1;
+
         contratacao.CargoCod = contratacao.Cargo.CargoCod; 
         var contratacaoMeses = contratacao.ContratacaoMeses;
+        delete contratacao.ContratacaoMeses; //Se deixar, acontece erro ao salvar
         contratacao.Salario = numberFilter(contratacao.Salario, 2);
-        delete contratacao.ContratacaoMeses;
         contratacoesAPI.postContratacao(contratacao)
         .then(function(dado) {
 
             contratacao.Codigo = dado.data.Codigo;
 
-            var cont = 0, total = contratacaoMeses.length;
             contratacaoMeses.forEach(function(x) {
                 x.ContratacaoCod = dado.data.Codigo;
-                contratacoesMesAPI.postContratacaoMes(x);
+                //contratacoesMesAPI.postContratacaoMes(x);
+            });
+
+            contratacoesMesAPI.postContratacaoMesSaveAll(contratacaoMeses)
+            .then(function(){}, function (error){
+                console.log(error);
+                messagesService.exibeMensagemErro(error.status, 'Erro ao salvar contrações (Meses)!');
             });
 
             loadContratacoes(self.ciclo.Codigo, self.cr.Codigo);
-            //loadContratacoesMes(contratacao);
             contratacao.Codigo = dado.data.Codigo;
             self.contratacoes.push(contratacao);
 

@@ -18,7 +18,7 @@ namespace OrcamentoApp.Models
         public int Qtda { get; set; }
         public int MesOrcamentoCod { get; set; }
     
-        public virtual Contratacao Contratacao { get; set; }
         public virtual MesOrcamento MesOrcamento { get; set; }
+        public virtual Contratacao Contratacao { get; set; }
     }
 }

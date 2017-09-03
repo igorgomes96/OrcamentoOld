@@ -54,25 +54,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Contratacao">
-      <EntityTypeMapping TypeName="OrcamentoModel.Contratacao">
-        <MappingFragment StoreEntitySet="Contratacao">
-          <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
-          <ScalarProperty Name="Salario" ColumnName="Salario" />
-          <ScalarProperty Name="ConvenioPlanoCod" ColumnName="ConvenioPlanoCod" />
-          <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Insalubridade" ColumnName="Insalubridade" />
-          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
-          <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
-          <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
-          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
-          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
-          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
-          <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DiasIndenizados">
       <EntityTypeMapping TypeName="OrcamentoModel.DiasIndenizados">
         <MappingFragment StoreEntitySet="DiasIndenizados">
@@ -141,14 +122,6 @@
           <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
           <ScalarProperty Name="Mes" ColumnName="Mes" />
           <ScalarProperty Name="Valor" ColumnName="Valor" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SalarioMinimo">
-      <EntityTypeMapping TypeName="OrcamentoModel.SalarioMinimo">
-        <MappingFragment StoreEntitySet="SalarioMinimo">
-          <ScalarProperty Name="Data" ColumnName="Data" />
-          <ScalarProperty Name="SalarioMinimoValor" ColumnName="SalarioMinimo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -490,17 +463,8 @@
     <EntitySetMapping Name="ConvenioOdo">
       <EntityTypeMapping TypeName="OrcamentoModel.ConvenioOdo">
         <MappingFragment StoreEntitySet="ConvenioOdo">
-          <ScalarProperty Name="ValorDependentes" ColumnName="ValorDependentes" />
           <ScalarProperty Name="Valor" ColumnName="Valor" />
           <ScalarProperty Name="Plano" ColumnName="Plano" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EscalaTrabalho">
-      <EntityTypeMapping TypeName="OrcamentoModel.EscalaTrabalho">
-        <MappingFragment StoreEntitySet="EscalaTrabalho">
-          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -718,6 +682,43 @@
           <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
           <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
           <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalarioMinimo">
+      <EntityTypeMapping TypeName="OrcamentoModel.SalarioMinimo">
+        <MappingFragment StoreEntitySet="SalarioMinimo">
+          <ScalarProperty Name="SalarioMinimo1" ColumnName="SalarioMinimo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contratacao">
+      <EntityTypeMapping TypeName="OrcamentoModel.Contratacao">
+        <MappingFragment StoreEntitySet="Contratacao">
+          <ScalarProperty Name="AdCondutor" ColumnName="AdCondutor" />
+          <ScalarProperty Name="CodEscala" ColumnName="CodEscala" />
+          <ScalarProperty Name="ConvenioOdoCod" ColumnName="ConvenioOdoCod" />
+          <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
+          <ScalarProperty Name="Salario" ColumnName="Salario" />
+          <ScalarProperty Name="ConvenioPlanoCod" ColumnName="ConvenioPlanoCod" />
+          <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
+          <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
+          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
+          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
+          <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+          <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
+          <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
+          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EscalaTrabalho">
+      <EntityTypeMapping TypeName="OrcamentoModel.EscalaTrabalho">
+        <MappingFragment StoreEntitySet="EscalaTrabalho">
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

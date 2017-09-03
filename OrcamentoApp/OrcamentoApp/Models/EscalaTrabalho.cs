@@ -17,6 +17,7 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EscalaTrabalho()
         {
+            this.Contratacao = new HashSet<Contratacao>();
             this.Funcionario = new HashSet<Funcionario>();
             this.QtdaDias = new HashSet<QtdaDias>();
         }
@@ -24,6 +25,8 @@ namespace OrcamentoApp.Models
         public int Codigo { get; set; }
         public string Descricao { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contratacao> Contratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Funcionario> Funcionario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

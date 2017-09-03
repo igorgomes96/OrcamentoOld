@@ -14,6 +14,10 @@ angular.module('orcamentoApp').service('contratacoesMesAPI', ['$http', 'config',
         return $http.get(config.baseUrl + resource + '/' + id);
     }
 
+    self.postContratacaoMesSaveAll = function(contratacoes) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', contratacoes);
+    }
+
     self.postContratacaoMes = function(contratacaoMes) {
         return $http.post(config.baseUrl + resource, contratacaoMes);
     }

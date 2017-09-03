@@ -19,8 +19,8 @@ namespace OrcamentoApp.Models
         public int CodContratacao { get; set; }
         public float Valor { get; set; }
     
-        public virtual Contratacao Contratacao { get; set; }
         public virtual EventoFolha EventoFolha { get; set; }
         public virtual MesOrcamento MesOrcamento { get; set; }
+        public virtual Contratacao Contratacao { get; set; }
     }
 }

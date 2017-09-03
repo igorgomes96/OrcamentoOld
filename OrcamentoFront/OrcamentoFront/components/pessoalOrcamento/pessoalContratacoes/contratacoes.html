@@ -4,12 +4,12 @@
             <tr>
                 <!-- <th width="2%"></th> -->
                 <th width="5%">Cód.</th>
-                <th width="12%">Cidade</th> <!-- Cidade -->
-                <th width="14%">Cargo</th>   <!-- Cargo -->
+                <th width="11%">Cidade</th> <!-- Cidade -->
+                <th width="12%">Cargo</th>   <!-- Cargo -->
                 <th width="5%">CH</th>  <!-- Carga Horária -->
                 <th width="7%">Salário</th>   <!-- Faixa Saláriais -->
                 <th width="13%">Motivo da Cont.</th>   <!-- Motivo da Contratação -->
-                <th class="text-center" ng-repeat="m in ct.ciclo.Meses">{{m.Mes | date:'MMM'}}</th>
+                <th class="text-center" ng-repeat="m in ct.ciclo.Meses">{{m.Mes | date:'MMM/yy'}}</th>
                 <th widht="3%"></th>
             </tr>
 

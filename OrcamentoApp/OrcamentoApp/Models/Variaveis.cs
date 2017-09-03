@@ -17,13 +17,13 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Variaveis()
         {
-            this.Contratacao = new HashSet<Contratacao>();
             this.Funcionario = new HashSet<Funcionario>();
             this.Salario = new HashSet<Salario>();
             this.SolicitacaoAlteracaoCargo = new HashSet<SolicitacaoAlteracaoCargo>();
             this.SolicitacaoAlteracaoCargo1 = new HashSet<SolicitacaoAlteracaoCargo>();
             this.SolicitacaoContratacao = new HashSet<SolicitacaoContratacao>();
             this.SimulacaoContratacao = new HashSet<SimulacaoContratacao>();
+            this.Contratacao = new HashSet<Contratacao>();
         }
     
         public int CargaHoraria { get; set; }
@@ -34,10 +34,8 @@ namespace OrcamentoApp.Models
         public float PR { get; set; }
         public int CargoCod { get; set; }
     
-        public virtual CargaHoraria CargaHoraria1 { get; set; }
+        public virtual CargaHoraria CH { get; set; }
         public virtual Cargo Cargo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contratacao> Contratacao { get; set; }
         public virtual Empresa Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Funcionario> Funcionario { get; set; }
@@ -51,5 +49,7 @@ namespace OrcamentoApp.Models
         public virtual ICollection<SolicitacaoContratacao> SolicitacaoContratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contratacao> Contratacao { get; set; }
     }
 }

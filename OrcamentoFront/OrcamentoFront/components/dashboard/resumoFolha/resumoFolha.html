@@ -44,7 +44,7 @@
 			</tr>
 		</thead>
 	    <tbody>
-	    	<tr ng-repeat="va in ct.valoresAbertos">
+	    	<tr ng-repeat="va in ct.valoresAbertos | orderBy:'NomeEvento'">
 	    		<td ng-class="{'linha-negrito':va.NomeEvento=='Totais'}">{{va.NomeEvento}}</td>
 	    		<td ng-class="{'linha-negrito':va.NomeEvento=='Totais'}" ng-repeat="v in va.Valores | orderBy:'Mes'" class="text-right">
 	    			{{v.Valor}}

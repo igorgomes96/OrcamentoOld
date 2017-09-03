@@ -19,7 +19,7 @@ namespace OrcamentoApp.Models
         public int PercentualHoras { get; set; }
         public int QtdaHoras { get; set; }
     
-        public virtual Contratacao Contratacao { get; set; }
         public virtual MesOrcamento MesOrcamento { get; set; }
+        public virtual Contratacao Contratacao { get; set; }
     }
 }

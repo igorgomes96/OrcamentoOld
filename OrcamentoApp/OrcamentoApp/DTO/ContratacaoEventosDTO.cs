@@ -6,12 +6,12 @@ using System.Web;
 
 namespace OrcamentoApp.DTO
 {
-    public class FuncionarioEventosDTO
+    public class ContratacaoEventosDTO
     {
         private Contexto db = new Contexto();
-        public FuncionarioEventosDTO(Funcionario f, Ciclo c)
+        public ContratacaoEventosDTO(Contratacao cont, Ciclo c)
         {
-            EventoCicloBaseDTO eventoTotais = new EventoCicloBaseDTO
+            EventoCicloContratacaoDTO eventoTotais = new EventoCicloContratacaoDTO
             {
                 CodEvento = "Totais",
                 NomeEvento = "Totais",
@@ -20,10 +20,10 @@ namespace OrcamentoApp.DTO
 
             foreach (MesOrcamento m in c.MesesOrcamento)
             {
-                CalculoEventoBaseDTO calculoTotais = new CalculoEventoBaseDTO
+                CalculoEventoContratacaoDTO calculoTotais = new CalculoEventoContratacaoDTO
                 {
                     CodEvento = "Totais",
-                    MatriculaFuncionario = MatriculaFuncionario,
+                    CodContratacao = cont.Codigo,
                     CodMesOrcamento = m.Codigo,
                     Valor = 0
                 };
@@ -31,13 +31,15 @@ namespace OrcamentoApp.DTO
             }
 
 
-            MatriculaFuncionario = f.Matricula;
-            NomeFuncionario = f.Nome;
-            Eventos = new List<EventoCicloBaseDTO>();
+            CodContratacao = cont.Codigo;
+            NomeCargo = cont.Variaveis.Cargo.NomeCargo;
+            CargaHoraria = cont.CargaHoraria;
+            CidadeNome = cont.CidadeNome;
+            Eventos = new List<EventoCicloContratacaoDTO>();
 
             foreach (EventoFolha e in db.EventoFolha)
             {
-                EventoCicloBaseDTO evento = new EventoCicloBaseDTO
+                EventoCicloContratacaoDTO evento = new EventoCicloContratacaoDTO
                 {
                     CodEvento = e.Codigo,
                     NomeEvento = e.NomeEvento,
@@ -46,31 +48,33 @@ namespace OrcamentoApp.DTO
 
                 foreach (MesOrcamento m in c.MesesOrcamento)
                 {
-                    CalculoEventoBaseDTO calculo = new CalculoEventoBaseDTO
+                    CalculoEventoContratacaoDTO calculo = new CalculoEventoContratacaoDTO
                     {
                         CodEvento = e.Codigo,
-                        MatriculaFuncionario = MatriculaFuncionario,
+                        CodContratacao = cont.Codigo,
                         CodMesOrcamento = m.Codigo,
                         Valor = 0
                     };
                     evento.ValoresMensais.Add(m.Codigo, calculo);
                 }
 
-                db.CalculoEventoBase.Where(x => x.MatriculaFuncionario == MatriculaFuncionario && x.CodEvento == e.Codigo && x.MesOrcamento.CicloCod == c.Codigo)
+                db.CalculoEventoContratacao.Where(x => x.CodContratacao == CodContratacao && x.CodEvento == e.Codigo && x.MesOrcamento.CicloCod == c.Codigo)
                     .ToList().ForEach(x =>
                     {
                         evento.ValoresMensais[x.CodMesOrcamento].Valor = x.Valor;
                         eventoTotais.ValoresMensais[x.CodMesOrcamento].Valor += x.Valor;
                     });
 
-                ((List<EventoCicloBaseDTO>)Eventos).Add(evento);
+                ((List<EventoCicloContratacaoDTO>)Eventos).Add(evento);
             }
 
-            ((List<EventoCicloBaseDTO>)Eventos).Add(eventoTotais);
+            ((List<EventoCicloContratacaoDTO>)Eventos).Add(eventoTotais);
 
         }
-        public string MatriculaFuncionario { get; set; }
-        public string NomeFuncionario { get; set; }
-        public IEnumerable<EventoCicloBaseDTO> Eventos { get; set; }
+        public int CodContratacao { get; set; }
+        public string NomeCargo { get; set; }
+        public int CargaHoraria { get; set; }
+        public string CidadeNome { get; set; }
+        public IEnumerable<EventoCicloContratacaoDTO> Eventos { get; set; }
     }
 }

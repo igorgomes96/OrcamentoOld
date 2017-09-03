@@ -81,7 +81,7 @@ namespace OrcamentoApp.Controllers
             }
 
             DateTime data = new DateTime(ciclo.DataInicio.Year, ciclo.DataInicio.Month, 1);
-            DateTime fim =  new DateTime(ciclo.DataFim.Value.Year, ciclo.DataFim.Value.Month, 1);
+            DateTime fim =  new DateTime(ciclo.DataFim.Year, ciclo.DataFim.Month, 1);
 
             while (data <= fim)
             {

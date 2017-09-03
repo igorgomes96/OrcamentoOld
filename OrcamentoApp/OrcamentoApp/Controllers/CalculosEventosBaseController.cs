@@ -63,13 +63,8 @@ namespace OrcamentoApp.Controllers
             Ciclo ciclo = db.Ciclo.Find(codCiclo);
             if (ciclo == null) return NotFound();
 
-            /*c.Funcionario.ToList().ForEach(x =>
-            {
-                db.CalculaCustoPessoa(x.Matricula, codCiclo);
-            });*/
-
             db.Database.ExecuteSqlCommand("delete a from CalculoEventoBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Funcionario c on a.MatriculaFuncionario = c.Matricula where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
-            //db.Database.ExecuteSqlCommand("insert into CalculoEventoBase (CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor) select CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Funcionario c on a.MatriculaFuncionario = c.Matricula where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
+            db.Database.ExecuteSqlCommand("insert into CalculoEventoBase (CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor) select CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo inner join Funcionario c on a.MatriculaFuncionario = c.Matricula where b.CicloCod = {0} and c.CentroCustoCod = {1}", codCiclo, cr);
 
             c.Funcionario.ToList().ForEach(x =>
             {

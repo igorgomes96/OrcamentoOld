@@ -72,7 +72,7 @@
             <PropertyRef Name="CargaHoraria" />
           </Key>
           <Property Name="CargaHoraria" Type="int" Nullable="false" />
-          <Property Name="QtdaPassesDiario" Type="int" />
+          <Property Name="QtdaPassesDiario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Cargo">
           <Key>
@@ -108,7 +108,7 @@
           </Key>
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DataInicio" Type="date" Nullable="false" />
-          <Property Name="DataFim" Type="date" />
+          <Property Name="DataFim" Type="date" Nullable="false" />
           <Property Name="StatusCod" Type="int" />
           <Property Name="TipoCod" Type="int" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="255" Nullable="false" />
@@ -136,7 +136,6 @@
             <PropertyRef Name="Codigo" />
           </Key>
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Insalubridade" Type="float" Nullable="false" />
           <Property Name="Motivo" Type="varchar" MaxLength="255" />
           <Property Name="Periculosidade" Type="bit" Nullable="false" />
           <Property Name="CentroCustoCod" Type="varchar" MaxLength="15" Nullable="false" />
@@ -148,6 +147,9 @@
           <Property Name="ConvenioPlanoCod" Type="int" />
           <Property Name="Salario" Type="real" Nullable="false" />
           <Property Name="VTFretadoFlag" Type="bit" Nullable="false" />
+          <Property Name="ConvenioOdoCod" Type="int" />
+          <Property Name="CodEscala" Type="int" Nullable="false" />
+          <Property Name="AdCondutor" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ContratacaoMes">
           <Key>
@@ -174,7 +176,6 @@
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Plano" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Valor" Type="real" Nullable="false" />
-          <Property Name="ValorDependentes" Type="real" Nullable="false" />
         </EntityType>
         <EntityType Name="DiasIndenizados">
           <Key>
@@ -966,6 +967,30 @@
             </Principal>
             <Dependent Role="Contratacao">
               <PropertyRef Name="ConvenioPlanoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_convenioodo_fk">
+          <End Role="ConvenioOdo" Type="Self.ConvenioOdo" Multiplicity="0..1" />
+          <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConvenioOdo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="ConvenioOdoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_escalatrabalho_fk">
+          <End Role="EscalaTrabalho" Type="Self.EscalaTrabalho" Multiplicity="1" />
+          <End Role="Contratacao" Type="Self.Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EscalaTrabalho">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="CodEscala" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2185,6 +2210,14 @@
             <End Role="ConvenioMed" EntitySet="ConvenioMed" />
             <End Role="Contratacao" EntitySet="Contratacao" />
           </AssociationSet>
+          <AssociationSet Name="contratacao_convenioodo_fk" Association="Self.contratacao_convenioodo_fk">
+            <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_escalatrabalho_fk" Association="Self.contratacao_escalatrabalho_fk">
+            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
           <AssociationSet Name="contratacao_filial_fk" Association="Self.contratacao_filial_fk">
             <End Role="Filial" EntitySet="Filial" />
             <End Role="Contratacao" EntitySet="Contratacao" />
@@ -2547,7 +2580,7 @@
           </Key>
           <Property Name="CargaHorariaCod" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PATs" Relationship="Self.pat_cargahoraria_fk" FromRole="CargaHoraria" ToRole="PAT" />
-          <Property Name="QtdaPassesDiario" Type="Int32" />
+          <Property Name="QtdaPassesDiario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.variaveis_cargahoraria_fk" FromRole="CargaHoraria" ToRole="Variaveis" />
         </EntityType>
         <EntityType Name="Cargo">
@@ -2588,34 +2621,6 @@
           <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Grupo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EventosFolha" Relationship="OrcamentoModel.eventofolha_contacontabil_fk" FromRole="ContaContabil" ToRole="EventoFolha" />
-        </EntityType>
-        <EntityType Name="Contratacao">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Insalubridade" Type="Double" Nullable="false" />
-          <Property Name="Motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Periculosidade" Type="Boolean" Nullable="false" />
-          <Property Name="CentroCustoCod" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CargaHoraria" Type="Int32" Nullable="false" />
-          <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
-          <Property Name="CidadeNome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CargoCod" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.contratacao_centrocusto_fk" FromRole="Contratacao" ToRole="CentroCusto" />
-          <Property Name="CicloCod" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ciclo" Relationship="OrcamentoModel.contratacao_ciclo_fk" FromRole="Contratacao" ToRole="Ciclo" />
-          <NavigationProperty Name="ContratacaoMeses" Relationship="OrcamentoModel.contratacaomes_contratacao_fk" FromRole="Contratacao" ToRole="ContratacaoMes" />
-          <Property Name="ConvenioPlanoCod" Type="Int32" />
-          <NavigationProperty Name="ConvenioMed" Relationship="OrcamentoModel.contratacao_conveniomed_fk" FromRole="Contratacao" ToRole="ConvenioMed" />
-          <Property Name="Salario" Type="Single" Nullable="false" />
-          <Property Name="VTFretadoFlag" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AdNoturnoContratacao" Relationship="OrcamentoModel.adnoturnocontratacao_contratacao_fk" FromRole="Contratacao" ToRole="AdNoturnoContratacao" />
-          <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="Contratacao" ToRole="HEContratacao" />
-          <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="Contratacao" ToRole="ValoresAbertosContratacao" />
-          <NavigationProperty Name="CalculoEventoContratacao" Relationship="OrcamentoModel.calculoeventocontratacao_contratacao_fk" FromRole="Contratacao" ToRole="CalculoEventoContratacao" />
-          <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.contratacao_variaveis_fk" FromRole="Contratacao" ToRole="Variaveis" />
-          <NavigationProperty Name="Filial" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Contratacao" ToRole="Filial" />
         </EntityType>
         <EntityType Name="DiasIndenizados">
           <Key>
@@ -2696,13 +2701,6 @@
           <Property Name="Valor" Type="Double" Nullable="false" />
           <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.receita_centrocusto_fk" FromRole="Receita" ToRole="CentroCusto" />
         </EntityType>
-        <EntityType Name="SalarioMinimo">
-          <Key>
-            <PropertyRef Name="Data" />
-          </Key>
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SalarioMinimoValor" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="Sindicato">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -2757,7 +2755,6 @@
           <EntitySet Name="Cargo" EntityType="Self.Cargo" />
           <EntitySet Name="Cidade" EntityType="Self.Cidade" />
           <EntitySet Name="ContaContabil" EntityType="Self.ContaContabil" />
-          <EntitySet Name="Contratacao" EntityType="Self.Contratacao" />
           <EntitySet Name="DiasIndenizados" EntityType="Self.DiasIndenizados" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" />
           <EntitySet Name="Encargos" EntityType="Self.Encargos" />
@@ -2765,7 +2762,6 @@
           <EntitySet Name="PAT" EntityType="Self.PAT" />
           <EntitySet Name="ReajConvenioMed" EntityType="Self.ReajConvenioMed" />
           <EntitySet Name="Receita" EntityType="Self.Receita" />
-          <EntitySet Name="SalarioMinimo" EntityType="Self.SalarioMinimo" />
           <EntitySet Name="Sindicato" EntityType="Self.Sindicato" />
           <AssociationSet Name="pat_cargahoraria_fk" Association="Self.pat_cargahoraria_fk">
             <End Role="CargaHoraria" EntitySet="CargaHoraria" />
@@ -2800,10 +2796,6 @@
             <End Role="Setor" EntitySet="Setor" />
             <End Role="CentroCusto" EntitySet="CentroCusto" />
           </AssociationSet>
-          <AssociationSet Name="contratacao_centrocusto_fk" Association="OrcamentoModel.contratacao_centrocusto_fk">
-            <End Role="CentroCusto" EntitySet="CentroCusto" />
-            <End Role="Contratacao" EntitySet="Contratacao" />
-          </AssociationSet>
           <AssociationSet Name="receita_centrocusto_fk" Association="OrcamentoModel.receita_centrocusto_fk">
             <End Role="CentroCusto" EntitySet="CentroCusto" />
             <End Role="Receita" EntitySet="Receita" />
@@ -2831,15 +2823,7 @@
             <End Role="TipoCiclo" EntitySet="TipoCiclo" />
             <End Role="Ciclo" EntitySet="Ciclo" />
           </AssociationSet>
-          <AssociationSet Name="contratacao_ciclo_fk" Association="OrcamentoModel.contratacao_ciclo_fk">
-            <End Role="Ciclo" EntitySet="Ciclo" />
-            <End Role="Contratacao" EntitySet="Contratacao" />
-          </AssociationSet>
           <EntitySet Name="ContratacaoMes" EntityType="OrcamentoModel.ContratacaoMes" />
-          <AssociationSet Name="contratacaomes_contratacao_fk" Association="OrcamentoModel.contratacaomes_contratacao_fk">
-            <End Role="Contratacao" EntitySet="Contratacao" />
-            <End Role="ContratacaoMes" EntitySet="ContratacaoMes" />
-          </AssociationSet>
           <EntitySet Name="ConvenioMed" EntityType="OrcamentoModel.ConvenioMed" />
           <AssociationSet Name="cargo_plano1_fk" Association="OrcamentoModel.cargo_plano1_fk">
             <End Role="ConvenioMed" EntitySet="ConvenioMed" />
@@ -2852,10 +2836,6 @@
           <AssociationSet Name="cargo_plano3_fk" Association="OrcamentoModel.cargo_plano3_fk">
             <End Role="ConvenioMed" EntitySet="ConvenioMed" />
             <End Role="Cargo" EntitySet="Cargo" />
-          </AssociationSet>
-          <AssociationSet Name="contratacao_conveniomed_fk" Association="OrcamentoModel.contratacao_conveniomed_fk">
-            <End Role="ConvenioMed" EntitySet="ConvenioMed" />
-            <End Role="Contratacao" EntitySet="Contratacao" />
           </AssociationSet>
           <AssociationSet Name="reajconveniomed_conveniomed_fk" Association="OrcamentoModel.reajconveniomed_conveniomed_fk">
             <End Role="ConvenioMed" EntitySet="ConvenioMed" />
@@ -2971,7 +2951,6 @@
           <EntitySet Name="AdNoturnoBase" EntityType="OrcamentoModel.AdNoturnoBase" />
           <EntitySet Name="AdNoturnoContratacao" EntityType="OrcamentoModel.AdNoturnoContratacao" />
           <EntitySet Name="ConvenioOdo" EntityType="OrcamentoModel.ConvenioOdo" />
-          <EntitySet Name="EscalaTrabalho" EntityType="OrcamentoModel.EscalaTrabalho" />
           <EntitySet Name="QtdaDias" EntityType="OrcamentoModel.QtdaDias" />
           <EntitySet Name="ReajConvenioOdo" EntityType="OrcamentoModel.ReajConvenioOdo" />
           <EntitySet Name="ReajVTFretado" EntityType="OrcamentoModel.ReajVTFretado" />
@@ -2979,10 +2958,6 @@
           <AssociationSet Name="adnoturnobase_funcionario_fk" Association="OrcamentoModel.adnoturnobase_funcionario_fk">
             <End Role="Funcionario" EntitySet="Funcionario" />
             <End Role="AdNoturnoBase" EntitySet="AdNoturnoBase" />
-          </AssociationSet>
-          <AssociationSet Name="adnoturnocontratacao_contratacao_fk" Association="OrcamentoModel.adnoturnocontratacao_contratacao_fk">
-            <End Role="Contratacao" EntitySet="Contratacao" />
-            <End Role="AdNoturnoContratacao" EntitySet="AdNoturnoContratacao" />
           </AssociationSet>
           <AssociationSet Name="reajvtfretado_cidade_fk" Association="OrcamentoModel.reajvtfretado_cidade_fk">
             <End Role="Cidade" EntitySet="Cidade" />
@@ -3000,20 +2975,8 @@
             <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
             <End Role="ReajConvenioOdo" EntitySet="ReajConvenioOdo" />
           </AssociationSet>
-          <AssociationSet Name="funcionario_escalatrabalho_fk" Association="OrcamentoModel.funcionario_escalatrabalho_fk">
-            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
-            <End Role="Funcionario" EntitySet="Funcionario" />
-          </AssociationSet>
-          <AssociationSet Name="qtdadias_escalatrabalho_fk" Association="OrcamentoModel.qtdadias_escalatrabalho_fk">
-            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
-            <End Role="QtdaDias" EntitySet="QtdaDias" />
-          </AssociationSet>
           <EntitySet Name="HEBase" EntityType="OrcamentoModel.HEBase" />
           <EntitySet Name="HEContratacao" EntityType="OrcamentoModel.HEContratacao" />
-          <AssociationSet Name="hecontratacao_contratacao_fk" Association="OrcamentoModel.hecontratacao_contratacao_fk">
-            <End Role="Contratacao" EntitySet="Contratacao" />
-            <End Role="HEContratacao" EntitySet="HEContratacao" />
-          </AssociationSet>
           <AssociationSet Name="hebase_funcionario_fk" Association="OrcamentoModel.hebase_funcionario_fk">
             <End Role="Funcionario" EntitySet="Funcionario" />
             <End Role="HEBase" EntitySet="HEBase" />
@@ -3033,19 +2996,11 @@
             <End Role="FeriasPorCR" EntitySet="FeriasPorCR" />
           </AssociationSet>
           <EntitySet Name="ValoresAbertosContratacao" EntityType="OrcamentoModel.ValoresAbertosContratacao" />
-          <AssociationSet Name="valoresabertoscontratacao_contratacao_fk" Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk">
-            <End Role="Contratacao" EntitySet="Contratacao" />
-            <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
-          </AssociationSet>
           <AssociationSet Name="valoresabertoscontratacao_evento_fk" Association="OrcamentoModel.valoresabertoscontratacao_evento_fk">
             <End Role="EventoFolha" EntitySet="EventoFolha" />
             <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
           </AssociationSet>
           <EntitySet Name="CalculoEventoContratacao" EntityType="OrcamentoModel.CalculoEventoContratacao" />
-          <AssociationSet Name="calculoeventocontratacao_contratacao_fk" Association="OrcamentoModel.calculoeventocontratacao_contratacao_fk">
-            <End Role="Contratacao" EntitySet="Contratacao" />
-            <End Role="CalculoEventoContratacao" EntitySet="CalculoEventoContratacao" />
-          </AssociationSet>
           <AssociationSet Name="calculoeventocontratacao_evento_fk" Association="OrcamentoModel.calculoeventocontratacao_evento_fk">
             <End Role="EventoFolha" EntitySet="EventoFolha" />
             <End Role="CalculoEventoContratacao" EntitySet="CalculoEventoContratacao" />
@@ -3058,10 +3013,6 @@
           <AssociationSet Name="variaveis_cargo_fk" Association="OrcamentoModel.variaveis_cargo_fk">
             <End Role="Cargo" EntitySet="Cargo" />
             <End Role="Variaveis" EntitySet="Variaveis" />
-          </AssociationSet>
-          <AssociationSet Name="contratacao_variaveis_fk" Association="OrcamentoModel.contratacao_variaveis_fk">
-            <End Role="Variaveis" EntitySet="Variaveis" />
-            <End Role="Contratacao" EntitySet="Contratacao" />
           </AssociationSet>
           <AssociationSet Name="variaveis_empresa" Association="OrcamentoModel.variaveis_empresa">
             <End Role="Empresa" EntitySet="Empresa" />
@@ -3092,10 +3043,6 @@
             <End Role="Cidade" EntitySet="Cidade" />
             <End Role="Filial" EntitySet="Filial" />
           </AssociationSet>
-          <AssociationSet Name="contratacao_filial_fk" Association="OrcamentoModel.contratacao_filial_fk">
-            <End Role="Filial" EntitySet="Filial" />
-            <End Role="Contratacao" EntitySet="Contratacao" />
-          </AssociationSet>
           <AssociationSet Name="filial_empresa_fk" Association="OrcamentoModel.filial_empresa_fk">
             <End Role="Empresa" EntitySet="Empresa" />
             <End Role="Filial" EntitySet="Filial" />
@@ -3111,10 +3058,6 @@
           <AssociationSet Name="salario_filial_fk" Association="OrcamentoModel.salario_filial_fk">
             <End Role="Filial" EntitySet="Filial" />
             <End Role="Salario" EntitySet="Salario" />
-          </AssociationSet>
-          <AssociationSet Name="solicitacaocontratacao_filial_fk" Association="OrcamentoModel.solicitacaocontratacao_filial_fk">
-            <End Role="Filial" EntitySet="Filial" />
-            <End Role="SolicitacaoContratacao" EntitySet="SolicitacaoContratacao" />
           </AssociationSet>
           <FunctionImport Name="CalculaCustoPessoa">
             <Parameter Name="matricula" Mode="In" Type="String" />
@@ -3244,6 +3187,69 @@
             <End Role="MesOrcamento" EntitySet="MesOrcamento" />
             <End Role="Transferencia" EntitySet="Transferencia" />
           </AssociationSet>
+          <EntitySet Name="SalarioMinimo" EntityType="OrcamentoModel.SalarioMinimo" />
+          <EntitySet Name="Contratacao" EntityType="OrcamentoModel.Contratacao" />
+          <AssociationSet Name="adnoturnocontratacao_contratacao_fk" Association="OrcamentoModel.adnoturnocontratacao_contratacao_fk">
+            <End Role="Contratacao" EntitySet="Contratacao" />
+            <End Role="AdNoturnoContratacao" EntitySet="AdNoturnoContratacao" />
+          </AssociationSet>
+          <AssociationSet Name="calculoeventocontratacao_contratacao_fk" Association="OrcamentoModel.calculoeventocontratacao_contratacao_fk">
+            <End Role="Contratacao" EntitySet="Contratacao" />
+            <End Role="CalculoEventoContratacao" EntitySet="CalculoEventoContratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_centrocusto_fk" Association="OrcamentoModel.contratacao_centrocusto_fk">
+            <End Role="CentroCusto" EntitySet="CentroCusto" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_ciclo_fk" Association="OrcamentoModel.contratacao_ciclo_fk">
+            <End Role="Ciclo" EntitySet="Ciclo" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_conveniomed_fk" Association="OrcamentoModel.contratacao_conveniomed_fk">
+            <End Role="ConvenioMed" EntitySet="ConvenioMed" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_convenioodo_fk" Association="OrcamentoModel.contratacao_convenioodo_fk">
+            <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_filial_fk" Association="OrcamentoModel.contratacao_filial_fk">
+            <End Role="Filial" EntitySet="Filial" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacao_variaveis_fk" Association="OrcamentoModel.contratacao_variaveis_fk">
+            <End Role="Variaveis" EntitySet="Variaveis" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="contratacaomes_contratacao_fk" Association="OrcamentoModel.contratacaomes_contratacao_fk">
+            <End Role="Contratacao" EntitySet="Contratacao" />
+            <End Role="ContratacaoMes" EntitySet="ContratacaoMes" />
+          </AssociationSet>
+          <AssociationSet Name="hecontratacao_contratacao_fk" Association="OrcamentoModel.hecontratacao_contratacao_fk">
+            <End Role="Contratacao" EntitySet="Contratacao" />
+            <End Role="HEContratacao" EntitySet="HEContratacao" />
+          </AssociationSet>
+          <AssociationSet Name="valoresabertoscontratacao_contratacao_fk" Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk">
+            <End Role="Contratacao" EntitySet="Contratacao" />
+            <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
+          </AssociationSet>
+          <AssociationSet Name="solicitacaocontratacao_filial_fk" Association="OrcamentoModel.solicitacaocontratacao_filial_fk">
+            <End Role="Filial" EntitySet="Filial" />
+            <End Role="SolicitacaoContratacao" EntitySet="SolicitacaoContratacao" />
+          </AssociationSet>
+          <EntitySet Name="EscalaTrabalho" EntityType="OrcamentoModel.EscalaTrabalho" />
+          <AssociationSet Name="contratacao_escalatrabalho_fk" Association="OrcamentoModel.contratacao_escalatrabalho_fk">
+            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
+            <End Role="Contratacao" EntitySet="Contratacao" />
+          </AssociationSet>
+          <AssociationSet Name="funcionario_escalatrabalho_fk" Association="OrcamentoModel.funcionario_escalatrabalho_fk">
+            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
+            <End Role="Funcionario" EntitySet="Funcionario" />
+          </AssociationSet>
+          <AssociationSet Name="qtdadias_escalatrabalho_fk" Association="OrcamentoModel.qtdadias_escalatrabalho_fk">
+            <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
+            <End Role="QtdaDias" EntitySet="QtdaDias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Sessao">
           <Key>
@@ -3317,7 +3323,6 @@
           <Property Name="SetorCod" Type="Int32" />
           <NavigationProperty Name="Empresa" Relationship="OrcamentoModel.centrocusto_empresa_fk" FromRole="CentroCusto" ToRole="Empresa" />
           <NavigationProperty Name="Setor" Relationship="OrcamentoModel.centrocusto_setor_fk" FromRole="CentroCusto" ToRole="Setor" />
-          <NavigationProperty Name="Contratacoes" Relationship="OrcamentoModel.contratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="Contratacao" />
           <NavigationProperty Name="Receitas" Relationship="OrcamentoModel.receita_centrocusto_fk" FromRole="CentroCusto" ToRole="Receita" />
           <Property Name="Descricao2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="SolicitacaoContratacao" />
@@ -3325,8 +3330,9 @@
           <NavigationProperty Name="ValoresAbertosCR" Relationship="OrcamentoModel.valoresabertoscr_centrocusto_fk" FromRole="CentroCusto" ToRole="ValoresAbertosCR" />
           <NavigationProperty Name="FeriasPorCR" Relationship="OrcamentoModel.feriasporcr_centrocusto_fk" FromRole="CentroCusto" ToRole="FeriasPorCR" />
           <NavigationProperty Name="Simulacao" Relationship="OrcamentoModel.simulacao_centrocusto_fk" FromRole="CentroCusto" ToRole="Simulacao" />
-          <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferenci_crorigem_fk" FromRole="CentroCusto" ToRole="Transferencia" />
-          <NavigationProperty Name="Transferencia1" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="CentroCusto" ToRole="Transferencia" />
+          <NavigationProperty Name="TransferenciaOrigem" Relationship="OrcamentoModel.transferenci_crorigem_fk" FromRole="CentroCusto" ToRole="Transferencia" />
+          <NavigationProperty Name="TransferenciaDestino" Relationship="OrcamentoModel.transferencia_centrocusto_fk" FromRole="CentroCusto" ToRole="Transferencia" />
+          <NavigationProperty Name="Contratacoes" Relationship="OrcamentoModel.contratacao_centrocusto_fk" FromRole="CentroCusto" ToRole="Contratacao" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -3367,18 +3373,6 @@
             </Principal>
             <Dependent Role="CentroCusto">
               <PropertyRef Name="SetorCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="contratacao_centrocusto_fk">
-          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroCusto">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Contratacao">
-              <PropertyRef Name="CentroCustoCod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3428,14 +3422,14 @@
           </Key>
           <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DataInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DataFim" Type="DateTime" Precision="0" />
+          <Property Name="DataFim" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="StatusCod" Type="Int32" />
           <Property Name="TipoCod" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StatusCiclo" Relationship="OrcamentoModel.ciclo_statusciclo_fk" FromRole="Ciclo" ToRole="StatusCiclo" />
           <NavigationProperty Name="TipoCiclo" Relationship="OrcamentoModel.ciclo_tipociclo_fk" FromRole="Ciclo" ToRole="TipoCiclo" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_ciclo_fk" FromRole="Ciclo" ToRole="Contratacao" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MesesOrcamento" Relationship="OrcamentoModel.mesorcamento_ciclo_fk" FromRole="Ciclo" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_ciclo_fk" FromRole="Ciclo" ToRole="Contratacao" />
         </EntityType>
         <EntityType Name="StatusCiclo">
           <Key>
@@ -3477,18 +3471,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="contratacao_ciclo_fk">
-          <End Type="OrcamentoModel.Ciclo" Role="Ciclo" Multiplicity="1" />
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ciclo">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Contratacao">
-              <PropertyRef Name="CicloCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ContratacaoMes">
           <Key>
             <PropertyRef Name="ContratacaoCod" />
@@ -3497,21 +3479,9 @@
           <Property Name="ContratacaoCod" Type="Int32" Nullable="false" />
           <Property Name="Qtda" Type="Int32" Nullable="false" />
           <Property Name="MesOrcamentoCod" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacaomes_contratacao_fk" FromRole="ContratacaoMes" ToRole="Contratacao" />
           <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.contratacaomes_mesorcamento_fk" FromRole="ContratacaoMes" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacaomes_contratacao_fk" FromRole="ContratacaoMes" ToRole="Contratacao" />
         </EntityType>
-        <Association Name="contratacaomes_contratacao_fk">
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
-          <End Type="OrcamentoModel.ContratacaoMes" Role="ContratacaoMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratacao">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="ContratacaoMes">
-              <PropertyRef Name="ContratacaoCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ConvenioMed">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -3523,10 +3493,10 @@
           <NavigationProperty Name="CargosPlano1" Relationship="OrcamentoModel.cargo_plano1_fk" FromRole="ConvenioMed" ToRole="Cargo" />
           <NavigationProperty Name="CargosPlano2" Relationship="OrcamentoModel.cargo_plano2_fk" FromRole="ConvenioMed" ToRole="Cargo" />
           <NavigationProperty Name="CargosPlano3" Relationship="OrcamentoModel.cargo_plano3_fk" FromRole="ConvenioMed" ToRole="Cargo" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_conveniomed_fk" FromRole="ConvenioMed" ToRole="Contratacao" />
           <NavigationProperty Name="ReajConvenioMed" Relationship="OrcamentoModel.reajconveniomed_conveniomed_fk" FromRole="ConvenioMed" ToRole="ReajConvenioMed" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_conveniomed_fk" FromRole="ConvenioMed" ToRole="Funcionario" />
           <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaoconstratacao_conveniomed_fk" FromRole="ConvenioMed" ToRole="SimulacaoContratacao" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_conveniomed_fk" FromRole="ConvenioMed" ToRole="Contratacao" />
         </EntityType>
         <Association Name="cargo_plano1_fk">
           <End Type="OrcamentoModel.ConvenioMed" Role="ConvenioMed" Multiplicity="0..1" />
@@ -3561,18 +3531,6 @@
             </Principal>
             <Dependent Role="Cargo">
               <PropertyRef Name="Plano3Cod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="contratacao_conveniomed_fk">
-          <End Type="OrcamentoModel.ConvenioMed" Role="ConvenioMed" Multiplicity="0..1" />
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConvenioMed">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Contratacao">
-              <PropertyRef Name="ConvenioPlanoCod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3991,7 +3949,6 @@
           <Property Name="CodConvenioOdo" Type="Int32" />
           <NavigationProperty Name="AdNoturnoBase" Relationship="OrcamentoModel.adnoturnobase_funcionario_fk" FromRole="Funcionario" ToRole="AdNoturnoBase" />
           <NavigationProperty Name="ConvenioOdo" Relationship="OrcamentoModel.funcionario_convenioodo_fk" FromRole="Funcionario" ToRole="ConvenioOdo" />
-          <NavigationProperty Name="EscalaTrabalho" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="Funcionario" ToRole="EscalaTrabalho" />
           <NavigationProperty Name="HEBase" Relationship="OrcamentoModel.hebase_funcionario_fk" FromRole="Funcionario" ToRole="HEBase" />
           <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.funcionario_variaveis_fk" FromRole="Funcionario" ToRole="Variaveis" />
           <NavigationProperty Name="Filial" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Funcionario" ToRole="Filial" />
@@ -3999,6 +3956,7 @@
           <NavigationProperty Name="FuncionarioFerias" Relationship="OrcamentoModel.funcionarioferias_funcionario_fk" FromRole="Funcionario" ToRole="FuncionarioFerias" />
           <Property Name="RecebeVT" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Funcionario" ToRole="Transferencia" />
+          <NavigationProperty Name="EscalaTrabalho" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="Funcionario" ToRole="EscalaTrabalho" />
         </EntityType>
         <Association Name="afastamento_funcionario_fk">
           <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
@@ -4131,8 +4089,8 @@
           <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
           <Property Name="PercentualHoras" Type="Int32" Nullable="false" />
           <Property Name="QtdaHoras" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.adnoturnocontratacao_contratacao_fk" FromRole="AdNoturnoContratacao" ToRole="Contratacao" />
           <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.adnoturnocontratacao_mesorcamento_fk" FromRole="AdNoturnoContratacao" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.adnoturnocontratacao_contratacao_fk" FromRole="AdNoturnoContratacao" ToRole="Contratacao" />
         </EntityType>
         <EntityType Name="ConvenioOdo">
           <Key>
@@ -4141,19 +4099,10 @@
           <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Plano" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Valor" Type="Single" Nullable="false" />
-          <Property Name="ValorDependentes" Type="Single" Nullable="false" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_convenioodo_fk" FromRole="ConvenioOdo" ToRole="Funcionario" />
           <NavigationProperty Name="ReajConvenioOdo" Relationship="OrcamentoModel.reajconvenioodo_convenioodo_fk" FromRole="ConvenioOdo" ToRole="ReajConvenioOdo" />
           <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaoconstratacao_convenioodo_fk" FromRole="ConvenioOdo" ToRole="SimulacaoContratacao" />
-        </EntityType>
-        <EntityType Name="EscalaTrabalho">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="Funcionario" />
-          <NavigationProperty Name="QtdaDias" Relationship="OrcamentoModel.qtdadias_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="QtdaDias" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_convenioodo_fk" FromRole="ConvenioOdo" ToRole="Contratacao" />
         </EntityType>
         <EntityType Name="QtdaDias">
           <Key>
@@ -4213,18 +4162,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="adnoturnocontratacao_contratacao_fk">
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
-          <End Type="OrcamentoModel.AdNoturnoContratacao" Role="AdNoturnoContratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratacao">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="AdNoturnoContratacao">
-              <PropertyRef Name="CodContratacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="reajvtfretado_cidade_fk">
           <End Type="OrcamentoModel.Cidade" Role="Cidade" Multiplicity="1" />
           <End Type="OrcamentoModel.ReajVTFretado" Role="ReajVTFretado" Multiplicity="*" />
@@ -4273,30 +4210,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="funcionario_escalatrabalho_fk">
-          <End Type="OrcamentoModel.EscalaTrabalho" Role="EscalaTrabalho" Multiplicity="1" />
-          <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EscalaTrabalho">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Funcionario">
-              <PropertyRef Name="CodEscalaTrabalho" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="qtdadias_escalatrabalho_fk">
-          <End Type="OrcamentoModel.EscalaTrabalho" Role="EscalaTrabalho" Multiplicity="1" />
-          <End Type="OrcamentoModel.QtdaDias" Role="QtdaDias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EscalaTrabalho">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="QtdaDias">
-              <PropertyRef Name="CodEscala" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="HEBase">
           <Key>
             <PropertyRef Name="FuncionarioMatricula" />
@@ -4320,21 +4233,9 @@
           <Property Name="PercentualHoras" Type="Int32" Nullable="false" />
           <Property Name="QtdaHoras" Type="Int32" Nullable="false" />
           <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="HEContratacao" ToRole="Contratacao" />
           <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.hecontratacao_mesorcamento_fk" FromRole="HEContratacao" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="HEContratacao" ToRole="Contratacao" />
         </EntityType>
-        <Association Name="hecontratacao_contratacao_fk">
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
-          <End Type="OrcamentoModel.HEContratacao" Role="HEContratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratacao">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="HEContratacao">
-              <PropertyRef Name="ContratacaoCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="hebase_funcionario_fk">
           <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
           <End Type="OrcamentoModel.HEBase" Role="HEBase" Multiplicity="*" />
@@ -4418,22 +4319,10 @@
           <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
           <Property Name="CodContratacao" Type="Int32" Nullable="false" />
           <Property Name="Valor" Type="Single" Nullable="false" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="ValoresAbertosContratacao" ToRole="Contratacao" />
           <NavigationProperty Name="EventoFolha" Relationship="OrcamentoModel.valoresabertoscontratacao_evento_fk" FromRole="ValoresAbertosContratacao" ToRole="EventoFolha" />
           <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.valoresabertoscontratacao_mesorcamento_fk" FromRole="ValoresAbertosContratacao" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="ValoresAbertosContratacao" ToRole="Contratacao" />
         </EntityType>
-        <Association Name="valoresabertoscontratacao_contratacao_fk">
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
-          <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratacao">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="ValoresAbertosContratacao">
-              <PropertyRef Name="CodContratacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="valoresabertoscontratacao_evento_fk">
           <End Type="OrcamentoModel.EventoFolha" Role="EventoFolha" Multiplicity="1" />
           <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
@@ -4456,22 +4345,10 @@
           <Property Name="CodEvento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CodMesOrcamento" Type="Int32" Nullable="false" />
           <Property Name="Valor" Type="Single" Nullable="false" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.calculoeventocontratacao_contratacao_fk" FromRole="CalculoEventoContratacao" ToRole="Contratacao" />
           <NavigationProperty Name="EventoFolha" Relationship="OrcamentoModel.calculoeventocontratacao_evento_fk" FromRole="CalculoEventoContratacao" ToRole="EventoFolha" />
           <NavigationProperty Name="MesOrcamento" Relationship="OrcamentoModel.calculoeventocontratacao_mesorcamento_fk" FromRole="CalculoEventoContratacao" ToRole="MesOrcamento" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.calculoeventocontratacao_contratacao_fk" FromRole="CalculoEventoContratacao" ToRole="Contratacao" />
         </EntityType>
-        <Association Name="calculoeventocontratacao_contratacao_fk">
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
-          <End Type="OrcamentoModel.CalculoEventoContratacao" Role="CalculoEventoContratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contratacao">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="CalculoEventoContratacao">
-              <PropertyRef Name="CodContratacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="calculoeventocontratacao_evento_fk">
           <End Type="OrcamentoModel.EventoFolha" Role="EventoFolha" Multiplicity="1" />
           <End Type="OrcamentoModel.CalculoEventoContratacao" Role="CalculoEventoContratacao" Multiplicity="*" />
@@ -4497,9 +4374,8 @@
           <Property Name="PL" Type="Single" Nullable="false" />
           <Property Name="PR" Type="Single" Nullable="false" />
           <Property Name="CargoCod" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CargaHoraria1" Relationship="OrcamentoModel.variaveis_cargahoraria_fk" FromRole="Variaveis" ToRole="CargaHoraria" />
+          <NavigationProperty Name="CH" Relationship="OrcamentoModel.variaveis_cargahoraria_fk" FromRole="Variaveis" ToRole="CargaHoraria" />
           <NavigationProperty Name="Cargo" Relationship="OrcamentoModel.variaveis_cargo_fk" FromRole="Variaveis" ToRole="Cargo" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_variaveis_fk" FromRole="Variaveis" ToRole="Contratacao" />
           <NavigationProperty Name="Empresa" Relationship="OrcamentoModel.variaveis_empresa" FromRole="Variaveis" ToRole="Empresa" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_variaveis_fk" FromRole="Variaveis" ToRole="Funcionario" />
           <NavigationProperty Name="Salario" Relationship="OrcamentoModel.salario_variaveis_fk" FromRole="Variaveis" ToRole="Salario" />
@@ -4507,6 +4383,7 @@
           <NavigationProperty Name="SolicitacaoAlteracaoCargo1" Relationship="OrcamentoModel.solicitacaoalteracaocargo_novo_variaveis_fk" FromRole="Variaveis" ToRole="SolicitacaoAlteracaoCargo" />
           <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_variaveis_fk" FromRole="Variaveis" ToRole="SolicitacaoContratacao" />
           <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaocontratacao_variaveis_fk" FromRole="Variaveis" ToRole="SimulacaoContratacao" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_variaveis_fk" FromRole="Variaveis" ToRole="Contratacao" />
         </EntityType>
         <Association Name="variaveis_cargahoraria_fk">
           <End Type="OrcamentoModel.CargaHoraria" Role="CargaHoraria" Multiplicity="1" />
@@ -4528,22 +4405,6 @@
               <PropertyRef Name="Codigo" />
             </Principal>
             <Dependent Role="Variaveis">
-              <PropertyRef Name="CargoCod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="contratacao_variaveis_fk">
-          <End Type="OrcamentoModel.Variaveis" Role="Variaveis" Multiplicity="1" />
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Variaveis">
-              <PropertyRef Name="CargaHoraria" />
-              <PropertyRef Name="EmpresaCod" />
-              <PropertyRef Name="CargoCod" />
-            </Principal>
-            <Dependent Role="Contratacao">
-              <PropertyRef Name="CargaHoraria" />
-              <PropertyRef Name="EmpresaCod" />
               <PropertyRef Name="CargoCod" />
             </Dependent>
           </ReferentialConstraint>
@@ -4652,13 +4513,13 @@
           <Property Name="SindicatoCod" Type="Int32" />
           <Property Name="SAT" Type="Single" Nullable="false" />
           <NavigationProperty Name="Cidade" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Filial" ToRole="Cidade" />
-          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Filial" ToRole="Contratacao" />
           <NavigationProperty Name="Empresa" Relationship="OrcamentoModel.filial_empresa_fk" FromRole="Filial" ToRole="Empresa" />
           <NavigationProperty Name="Sindicato" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Filial" ToRole="Sindicato" />
           <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Filial" ToRole="Funcionario" />
           <NavigationProperty Name="Salario" Relationship="OrcamentoModel.salario_filial_fk" FromRole="Filial" ToRole="Salario" />
-          <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_filial_fk" FromRole="Filial" ToRole="SolicitacaoContratacao" />
           <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaocontratacao_filial_fk" FromRole="Filial" ToRole="SimulacaoContratacao" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Filial" ToRole="Contratacao" />
+          <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_filial_fk" FromRole="Filial" ToRole="SolicitacaoContratacao" />
         </EntityType>
         <Association Name="filial_cidade_fk">
           <End Type="OrcamentoModel.Cidade" Role="Cidade" Multiplicity="1" />
@@ -4668,20 +4529,6 @@
               <PropertyRef Name="NomeCidade" />
             </Principal>
             <Dependent Role="Filial">
-              <PropertyRef Name="CidadeNome" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="contratacao_filial_fk">
-          <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Filial">
-              <PropertyRef Name="EmpresaCod" />
-              <PropertyRef Name="CidadeNome" />
-            </Principal>
-            <Dependent Role="Contratacao">
-              <PropertyRef Name="EmpresaCod" />
               <PropertyRef Name="CidadeNome" />
             </Dependent>
           </ReferentialConstraint>
@@ -4733,20 +4580,6 @@
               <PropertyRef Name="CidadeNome" />
             </Principal>
             <Dependent Role="Salario">
-              <PropertyRef Name="EmpresaCod" />
-              <PropertyRef Name="CidadeNome" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="solicitacaocontratacao_filial_fk">
-          <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-          <End Type="OrcamentoModel.SolicitacaoContratacao" Role="SolicitacaoContratacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Filial">
-              <PropertyRef Name="EmpresaCod" />
-              <PropertyRef Name="CidadeNome" />
-            </Principal>
-            <Dependent Role="SolicitacaoContratacao">
               <PropertyRef Name="EmpresaCod" />
               <PropertyRef Name="CidadeNome" />
             </Dependent>
@@ -5230,6 +5063,243 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SalarioMinimo">
+          <Key>
+            <PropertyRef Name="Data" />
+          </Key>
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SalarioMinimo1" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contratacao">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Motivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Periculosidade" Type="Boolean" Nullable="false" />
+          <Property Name="CentroCustoCod" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CargaHoraria" Type="Int32" Nullable="false" />
+          <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
+          <Property Name="CidadeNome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CargoCod" Type="Int32" Nullable="false" />
+          <Property Name="CicloCod" Type="Int32" Nullable="false" />
+          <Property Name="ConvenioPlanoCod" Type="Int32" />
+          <Property Name="Salario" Type="Single" Nullable="false" />
+          <Property Name="VTFretadoFlag" Type="Boolean" Nullable="false" />
+          <Property Name="ConvenioOdoCod" Type="Int32" />
+          <Property Name="CodEscala" Type="Int32" Nullable="false" />
+          <Property Name="AdCondutor" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdNoturnoContratacao" Relationship="OrcamentoModel.adnoturnocontratacao_contratacao_fk" FromRole="Contratacao" ToRole="AdNoturnoContratacao" />
+          <NavigationProperty Name="CalculoEventoContratacao" Relationship="OrcamentoModel.calculoeventocontratacao_contratacao_fk" FromRole="Contratacao" ToRole="CalculoEventoContratacao" />
+          <NavigationProperty Name="CentroCusto" Relationship="OrcamentoModel.contratacao_centrocusto_fk" FromRole="Contratacao" ToRole="CentroCusto" />
+          <NavigationProperty Name="Ciclo" Relationship="OrcamentoModel.contratacao_ciclo_fk" FromRole="Contratacao" ToRole="Ciclo" />
+          <NavigationProperty Name="ConvenioMed" Relationship="OrcamentoModel.contratacao_conveniomed_fk" FromRole="Contratacao" ToRole="ConvenioMed" />
+          <NavigationProperty Name="ConvenioOdo" Relationship="OrcamentoModel.contratacao_convenioodo_fk" FromRole="Contratacao" ToRole="ConvenioOdo" />
+          <NavigationProperty Name="Filial" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Contratacao" ToRole="Filial" />
+          <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.contratacao_variaveis_fk" FromRole="Contratacao" ToRole="Variaveis" />
+          <NavigationProperty Name="ContratacaoMeses" Relationship="OrcamentoModel.contratacaomes_contratacao_fk" FromRole="Contratacao" ToRole="ContratacaoMes" />
+          <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="Contratacao" ToRole="HEContratacao" />
+          <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="Contratacao" ToRole="ValoresAbertosContratacao" />
+          <NavigationProperty Name="EscalaTrabalho" Relationship="OrcamentoModel.contratacao_escalatrabalho_fk" FromRole="Contratacao" ToRole="EscalaTrabalho" />
+        </EntityType>
+        <Association Name="adnoturnocontratacao_contratacao_fk">
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+          <End Type="OrcamentoModel.AdNoturnoContratacao" Role="AdNoturnoContratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratacao">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="AdNoturnoContratacao">
+              <PropertyRef Name="CodContratacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="calculoeventocontratacao_contratacao_fk">
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+          <End Type="OrcamentoModel.CalculoEventoContratacao" Role="CalculoEventoContratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratacao">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="CalculoEventoContratacao">
+              <PropertyRef Name="CodContratacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_centrocusto_fk">
+          <End Type="OrcamentoModel.CentroCusto" Role="CentroCusto" Multiplicity="1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroCusto">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="CentroCustoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_ciclo_fk">
+          <End Type="OrcamentoModel.Ciclo" Role="Ciclo" Multiplicity="1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciclo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="CicloCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_conveniomed_fk">
+          <End Type="OrcamentoModel.ConvenioMed" Role="ConvenioMed" Multiplicity="0..1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConvenioMed">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="ConvenioPlanoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_convenioodo_fk">
+          <End Type="OrcamentoModel.ConvenioOdo" Role="ConvenioOdo" Multiplicity="0..1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConvenioOdo">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="ConvenioOdoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_filial_fk">
+          <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filial">
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CidadeNome" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CidadeNome" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacao_variaveis_fk">
+          <End Type="OrcamentoModel.Variaveis" Role="Variaveis" Multiplicity="1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variaveis">
+              <PropertyRef Name="CargaHoraria" />
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CargoCod" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="CargaHoraria" />
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CargoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="contratacaomes_contratacao_fk">
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+          <End Type="OrcamentoModel.ContratacaoMes" Role="ContratacaoMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratacao">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="ContratacaoMes">
+              <PropertyRef Name="ContratacaoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="hecontratacao_contratacao_fk">
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+          <End Type="OrcamentoModel.HEContratacao" Role="HEContratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratacao">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="HEContratacao">
+              <PropertyRef Name="ContratacaoCod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="valoresabertoscontratacao_contratacao_fk">
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
+          <End Type="OrcamentoModel.ValoresAbertosContratacao" Role="ValoresAbertosContratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contratacao">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="ValoresAbertosContratacao">
+              <PropertyRef Name="CodContratacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="solicitacaocontratacao_filial_fk">
+          <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+          <End Type="OrcamentoModel.SolicitacaoContratacao" Role="SolicitacaoContratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filial">
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CidadeNome" />
+            </Principal>
+            <Dependent Role="SolicitacaoContratacao">
+              <PropertyRef Name="EmpresaCod" />
+              <PropertyRef Name="CidadeNome" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EscalaTrabalho">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="Contratacao" />
+          <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="Funcionario" />
+          <NavigationProperty Name="QtdaDias" Relationship="OrcamentoModel.qtdadias_escalatrabalho_fk" FromRole="EscalaTrabalho" ToRole="QtdaDias" />
+        </EntityType>
+        <Association Name="contratacao_escalatrabalho_fk">
+          <End Type="OrcamentoModel.EscalaTrabalho" Role="EscalaTrabalho" Multiplicity="1" />
+          <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EscalaTrabalho">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Contratacao">
+              <PropertyRef Name="CodEscala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="funcionario_escalatrabalho_fk">
+          <End Type="OrcamentoModel.EscalaTrabalho" Role="EscalaTrabalho" Multiplicity="1" />
+          <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EscalaTrabalho">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="CodEscalaTrabalho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="qtdadias_escalatrabalho_fk">
+          <End Type="OrcamentoModel.EscalaTrabalho" Role="EscalaTrabalho" Multiplicity="1" />
+          <End Type="OrcamentoModel.QtdaDias" Role="QtdaDias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EscalaTrabalho">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="QtdaDias">
+              <PropertyRef Name="CodEscala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5286,25 +5356,6 @@
                 <ScalarProperty Name="Grupo" ColumnName="Grupo" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contratacao">
-            <EntityTypeMapping TypeName="OrcamentoModel.Contratacao">
-              <MappingFragment StoreEntitySet="Contratacao">
-                <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
-                <ScalarProperty Name="Salario" ColumnName="Salario" />
-                <ScalarProperty Name="ConvenioPlanoCod" ColumnName="ConvenioPlanoCod" />
-                <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Insalubridade" ColumnName="Insalubridade" />
-                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
-                <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
-                <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
-                <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
-                <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
-                <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
-                <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5376,14 +5427,6 @@
                 <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
                 <ScalarProperty Name="Mes" ColumnName="Mes" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalarioMinimo">
-            <EntityTypeMapping TypeName="OrcamentoModel.SalarioMinimo">
-              <MappingFragment StoreEntitySet="SalarioMinimo">
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="SalarioMinimoValor" ColumnName="SalarioMinimo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5725,17 +5768,8 @@
           <EntitySetMapping Name="ConvenioOdo">
             <EntityTypeMapping TypeName="OrcamentoModel.ConvenioOdo">
               <MappingFragment StoreEntitySet="ConvenioOdo">
-                <ScalarProperty Name="ValorDependentes" ColumnName="ValorDependentes" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Plano" ColumnName="Plano" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EscalaTrabalho">
-            <EntityTypeMapping TypeName="OrcamentoModel.EscalaTrabalho">
-              <MappingFragment StoreEntitySet="EscalaTrabalho">
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5953,6 +5987,43 @@
                 <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
                 <ScalarProperty Name="FuncionarioMatricula" ColumnName="FuncionarioMatricula" />
                 <ScalarProperty Name="CRDestino" ColumnName="CRDestino" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalarioMinimo">
+            <EntityTypeMapping TypeName="OrcamentoModel.SalarioMinimo">
+              <MappingFragment StoreEntitySet="SalarioMinimo">
+                <ScalarProperty Name="SalarioMinimo1" ColumnName="SalarioMinimo" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contratacao">
+            <EntityTypeMapping TypeName="OrcamentoModel.Contratacao">
+              <MappingFragment StoreEntitySet="Contratacao">
+                <ScalarProperty Name="AdCondutor" ColumnName="AdCondutor" />
+                <ScalarProperty Name="CodEscala" ColumnName="CodEscala" />
+                <ScalarProperty Name="ConvenioOdoCod" ColumnName="ConvenioOdoCod" />
+                <ScalarProperty Name="VTFretadoFlag" ColumnName="VTFretadoFlag" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="ConvenioPlanoCod" ColumnName="ConvenioPlanoCod" />
+                <ScalarProperty Name="CicloCod" ColumnName="CicloCod" />
+                <ScalarProperty Name="CargoCod" ColumnName="CargoCod" />
+                <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
+                <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
+                <ScalarProperty Name="CargaHoraria" ColumnName="CargaHoraria" />
+                <ScalarProperty Name="CentroCustoCod" ColumnName="CentroCustoCod" />
+                <ScalarProperty Name="Periculosidade" ColumnName="Periculosidade" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EscalaTrabalho">
+            <EntityTypeMapping TypeName="OrcamentoModel.EscalaTrabalho">
+              <MappingFragment StoreEntitySet="EscalaTrabalho">
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

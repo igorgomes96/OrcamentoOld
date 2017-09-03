@@ -23,20 +23,22 @@ namespace OrcamentoApp.Services
             Encargos encargos = db.Encargos.Find(func.EmpresaCod);
             if (encargos == null) throw new EncargosNaoEncontradosException();
 
-            db.Database.ExecuteSqlCommand("insert into CalculoEventoBase (CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor) select CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo where MatriculaFuncionario = {0} and b.CicloCod = {1}", func.Matricula, ciclo.Codigo);
+            //db.Database.ExecuteSqlCommand("insert into CalculoEventoBase (CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor) select CodEvento, MatriculaFuncionario, CodMesOrcamento, Valor from ValoresAbertosBase a inner join MesOrcamento b on a.CodMesOrcamento = b.Codigo where MatriculaFuncionario = {0} and b.CicloCod = {1}", func.Matricula, ciclo.Codigo);
 
             float baseEncargos = 0;
             float somaHEs, somaHNs;
             float salario = func.Salario, salarioBase = func.Salario;
-            double valorConvMed = func.ValorConvMedico;
-            double valorConvOdo = func.ValorConvOdontologico;
-            double passe = func.Filial.Cidade.VTPasse;
-            double frete = func.Filial.Cidade.VTFretadoValor;
+            float valorConvMed = func.ValorConvMedico;
+            float valorConvOdo = func.ValorConvOdontologico;
+            float passe = func.Filial.Cidade.VTPasse;
+            float frete = func.Filial.Cidade.VTFretadoValor;
+            int qtdaPasses = db.CargaHoraria.Find(func.CargaHoraria).QtdaPassesDiario;
 
             foreach (MesOrcamento m in ciclo.MesesOrcamento)
             {
 
                 int ano = m.Mes.Year, mes = m.Mes.Month;
+                int qtdaDias = db.QtdaDias.Find(mes, func.CodEscalaTrabalho).Qtda;
 
                 //Reajustes
                 Reajuste reajSal = db.Reajuste.Find(ano, mes, func.SindicatoCod);
@@ -52,16 +54,16 @@ namespace OrcamentoApp.Services
                 }
 
                 if (reajMed != null)
-                    valorConvMed *= (reajMed.PercentualReajuste + 1);
+                    valorConvMed *= (float)(reajMed.PercentualReajuste + 1);
 
                 if (reajOdo != null)
                     valorConvOdo *= (reajOdo.PercentualReajuste + 1);
 
                 if (reajVTFretado != null)
-                    frete *= (reajVTFretado.PercentualReajuste + 1);
+                    frete *= (float)(reajVTFretado.PercentualReajuste + 1);
 
                 if (reajVTPasse != null)
-                    passe *= (reajVTPasse.PercentualReajuste + 1);
+                    passe *= (float)(reajVTPasse.PercentualReajuste + 1);
 
                 //Horas Extras
                 List<HEBase> hes = db.HEBase
@@ -140,22 +142,29 @@ namespace OrcamentoApp.Services
 
 
                 // ********************** BENEFÍCIOS **********************
-                if (func.VTFretadoFlag)
-                    lista.Add(new CalculoEventoBase
-                    {
-                        CodEvento = "VT-FRETE",
-                        MatriculaFuncionario = func.Matricula,
-                        CodMesOrcamento = m.Codigo,
-                        Valor = (float)func.Filial.Cidade.VTFretadoValor
-                    });
-                else
-                    lista.Add(new CalculoEventoBase
-                    {
-                        CodEvento = "VT-PASSE",
-                        MatriculaFuncionario = func.Matricula,
-                        CodMesOrcamento = m.Codigo,
-                        Valor = (float)func.Filial.Cidade.VTPasse
-                    });
+                float vtDescontado = 0;
+                if (func.VTFretadoFlag) {
+                    vtDescontado = frete - (float)(salarioBase * 0.6);
+                    if (vtDescontado > 0) 
+                        lista.Add(new CalculoEventoBase
+                        {
+                            CodEvento = "VT-FRETE",
+                            MatriculaFuncionario = func.Matricula,
+                            CodMesOrcamento = m.Codigo,
+                            Valor = vtDescontado
+                        });
+                }
+                else {
+                    vtDescontado = (passe * qtdaDias) - (float)(salarioBase * 0.6);
+                    if (vtDescontado > 0)
+                        lista.Add(new CalculoEventoBase
+                        {
+                            CodEvento = "VT-PASSE",
+                            MatriculaFuncionario = func.Matricula,
+                            CodMesOrcamento = m.Codigo,
+                            Valor = vtDescontado
+                        });
+                }
 
                 lista.Add(new CalculoEventoBase
                 {

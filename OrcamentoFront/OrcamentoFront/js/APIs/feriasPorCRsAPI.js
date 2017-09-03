@@ -15,6 +15,10 @@ angular.module('orcamentoApp').service('feriasPorCRsAPI', ['$http', 'config', fu
         return $http.post(config.baseUrl + resource, FeriasPorCR);
     }
 
+    self.postFeriasPorCRSaveAll = function(codCiclo, ferias) {
+        return $http.post(config.baseUrl + resource + '/SaveAll/' + codCiclo, ferias);
+    }
+
     self.putFeriasPorCR = function(cr, mes, FeriasPorCR) {
         return $http.put(config.baseUrl + resource + '/' + cr + '/' + mes, FeriasPorCR);
     }

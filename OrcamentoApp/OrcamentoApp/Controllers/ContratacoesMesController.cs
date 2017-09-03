@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -36,6 +37,27 @@ namespace OrcamentoApp.Controllers
             }
 
             return Ok(new ContratacaoMesDTO(contratacaoMes));
+        }
+
+        [HttpPost]
+        [Route("api/ContratacoesMes/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll (IEnumerable<ContratacaoMes> meses)
+        {
+            foreach(ContratacaoMes m in meses)
+            {
+                db.ContratacaoMes.AddOrUpdate(m);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/ContratacoesMes/5

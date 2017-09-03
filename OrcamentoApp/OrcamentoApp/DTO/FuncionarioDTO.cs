@@ -61,7 +61,7 @@ namespace OrcamentoApp.DTO
 
             Historico = GetHistoricoGeral(f)
                 .Where(x => (x.Inicio == null && x.Fim > c.DataInicio) ||
-                (x.Fim == null && x.Inicio < c.DataFim.Value) ||
+                (x.Fim == null && x.Inicio < c.DataFim) ||
                 (x.Inicio < c.DataFim && x.Fim > c.DataInicio));
             
 
@@ -80,7 +80,7 @@ namespace OrcamentoApp.DTO
 
             Historico = GetHistoricoGeral(f)
                 .Where(x => x.CR == cr && ((x.Inicio == null && x.Fim > c.DataInicio) ||
-                (x.Fim == null && x.Inicio < c.DataFim.Value) ||
+                (x.Fim == null && x.Inicio < c.DataFim) ||
                 (x.Inicio < c.DataFim && x.Fim > c.DataInicio)));
 
 

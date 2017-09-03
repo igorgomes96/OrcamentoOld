@@ -5,16 +5,16 @@ using System.Web;
 
 namespace OrcamentoApp.DTO
 {
-    public class EventoCicloDTO
+    public class EventoCicloContratacaoDTO
     {
-        public EventoCicloDTO() {
-            ValoresMensais = new Dictionary<int, CalculoEventoBaseDTO>();
+        public EventoCicloContratacaoDTO() {
+            ValoresMensais = new Dictionary<int, CalculoEventoContratacaoDTO>();
         }
 
         public string CodEvento {get; set; }
         public string NomeEvento { get; set; }
         public int CodCiclo { get; set; }
-        public IDictionary<int, CalculoEventoBaseDTO> ValoresMensais { get; set; }
+        public IDictionary<int, CalculoEventoContratacaoDTO> ValoresMensais { get; set; }
 
     }
 }

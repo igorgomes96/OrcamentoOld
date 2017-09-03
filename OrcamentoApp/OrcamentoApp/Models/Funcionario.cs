@@ -79,7 +79,6 @@ namespace OrcamentoApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdNoturnoBase> AdNoturnoBase { get; set; }
         public virtual ConvenioOdo ConvenioOdo { get; set; }
-        public virtual EscalaTrabalho EscalaTrabalho { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEBase> HEBase { get; set; }
         public virtual Variaveis Variaveis { get; set; }
@@ -90,5 +89,6 @@ namespace OrcamentoApp.Models
         public virtual ICollection<FuncionarioFerias> FuncionarioFerias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transferencia> Transferencia { get; set; }
+        public virtual EscalaTrabalho EscalaTrabalho { get; set; }
     }
 }

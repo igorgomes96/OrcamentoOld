@@ -29,6 +29,7 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
         insumosAbertos.forEach(function(z) {
             valoresAbertosCRsAPI.getValoresAbertosCRsPorCiclo(cr, z, ciclo)
             .then(function(dado) {
+            	console.log(dado.data.NomeEvento);
 				self.valoresAbertos.push(dado.data);
             });
         });
@@ -43,7 +44,7 @@ angular.module('orcamentoApp').controller('resumoFolhaCtrl', ['calculosEventosBa
             loadValoresAbertosCR(self.cr.Codigo, self.ciclo.Codigo);
         }
         else
-            self.funcionarios = [];
+            self.valoresAbertos = [];
     });
 
 	var listenerCalculoRealizado = $scope.$on('calculoRealizado', function($event) {

@@ -22,7 +22,7 @@ namespace OrcamentoApp.Models
         }
     
         public int CargaHorariaCod { get; set; }
-        public Nullable<int> QtdaPassesDiario { get; set; }
+        public int QtdaPassesDiario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PAT> PATs { get; set; }

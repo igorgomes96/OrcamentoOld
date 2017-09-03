@@ -15,6 +15,6 @@ namespace OrcamentoApp.Models
     public partial class SalarioMinimo
     {
         public System.DateTime Data { get; set; }
-        public double SalarioMinimoValor { get; set; }
+        public double SalarioMinimo1 { get; set; }
     }
 }

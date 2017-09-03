@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoApp.Models;
 using OrcamentoApp.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoApp.Controllers
 {
@@ -23,6 +24,48 @@ namespace OrcamentoApp.Controllers
             return db.FeriasPorCR.ToList()
                 .Where(x => (cr == null || x.CodigoCR == cr) && (codCiclo == null || x.MesOrcamento.CicloCod == codCiclo))
                 .Select(x => new FeriasPorCRDTO(x));
+        }
+
+        [ResponseType(typeof(void))]
+        [Route("api/FeriasPorCRs/SaveAll/{codCiclo}")]
+        [HttpPost]
+        public IHttpActionResult SaveAllPorCiclo(int codCiclo, IEnumerable<FeriasPorCR> ferias)
+        {
+            Ciclo ciclo = db.Ciclo.Find(codCiclo);
+            if (ciclo == null) return NotFound();
+            float soma = 0;
+
+            foreach (FeriasPorCR f in ferias)
+            {
+                MesOrcamento mes = db.MesOrcamento.Find(f.CodMesOrcamento);
+                if (mes == null)
+                    return NotFound();
+                else if (mes.CicloCod != codCiclo)
+                    return BadRequest("Mês fora do ciclo informado!");
+
+                if (f.Percentual == 0)
+                {
+                    if (FeriasPorCRExists(f.CodigoCR, f.CodMesOrcamento))
+                        db.FeriasPorCR.Remove(f);
+                } else
+                {
+                    db.FeriasPorCR.AddOrUpdate(f);
+                    soma += f.Percentual;
+                }
+            }
+
+            if (soma != 1 && soma != 0)
+                return BadRequest("A soma dos percentuais não correspondem a 100% (" + soma + ")!");
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // GET: api/FeriasPorCRs/5

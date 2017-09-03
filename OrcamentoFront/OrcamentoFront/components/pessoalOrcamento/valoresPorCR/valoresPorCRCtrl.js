@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('valoresPorCRCtrl', ['valoresAbertosCRsAPI', '$scope', 'sharedDataService', 'feriasPorCRsAPI', 'eventosFolhaAPI', 'numberFilter', function(valoresAbertosCRsAPI, $scope, sharedDataService, feriasPorCRsAPI, eventosFolhaAPI, numberFilter) {
+angular.module('orcamentoApp').controller('valoresPorCRCtrl', ['valoresAbertosCRsAPI', '$scope', 'sharedDataService', 'feriasPorCRsAPI', 'eventosFolhaAPI', 'numberFilter', 'messagesService', function(valoresAbertosCRsAPI, $scope, sharedDataService, feriasPorCRsAPI, eventosFolhaAPI, numberFilter, messagesService) {
 
 	var self = this;
 
@@ -54,9 +54,16 @@ angular.module('orcamentoApp').controller('valoresPorCRCtrl', ['valoresAbertosCR
             valores = valores.concat(x.Valores.map(function(y) { return y; }));
         });
 
+        var ferias = angular.copy(self.ferias);
+        ferias.forEach(function(x) {
+            x.Percentual = x.Percentual / 100;
+        })
+
         valoresAbertosCRsAPI.postValorAbertoCRSaveAll(valores)
-        .then(function(dado) {
-            console.log("Salvo");
+        .then(function() {
+            return feriasPorCRsAPI.postFeriasPorCRSaveAll(self.ciclo.Codigo, ferias);
+        }).then(function() {
+            messagesService.exibeMensagemSucesso("Valores salvos com Sucesso!");
         });
     }
 

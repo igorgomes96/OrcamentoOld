@@ -32,7 +32,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<ContaContabil> ContaContabil { get; set; }
-        public virtual DbSet<Contratacao> Contratacao { get; set; }
         public virtual DbSet<DiasIndenizados> DiasIndenizados { get; set; }
         public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Encargos> Encargos { get; set; }
@@ -40,7 +39,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<PAT> PAT { get; set; }
         public virtual DbSet<ReajConvenioMed> ReajConvenioMed { get; set; }
         public virtual DbSet<Receita> Receita { get; set; }
-        public virtual DbSet<SalarioMinimo> SalarioMinimo { get; set; }
         public virtual DbSet<Sindicato> Sindicato { get; set; }
         public virtual DbSet<Sessao> Sessao { get; set; }
         public virtual DbSet<Permissao> Permissao { get; set; }
@@ -70,7 +68,6 @@ namespace OrcamentoApp.Models
         public virtual DbSet<AdNoturnoBase> AdNoturnoBase { get; set; }
         public virtual DbSet<AdNoturnoContratacao> AdNoturnoContratacao { get; set; }
         public virtual DbSet<ConvenioOdo> ConvenioOdo { get; set; }
-        public virtual DbSet<EscalaTrabalho> EscalaTrabalho { get; set; }
         public virtual DbSet<QtdaDias> QtdaDias { get; set; }
         public virtual DbSet<ReajConvenioOdo> ReajConvenioOdo { get; set; }
         public virtual DbSet<ReajVTFretado> ReajVTFretado { get; set; }
@@ -91,6 +88,9 @@ namespace OrcamentoApp.Models
         public virtual DbSet<MesOrcamento> MesOrcamento { get; set; }
         public virtual DbSet<FuncionarioFerias> FuncionarioFerias { get; set; }
         public virtual DbSet<Transferencia> Transferencia { get; set; }
+        public virtual DbSet<SalarioMinimo> SalarioMinimo { get; set; }
+        public virtual DbSet<Contratacao> Contratacao { get; set; }
+        public virtual DbSet<EscalaTrabalho> EscalaTrabalho { get; set; }
     
         public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
         {
