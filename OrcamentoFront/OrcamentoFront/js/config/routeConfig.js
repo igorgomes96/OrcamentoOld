@@ -44,9 +44,17 @@ angular.module('orcamentoApp').config(['$stateProvider', '$urlRouterProvider', '
                 templateUrl: 'components/dashboard/dashboard.html',
                 controller: 'dashboardCtrl as ct'
             },
-            'resumoFolha@menuContainer.dashboard': {
-                templateUrl: 'components/dashboard/resumoFolha/resumoFolha.html',
-                controller: 'resumoFolhaCtrl as ct'
+            'resumoFolhaBase@menuContainer.dashboard': {
+                templateUrl: 'components/dashboard/resumoFolha/resumoFolhaBase.html',
+                controller: 'resumoFolhaBaseCtrl as ct'
+            },
+            'resumoFolhaContratacoes@menuContainer.dashboard': {
+                templateUrl: 'components/dashboard/resumoFolha/resumoFolhaContratacoes.html',
+                controller: 'resumoFolhaContratacoesCtrl as ct'
+            },
+            'resumoFolhaVerbasGerais@menuContainer.dashboard': {
+                templateUrl: 'components/dashboard/resumoFolha/resumoFolhaVerbasGerais.html',
+                controller: 'resumoFolhaVerbasGeraisCtrl as ct'
             }
         }
     })
