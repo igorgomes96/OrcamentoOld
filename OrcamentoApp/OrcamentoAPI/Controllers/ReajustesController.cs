@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -26,11 +27,11 @@ namespace OrcamentoAPI.Controllers
         }
 
         // GET: api/Reajustes/5
-        [Route("api/Reajustes/{codSindicato}/{ano}")]
+        [Route("api/Reajustes/{ano}/{mes}/{codSindicato}")]
         [ResponseType(typeof(ReajusteDTO))]
-        public IHttpActionResult GetReajuste(int codSindicato, int ano)
+        public IHttpActionResult GetReajuste(int ano, int mes, int codSindicato)
         {
-            Reajuste reajuste = db.Reajuste.Find(ano, codSindicato);
+            Reajuste reajuste = db.Reajuste.Find(ano, mes, codSindicato);
             if (reajuste == null)
             {
                 return NotFound();
@@ -39,17 +40,43 @@ namespace OrcamentoAPI.Controllers
             return Ok(new ReajusteDTO(reajuste));
         }
 
-        // PUT: api/Reajustes/5
-        [Route("api/Reajustes/{codSindicato}/{ano}")]
+        [HttpPost]
+        [Route("api/Reajustes/SaveAll")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutReajuste(int codSindicato, int ano, Reajuste reajuste)
+        public IHttpActionResult SaveAll (IEnumerable<Reajuste> reajustes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (ano != reajuste.Ano || codSindicato != reajuste.SindicatoCod)
+            foreach (Reajuste r in reajustes)
+            {
+                db.Reajuste.AddOrUpdate(r);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
+        }
+
+        // PUT: api/Reajustes/5
+        [Route("api/Reajustes/{ano}/{mes}/{codSindicato}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutReajuste(int ano, int mes, int codSindicato, Reajuste reajuste)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (ano != reajuste.Ano || codSindicato != reajuste.SindicatoCod || mes != reajuste.MesReajuste)
             {
                 return BadRequest();
             }
@@ -62,7 +89,7 @@ namespace OrcamentoAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReajusteExists(codSindicato, ano))
+                if (!ReajusteExists(ano, mes, codSindicato))
                 {
                     return NotFound();
                 }
@@ -92,7 +119,7 @@ namespace OrcamentoAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ReajusteExists(reajuste.SindicatoCod, reajuste.Ano))
+                if (ReajusteExists(reajuste.Ano, reajuste.MesReajuste, reajuste.SindicatoCod))
                 {
                     return Conflict();
                 }
@@ -106,11 +133,11 @@ namespace OrcamentoAPI.Controllers
         }
 
         // DELETE: api/Reajustes/5
-        [Route("api/Reajustes/{codSindicato}/{ano}")]
+        [Route("api/Reajustes/{ano}/{mes}/{codSindicato}")]
         [ResponseType(typeof(ReajusteDTO))]
-        public IHttpActionResult DeleteReajuste(int codSindicato, int ano)
+        public IHttpActionResult DeleteReajuste(int ano, int mes, int codSindicato)
         {
-            Reajuste reajuste = db.Reajuste.Find(ano, codSindicato);
+            Reajuste reajuste = db.Reajuste.Find(ano, mes, codSindicato);
             if (reajuste == null)
             {
                 return NotFound();
@@ -132,9 +159,9 @@ namespace OrcamentoAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ReajusteExists(int codSindicato, int ano)
+        private bool ReajusteExists(int ano, int mes, int codSindicato)
         {
-            return db.Reajuste.Count(e => e.Ano == ano && e.SindicatoCod == codSindicato) > 0;
+            return db.Reajuste.Count(e => e.Ano == ano && e.SindicatoCod == codSindicato && e.MesReajuste == mes) > 0;
         }
     }
 }

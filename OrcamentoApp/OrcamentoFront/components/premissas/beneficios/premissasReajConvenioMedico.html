@@ -29,14 +29,15 @@
                     <tr>
                         <th width="14%">Cód. do Plano</th>
                         <th width="40%">Plano</th>
-                        <th width="25%">Mês</th>
+                        <th width="22%">Mês</th>
                         <th width="21%">índice de Reajuste</th>
+                        <th width="3%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="r in ct.reajustes">
                         <td>{{r.ConvenioMedCod}}</td>
-                        <td>{{r.Plano.Plano}}</td>
+                        <td>{{r.NomePlano}}</td>
                         <td>
                             <select class="form-control input-sm" ng-model="r.MesReajuste" ng-options="m.Valor as m.Mes for m in ct.meses"></select>
                         </td>
@@ -46,11 +47,14 @@
                                 <span class="input-group-addon">%</span>
                             </div>
                         </td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" ng-click="ct.excluir(ct.ano, r.ConvenioMedCod, r.MesReajuste)"><i class="fa fa-times"></i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 
-            <button class="btn btn-primary" ng-click="ct.salvarReajustes(ct.reajustes)">Salvar</button>  
+            <button class="btn btn-primary" ng-click="ct.saveAll(ct.reajustes)">Salvar</button>  
         </div>
     </div>
 

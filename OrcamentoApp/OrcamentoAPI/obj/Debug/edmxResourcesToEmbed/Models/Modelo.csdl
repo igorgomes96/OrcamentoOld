@@ -47,8 +47,8 @@
     <Property Name="VTFretadoValor" Type="Single" Nullable="false" />
     <NavigationProperty Name="ReajVTFretado" Relationship="OrcamentoModel.reajvtfretado_cidade_fk" FromRole="Cidade" ToRole="ReajVTFretado" />
     <NavigationProperty Name="ReajVTPasse" Relationship="OrcamentoModel.reajvtpasse_cidade_fk" FromRole="Cidade" ToRole="ReajVTPasse" />
-    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Cidade" ToRole="Filial" />
     <Property Name="VTValorMensal" Type="Single" />
+    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Cidade" ToRole="Filial" />
   </EntityType>
   <EntityType Name="ContaContabil">
     <Key>
@@ -147,8 +147,8 @@
     <NavigationProperty Name="PATs" Relationship="Self.pat_sindicato_fk" FromRole="Sindicato" ToRole="PAT" />
     <NavigationProperty Name="Reajuste" Relationship="OrcamentoModel.reajuste_sindicato_fk" FromRole="Sindicato" ToRole="Reajuste" />
     <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_sindicato_fk" FromRole="Sindicato" ToRole="Funcionario" />
-    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Sindicato" ToRole="Filial" />
     <NavigationProperty Name="ReajPAT" Relationship="OrcamentoModel.reajpat_sindicato_fk" FromRole="Sindicato" ToRole="ReajPAT" />
+    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Sindicato" ToRole="Filial" />
   </EntityType>
   <Association Name="pat_cargahoraria_fk">
     <End Role="CargaHoraria" Type="Self.CargaHoraria" Multiplicity="1" />
@@ -475,27 +475,6 @@
       <End Role="Variaveis" EntitySet="Variaveis" />
       <End Role="SolicitacaoContratacao" EntitySet="SolicitacaoContratacao" />
     </AssociationSet>
-    <EntitySet Name="Filial" EntityType="OrcamentoModel.Filial" />
-    <AssociationSet Name="filial_cidade_fk" Association="OrcamentoModel.filial_cidade_fk">
-      <End Role="Cidade" EntitySet="Cidade" />
-      <End Role="Filial" EntitySet="Filial" />
-    </AssociationSet>
-    <AssociationSet Name="filial_empresa_fk" Association="OrcamentoModel.filial_empresa_fk">
-      <End Role="Empresa" EntitySet="Empresa" />
-      <End Role="Filial" EntitySet="Filial" />
-    </AssociationSet>
-    <AssociationSet Name="filial_sindicato_fk" Association="OrcamentoModel.filial_sindicato_fk">
-      <End Role="Sindicato" EntitySet="Sindicato" />
-      <End Role="Filial" EntitySet="Filial" />
-    </AssociationSet>
-    <AssociationSet Name="funcionario_filial_fk" Association="OrcamentoModel.funcionario_filial_fk">
-      <End Role="Filial" EntitySet="Filial" />
-      <End Role="Funcionario" EntitySet="Funcionario" />
-    </AssociationSet>
-    <AssociationSet Name="salario_filial_fk" Association="OrcamentoModel.salario_filial_fk">
-      <End Role="Filial" EntitySet="Filial" />
-      <End Role="Salario" EntitySet="Salario" />
-    </AssociationSet>
     <FunctionImport Name="CalculaCustoPessoa">
       <Parameter Name="matricula" Mode="In" Type="String" />
       <Parameter Name="codCiclo" Mode="In" Type="Int32" />
@@ -514,10 +493,6 @@
     </AssociationSet>
     <AssociationSet Name="simulacaoconstratacao_convenioodo_fk" Association="OrcamentoModel.simulacaoconstratacao_convenioodo_fk">
       <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
-      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
-    </AssociationSet>
-    <AssociationSet Name="simulacaocontratacao_filial_fk" Association="OrcamentoModel.simulacaocontratacao_filial_fk">
-      <End Role="Filial" EntitySet="Filial" />
       <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
     </AssociationSet>
     <AssociationSet Name="simulacaodemissao_funcionario_fk" Association="OrcamentoModel.simulacaodemissao_funcionario_fk">
@@ -650,10 +625,6 @@
       <End Role="ConvenioOdo" EntitySet="ConvenioOdo" />
       <End Role="Contratacao" EntitySet="Contratacao" />
     </AssociationSet>
-    <AssociationSet Name="contratacao_filial_fk" Association="OrcamentoModel.contratacao_filial_fk">
-      <End Role="Filial" EntitySet="Filial" />
-      <End Role="Contratacao" EntitySet="Contratacao" />
-    </AssociationSet>
     <AssociationSet Name="contratacao_variaveis_fk" Association="OrcamentoModel.contratacao_variaveis_fk">
       <End Role="Variaveis" EntitySet="Variaveis" />
       <End Role="Contratacao" EntitySet="Contratacao" />
@@ -670,10 +641,6 @@
       <End Role="Contratacao" EntitySet="Contratacao" />
       <End Role="ValoresAbertosContratacao" EntitySet="ValoresAbertosContratacao" />
     </AssociationSet>
-    <AssociationSet Name="solicitacaocontratacao_filial_fk" Association="OrcamentoModel.solicitacaocontratacao_filial_fk">
-      <End Role="Filial" EntitySet="Filial" />
-      <End Role="SolicitacaoContratacao" EntitySet="SolicitacaoContratacao" />
-    </AssociationSet>
     <EntitySet Name="EscalaTrabalho" EntityType="OrcamentoModel.EscalaTrabalho" />
     <AssociationSet Name="contratacao_escalatrabalho_fk" Association="OrcamentoModel.contratacao_escalatrabalho_fk">
       <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
@@ -686,6 +653,39 @@
     <AssociationSet Name="qtdadias_escalatrabalho_fk" Association="OrcamentoModel.qtdadias_escalatrabalho_fk">
       <End Role="EscalaTrabalho" EntitySet="EscalaTrabalho" />
       <End Role="QtdaDias" EntitySet="QtdaDias" />
+    </AssociationSet>
+    <EntitySet Name="Filial" EntityType="OrcamentoModel.Filial" />
+    <AssociationSet Name="filial_cidade_fk" Association="OrcamentoModel.filial_cidade_fk">
+      <End Role="Cidade" EntitySet="Cidade" />
+      <End Role="Filial" EntitySet="Filial" />
+    </AssociationSet>
+    <AssociationSet Name="contratacao_filial_fk" Association="OrcamentoModel.contratacao_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="Contratacao" EntitySet="Contratacao" />
+    </AssociationSet>
+    <AssociationSet Name="filial_empresa_fk" Association="OrcamentoModel.filial_empresa_fk">
+      <End Role="Empresa" EntitySet="Empresa" />
+      <End Role="Filial" EntitySet="Filial" />
+    </AssociationSet>
+    <AssociationSet Name="filial_sindicato_fk" Association="OrcamentoModel.filial_sindicato_fk">
+      <End Role="Sindicato" EntitySet="Sindicato" />
+      <End Role="Filial" EntitySet="Filial" />
+    </AssociationSet>
+    <AssociationSet Name="funcionario_filial_fk" Association="OrcamentoModel.funcionario_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="Funcionario" EntitySet="Funcionario" />
+    </AssociationSet>
+    <AssociationSet Name="salario_filial_fk" Association="OrcamentoModel.salario_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="Salario" EntitySet="Salario" />
+    </AssociationSet>
+    <AssociationSet Name="simulacaocontratacao_filial_fk" Association="OrcamentoModel.simulacaocontratacao_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="SimulacaoContratacao" EntitySet="SimulacaoContratacao" />
+    </AssociationSet>
+    <AssociationSet Name="solicitacaocontratacao_filial_fk" Association="OrcamentoModel.solicitacaocontratacao_filial_fk">
+      <End Role="Filial" EntitySet="Filial" />
+      <End Role="SolicitacaoContratacao" EntitySet="SolicitacaoContratacao" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Sessao">
@@ -1386,12 +1386,12 @@
     <NavigationProperty Name="ConvenioOdo" Relationship="OrcamentoModel.funcionario_convenioodo_fk" FromRole="Funcionario" ToRole="ConvenioOdo" />
     <NavigationProperty Name="HEBase" Relationship="OrcamentoModel.hebase_funcionario_fk" FromRole="Funcionario" ToRole="HEBase" />
     <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.funcionario_variaveis_fk" FromRole="Funcionario" ToRole="Variaveis" />
-    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Funcionario" ToRole="Filial" />
     <NavigationProperty Name="SimulacaoDemissao" Relationship="OrcamentoModel.simulacaodemissao_funcionario_fk" FromRole="Funcionario" ToRole="SimulacaoDemissao" />
     <NavigationProperty Name="FuncionarioFerias" Relationship="OrcamentoModel.funcionarioferias_funcionario_fk" FromRole="Funcionario" ToRole="FuncionarioFerias" />
     <Property Name="RecebeVT" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Transferencia" Relationship="OrcamentoModel.transferencia_funcionario_fk" FromRole="Funcionario" ToRole="Transferencia" />
     <NavigationProperty Name="EscalaTrabalho" Relationship="OrcamentoModel.funcionario_escalatrabalho_fk" FromRole="Funcionario" ToRole="EscalaTrabalho" />
+    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Funcionario" ToRole="Filial" />
   </EntityType>
   <Association Name="afastamento_funcionario_fk">
     <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="1" />
@@ -1936,90 +1936,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Filial">
-    <Key>
-      <PropertyRef Name="EmpresaCod" />
-      <PropertyRef Name="CidadeNome" />
-    </Key>
-    <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
-    <Property Name="CidadeNome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="AvisoPrevio" Type="Single" Nullable="false" />
-    <Property Name="FAP" Type="Single" Nullable="false" />
-    <Property Name="SindicatoCod" Type="Int32" />
-    <Property Name="SAT" Type="Single" Nullable="false" />
-    <NavigationProperty Name="Cidade" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Filial" ToRole="Cidade" />
-    <NavigationProperty Name="Empresa" Relationship="OrcamentoModel.filial_empresa_fk" FromRole="Filial" ToRole="Empresa" />
-    <NavigationProperty Name="Sindicato" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Filial" ToRole="Sindicato" />
-    <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Filial" ToRole="Funcionario" />
-    <NavigationProperty Name="Salario" Relationship="OrcamentoModel.salario_filial_fk" FromRole="Filial" ToRole="Salario" />
-    <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaocontratacao_filial_fk" FromRole="Filial" ToRole="SimulacaoContratacao" />
-    <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Filial" ToRole="Contratacao" />
-    <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_filial_fk" FromRole="Filial" ToRole="SolicitacaoContratacao" />
-  </EntityType>
-  <Association Name="filial_cidade_fk">
-    <End Type="OrcamentoModel.Cidade" Role="Cidade" Multiplicity="1" />
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cidade">
-        <PropertyRef Name="NomeCidade" />
-      </Principal>
-      <Dependent Role="Filial">
-        <PropertyRef Name="CidadeNome" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="filial_empresa_fk">
-    <End Type="OrcamentoModel.Empresa" Role="Empresa" Multiplicity="1" />
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empresa">
-        <PropertyRef Name="Codigo" />
-      </Principal>
-      <Dependent Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="filial_sindicato_fk">
-    <End Type="OrcamentoModel.Sindicato" Role="Sindicato" Multiplicity="0..1" />
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sindicato">
-        <PropertyRef Name="Codigo" />
-      </Principal>
-      <Dependent Role="Filial">
-        <PropertyRef Name="SindicatoCod" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="funcionario_filial_fk">
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-    <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Principal>
-      <Dependent Role="Funcionario">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="salario_filial_fk">
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-    <End Type="OrcamentoModel.Salario" Role="Salario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Principal>
-      <Dependent Role="Salario">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Simulacao">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -2053,9 +1969,9 @@
     <Property Name="Periculosidade" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ConvenioMed" Relationship="OrcamentoModel.simulacaoconstratacao_conveniomed_fk" FromRole="SimulacaoContratacao" ToRole="ConvenioMed" />
     <NavigationProperty Name="ConvenioOdo" Relationship="OrcamentoModel.simulacaoconstratacao_convenioodo_fk" FromRole="SimulacaoContratacao" ToRole="ConvenioOdo" />
-    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.simulacaocontratacao_filial_fk" FromRole="SimulacaoContratacao" ToRole="Filial" />
     <NavigationProperty Name="Simulacao" Relationship="OrcamentoModel.simulacaocontratacao_simulacao_fk" FromRole="SimulacaoContratacao" ToRole="Simulacao" />
     <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.simulacaocontratacao_variaveis_fk" FromRole="SimulacaoContratacao" ToRole="Variaveis" />
+    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.simulacaocontratacao_filial_fk" FromRole="SimulacaoContratacao" ToRole="Filial" />
   </EntityType>
   <EntityType Name="SimulacaoDemissao">
     <Key>
@@ -2112,20 +2028,6 @@
       </Principal>
       <Dependent Role="SimulacaoContratacao">
         <PropertyRef Name="ConvenioOdoCod" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="simulacaocontratacao_filial_fk">
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-    <End Type="OrcamentoModel.SimulacaoContratacao" Role="SimulacaoContratacao" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Principal>
-      <Dependent Role="SimulacaoContratacao">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2530,12 +2432,12 @@
     <NavigationProperty Name="Ciclo" Relationship="OrcamentoModel.contratacao_ciclo_fk" FromRole="Contratacao" ToRole="Ciclo" />
     <NavigationProperty Name="ConvenioMed" Relationship="OrcamentoModel.contratacao_conveniomed_fk" FromRole="Contratacao" ToRole="ConvenioMed" />
     <NavigationProperty Name="ConvenioOdo" Relationship="OrcamentoModel.contratacao_convenioodo_fk" FromRole="Contratacao" ToRole="ConvenioOdo" />
-    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Contratacao" ToRole="Filial" />
     <NavigationProperty Name="Variaveis" Relationship="OrcamentoModel.contratacao_variaveis_fk" FromRole="Contratacao" ToRole="Variaveis" />
     <NavigationProperty Name="ContratacaoMeses" Relationship="OrcamentoModel.contratacaomes_contratacao_fk" FromRole="Contratacao" ToRole="ContratacaoMes" />
     <NavigationProperty Name="HEContratacao" Relationship="OrcamentoModel.hecontratacao_contratacao_fk" FromRole="Contratacao" ToRole="HEContratacao" />
     <NavigationProperty Name="ValoresAbertosContratacao" Relationship="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" FromRole="Contratacao" ToRole="ValoresAbertosContratacao" />
     <NavigationProperty Name="EscalaTrabalho" Relationship="OrcamentoModel.contratacao_escalatrabalho_fk" FromRole="Contratacao" ToRole="EscalaTrabalho" />
+    <NavigationProperty Name="Filial" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Contratacao" ToRole="Filial" />
   </EntityType>
   <Association Name="adnoturnocontratacao_contratacao_fk">
     <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="1" />
@@ -2609,20 +2511,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="contratacao_filial_fk">
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-    <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Principal>
-      <Dependent Role="Contratacao">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="contratacao_variaveis_fk">
     <End Type="OrcamentoModel.Variaveis" Role="Variaveis" Multiplicity="1" />
     <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
@@ -2675,20 +2563,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="solicitacaocontratacao_filial_fk">
-    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
-    <End Type="OrcamentoModel.SolicitacaoContratacao" Role="SolicitacaoContratacao" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Filial">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Principal>
-      <Dependent Role="SolicitacaoContratacao">
-        <PropertyRef Name="EmpresaCod" />
-        <PropertyRef Name="CidadeNome" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="EscalaTrabalho">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -2732,6 +2606,131 @@
       </Principal>
       <Dependent Role="QtdaDias">
         <PropertyRef Name="CodEscala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Filial">
+    <Key>
+      <PropertyRef Name="EmpresaCod" />
+      <PropertyRef Name="CidadeNome" />
+    </Key>
+    <Property Name="EmpresaCod" Type="Int32" Nullable="false" />
+    <Property Name="CidadeNome" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="FAP" Type="Single" Nullable="false" />
+    <Property Name="SindicatoCod" Type="Int32" />
+    <Property Name="SAT" Type="Single" Nullable="false" />
+    <NavigationProperty Name="Cidade" Relationship="OrcamentoModel.filial_cidade_fk" FromRole="Filial" ToRole="Cidade" />
+    <NavigationProperty Name="Contratacao" Relationship="OrcamentoModel.contratacao_filial_fk" FromRole="Filial" ToRole="Contratacao" />
+    <NavigationProperty Name="Empresa" Relationship="OrcamentoModel.filial_empresa_fk" FromRole="Filial" ToRole="Empresa" />
+    <NavigationProperty Name="Sindicato" Relationship="OrcamentoModel.filial_sindicato_fk" FromRole="Filial" ToRole="Sindicato" />
+    <NavigationProperty Name="Funcionario" Relationship="OrcamentoModel.funcionario_filial_fk" FromRole="Filial" ToRole="Funcionario" />
+    <NavigationProperty Name="Salario" Relationship="OrcamentoModel.salario_filial_fk" FromRole="Filial" ToRole="Salario" />
+    <NavigationProperty Name="SimulacaoContratacao" Relationship="OrcamentoModel.simulacaocontratacao_filial_fk" FromRole="Filial" ToRole="SimulacaoContratacao" />
+    <NavigationProperty Name="SolicitacaoContratacao" Relationship="OrcamentoModel.solicitacaocontratacao_filial_fk" FromRole="Filial" ToRole="SolicitacaoContratacao" />
+  </EntityType>
+  <Association Name="filial_cidade_fk">
+    <End Type="OrcamentoModel.Cidade" Role="Cidade" Multiplicity="1" />
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cidade">
+        <PropertyRef Name="NomeCidade" />
+      </Principal>
+      <Dependent Role="Filial">
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="contratacao_filial_fk">
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+    <End Type="OrcamentoModel.Contratacao" Role="Contratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="Contratacao">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="filial_empresa_fk">
+    <End Type="OrcamentoModel.Empresa" Role="Empresa" Multiplicity="1" />
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="filial_sindicato_fk">
+    <End Type="OrcamentoModel.Sindicato" Role="Sindicato" Multiplicity="0..1" />
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sindicato">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Filial">
+        <PropertyRef Name="SindicatoCod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="funcionario_filial_fk">
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+    <End Type="OrcamentoModel.Funcionario" Role="Funcionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="Funcionario">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="salario_filial_fk">
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+    <End Type="OrcamentoModel.Salario" Role="Salario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="Salario">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="simulacaocontratacao_filial_fk">
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+    <End Type="OrcamentoModel.SimulacaoContratacao" Role="SimulacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="SimulacaoContratacao">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="solicitacaocontratacao_filial_fk">
+    <End Type="OrcamentoModel.Filial" Role="Filial" Multiplicity="1" />
+    <End Type="OrcamentoModel.SolicitacaoContratacao" Role="SolicitacaoContratacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
+      </Principal>
+      <Dependent Role="SolicitacaoContratacao">
+        <PropertyRef Name="EmpresaCod" />
+        <PropertyRef Name="CidadeNome" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

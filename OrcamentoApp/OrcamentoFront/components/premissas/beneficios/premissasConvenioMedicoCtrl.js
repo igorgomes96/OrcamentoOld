@@ -16,11 +16,14 @@ angular.module('orcamentoApp').controller('premissasConvenioMedicoCtrl', ['conve
 
 	self.salvarConvenios = function(convenios) {
 		var f = null;
-		convenios.forEach(function(x) {
+		/*convenios.forEach(function(x) {
 			if (x.Codigo) f = conveniosMedAPI.putConveniosMed(x.Codigo, x);
 			else f = conveniosMedAPI.postConveniosMed(x);
+		});*/
+		conveniosMedAPI.postConveniosMedSaveAll(convenios)
+		.then(function() {
+			messagesService.exibeMensagemSucesso('Planos salvos com sucesso!');
 		});
-		messagesService.exibeMensagemSucesso('Planos salvos com sucesso!');
 	}
 
 	loadConvenios();

@@ -28,8 +28,8 @@ namespace OrcamentoAPI.Models
     
         public virtual ConvenioMed ConvenioMed { get; set; }
         public virtual ConvenioOdo ConvenioOdo { get; set; }
-        public virtual Filial Filial { get; set; }
         public virtual Simulacao Simulacao { get; set; }
         public virtual Variaveis Variaveis { get; set; }
+        public virtual Filial Filial { get; set; }
     }
 }

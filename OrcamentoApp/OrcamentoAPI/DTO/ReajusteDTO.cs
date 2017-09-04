@@ -15,6 +15,7 @@ namespace OrcamentoAPI.DTO
             MesFechamento = r.MesFechamento;
             PisoSalarial = r.PisoSalarial;
             SindicatoCod = r.SindicatoCod;
+            if (r.Sindicato != null) NomeSindicato = r.Sindicato.NomeSindicato;
         }
         public int Ano { get; set; }
         public double PercentualReajuste { get; set; }
@@ -22,6 +23,7 @@ namespace OrcamentoAPI.DTO
         public int MesReajuste { get; set; }
         public float PisoSalarial { get; set; }
         public int SindicatoCod { get; set; }
+        public string NomeSindicato { get; set; }
     
     }
 }

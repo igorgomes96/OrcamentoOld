@@ -80,7 +80,6 @@ namespace OrcamentoAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HEBase> HEBase { get; set; }
         public virtual Variaveis Variaveis { get; set; }
-        public virtual Filial Filial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoDemissao> SimulacaoDemissao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -88,5 +87,6 @@ namespace OrcamentoAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transferencia> Transferencia { get; set; }
         public virtual EscalaTrabalho EscalaTrabalho { get; set; }
+        public virtual Filial Filial { get; set; }
     }
 }

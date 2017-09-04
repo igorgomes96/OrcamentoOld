@@ -54,7 +54,7 @@ namespace OrcamentoAPI.Excel
 
 
                 //ConvenioMed
-                tab = "ConvenioMed";
+                tab = "Convênio Médico";
                 adapter = new OleDbDataAdapter("select * from[" + tab + "$]", conexao);
                 ds = new DataSet() { DataSetName = tab };
                 try { 
@@ -67,7 +67,7 @@ namespace OrcamentoAPI.Excel
                 }
 
                 //Cargo
-                tab = "Cargo";
+                tab = "Cargos";
                 adapter = new OleDbDataAdapter("select * from[" + tab + "$]", conexao);
                 ds = new DataSet() { DataSetName = tab };
                 try
@@ -97,7 +97,7 @@ namespace OrcamentoAPI.Excel
                 }
 
                 //Filial
-                tab = "Filial";
+                tab = "Filiais";
                 adapter = new OleDbDataAdapter("select * from[" + tab + "$]", conexao);
                 ds = new DataSet() { DataSetName = tab };
                 try
@@ -112,7 +112,7 @@ namespace OrcamentoAPI.Excel
                 }
 
                 //Salários
-                tab = "Salario";
+                tab = "Salários";
                 adapter = new OleDbDataAdapter("select * from[" + tab + "$]", conexao);
                 ds = new DataSet() { DataSetName = tab };
                 try
@@ -172,11 +172,6 @@ namespace OrcamentoAPI.Excel
 
             db.Dispose();
         }
-
-        /*Nullable<DateTime> dataFim = null;
-        if (DateTime.TryParse(r["Data Fim"].ToString(), out DateTime temp))
-        dataFim = temp;*/
-
 
         private void ImportacaoSalarios(DataSet ds)
         {
@@ -359,10 +354,14 @@ namespace OrcamentoAPI.Excel
 
                     encargo.Enc13 = float.Parse(r["13º Salário"].ToString());
                     encargo.Ferias = float.Parse(r["Férias"].ToString());
-                    //encargo.SistemaS = float.Parse(r["Sistema S"].ToString());
                     encargo.FGTS = float.Parse(r["FGTS"].ToString());
                     encargo.INSS = float.Parse(r["INSS"].ToString());
                     encargo.AvisoPrevio = float.Parse(r["Aviso Prévio"].ToString());
+                    encargo.INCRA = float.Parse(r["INCRA"].ToString());
+                    encargo.SalEducacao = float.Parse(r["Salário Educação"].ToString());
+                    encargo.Sebrae = float.Parse(r["Sebrae"].ToString());
+                    encargo.Senai = float.Parse(r["Senai"].ToString());
+                    encargo.SESI = float.Parse(r["SESI"].ToString());
 
                     l++;
 
@@ -463,253 +462,6 @@ namespace OrcamentoAPI.Excel
             return db.CargaHoraria.Count(x => x.CargaHorariaCod == cargaHoraria) > 0;
         }
 
-        /*private void ImportacaoCRsEnvio(DataSet ds)
-        {
-            int l = 2;
-            try { 
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-
-                    if (r["Código CR"] == null || r["Código CR"].ToString() == "")
-                        break;
-
-                    if (!CRExists(r["Código CR"].ToString()))
-                        throw new CRNaoEncontradoException(r["Código CR"].ToString(), ds.DataSetName, l);
-
-                    if (db.Usuario.Find(r["Gestor do CR"].ToString()) == null)
-                        throw new UsuarioNaoEncontradoException(r["Gestor do CR"].ToString(), ds.DataSetName, l);
-
-                    if (db.CriterioRateio.Find(int.Parse(r["Código do Critério de Rateio"].ToString())) == null)
-                        throw new CriterioRateioNaoEncontradoException(int.Parse(r["Código do Critério de Rateio"].ToString()), ds.DataSetName, l);
-
-                    CREnvio cr = new CREnvio
-                    {
-                        CodigoCR = r["Código CR"].ToString(),
-                        CGResponsavel = r["Gestor do CR"].ToString(),
-                        CodigoConta = r["Código da Conta"].ToString(),
-                        IdCriterioRateio = int.Parse(r["Código do Critério de Rateio"].ToString())
-                    };
-
-                    if (CREnvioExists(cr.CodigoCR))
-                        db.Entry(cr).State = System.Data.Entity.EntityState.Modified;
-                    else
-                        db.Entry(cr).State = System.Data.Entity.EntityState.Added;
-
-                    l++;
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-
-        }
-
-        private void ImportacaoCRsPorGrupo(DataSet ds)
-        {
-            int l = 2;
-            //db.Database.ExecuteSqlCommand("delete from CRGrupoRateio");
-            try { 
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-
-                    if (r["Código do CR"] == null || r["Código do CR"].ToString() == "")
-                        break;
-
-                    CR c = db.CR.Find(r["Código do CR"].ToString());
-                    if (c == null)
-                        throw new CRNaoEncontradoException(r["Código do CR"].ToString(), ds.DataSetName, l);
-
-                    else
-                    {
-                        GrupoRateio g = db.GrupoRateio.Find(int.Parse(r["Código do Grupo"].ToString()));
-                        if (g == null)
-                            throw new GrupoRateioNaoEncontradoException(int.Parse(r["Código do Grupo"].ToString()), ds.DataSetName, l);
-                        else {
-                            //Método Contains não está funcionando. Acho que é porque o código não é um varchar, e quando CR é recuperado, Código é truncado.
-                            bool existe = false;
-                            foreach (CR cr in g.CRs) { 
-                                if (cr.Codigo.Trim() == c.Codigo.Trim())
-                                {
-                                    existe = true;
-                                    break;
-                                }
-                            }
-                            if (!existe) g.CRs.Add(c);
-                        }
-                    }
-                    db.Entry(c).State = System.Data.Entity.EntityState.Modified;
-                    l++;
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-        }
-
-        private void ImportacaoValoresRateio(DataSet ds)
-        {
-            int l = 2;
-            db.Database.ExecuteSqlCommand("delete from UnidadeRateio where IdMesRateio = {0} and IdCriterio != 1", IdMes);
-            try
-            {
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (r["CR"] == null || r["CR"].ToString() == "")
-                        break;
-
-                    CR c = db.CR.Find(r["CR"].ToString());
-                    if (c == null)
-                        throw new CRNaoEncontradoException(r["CR"].ToString(), ds.DataSetName, l);
-
-
-                    if (db.CriterioRateio.Find(int.Parse(r["Código do Critério de Rateio"].ToString())) == null)
-                        throw new CriterioRateioNaoEncontradoException(int.Parse(r["Código do Critério de Rateio"].ToString()), ds.DataSetName, l);
-
-                    UnidadeRateio u = new UnidadeRateio
-                    {
-                        CRRecebimento = r["CR"].ToString(),
-                        IdMesRateio = IdMes,
-                        IdCriterio = int.Parse(r["Código do Critério de Rateio"].ToString()),
-                        Qtda = float.Parse(r["Valor/Percentual"].ToString())
-                    };
-                    db.UnidadeRateio.Add(u);
-                    l++;
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-        }
-
-        private void ImportacaoRateioPorGrupo(DataSet ds)
-        {
-            int l = 2;
-            db.Database.ExecuteSqlCommand("delete from RateioPorGrupo where IdMesRateio = {0}", IdMes);
-            try { 
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (r["CR de Envio"] == null || r["CR de Envio"].ToString() == "")
-                        break;
-
-                    if (db.GrupoRateio.Find(int.Parse(r["Grupo"].ToString())) == null)
-                        throw new GrupoRateioNaoEncontradoException(int.Parse(r["Grupo"].ToString()), ds.DataSetName, l);
-
-                    if (db.CREnvio.Find(r["CR de Envio"].ToString()) == null)
-                        throw new CREnvioNaoEncontradoException(r["CR de Envio"].ToString(), ds.DataSetName, l);
-
-                    RateioPorGrupo ra = new RateioPorGrupo
-                    {
-                        CREnvio = r["CR de Envio"].ToString(),
-                        IdMesRateio = IdMes,
-                        IdGrupo = int.Parse(r["Grupo"].ToString()),
-                        Percentual = float.Parse(r["Percentual"].ToString())
-                    };
-                    db.RateioPorGrupo.Add(ra);
-                    l++;
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-
-        }
-
-        private void ImportacaoRateioManual(DataSet ds)
-        {
-            int l = 2;
-            bool notIsAdmin = !user.IsInRole("Administrador");
-            Usuario u = null;
-            if (notIsAdmin)
-                u = db.Usuario.Find(user.Identity.Name);
-
-            try { 
-                foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (r["CR de Envio"] == null || r["CR de Envio"].ToString() == "")
-                        break;
-
-                    CREnvio cr = db.CREnvio.Find(r["CR de Envio"].ToString());
-                    if (cr == null)
-                        throw new CRNaoEncontradoException(r["CR de Envio"].ToString(), ds.DataSetName, l);
-
-                    if (notIsAdmin) {
-                        bool existe = false;
-                        foreach (CREnvio c in u.CRsEnvio)
-                        {
-                            if (c.CodigoCR.Trim() == cr.CodigoCR.Trim())
-                            {
-                                existe = true;
-                                break;
-                            }
-                        }
-                        if (!existe)
-                            throw new CRNaoAutorizadoException(cr.CodigoCR, ds.DataSetName, l);
-                    }
-
-                    RateioManual temp = db.RateioManual.Find(cr.CodigoCR, r["CR de Recebimento"].ToString(), IdMes);
-
-                    if (temp == null) {
-                        RateioManual ra = new RateioManual
-                        {
-                            CREnvio = cr.CodigoCR,
-                            CRRecebimento = r["CR de Recebimento"].ToString(),
-                            IdMesRateio = IdMes,
-                            Percentual = float.Parse(r["Percentual"].ToString())
-                        };
-                        db.RateioManual.Add(ra);
-                    } else
-                    {
-                        temp.Percentual = float.Parse(r["Percentual"].ToString());
-                    }
-                    l++;    
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-        }
-
-        private void ImportacaoDePara(DataSet ds)
-        {
-            int l = 2;
-            db.Database.ExecuteSqlCommand("delete from PercentualRateio where IdMesRateio = {0} and (select IdCriterioRateio from CREnvio where CodigoCR = CREnvio) != 1", IdMes);
-            db.Database.ExecuteSqlCommand("delete from DeParaCR where IdMesRateio = {0}", IdMes);
-            try { 
-            foreach (DataRow r in ds.Tables[0].Rows)
-                {
-                    if (r["CR de Envio"] == null || r["CR de Envio"].ToString() == "")
-                        break;
-
-                    CREnvio cr = db.CREnvio.Find(r["CR de Envio"].ToString());
-                    if (cr == null)
-                        throw new CRNaoEncontradoException(r["CR de Envio"].ToString(), ds.DataSetName, l);
-
-                    DeParaCR d = new DeParaCR
-                    {
-                        CREnvio = cr.CodigoCR,
-                        CRRecebimento = r["CR de Recebimento"].ToString(),
-                        IdMesRateio = IdMes
-                    };
-                    db.DeParaCR.Add(d);
-                    l++;
-                }
-            } catch (Exception e)
-            {
-                throw new ExcelException(e.Message, ds.DataSetName, l);
-            }
-        }
-
-        public bool CREnvioExists(string cr)
-        {
-            if (db == null) db = new Contexto();
-            return db.CREnvio.Find(cr) != null;
-        }
-
-        public bool CRExists(string cr)
-        {
-            if (db == null) db = new Contexto();
-            return db.CR.Find(cr) != null;
-        }*/
 
     }
 }

@@ -119,7 +119,7 @@ namespace OrcamentoAPI.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult SaveAll (IEnumerable<Salario> salarios)
         {
-            if (salarios == null) return Ok();
+            if (salarios == null) return;
             foreach (Salario s in salarios)
             {
                 db.Salario.AddOrUpdate(s);

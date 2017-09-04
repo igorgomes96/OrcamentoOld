@@ -48,7 +48,6 @@ namespace OrcamentoAPI.Models
         public virtual Ciclo Ciclo { get; set; }
         public virtual ConvenioMed ConvenioMed { get; set; }
         public virtual ConvenioOdo ConvenioOdo { get; set; }
-        public virtual Filial Filial { get; set; }
         public virtual Variaveis Variaveis { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContratacaoMes> ContratacaoMeses { get; set; }
@@ -57,5 +56,6 @@ namespace OrcamentoAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
         public virtual EscalaTrabalho EscalaTrabalho { get; set; }
+        public virtual Filial Filial { get; set; }
     }
 }

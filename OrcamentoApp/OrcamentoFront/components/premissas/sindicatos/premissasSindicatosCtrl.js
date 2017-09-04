@@ -14,10 +14,10 @@ angular.module('orcamentoApp').controller('premissasSindicatosCtrl', ['reajustes
 				x.PisoSalarial = numberFilter(x.PisoSalarial, 2);
 				x.PercentualReajuste = numberFilter(x.PercentualReajuste * 100, 4);
 				x.MesFechamento = new Date(x.Ano, x.MesFechamento - 1, 1);
-				sindicatosAPI.getSindicato(x.SindicatoCod)
+				/*sindicatosAPI.getSindicato(x.SindicatoCod)
 				.then(function(retorno) {
 					x.SindicatoNome = retorno.data.NomeSindicato;
-				});
+				});*/
 			});
 
 			self.sindicatos = dado.data;
@@ -30,11 +30,15 @@ angular.module('orcamentoApp').controller('premissasSindicatosCtrl', ['reajustes
 		sindicatos.forEach(function(x) {
 			x.PercentualReajuste = x.PercentualReajuste / 100;
 			x.MesFechamento = x.MesFechamento.getMonth() + 1;
-			reajustesAPI.putReajuste(x.SindicatoCod, x.Ano, x);
+			//reajustesAPI.putReajuste(x.SindicatoCod, x.Ano, x);
 		});
-		messagesService.exibeMensagemSucesso('Sindicatos salvos com sucesso!');
+		reajustesAPI.postReajusteSaveAll(sindicatos)
+		.then(function() {
+			messagesService.exibeMensagemSucesso('Reajustes salvos com sucesso!');
+		});
 
 	}
+
 
 	function carregaAnos() {
 		var x = self.filtroAno - 1;

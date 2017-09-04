@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -34,6 +35,32 @@ namespace OrcamentoAPI.Controllers
             }
 
             return Ok(new CidadeDTO(cidade));
+        }
+
+        [HttpPost]
+        [Route("api/Cidades/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll (IEnumerable<Cidade> cidades)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            foreach (Cidade c in cidades)
+            {
+                db.Cidade.AddOrUpdate(c);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/Cidades/5

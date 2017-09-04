@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -26,11 +27,11 @@ namespace OrcamentoAPI.Controllers
         }
 
         // GET: api/ReajConvenioMedicos/5
-        [Route("api/ReajConvenioMedicos/{ano}/{plano}")]
+        [Route("api/ReajConvenioMedicos/{ano}/{plano}/{mes}")]
         [ResponseType(typeof(ReajConvenioMedDTO))]
-        public IHttpActionResult GetReajConvenioMed(int ano, int plano)
+        public IHttpActionResult GetReajConvenioMed(int ano, int plano, int mes)
         {
-            ReajConvenioMed reajConvenioMed = db.ReajConvenioMed.Find(ano, plano);
+            ReajConvenioMed reajConvenioMed = db.ReajConvenioMed.Find(ano, plano, mes);
             if (reajConvenioMed == null)
             {
                 return NotFound();
@@ -39,17 +40,43 @@ namespace OrcamentoAPI.Controllers
             return Ok(new ReajConvenioMedDTO(reajConvenioMed));
         }
 
-        // PUT: api/ReajConvenioMedicos/5
-        [Route("api/ReajConvenioMedicos/{ano}/{plano}")]
+        [HttpPost]
+        [Route("api/ReajConvenioMedicos/SaveAll")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutReajConvenioMed(int ano, int plano, ReajConvenioMed reajConvenioMed)
+        public IHttpActionResult SaveAll (IEnumerable<ReajConvenioMed> reajustes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (ano != reajConvenioMed.Ano || plano != reajConvenioMed.ConvenioMedCod)
+            foreach (ReajConvenioMed r in reajustes)
+            {
+                db.ReajConvenioMed.AddOrUpdate(r);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
+        }
+
+        // PUT: api/ReajConvenioMedicos/5
+        [Route("api/ReajConvenioMedicos/{ano}/{plano}/{mes}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutReajConvenioMed(int ano, int plano, int mes, ReajConvenioMed reajConvenioMed)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (ano != reajConvenioMed.Ano || plano != reajConvenioMed.ConvenioMedCod || mes != reajConvenioMed.MesReajuste)
             {
                 return BadRequest();
             }
@@ -62,7 +89,7 @@ namespace OrcamentoAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReajConvenioMedExists(ano, plano))
+                if (!ReajConvenioMedExists(ano, plano, mes))
                 {
                     return NotFound();
                 }
@@ -92,7 +119,7 @@ namespace OrcamentoAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (ReajConvenioMedExists(reajConvenioMed.Ano, reajConvenioMed.ConvenioMedCod))
+                if (ReajConvenioMedExists(reajConvenioMed.Ano, reajConvenioMed.ConvenioMedCod, reajConvenioMed.MesReajuste))
                 {
                     return Conflict();
                 }
@@ -106,11 +133,11 @@ namespace OrcamentoAPI.Controllers
         }
 
         // DELETE: api/ReajConvenioMedicos/5
-        [Route("api/ReajConvenioMedicos/{ano}/{plano}")]
+        [Route("api/ReajConvenioMedicos/{ano}/{plano}/{mes}")]
         [ResponseType(typeof(ReajConvenioMedDTO))]
-        public IHttpActionResult DeleteReajConvenioMed(int ano, int plano)
+        public IHttpActionResult DeleteReajConvenioMed(int ano, int plano, int mes)
         {
-            ReajConvenioMed reajConvenioMed = db.ReajConvenioMed.Find(ano, plano);
+            ReajConvenioMed reajConvenioMed = db.ReajConvenioMed.Find(ano, plano, mes);
             if (reajConvenioMed == null)
             {
                 return NotFound();
@@ -132,9 +159,9 @@ namespace OrcamentoAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ReajConvenioMedExists(int ano, int plano)
+        private bool ReajConvenioMedExists(int ano, int plano, int mes)
         {
-            return db.ReajConvenioMed.Count(e => e.Ano == ano && e.ConvenioMedCod == plano) > 0;
+            return db.ReajConvenioMed.Count(e => e.Ano == ano && e.ConvenioMedCod == plano && e.MesReajuste == mes) > 0;
         }
     }
 }

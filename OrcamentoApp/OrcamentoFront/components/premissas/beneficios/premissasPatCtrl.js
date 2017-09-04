@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('premissasPatCtrl', ['patAPI', 'sindicatosAPI', 'numberFilter', function(patAPI, sindicatosAPI, numberFilter) {
+angular.module('orcamentoApp').controller('premissasPatCtrl', ['patAPI', 'sindicatosAPI', 'numberFilter', 'messagesService', function(patAPI, sindicatosAPI, numberFilter, messagesService) {
 
 	var self = this;
 	self.pats = [];
@@ -9,14 +9,21 @@ angular.module('orcamentoApp').controller('premissasPatCtrl', ['patAPI', 'sindic
 			dado.data.forEach(function(x) {
 
 				x.Valor = numberFilter(x.Valor, 2);
-				sindicatosAPI.getSindicato(x.SindicatoCod)
+				/*sindicatosAPI.getSindicato(x.SindicatoCod)
 				.then(function(retorno) {
 					x.Sindicato = retorno.data;
-				});
+				});*/
 
 			});
 
 			self.pats = dado.data;
+		});
+	}
+
+	self.saveAll = function(pats) {
+		patAPI.postPATSaveAll(pats)
+		.then(function() {
+			messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
 		});
 	}
 

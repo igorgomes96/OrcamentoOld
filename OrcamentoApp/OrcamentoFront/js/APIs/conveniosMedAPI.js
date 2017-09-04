@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('conveniosMedAPI', ['$http', 'config', fu
         return $http.get(config.baseUrl + resource + '/' + id);
     }
 
+    self.postConveniosMedSaveAll = function(conveniosMed) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', conveniosMed);
+    }
+
     self.postConveniosMed = function(conveniosMed) {
         return $http.post(config.baseUrl + resource, conveniosMed);
     }

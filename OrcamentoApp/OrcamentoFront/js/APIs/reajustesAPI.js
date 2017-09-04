@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('reajustesAPI', ['$http', 'config', funct
         return $http.get(config.baseUrl + resource + '/' + codSindicato + '/' + ano);
     }
 
+    self.postReajusteSaveAll = function(reajustes) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', reajustes);
+    }
+
     self.postReajuste = function(reajuste) {
         return $http.post(config.baseUrl + resource, reajuste);
     }

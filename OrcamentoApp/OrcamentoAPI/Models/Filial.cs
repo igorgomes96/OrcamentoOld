@@ -17,21 +17,22 @@ namespace OrcamentoAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Filial()
         {
+            this.Contratacao = new HashSet<Contratacao>();
             this.Funcionario = new HashSet<Funcionario>();
             this.Salario = new HashSet<Salario>();
             this.SimulacaoContratacao = new HashSet<SimulacaoContratacao>();
-            this.Contratacao = new HashSet<Contratacao>();
             this.SolicitacaoContratacao = new HashSet<SolicitacaoContratacao>();
         }
     
         public int EmpresaCod { get; set; }
         public string CidadeNome { get; set; }
-        public float AvisoPrevio { get; set; }
         public float FAP { get; set; }
         public Nullable<int> SindicatoCod { get; set; }
         public float SAT { get; set; }
     
         public virtual Cidade Cidade { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contratacao> Contratacao { get; set; }
         public virtual Empresa Empresa { get; set; }
         public virtual Sindicato Sindicato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -40,8 +41,6 @@ namespace OrcamentoAPI.Models
         public virtual ICollection<Salario> Salario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimulacaoContratacao> SimulacaoContratacao { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contratacao> Contratacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitacaoContratacao> SolicitacaoContratacao { get; set; }
     }

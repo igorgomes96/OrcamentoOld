@@ -234,7 +234,6 @@
     </Key>
     <Property Name="EmpresaCod" Type="int" Nullable="false" />
     <Property Name="CidadeNome" Type="varchar" MaxLength="60" Nullable="false" />
-    <Property Name="AvisoPrevio" Type="real" Nullable="false" />
     <Property Name="FAP" Type="real" Nullable="false" />
     <Property Name="SindicatoCod" Type="int" />
     <Property Name="SAT" Type="real" Nullable="false" />

@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('premissasVariaveisCtrl', ['variaveisAPI', 'empresasAPI', 'cargosAPI', 'numberFilter', function(variaveisAPI, empresasAPI, cargosAPI, numberFilter) {
+angular.module('orcamentoApp').controller('premissasVariaveisCtrl', ['variaveisAPI', 'empresasAPI', 'cargosAPI', 'numberFilter', 'messagesService', function(variaveisAPI, empresasAPI, cargosAPI, numberFilter, messagesService) {
 
 	var self = this;
 	self.variaveis = [];
@@ -15,7 +15,7 @@ angular.module('orcamentoApp').controller('premissasVariaveisCtrl', ['variaveisA
 				x.ParticipacaoLucros = numberFilter(x.ParticipacaoLucros, 2);
 				x.RemuneracaoVariavel = numberFilter(x.RemuneracaoVariavel, 2);
 				
-				empresasAPI.getEmpresa(x.EmpresaCod)
+				/*empresasAPI.getEmpresa(x.EmpresaCod)
 				.then(function(retorno) {
 					x.Empresa = retorno.data;
 				});
@@ -23,12 +23,19 @@ angular.module('orcamentoApp').controller('premissasVariaveisCtrl', ['variaveisA
 				cargosAPI.getCargo(x.CargoCod)
 				.then(function(retorno) {
 					x.Cargo = retorno.data;
-				});
+				});*/
 
 			});
 
 			self.variaveis = dado.data;
 
+		});
+	}
+
+	self.saveAll = function(variaveis) {
+		variaveisAPI.postVariaveisSaveAll(variaveis)
+		.then(function() {
+			messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
 		});
 	}
 

@@ -19,10 +19,14 @@ namespace OrcamentoAPI.DTO
             Faixa2 = s.Faixa2;
             Faixa3 = s.Faixa3;
             Faixa4 = s.Faixa4;
+            if (s.Variaveis.Cargo != null) NomeCargo = s.Variaveis.Cargo.NomeCargo;
+            if (s.Filial.Empresa != null) NomeEmpresa = s.Filial.Empresa.Nome;
         }
         public int CargoCod { get; set; }
+        public string NomeCargo { get; set; }
         public int CargaHoraria { get; set; }
         public int EmpresaCod { get; set; }
+        public string NomeEmpresa { get; set; }
         public string CidadeNome { get; set; }
         public Nullable<float> Faixa1 { get; set; }
         public Nullable<float> Faixa2 { get; set; }

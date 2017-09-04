@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('cidadesAPI', ['$http', 'config', functio
         return $http.get(config.baseUrl + resource + '/' + id);
     }
 
+    self.postCidadeSaveAll = function(cidades) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', cidades);
+    }
+
     self.postCidade = function(cidade) {
         return $http.post(config.baseUrl + resource, cidade);
     }

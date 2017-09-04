@@ -79,7 +79,6 @@ namespace OrcamentoAPI.Models
         public virtual DbSet<ValoresAbertosContratacao> ValoresAbertosContratacao { get; set; }
         public virtual DbSet<CalculoEventoContratacao> CalculoEventoContratacao { get; set; }
         public virtual DbSet<Variaveis> Variaveis { get; set; }
-        public virtual DbSet<Filial> Filial { get; set; }
         public virtual DbSet<Simulacao> Simulacao { get; set; }
         public virtual DbSet<SimulacaoContratacao> SimulacaoContratacao { get; set; }
         public virtual DbSet<SimulacaoDemissao> SimulacaoDemissao { get; set; }
@@ -91,6 +90,7 @@ namespace OrcamentoAPI.Models
         public virtual DbSet<SalarioMinimo> SalarioMinimo { get; set; }
         public virtual DbSet<Contratacao> Contratacao { get; set; }
         public virtual DbSet<EscalaTrabalho> EscalaTrabalho { get; set; }
+        public virtual DbSet<Filial> Filial { get; set; }
     
         public virtual int CalculaCustoPessoa(string matricula, Nullable<int> codCiclo)
         {

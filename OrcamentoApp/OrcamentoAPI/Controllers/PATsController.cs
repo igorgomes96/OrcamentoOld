@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -37,6 +38,32 @@ namespace OrcamentoAPI.Controllers
             }
 
             return Ok(new PATDTO(pAT));
+        }
+
+        [HttpPost]
+        [Route("api/PATs/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll (IEnumerable<PAT> pats)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            foreach (PAT p in pats)
+            {
+                db.PAT.AddOrUpdate(p);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/PATs/5

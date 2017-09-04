@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('variaveisAPI', ['$http', 'config', funct
         return $http.get(config.baseUrl + resource + '/' + id);
     }
 
+    self.postVariaveisSaveAll = function(variaveis) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', variaveis);
+    }
+
     self.postVariaveis = function(variaveis) {
         return $http.post(config.baseUrl + resource, variaveis);
     }

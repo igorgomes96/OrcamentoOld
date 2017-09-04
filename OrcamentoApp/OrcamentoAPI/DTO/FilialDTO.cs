@@ -12,7 +12,6 @@ namespace OrcamentoAPI.DTO
             if (f == null) return;
             EmpresaCod = f.EmpresaCod;
             CidadeNome = f.CidadeNome;
-            AvisoPrevio = f.AvisoPrevio;
             FAP = f.FAP;
             SAT = f.SAT;
             SindicatoCod = f.SindicatoCod;
@@ -20,9 +19,8 @@ namespace OrcamentoAPI.DTO
     
         public int EmpresaCod { get; set; }
         public string CidadeNome { get; set; }
-        public Nullable<double> AvisoPrevio { get; set; }
-        public Nullable<double> FAP { get; set; }
-        public Nullable<double> SAT { get; set; }
+        public double FAP { get; set; }
+        public double SAT { get; set; }
         public Nullable<int> SindicatoCod { get; set; }
     
     }

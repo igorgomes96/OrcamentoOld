@@ -1,4 +1,4 @@
-angular.module('orcamentoApp').controller('premissasReajConvenioMedicoCtrl', ['reajConvenioMedicoAPI', 'conveniosMedAPI', 'numberFilter', function(reajConvenioMedicosAPI, conveniosMedAPI, numberFilter) {
+angular.module('orcamentoApp').controller('premissasReajConvenioMedicoCtrl', ['reajConvenioMedicoAPI', 'conveniosMedAPI', 'numberFilter', 'messagesService', function(reajConvenioMedicosAPI, conveniosMedAPI, numberFilter, messagesService) {
 
 	var self = this;
 
@@ -27,14 +27,30 @@ angular.module('orcamentoApp').controller('premissasReajConvenioMedicoCtrl', ['r
 
 				x.PercentualReajuste = numberFilter(x.PercentualReajuste * 100, 2);
 
-				conveniosMedAPI.getConveniosMed(x.ConvenioMedCod)
-				.then(function(retorno) {
-					x.Plano = retorno.data;
-				});
-
 			});
 			self.reajustes = dado.data;
 		});
+	}
+
+	self.saveAll = function(reajustes) {
+		var reaj = angular.copy(reajustes);
+		reaj.forEach(function(x) {
+			x.PercentualReajuste = x.PercentualReajuste / 100;
+		});
+
+		reajConvenioMedicosAPI.postReajConvenioMedicoSaveAll(reaj)
+		.then(function() {
+			messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
+		});
+
+	}
+
+	self.excluir = function(ano, convenio, mes) {
+		reajConvenioMedicosAPI.deleteReajConvenioMedico(ano, convenio, mes)
+		.then(function() {
+			messagesService.exibeMensagemSucesso("Reajuste excluído com sucesso!");
+			self.loadReajustes(self.ano);
+		});	
 	}
 
 	for(var i = -1; i < 5; i++) {

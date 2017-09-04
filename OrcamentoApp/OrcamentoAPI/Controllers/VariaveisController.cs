@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -37,6 +38,31 @@ namespace OrcamentoAPI.Controllers
             }
 
             return Ok(new VariaveisDTO(variaveis));
+        }
+
+        [Route("api/Variaveis/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll (IEnumerable<Variaveis> variaveis)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            foreach (Variaveis v in variaveis)
+            {
+                db.Variaveis.AddOrUpdate(v);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/Variaveis/5

@@ -58,6 +58,7 @@
 
 	<hr>
 
+
 	<div class="row">
 		<div class="col-md-12">
 			
@@ -73,9 +74,9 @@
 		        </thead>
 		        <tbody>
 		            <tr ng-repeat="v in ct.variaveis | filter:ct.filtroExpressao">
-		            	<td>{{v.Cargo.NomeCargo}}</td>
+		            	<td>{{v.NomeCargo}}</td>
 		                <td>{{v.CargaHoraria}} horas</td>
-		                <td>{{v.Empresa.Nome}}</td>
+		                <td>{{v.NomeEmpresa}}</td>
 		                <td>
 		                    <div class="input-group">
 		                        <input type="text" class="form-control input-sm text-right" ng-model="v.ParticipacaoLucros">
@@ -90,7 +91,7 @@
 		        </tbody>
 		    </table>
 
-		    <button class="btn btn-primary" ng-click="ct.saveVariaveis(ct.variaveis)">Salvar</button>
+		    <button class="btn btn-primary" ng-click="ct.saveAll(ct.variaveis)">Salvar</button>
 
 
 		</div>

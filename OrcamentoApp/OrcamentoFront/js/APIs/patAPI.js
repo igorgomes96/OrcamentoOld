@@ -11,6 +11,10 @@ angular.module('orcamentoApp').service('patAPI', ['$http', 'config', function($h
         return $http.get(config.baseUrl + resource + '/' + sindicatoCod + '/' + cargaHoraria);
     }
 
+    self.postPATSaveAll = function(pats) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', pats);
+    }
+
     self.postPAT = function(pat) {
         return $http.post(config.baseUrl + resource, pat);
     }

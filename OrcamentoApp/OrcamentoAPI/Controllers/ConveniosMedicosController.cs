@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OrcamentoAPI.Models;
 using OrcamentoAPI.DTO;
+using System.Data.Entity.Migrations;
 
 namespace OrcamentoAPI.Controllers
 {
@@ -34,6 +35,26 @@ namespace OrcamentoAPI.Controllers
             }
 
             return Ok(new ConvenioMedDTO(convenioMed));
+        }
+
+        [HttpPost]
+        [Route("api/ConveniosMedicos/SaveAll")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult SaveAll (IEnumerable<ConvenioMed> convenios)
+        {
+            foreach (ConvenioMed c in convenios)
+            {
+                db.ConvenioMed.AddOrUpdate(c);
+            }
+            try
+            {
+                db.SaveChanges();
+            } catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            return Ok();
         }
 
         // PUT: api/ConveniosMedicos/5

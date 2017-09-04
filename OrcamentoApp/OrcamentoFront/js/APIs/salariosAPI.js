@@ -17,6 +17,10 @@ angular.module('orcamentoApp').service('salariosAPI', ['$http', 'config', functi
         return $http.get(config.baseUrl + resource + '/' + id);
     }
 
+    self.postSalarioSaveAll = function(salarios) {
+        return $http.post(config.baseUrl + resource + '/SaveAll', salarios);
+    }
+
     self.postSalario = function(salario) {
         return $http.post(config.baseUrl + resource, salario);
     }
