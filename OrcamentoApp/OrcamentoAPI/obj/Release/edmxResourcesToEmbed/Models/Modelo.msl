@@ -578,18 +578,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Filial">
-      <EntityTypeMapping TypeName="OrcamentoModel.Filial">
-        <MappingFragment StoreEntitySet="Filial">
-          <ScalarProperty Name="SAT" ColumnName="SAT" />
-          <ScalarProperty Name="SindicatoCod" ColumnName="SindicatoCod" />
-          <ScalarProperty Name="FAP" ColumnName="FAP" />
-          <ScalarProperty Name="AvisoPrevio" ColumnName="AvisoPrevio" />
-          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
-          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="CalculaCustoPessoa" FunctionName="OrcamentoModel.Store.CalculaCustoPessoa" />
     <EntitySetMapping Name="Simulacao">
       <EntityTypeMapping TypeName="OrcamentoModel.Simulacao">
@@ -717,6 +705,17 @@
         <MappingFragment StoreEntitySet="EscalaTrabalho">
           <ScalarProperty Name="Descricao" ColumnName="Descricao" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filial">
+      <EntityTypeMapping TypeName="OrcamentoModel.Filial">
+        <MappingFragment StoreEntitySet="Filial">
+          <ScalarProperty Name="SAT" ColumnName="SAT" />
+          <ScalarProperty Name="SindicatoCod" ColumnName="SindicatoCod" />
+          <ScalarProperty Name="FAP" ColumnName="FAP" />
+          <ScalarProperty Name="CidadeNome" ColumnName="CidadeNome" />
+          <ScalarProperty Name="EmpresaCod" ColumnName="EmpresaCod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

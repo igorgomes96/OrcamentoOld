@@ -117,12 +117,6 @@
         <AssociationConnector Association="OrcamentoModel.solicitacaoalteracaocargo_anterior_variaveis_fk" />
         <AssociationConnector Association="OrcamentoModel.solicitacaoalteracaocargo_novo_variaveis_fk" />
         <AssociationConnector Association="OrcamentoModel.solicitacaocontratacao_variaveis_fk" />
-        <EntityTypeShape EntityType="OrcamentoModel.Filial" Width="1.5" PointX="6" PointY="25" />
-        <AssociationConnector Association="OrcamentoModel.filial_cidade_fk" />
-        <AssociationConnector Association="OrcamentoModel.filial_empresa_fk" />
-        <AssociationConnector Association="OrcamentoModel.filial_sindicato_fk" />
-        <AssociationConnector Association="OrcamentoModel.funcionario_filial_fk" />
-        <AssociationConnector Association="OrcamentoModel.salario_filial_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.Simulacao" Width="1.5" PointX="20.25" PointY="44" />
         <EntityTypeShape EntityType="OrcamentoModel.SimulacaoContratacao" Width="1.5" PointX="8.25" PointY="37.625" />
         <EntityTypeShape EntityType="OrcamentoModel.SimulacaoDemissao" Width="1.5" PointX="22.5" PointY="42.375" />
@@ -130,7 +124,6 @@
         <AssociationConnector Association="OrcamentoModel.simulacao_centrocusto_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaoconstratacao_conveniomed_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaoconstratacao_convenioodo_fk" />
-        <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_filial_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaodemissao_funcionario_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacao_tiposimulacao_fk" />
         <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_simulacao_fk" />
@@ -168,16 +161,23 @@
         <AssociationConnector Association="OrcamentoModel.contratacao_ciclo_fk" />
         <AssociationConnector Association="OrcamentoModel.contratacao_conveniomed_fk" />
         <AssociationConnector Association="OrcamentoModel.contratacao_convenioodo_fk" />
-        <AssociationConnector Association="OrcamentoModel.contratacao_filial_fk" />
         <AssociationConnector Association="OrcamentoModel.contratacao_variaveis_fk" />
         <AssociationConnector Association="OrcamentoModel.contratacaomes_contratacao_fk" />
         <AssociationConnector Association="OrcamentoModel.hecontratacao_contratacao_fk" />
         <AssociationConnector Association="OrcamentoModel.valoresabertoscontratacao_contratacao_fk" />
-        <AssociationConnector Association="OrcamentoModel.solicitacaocontratacao_filial_fk" />
         <EntityTypeShape EntityType="OrcamentoModel.EscalaTrabalho" Width="1.5" PointX="9" PointY="25.75" />
         <AssociationConnector Association="OrcamentoModel.contratacao_escalatrabalho_fk" />
         <AssociationConnector Association="OrcamentoModel.funcionario_escalatrabalho_fk" />
         <AssociationConnector Association="OrcamentoModel.qtdadias_escalatrabalho_fk" />
+        <EntityTypeShape EntityType="OrcamentoModel.Filial" Width="1.5" PointX="6" PointY="24.5" />
+        <AssociationConnector Association="OrcamentoModel.filial_cidade_fk" />
+        <AssociationConnector Association="OrcamentoModel.contratacao_filial_fk" />
+        <AssociationConnector Association="OrcamentoModel.filial_empresa_fk" />
+        <AssociationConnector Association="OrcamentoModel.filial_sindicato_fk" />
+        <AssociationConnector Association="OrcamentoModel.funcionario_filial_fk" />
+        <AssociationConnector Association="OrcamentoModel.salario_filial_fk" />
+        <AssociationConnector Association="OrcamentoModel.simulacaocontratacao_filial_fk" />
+        <AssociationConnector Association="OrcamentoModel.solicitacaocontratacao_filial_fk" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

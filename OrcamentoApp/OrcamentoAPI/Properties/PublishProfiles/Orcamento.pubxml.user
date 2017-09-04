@@ -6,14 +6,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\igorago\Documents\GitHub\Orcamento\OrcamentoApp\OrcamentoAPI\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\igorago\Documents\GitHub\Orcamento\OrcamentoAPI\OrcamentoAPI\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/04/2017 11:23:13</publishTime>
+      <publishTime>09/04/2017 15:23:32</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/04/2017 11:23:13</publishTime>
+      <publishTime>09/04/2017 15:23:32</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/28/2017 09:01:16</publishTime>
@@ -31,7 +31,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/28/2017 09:01:20</publishTime>
     </File>
     <File Include="bin/OrcamentoApp.dll">
-      <publishTime>09/04/2017 11:14:00</publishTime>
+      <publishTime>09/04/2017 15:23:19</publishTime>
     </File>
     <File Include="bin/PagedList.dll">
       <publishTime>08/28/2017 09:01:20</publishTime>
@@ -181,13 +181,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/28/2017 09:01:13</publishTime>
     </File>
     <File Include="Models/Modelo.edmx.diagram">
-      <publishTime>09/04/2017 07:43:34</publishTime>
+      <publishTime>09/04/2017 12:12:33</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/28/2017 09:01:16</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/04/2017 11:23:06</publishTime>
+      <publishTime>09/04/2017 15:23:22</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>09/04/2017 11:14:00</publishTime>
