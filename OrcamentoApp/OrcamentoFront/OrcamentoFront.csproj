@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{16A1D6FD-29DE-4555-A357-285DE9AED4B8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrcamentoFront</RootNamespace>
+    <AssemblyName>OrcamentoFront</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="components\autenticacao\autenticacao.html" />
+    <Content Include="components\autenticacao\autenticacaoCtrl.js" />
+    <Content Include="components\autenticacao\unauthenticated.html" />
+    <Content Include="components\dashboard\dashboard.html" />
+    <Content Include="components\dashboard\dashboardCtrl.js" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaBase.html" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaBaseCtrl.js" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaContratacoes.html" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaContratacoesCtrl.js" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaVerbasGerais.html" />
+    <Content Include="components\dashboard\resumoFolha\resumoFolhaVerbasGeraisCtrl.js" />
+    <Content Include="components\home\containerHome.html" />
+    <Content Include="components\home\containerHomeCtrl.js" />
+    <Content Include="components\home\homeAdministrador.html" />
+    <Content Include="components\home\selecaoCiclo.html" />
+    <Content Include="components\home\selecaoCicloCtrl.js" />
+    <Content Include="components\home\selecaoModulo.html" />
+    <Content Include="components\home\selecaoModuloCtrl.js" />
+    <Content Include="components\menuContainer\menuContainer.html" />
+    <Content Include="components\navigation\navigation.html" />
+    <Content Include="components\navigation\navigationCtrl.js" />
+    <Content Include="components\orcamentoFiltros\orcamentoFiltros.html" />
+    <Content Include="components\orcamentoFiltros\orcamentoFiltrosCtrl.js" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\adNoturno.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\desligamentos.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\ferias.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\horasExtras.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\info.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\outros.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\pessoalBase.html" />
+    <Content Include="components\pessoalOrcamento\pessoalBase\pessoalBaseCtrl.js" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\adNoturno.html" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\contratacoes.html" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\horasExtras.html" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\outros.html" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\pessoalContratacoes.html" />
+    <Content Include="components\pessoalOrcamento\pessoalContratacoes\pessoalContratacoesCtrl.js" />
+    <Content Include="components\pessoalOrcamento\pessoalOrcamento.html" />
+    <Content Include="components\pessoalOrcamento\pessoalOrcamentoCtrl.js" />
+    <Content Include="components\pessoalOrcamento\pessoalTransferencias\pessoalTransferenciasCtrl.js" />
+    <Content Include="components\pessoalOrcamento\pessoalTransferencias\pessoalTransferenciasEnviadas.html" />
+    <Content Include="components\pessoalOrcamento\pessoalTransferencias\pessoalTransferenciasRecebidas.html" />
+    <Content Include="components\pessoalOrcamento\valoresPorCR\valoresPorCR.html" />
+    <Content Include="components\pessoalOrcamento\valoresPorCR\valoresPorCRCtrl.js" />
+    <Content Include="components\premissas\beneficios\premissasBeneficios.html" />
+    <Content Include="components\premissas\beneficios\premissasConvenioMedico.html" />
+    <Content Include="components\premissas\beneficios\premissasConvenioMedicoCtrl.js" />
+    <Content Include="components\premissas\beneficios\premissasPat.html" />
+    <Content Include="components\premissas\beneficios\premissasPatCtrl.js" />
+    <Content Include="components\premissas\beneficios\premissasReajConvenioMedico.html" />
+    <Content Include="components\premissas\beneficios\premissasReajConvenioMedicoCtrl.js" />
+    <Content Include="components\premissas\beneficios\premissasVariaveis.html" />
+    <Content Include="components\premissas\beneficios\premissasVariaveisCtrl.js" />
+    <Content Include="components\premissas\beneficios\premissasVT.html" />
+    <Content Include="components\premissas\beneficios\premissasVTCtrl.js" />
+    <Content Include="components\premissas\cargosSalarios\premissasCargos.html" />
+    <Content Include="components\premissas\cargosSalarios\premissasCargosCtrl.js" />
+    <Content Include="components\premissas\cargosSalarios\premissasCargosSalarios.html" />
+    <Content Include="components\premissas\cargosSalarios\premissasSalarios.html" />
+    <Content Include="components\premissas\encargos\encargos.html" />
+    <Content Include="components\premissas\encargos\encargosPorEmpresa.html" />
+    <Content Include="components\premissas\encargos\encargosPorEmpresaCtrl.js" />
+    <Content Include="components\premissas\encargos\encargosPorFilial.html" />
+    <Content Include="components\premissas\encargos\encargosPorFilialCtrl.js" />
+    <Content Include="components\premissas\premissasCtrl.js" />
+    <Content Include="components\premissas\sindicatos\premissasSindicatos.html" />
+    <Content Include="components\premissas\sindicatos\premissasSindicatosContainer.html" />
+    <Content Include="components\premissas\sindicatos\premissasSindicatosCtrl.js" />
+    <Content Include="components\simulacoes\container.html" />
+    <Content Include="components\simulacoes\simulacoes.html" />
+    <Content Include="components\simulacoes\simulacoesContratacao\simulacoesContratacao.html" />
+    <Content Include="components\simulacoes\simulacoesContratacao\simulacoesContratacaoCtrl.js" />
+    <Content Include="components\simulacoes\simulacoesCtrl.js" />
+    <Content Include="components\simulacoes\simulacoesDemissao\simulacoesDemissao.html" />
+    <Content Include="components\simulacoes\simulacoesDemissao\simulacoesDemissaoCtrl.js" />
+    <Content Include="components\simulacoes\simulacoesHistorico\simulacoesHistorico.html" />
+    <Content Include="components\simulacoes\simulacoesHistorico\simulacoesHistoricoCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTH.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHAlteracoes\solicitacoesTHAlteracoesCargo.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHAlteracoes\solicitacoesTHAlteracoesCargoSalario.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHAlteracoes\solicitacoesTHAlteracoesCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHAlteracoes\solicitacoesTHAlteracoesSalario.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHContratacoes\solicitacoesTHContratacoes.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHContratacoes\solicitacoesTHContratacoesCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHDemissoes\solicitacoesTHDemissoes.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHDemissoes\solicitacoesTHDemissoesCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHFila\solicitacoesTHFila.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHHistorico\solicitacoesTHHistorico.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHHistorico\solicitacoesTHHistoricoCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHOutros\solicitacoesTHOutros.html" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHOutros\solicitacoesTHOutrosCtrl.js" />
+    <Content Include="components\solicitacoesTH\solicitacoesTHSolicitacoes\solicitacoesTHSolicitacoes.html" />
+    <Content Include="components\temp\simulacoes.html" />
+    <Content Include="components\usuarios\containerUsuarios.html" />
+    <Content Include="components\usuarios\gestaoUsuariosCtrl.js" />
+    <Content Include="components\usuarios\usuarios.html" />
+    <Content Include="css\sb-admin-2.css" />
+    <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="css\styles.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="index.html" />
+    <Content Include="js\APIs\actsAPI.js" />
+    <Content Include="js\APIs\adNoturnosBaseAPI.js" />
+    <Content Include="js\APIs\adNoturnosContratacoesAPI.js" />
+    <Content Include="js\APIs\autenticacaoAPI.js" />
+    <Content Include="js\APIs\calculosEventosBaseAPI.js" />
+    <Content Include="js\APIs\calculosEventosContratacoesAPI.js" />
+    <Content Include="js\APIs\cargosAPI.js" />
+    <Content Include="js\APIs\centrosCustosAPI.js" />
+    <Content Include="js\APIs\ciclosAPI.js" />
+    <Content Include="js\APIs\cidadesAPI.js" />
+    <Content Include="js\APIs\contratacoesAPI.js" />
+    <Content Include="js\APIs\contratacoesMesAPI.js" />
+    <Content Include="js\APIs\conveniosMedAPI.js" />
+    <Content Include="js\APIs\diasIndenizadosAPI.js" />
+    <Content Include="js\APIs\empresasAPI.js" />
+    <Content Include="js\APIs\encargosAPI.js" />
+    <Content Include="js\APIs\eventosFolhaAPI.js" />
+    <Content Include="js\APIs\feriasPorCRsAPI.js" />
+    <Content Include="js\APIs\filiaisAPI.js" />
+    <Content Include="js\APIs\funcionariosAPI.js" />
+    <Content Include="js\APIs\funcionariosFeriasAPI.js" />
+    <Content Include="js\APIs\hesBaseAPI.js" />
+    <Content Include="js\APIs\hesContratacoesAPI.js" />
+    <Content Include="js\APIs\importacoesAPI.js" />
+    <Content Include="js\APIs\mesesOrcamentoAPI.js" />
+    <Content Include="js\APIs\patAPI.js" />
+    <Content Include="js\APIs\PerfisAcessoAPI.js" />
+    <Content Include="js\APIs\reajConvenioMedicoAPI.js" />
+    <Content Include="js\APIs\reajustesAPI.js" />
+    <Content Include="js\APIs\salariosAPI.js" />
+    <Content Include="js\APIs\setoresAPI.js" />
+    <Content Include="js\APIs\sindicatosAPI.js" />
+    <Content Include="js\APIs\solicitacoesAlteracoesCargosAPI.js" />
+    <Content Include="js\APIs\solicitacoesAlteracoesSalariosAPI.js" />
+    <Content Include="js\APIs\solicitacoesContratacoesAPI.js" />
+    <Content Include="js\APIs\solicitacoesDesligamentosAPI.js" />
+    <Content Include="js\APIs\solicitacoesTHAPI.js" />
+    <Content Include="js\APIs\sthsAPI.js" />
+    <Content Include="js\APIs\tiposCicloAPI.js" />
+    <Content Include="js\APIs\transferenciasAPI.js" />
+    <Content Include="js\APIs\usuariosAPI.js" />
+    <Content Include="js\APIs\valoresAbertosBaseAPI.js" />
+    <Content Include="js\APIs\valoresAbertosContratacoesAPI.js" />
+    <Content Include="js\APIs\valoresAbertosCRsAPI.js" />
+    <Content Include="js\APIs\variaveisAPI.js" />
+    <Content Include="js\app.js" />
+    <Content Include="js\config\interceptorsConfig.js" />
+    <Content Include="js\config\routeConfig.js" />
+    <Content Include="js\filters\ellipsisFilter.js" />
+    <Content Include="js\interceptors\anexaTokenInterceptor.js" />
+    <Content Include="js\interceptors\errorInterceptor.js" />
+    <Content Include="js\sb-admin-2.js" />
+    <Content Include="js\services\localStorageService.js" />
+    <Content Include="js\services\messagesService.js" />
+    <Content Include="js\services\sharedDataService.js" />
+    <Content Include="js\services\sharedDataWithoutInjectionService.js" />
+    <Content Include="js\services\uploadFileService.js" />
+    <Content Include="js\values\configValue.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51736</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51736/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

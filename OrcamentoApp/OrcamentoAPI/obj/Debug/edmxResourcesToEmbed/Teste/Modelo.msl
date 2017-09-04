@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OrcamentoModelTesteStoreContainer" CdmEntityContainer="OrcamentoEntities">
+    <EntitySetMapping Name="ACT">
+      <EntityTypeMapping TypeName="OrcamentoModelTeste.ACT">
+        <MappingFragment StoreEntitySet="ACT">
+          <ScalarProperty Name="CodigoACT" ColumnName="CodigoACT" />
+          <ScalarProperty Name="SolicitacaoCod" ColumnName="SolicitacaoCod" />
+          <ScalarProperty Name="DataAbertura" ColumnName="DataAbertura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
