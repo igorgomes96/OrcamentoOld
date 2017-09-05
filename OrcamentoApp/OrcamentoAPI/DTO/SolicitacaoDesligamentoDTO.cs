@@ -8,7 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SolicitacaoDesligamentoDTO
     {
-
+        public SolicitacaoDesligamentoDTO() { }
         public SolicitacaoDesligamentoDTO(SolicitacaoDesligamento s)
         {
             if (s == null) return;

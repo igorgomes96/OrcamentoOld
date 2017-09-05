@@ -9,7 +9,13 @@ namespace OrcamentoAPI.DTO
     public class FuncionarioHEsDTO
     {
         private Contexto db;
-        public FuncionarioHEsDTO() { }
+        public FuncionarioHEsDTO() {
+            HEs170 = new HashSet<QtdaHorasMesDTO>();
+            HEs100 = new HashSet<QtdaHorasMesDTO>();
+            HEs75 = new HashSet<QtdaHorasMesDTO>();
+            HEs60 = new HashSet<QtdaHorasMesDTO>();
+            HEs50 = new HashSet<QtdaHorasMesDTO>();
+        }
 
         public FuncionarioHEsDTO(Funcionario f, Ciclo c)
         {

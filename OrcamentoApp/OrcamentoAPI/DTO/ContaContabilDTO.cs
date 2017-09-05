@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class ContaContabilDTO
     {
+        public ContaContabilDTO() { }
         public ContaContabilDTO(ContaContabil c)
         {
             if (c == null) return;

@@ -1,0 +1,54 @@
+<ui-panel titulo="Encargos por Filial" nome="panel-por-filial">
+
+	<table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <th width="12%">
+                    <input type="text" class="form-control input-sm" ng-model="ct.filtro.codEmpresa" placeholder="Filtrar por Cód. Empresa" ng-model-options="{debounce: 600}">
+                </th>
+                <th width="20%">
+                    <input type="text" class="form-control input-sm" ng-model="ct.filtro.nomeEmpresa" placeholder="Filtrar por nome da Empresa" ng-model-options="{debounce: 600}">
+                </th>
+                <th width="25%">
+                    <input type="text" class="form-control input-sm" ng-model="ct.filtro.cidade" placeholder="Filtrar pela cidade" ng-model-options="{debounce: 600}">
+                </th>
+                <th width="25%">
+                    <input type="text" class="form-control input-sm" ng-model="ct.filtro.sindicato" placeholder="Filtrar pelo sindicato" ng-model-options="{debounce: 600}">
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>Cód. Empresa</th>
+                <th>Empresa</th>
+                <th>Cidade</th>
+                <th>Sindicato</th>
+                <th class="text-center">SAT</th>
+                <th class="text-center">FAP</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="e in ct.encargos | filter:{EmpresaCod: ct.filtro.codEmpresa} | filter:{NomeEmpresa: ct.filtro.nomeEmpresa} | filter:{CidadeNome:ct.filtro.cidade} | filter:{NomeSindicato:ct.filtro.sindicato}">
+        		<td>{{e.EmpresaCod}}</td>
+        		<td>{{e.NomeEmpresa}}</td>
+        		<td>{{e.CidadeNome}}</td>
+        		<td>{{e.NomeSindicato}}</td>
+        		<td>
+        			<div class="input-group">
+                        <input type="text" class="form-control input-sm text-right" ng-model="e.SAT">
+                        <span class="input-group-addon">%</span>
+                    </div>
+        		</td>
+        		<td>
+        			<div class="input-group">
+                        <input type="text" class="form-control input-sm text-right" ng-model="e.FAP">
+                        <span class="input-group-addon">%</span>
+                    </div>
+        		</td>
+        	</tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary" ng-click="ct.saveEncargos(ct.encargos)">Salvar</button>
+
+</ui-panel>

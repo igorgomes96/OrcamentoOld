@@ -7,6 +7,8 @@ namespace OrcamentoAPI.DTO
     
     public partial class CargoDTO
     {
+        public CargoDTO() { }
+        
         public CargoDTO(Cargo c)
         {
             if (c == null) return;

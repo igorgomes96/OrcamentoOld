@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class UsuarioDTO
     {
+        public UsuarioDTO() { }
         public UsuarioDTO (Usuario u)
         {
             if (u == null) return;

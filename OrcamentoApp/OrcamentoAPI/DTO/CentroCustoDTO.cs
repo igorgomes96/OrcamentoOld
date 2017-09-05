@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class CentroCustoDTO
     {
+        public CentroCustoDTO() { }
         public CentroCustoDTO(CentroCusto c)
         {
             if (c == null) return;

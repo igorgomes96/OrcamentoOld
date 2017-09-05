@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class PerfilAcessoDTO
     {
+        public PerfilAcessoDTO() { }
         public PerfilAcessoDTO(PerfilAcesso p)
         {
             if (p == null) return;

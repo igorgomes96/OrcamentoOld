@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class VariaveisDTO
     {
+        public VariaveisDTO() { }
         public VariaveisDTO(Variaveis v)
         {
             if (v == null) return;

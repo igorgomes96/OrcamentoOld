@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class NivelDTO
     {
+        public NivelDTO() { }
         public NivelDTO(Nivel n)
         {
             if (n == null) return;

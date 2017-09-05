@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class ReajusteDTO
     {
+        public ReajusteDTO() { }
         public ReajusteDTO (Reajuste r)
         {
             if (r == null) return;

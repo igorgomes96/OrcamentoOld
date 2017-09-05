@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class CHCargoDTO
     {
+
         public CHCargoDTO()
         {
             CHs = new List<int>();

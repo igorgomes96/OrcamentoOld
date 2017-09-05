@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class MesOrcamentoDTO
     {
+        public MesOrcamentoDTO() { }
         public MesOrcamentoDTO(MesOrcamento m)
         {
             if (m == null) return;

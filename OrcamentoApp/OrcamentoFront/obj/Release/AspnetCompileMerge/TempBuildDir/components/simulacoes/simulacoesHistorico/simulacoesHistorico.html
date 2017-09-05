@@ -1,0 +1,259 @@
+<ui-panel titulo="Histórico de Solicitações" nome="panel-historico-solicitacao">
+
+    <form role="form">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Filtro de Status</label>
+                    <select class="form-control" ng-options="s.value as s.text for s in [{value:'', text:'(Todas)'}, {value:'Respondida', text:'Respondidas'}, {value:'Aguardando Aprovação', text:'Aguardando Aprovação'}]" ng-model="ct.filtroStatus">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr class="text-center">
+                <th>Código</th>
+                <th>Tipo de Solicitação</th>
+                <th>Data de Solicitação</th>
+                <th>Matrícula</th>
+                <th>Status</th>
+                <th>Parecer</th>
+                <th>Data de Resposta</th>
+                <th>ACTs / STHs</th>
+                <th width="3%"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="s in ct.solicitacoes | filter:{'StatusSolicitacao': ct.filtroStatus}">
+                <td>{{s.Codigo}}</td>
+                <td>{{s.TipoSolicitacao}}</td>
+                <td>{{s.DataSolicitacao | date:'dd/MMM/yy'}}</td>
+                <td>{{s.MatriculaFuncionario}}</td>
+                <td>{{s.StatusSolicitacao}}</td>
+                <td>{{s.Parecer}}</td>
+                <td>{{s.DataResposta | date:'dd/MMM/yy'}}</td>
+                <td>{{s.ACTsSTHs | limitTo:22}}</td>
+                <td>
+                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#{{s.Modal}}" ng-click="ct.carregaSolicitacao(s)">
+                        <i class="fa fa-info"></i>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</ui-panel>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-contratacao" tabindex="-1" role="dialog" aria-labelledby="modal-info-contratacao-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-info-contratacao-title">Solicitação de Contratação</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Cidade</dt>
+                            <dd>{{ct.solicitacao.Contratacao.CidadeNome}}</dd>
+                            <dt>Cargo</dt>
+                            <dd>{{ct.solicitacao.Contratacao.Cargo.NomeCargo}}</dd>
+                            <dt>Carga Horária</dt>
+                            <dd>{{ct.solicitacao.Contratacao.CargaHoraria}} horas</dd>
+                            <dt>Quantidade</dt>
+                            <dd>{{ct.solicitacao.Contratacao.Qtda}}</dd>
+                            <dt>Salário</dt>
+                            <dd>R$ {{ct.solicitacao.Contratacao.Salario | number:2}}</dd>
+                            <dt>Data Prevista</dt>
+                            <dd>{{ct.solicitacao.Contratacao.DataPrevista | date:'dd/MMM/yy'}}</dd>
+                            <dt>Informações Adicionais</dt>
+                            <dd>{{ct.solicitacao.DescricaoSolicitacao}}</dd>
+                        </dl>
+                   
+                    </div>
+                </div>                  
+            </div>  
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modal-demissao" tabindex="-1" role="dialog" aria-labelledby="modal-info-demissao-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-info-demissao-title">Solicitação de Desligamento</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Matrícula</dt>
+                            <dd>{{ct.solicitacao.Desligamento.FuncionarioMatricula}}</dd>
+                            <dt>Nome</dt>
+                            <dd>{{ct.solicitacao.Desligamento.Funcionario.Nome}}</dd>
+                            <dt>Cargo</dt>
+                            <dd>{{ct.solicitacao.Desligamento.Funcionario.Cargo.NomeCargo}}</dd>
+                            <dt>Salário</dt>
+                            <dd>R$ {{ct.solicitacao.Desligamento.Funcionario.Salario | number:2}}</dd>
+                            <dt>Data de Desligamento</dt>
+                            <dd>{{ct.solicitacao.Desligamento.DataDesligamento | date:'dd/MMM/yy'}}</dd>
+                            <dt>Motivo</dt>
+                            <dd>{{ct.solicitacao.Desligamento.Motivo}}</dd>
+                            <dt>Tipo de Aviso</dt>
+                            <dd>{{ct.solicitacao.Desligamento.TipoAviso}}</dd>
+                            <dt>Informações Adicionais</dt>
+                            <dd>{{ct.solicitacao.DescricaoSolicitacao}}</dd>
+                        </dl>
+                   
+                    </div>
+                </div>                  
+            </div>  
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-alteracao-cargo" tabindex="-1" role="dialog" aria-labelledby="modal-info-alteracao-cargo-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-info-alteracao-cargo-title">Alteração de Cargo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Matrícula</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.FuncionarioMatricula}}</dd>
+                            <dt>Nome</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.Funcionario.Nome}}</dd>
+                            <dt>Cargo Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CargoAnterior.NomeCargo}}</dd>
+                            <dt>Carga Horária Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CHAnterior}} horas</dd>
+                            <dt>Cargo Novo</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CargoNovo.NomeCargo}}</dd>
+                            <dt>Carga Horária Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CHNovo}} horas</dd>
+                            <dt>Informações Adicionais</dt>
+                            <dd>{{ct.solicitacao.DescricaoSolicitacao}}</dd>
+                        </dl>
+                   
+                    </div>
+                </div>                  
+            </div>  
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-alteracao-salario" tabindex="-1" role="dialog" aria-labelledby="modal-info-alteracao-salario-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-info-alteracao-salario-title">Alteração de Cargo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Matrícula</dt>
+                            <dd>{{ct.solicitacao.AlteracaoSalario.FuncionarioMatricula}}</dd>
+                            <dt>Nome</dt>
+                            <dd>{{ct.solicitacao.AlteracaoSalario.Funcionario.Nome}}</dd>
+                            <dt>Salário Anterior</dt>
+                            <dd>R$ {{ct.solicitacao.AlteracaoSalario.SalarioAnterior}}</dd>
+                            <dt>Salário Novo</dt>
+                            <dd>R$ {{ct.solicitacao.AlteracaoSalario.SalarioNovo}}</dd>
+                            <dt>Percentual de Aumento</dt>
+                            <dd>{{ct.solicitacao.AlteracaoSalario.Percentual | number:2}}%</dd>
+                            <dt>Informações Adicionais</dt>
+                            <dd>{{ct.solicitacao.DescricaoSolicitacao}}</dd>
+                        </dl>
+                   
+                    </div>
+                </div>                  
+            </div>  
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+
+<div class="modal fade" id="modal-alteracao-cargo-salario" tabindex="-1" role="dialog" aria-labelledby="modal-info-alteracao-cargo-salario-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-info-alteracao-cargo-salario-title">Alteração de Cargo e Salário</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <dl class="dl-horizontal">
+                            <dt>Matrícula</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.FuncionarioMatricula}}</dd>
+                            <dt>Nome</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.Funcionario.Nome}}</dd>
+                            <dt>Cargo Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CargoAnterior.NomeCargo}}</dd>
+                            <dt>Carga Horária Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CHAnterior}} horas</dd>
+                            <dt>Cargo Novo</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CargoNovo.NomeCargo}}</dd>
+                            <dt>Carga Horária Anterior</dt>
+                            <dd>{{ct.solicitacao.AlteracaoCargo.CHNovo}} horas</dd>
+                            <dt>Salário Anterior</dt>
+                            <dd>R$ {{ct.solicitacao.AlteracaoSalario.SalarioAnterior}}</dd>
+                            <dt>Salário Novo</dt>
+                            <dd>R$ {{ct.solicitacao.AlteracaoSalario.SalarioNovo}}</dd>
+                            <dt>Percentual de Aumento</dt>
+                            <dd>{{ct.solicitacao.AlteracaoSalario.Percentual | number:2}}%</dd>
+                            <dt>Informações Adicionais</dt>
+                            <dd>{{ct.solicitacao.DescricaoSolicitacao}}</dd>
+                        </dl>
+                   
+                    </div>
+                </div>                  
+            </div>  
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

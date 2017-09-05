@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class AdNoturnoBaseDTO
     {
+        public AdNoturnoBaseDTO() { }
         public AdNoturnoBaseDTO (AdNoturnoBase a)
         {
             if (a == null) return;

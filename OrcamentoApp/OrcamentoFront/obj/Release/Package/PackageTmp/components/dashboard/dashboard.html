@@ -1,0 +1,105 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
+    </div>
+
+    <div ng-include="'components/orcamentoFiltros/orcamentoFiltros.html'"></div>
+
+    <hr>
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+   <!--      	<div class="panel panel-default">
+                <div class="panel-heading">
+                    Resumo
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#">Action</a>
+                                </li>
+                                <li><a href="#">Another action</a>
+                                </li>
+                                <li><a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div ui-view="resumoFolha"></div>
+                </div>
+            </div> -->
+
+            <ui-panel titulo="Resumo da Folha" nome="panel-resumo-folha">
+
+                <div class="pills-in-panel">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{'active': ct.aba == 'Base'}">
+                            <a href ng-click="ct.aba = 'Base'">Base</a>
+                        </li>
+
+                        <li ng-class="{'active': ct.aba == 'Contratações'}">
+                            <a href ng-click="ct.aba = 'Contratações'">Contratações</a>
+                        </li>
+
+                        <li ng-class="{'active': ct.aba == 'Verbas Gerais'}">
+                            <a href ng-click="ct.aba = 'Verbas Gerais'">Verbas Gerais</a>
+                        </li>
+
+                        <!-- <li role="presentation" class="dropdown" ng-class="{'active': aba == 'Horas Extras'}">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href role="button" aria-haspopup="true" aria-expanded="false">
+                                Horas Extras {{ct.PercHE}}<span ng-hide="!ct.PercHE">%</span> <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='170';">170%</a>
+                                </li>
+                                <li>
+                                    <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='100';">100%</a>
+                                </li>
+                                <li>
+                                    <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='75';">75%</a>
+                                </li>
+                                <li>
+                                    <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='60';">60%</a>
+                                </li>
+                                <li>
+                                    <a href ng-click="ct.mudaAba('Horas Extras');ct.PercHE='50';">50%</a>
+                                </li>
+                            </ul>
+                        </li> -->
+
+                    </ul>
+                </div>
+
+
+                <div class="row" ng-if="ct.aba == 'Base'">
+                    <div class="col-md-12" ui-view="resumoFolhaBase"></div>
+                </div>
+
+                <div class="row" ng-if="ct.aba == 'Contratações'">
+                    <div class="col-md-12" ui-view="resumoFolhaContratacoes"></div>
+                </div>
+
+                <div class="row" ng-if="ct.aba == 'Verbas Gerais'">
+                    <div class="col-md-12" ui-view="resumoFolhaVerbasGerais"></div>
+                </div>
+
+            </ui-panel>
+
+		</div>
+    </div>
+
+</div>
+

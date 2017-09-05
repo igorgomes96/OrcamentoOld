@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class UserInfoDTO
     {
+        public UserInfoDTO() { }
         public UserInfoDTO(Usuario u)
         {
             if (u == null) return;

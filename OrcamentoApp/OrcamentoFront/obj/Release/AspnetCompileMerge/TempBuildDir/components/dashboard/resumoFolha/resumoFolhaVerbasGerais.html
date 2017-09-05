@@ -1,0 +1,20 @@
+<h4>Verbas Gerais (Por CR)</h4>
+
+<table class="table table-striped table-condensed">
+	<thead>
+		<tr>
+			<th width="15%">Evento</th>
+			<th ng-repeat="m in ct.ciclo.Meses" class="text-center">
+        		{{m.Mes | date:'MMM/yy'}}
+    		</th>
+		</tr>
+	</thead>
+    <tbody>
+    	<tr ng-repeat="va in ct.valoresAbertos | orderBy:'NomeEvento'">
+    		<td ng-class="{'linha-negrito':va.NomeEvento=='Totais'}">{{va.NomeEvento}}</td>
+    		<td ng-class="{'linha-negrito':va.NomeEvento=='Totais'}" ng-repeat="v in va.Valores | orderBy:'Mes'" class="text-right">
+    			{{v.Valor}}
+    		</td>
+    	</tr>
+    </tbody>
+</table>

@@ -9,6 +9,11 @@ namespace OrcamentoAPI.DTO
     public class FuncionarioEventosDTO
     {
         private Contexto db = new Contexto();
+
+        public FuncionarioEventosDTO()
+        {
+            Eventos = new List<EventoCicloBaseDTO>();
+        }
         public FuncionarioEventosDTO(Funcionario f, Ciclo c)
         {
             EventoCicloBaseDTO eventoTotais = new EventoCicloBaseDTO

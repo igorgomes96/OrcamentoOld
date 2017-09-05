@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class ReceitaDTO
     {
+        public ReceitaDTO() { }
         public ReceitaDTO(Receita r)
         {
             if (r == null) return;

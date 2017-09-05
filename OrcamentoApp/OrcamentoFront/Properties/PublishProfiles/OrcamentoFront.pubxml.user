@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\igorago\Documents\GitHub\Orcamento\OrcamentoApp\OrcamentoFront\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/OrcamentoFront.dll">
+      <publishTime>09/05/2017 09:14:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="components/autenticacao/autenticacao.html">
+      <publishTime>09/04/2017 10:50:20</publishTime>
+    </File>
+    <File Include="components/autenticacao/autenticacaoCtrl.js">
+      <publishTime>09/04/2017 10:50:20</publishTime>
+    </File>
+    <File Include="components/autenticacao/unauthenticated.html">
+      <publishTime>09/04/2017 10:50:20</publishTime>
+    </File>
+    <File Include="components/dashboard/dashboard.html">
+      <publishTime>09/04/2017 10:50:20</publishTime>
+    </File>
+    <File Include="components/dashboard/dashboardCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaBase.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaBaseCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaContratacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaContratacoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaVerbasGerais.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/dashboard/resumoFolha/resumoFolhaVerbasGeraisCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/containerHome.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/containerHomeCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/homeAdministrador.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/selecaoCiclo.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/selecaoCicloCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/selecaoModulo.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/home/selecaoModuloCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/menuContainer/menuContainer.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/navigation/navigation.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/navigation/navigationCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/orcamentoFiltros/orcamentoFiltros.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/orcamentoFiltros/orcamentoFiltrosCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/adNoturno.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/desligamentos.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/ferias.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/horasExtras.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/info.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/outros.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/pessoalBase.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalBase/pessoalBaseCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/adNoturno.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/contratacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/horasExtras.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/outros.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/pessoalContratacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalContratacoes/pessoalContratacoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalOrcamento.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalOrcamentoCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasEnviadas.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/pessoalTransferencias/pessoalTransferenciasRecebidas.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/valoresPorCR/valoresPorCR.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/pessoalOrcamento/valoresPorCR/valoresPorCRCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasBeneficios.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasConvenioMedico.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasConvenioMedicoCtrl.js">
+      <publishTime>09/04/2017 13:44:35</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasPat.html">
+      <publishTime>09/04/2017 14:05:27</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasPatCtrl.js">
+      <publishTime>09/04/2017 14:05:10</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasReajConvenioMedico.html">
+      <publishTime>09/04/2017 14:52:18</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasReajConvenioMedicoCtrl.js">
+      <publishTime>09/04/2017 14:52:41</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasVariaveis.html">
+      <publishTime>09/04/2017 15:21:08</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasVariaveisCtrl.js">
+      <publishTime>09/04/2017 15:17:52</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasVT.html">
+      <publishTime>09/04/2017 14:25:51</publishTime>
+    </File>
+    <File Include="components/premissas/beneficios/premissasVTCtrl.js">
+      <publishTime>09/04/2017 14:23:58</publishTime>
+    </File>
+    <File Include="components/premissas/cargosSalarios/premissasCargos.html">
+      <publishTime>09/04/2017 13:33:29</publishTime>
+    </File>
+    <File Include="components/premissas/cargosSalarios/premissasCargosCtrl.js">
+      <publishTime>09/04/2017 13:39:14</publishTime>
+    </File>
+    <File Include="components/premissas/cargosSalarios/premissasCargosSalarios.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/cargosSalarios/premissasSalarios.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/encargos/encargos.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/encargos/encargosPorEmpresa.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/encargos/encargosPorEmpresaCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/encargos/encargosPorFilial.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/encargos/encargosPorFilialCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/premissasCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/sindicatos/premissasSindicatos.html">
+      <publishTime>09/04/2017 15:06:16</publishTime>
+    </File>
+    <File Include="components/premissas/sindicatos/premissasSindicatosContainer.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/premissas/sindicatos/premissasSindicatosCtrl.js">
+      <publishTime>09/04/2017 15:03:23</publishTime>
+    </File>
+    <File Include="components/simulacoes/container.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesContratacao/simulacoesContratacao.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesContratacao/simulacoesContratacaoCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesDemissao/simulacoesDemissao.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesDemissao/simulacoesDemissaoCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesHistorico/simulacoesHistorico.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/simulacoes/simulacoesHistorico/simulacoesHistoricoCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTH.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCargo.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCargoSalario.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHAlteracoes/solicitacoesTHAlteracoesSalario.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHContratacoes/solicitacoesTHContratacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHContratacoes/solicitacoesTHContratacoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHDemissoes/solicitacoesTHDemissoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHDemissoes/solicitacoesTHDemissoesCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHFila/solicitacoesTHFila.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHHistorico/solicitacoesTHHistorico.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHHistorico/solicitacoesTHHistoricoCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHOutros/solicitacoesTHOutros.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHOutros/solicitacoesTHOutrosCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/solicitacoesTH/solicitacoesTHSolicitacoes/solicitacoesTHSolicitacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/temp/simulacoes.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/usuarios/containerUsuarios.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/usuarios/gestaoUsuariosCtrl.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="components/usuarios/usuarios.html">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="css/sb-admin-2.css">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="css/sb-admin-2.min.css">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="css/styles.css">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>09/04/2017 10:50:22</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>09/04/2017 10:50:22</publishTime>
+    </File>
+    <File Include="js/APIs/actsAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/adNoturnosBaseAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/adNoturnosContratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/autenticacaoAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/calculosEventosBaseAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/calculosEventosContratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/cargosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/centrosCustosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/ciclosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/cidadesAPI.js">
+      <publishTime>09/04/2017 14:22:44</publishTime>
+    </File>
+    <File Include="js/APIs/contratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/contratacoesMesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/conveniosMedAPI.js">
+      <publishTime>09/04/2017 13:43:50</publishTime>
+    </File>
+    <File Include="js/APIs/diasIndenizadosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/empresasAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/encargosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/eventosFolhaAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/feriasPorCRsAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/filiaisAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/funcionariosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/funcionariosFeriasAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/hesBaseAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/hesContratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/importacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/mesesOrcamentoAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/patAPI.js">
+      <publishTime>09/04/2017 14:04:01</publishTime>
+    </File>
+    <File Include="js/APIs/PerfisAcessoAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/reajConvenioMedicoAPI.js">
+      <publishTime>09/04/2017 14:48:33</publishTime>
+    </File>
+    <File Include="js/APIs/reajustesAPI.js">
+      <publishTime>09/04/2017 15:02:47</publishTime>
+    </File>
+    <File Include="js/APIs/salariosAPI.js">
+      <publishTime>09/04/2017 13:33:12</publishTime>
+    </File>
+    <File Include="js/APIs/setoresAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/sindicatosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/solicitacoesAlteracoesCargosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/solicitacoesAlteracoesSalariosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/solicitacoesContratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/solicitacoesDesligamentosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/solicitacoesTHAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/sthsAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/tiposCicloAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/transferenciasAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/usuariosAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/valoresAbertosBaseAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/valoresAbertosContratacoesAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/valoresAbertosCRsAPI.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/APIs/variaveisAPI.js">
+      <publishTime>09/04/2017 15:13:41</publishTime>
+    </File>
+    <File Include="js/app.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/config/interceptorsConfig.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/config/routeConfig.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/filters/ellipsisFilter.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/interceptors/anexaTokenInterceptor.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/interceptors/errorInterceptor.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/sb-admin-2.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/services/localStorageService.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/services/messagesService.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/services/sharedDataService.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/services/sharedDataWithoutInjectionService.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/services/uploadFileService.js">
+      <publishTime>09/04/2017 10:50:21</publishTime>
+    </File>
+    <File Include="js/values/configValue.js">
+      <publishTime>09/04/2017 11:55:06</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/04/2017 10:49:59</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>09/05/2017 09:14:27</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/05/2017 09:14:24</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

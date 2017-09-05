@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class SetorDTO
     {
+        public SetorDTO() { }
         public SetorDTO(Setor s)
         {
             if (s == null) return;

@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SolicitacaoTHDTO
     {
+        public SolicitacaoTHDTO() { }
         public SolicitacaoTHDTO(SolicitacaoTH s)
         {
             if (s == null) return;

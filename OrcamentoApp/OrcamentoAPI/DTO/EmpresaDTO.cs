@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class EmpresaDTO
     {
+        public EmpresaDTO() { }
         public EmpresaDTO(Empresa e)
         {
             if (e == null) return;

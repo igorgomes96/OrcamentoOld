@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class HEBaseDTO
     {
+        public HEBaseDTO() { }
         public HEBaseDTO(HEBase h)
         {
             if (h == null) return;

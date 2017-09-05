@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
 {
     public partial class PATDTO
     {
+        public PATDTO() { }
         public PATDTO(PAT p)
         {
             if (p == null) return;

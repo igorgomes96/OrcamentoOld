@@ -1,0 +1,57 @@
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr>
+            <th style="border-bottom: 0;"></th>
+            <th style="border-bottom: 0;"></th>
+            <th style="border-bottom: 0;"></th>
+            <th colspan="2" class="text-center" style="border-bottom: 0;">1ª Parcela</th>
+            <th colspan="2" class="text-center" style="border-bottom: 0;">2ª Parcela</th>
+            <th colspan="2" class="text-center" style="border-bottom: 0;">3ª Parcela</th>
+        </tr>
+        <tr>
+            <th style="border-top: 0;" width="8%">Matrícula</th>
+            <th style="border-top: 0;" width="20%">Nome</th>
+            <th style="border-top: 0;" width="18%">Cargo</th>
+            <th style="border-top: 0;" width="9%">Mês</th>
+            <th style="border-top: 0;" width="9%">Qtda. Dias</th>
+            <th style="border-top: 0;" width="9%">Mês</th>
+            <th style="border-top: 0;" width="9%">Qtda. Dias</th>
+            <th style="border-top: 0;" width="9%">Mês</th>
+            <th style="border-top: 0;" width="9%">Qtda. Dias</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form name="formPessoal">
+            <tr ng-repeat="f in ct.funcionarios">
+                <td>{{f.Matricula}}</td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Nome}}"><p>{{f.Nome | ellipsis:12:5}}</p></td>
+                <td data-toggle="tooltip" data-placement="left" title="{{f.Cargo.NomeCargo}}"><p class="ellipsis">{{f.Cargo.NomeCargo | ellipsis:12:5}}</p></td>
+                <td>
+                    <select class="form-control input-sm" ng-model="f.Ferias[0].CodMesOrcamento" ng-options="m.Codigo as (m.Mes | date:'MMM/yy') for m in ct.ciclo.Meses">
+                        <option value="">(N/A)</option>
+                    </select>
+                </td>
+                <td ng-class="{'has-error': !f.Ferias[0].QtdaDias && f.Ferias[0].CodMesOrcamento}">
+                    <input type="number" ng-disabled="!f.Ferias[0].CodMesOrcamento" class="form-control input-sm" ng-model="f.Ferias[0].QtdaDias">
+                </td>
+                <td>
+                    <select class="form-control input-sm" ng-model="f.Ferias[1].CodMesOrcamento" ng-options="m.Codigo as (m.Mes | date:'MMM/yy') for m in ct.ciclo.Meses">
+                        <option value="">(N/A)</option>
+                    </select>
+                </td>
+                <td ng-class="{'has-error': !f.Ferias[1].QtdaDias && f.Ferias[1].CodMesOrcamento}">
+                    <input type="number" ng-disabled="!f.Ferias[1].CodMesOrcamento" class="form-control input-sm" ng-model="f.Ferias[1].QtdaDias">
+                </td>
+                <td>
+                    <select class="form-control input-sm" ng-model="f.Ferias[2].CodMesOrcamento" ng-options="m.Codigo as (m.Mes | date:'MMM/yy') for m in ct.ciclo.Meses">
+                        <option value="">(N/A)</option>
+                    </select>
+                </td>
+                <td ng-class="{'has-error': !f.Ferias[2].QtdaDias && f.Ferias[2].CodMesOrcamento}">
+                    <input type="number" ng-disabled="!f.Ferias[2].CodMesOrcamento" class="form-control input-sm" ng-model="f.Ferias[2].QtdaDias">
+                </td>
+            </tr>
+
+        </form>
+    </tbody>
+</table>

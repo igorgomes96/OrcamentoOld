@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class CidadeDTO
     {
+        public CidadeDTO() { }
         public CidadeDTO(Cidade c)
         {
             if (c == null) return;

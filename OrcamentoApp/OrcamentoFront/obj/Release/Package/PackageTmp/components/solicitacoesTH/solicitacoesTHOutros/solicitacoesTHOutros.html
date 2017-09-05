@@ -1,0 +1,25 @@
+<div id="form-alteracao-cargo" ng-controller="solicitacoesTHOutrosCtrl as ctOutros">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="select-cr-outros">CR de destino</label>
+                <select id="select-cr-outros" class="form-control" ng-options="c for c in ['CR 1', 'CR 2', 'CR 3', 'CR 4']" ng-model="novaSolicitacao.cr">
+                    <option value=''></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="textarea-info-adicionais-outros">Solicitação</label>
+                <textarea id="textarea-info-adicionais-outros" placeholder="Digite aqui sua solicitação" rows="4" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary pull-right">Enviar Solicitação</button>
+
+</div>

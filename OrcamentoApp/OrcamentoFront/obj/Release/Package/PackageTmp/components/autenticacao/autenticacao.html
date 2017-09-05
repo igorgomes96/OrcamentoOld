@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Autenticação</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Usuário" name="username" id="username" autofocus ng-model="ct.user.Login">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Senha" name="password" id="password" type="password"  ng-model="ct.user.Senha">
+                            </div>
+                            <div class="checkbox" ng-hide="true">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <a href="index.html" class="btn btn-success btn-block" ng-click="ct.autentica(ct.user)" ng-disabled="!ct.user || !ct.user.Login || !ct.user.Senha">Entrar</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 
+<div class="focusedform">
+
+
+	<div class="verticalcenter">
+
+		<div class="panel panel-primary">
+
+			<div class="panel-body">
+				<h4 class="text-center" style="margin-bottom: 25px;">Autenticação</h4>
+
+				<form action="#" class="form-horizontal" style="margin-bottom: 0px !important;">
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<input type="text" class="form-control" id="username" placeholder="Usuário" ng-model="ct.user.Login">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+								<input type="password" class="form-control" id="password" placeholder="Senha" ng-model="ct.user.Senha">
+							</div>	
+						</div>
+					</div>
+				</form>
+
+				<div class="clearfix" ng-hide="true">
+					<div class="pull-right"><label>
+						<input type="checkbox" checked=""> Mantenha-me conectado</label>
+					</div>
+				</div>
+						
+			</div>
+
+			<div class="panel-footer">
+					
+				<div class="pull-right">
+					<a ng-click="ct.limpar(ct.user)" class="btn btn-default">Limpar</a>
+					<a ng-click="ct.autentica(ct.user)" ng-disabled="!ct.user || !ct.user.Login || !ct.user.Senha" class="btn btn-primary">Entrar</a>
+				</div>
+			</div>
+		
+		</div>
+
+	 </div>
+
+ </div>-->

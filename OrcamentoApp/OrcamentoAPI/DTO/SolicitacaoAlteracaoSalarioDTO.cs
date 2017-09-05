@@ -8,7 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SolicitacaoAlteracaoSalarioDTO
     {
-
+        public SolicitacaoAlteracaoSalarioDTO() { }
         public SolicitacaoAlteracaoSalarioDTO(SolicitacaoAlteracaoSalario s)
         {
             if (s == null) return;

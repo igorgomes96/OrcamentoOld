@@ -1,0 +1,52 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Benefícios</h1>
+        </div>
+    </div>
+
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="form-group" ng-submit="ctMain.sendFile()">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="custom-file-upload">
+                                    <input type="file" name="file">
+                                    <i class="fa fa-upload"></i> Importar base do Excel
+                                </label>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-6">
+                                <input type="text" name="input-files-label" class="form-control" id="input-files-label" disabled style="display: none;">
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Upload" id="button-upload-file" style="display: none;"/>
+                            
+                        </div>
+
+                    <!--</div> -->
+                    </form>
+                </div>
+            </div>
+
+
+			<div ui-view="pat"></div>
+            <div ui-view="vt"></div>
+            <div ui-view="variaveis"></div>
+            <div ui-view="planosConvenio"></div>
+            <div ui-view="reajustesConvenio"></div>
+
+
+		</div>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->

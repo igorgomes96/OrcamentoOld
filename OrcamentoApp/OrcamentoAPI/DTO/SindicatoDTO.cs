@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class SindicatoDTO
     {
+        public SindicatoDTO() { }
         public SindicatoDTO(Sindicato s)
         {
             if (s == null) return;

@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class ReajConvenioMedDTO
     {
+        public ReajConvenioMedDTO() { }
         public ReajConvenioMedDTO (ReajConvenioMed r)
         {
             if (r == null) return;

@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SalarioDTO
     {
+        public SalarioDTO() { }
         public SalarioDTO(Salario s)
         {
             if (s == null) return;

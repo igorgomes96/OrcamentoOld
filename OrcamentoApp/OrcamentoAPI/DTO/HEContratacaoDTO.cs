@@ -7,7 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class HEContratacaoDTO
     {
-
+        public HEContratacaoDTO() { }
         public HEContratacaoDTO(HEContratacao h)
         {
             if (h == null) return;

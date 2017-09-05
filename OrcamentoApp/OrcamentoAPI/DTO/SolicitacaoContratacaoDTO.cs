@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SolicitacaoContratacaoDTO
     {
+        public SolicitacaoContratacaoDTO() { }
         public SolicitacaoContratacaoDTO(SolicitacaoContratacao s)
         {
             if (s == null) return;

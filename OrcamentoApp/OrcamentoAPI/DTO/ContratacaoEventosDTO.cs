@@ -9,6 +9,11 @@ namespace OrcamentoAPI.DTO
     public class ContratacaoEventosDTO
     {
         private Contexto db = new Contexto();
+
+        public ContratacaoEventosDTO()
+        {
+            Eventos = new List<EventoCicloContratacaoDTO>();
+        }
         public ContratacaoEventosDTO(Contratacao cont, Ciclo c)
         {
             EventoCicloContratacaoDTO eventoTotais = new EventoCicloContratacaoDTO

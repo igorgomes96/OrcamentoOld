@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class CargaHorariaDTO
     {
+        public CargaHorariaDTO() { }
         public CargaHorariaDTO(CargaHoraria c)
         {
             if (c == null) return;

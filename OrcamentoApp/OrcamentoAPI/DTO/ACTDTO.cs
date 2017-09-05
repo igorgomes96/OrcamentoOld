@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class ACTDTO
     {
+        public ACTDTO() { }
         public ACTDTO (ACT a)
         {
             if (a == null) return;

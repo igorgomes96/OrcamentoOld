@@ -9,7 +9,13 @@ namespace OrcamentoAPI.DTO
     public class ContratacaoHEsDTO
     {
         private Contexto db;
-        public ContratacaoHEsDTO() { }
+        public ContratacaoHEsDTO() {
+            HEs170 = new HashSet<QtdaHorasMesDTO>();
+            HEs100 = new HashSet<QtdaHorasMesDTO>();
+            HEs75 = new HashSet<QtdaHorasMesDTO>();
+            HEs60 = new HashSet<QtdaHorasMesDTO>();
+            HEs50 = new HashSet<QtdaHorasMesDTO>();
+        }
 
         public ContratacaoHEsDTO(Contratacao con, Ciclo c)
         {

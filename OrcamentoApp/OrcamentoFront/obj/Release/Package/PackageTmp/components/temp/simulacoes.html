@@ -1,0 +1,422 @@
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Simulações</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <form class="form">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="input-filtro-torre">Simulações</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                            <select class="form-control" ng-model="filtroSimulacoes" ng-options="s for s in ['Simualação 1', 'Simulação 2', 'Simulação 3', 'Simulação 4']">
+                                                <option value=''>(Escolha uma Simulação)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-8">
+                                <button class="btn btn-danger" ng-if="filtroSimulacoes">Excluir</button>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-salvar-simulacao">Salvar</button>
+                                <button class="btn btn-primary" ng-if="filtroSimulacoes" data-toggle="modal" data-target="#modal-salvar-simulacao">Duplicar</button>
+                            </div>
+                        </div>
+
+
+
+
+                    <hr>
+
+                    <form class="form">
+
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="input-filtro-torre">Torre</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                            <select class="form-control" ng-model="filtroTorre" ng-options="t for t in ['Torre 1', 'Torre 2', 'Torre 3', 'Torre 4']">
+                                                <option value=''>(Todas as Torres)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="input-filtro-torre">Coordenação</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                            <select class="form-control" ng-model="filtroCoordenacao" ng-options="t for t in ['Coordenação 1', 'Coordenação 2', 'Coordenação 3', 'Coordenação 4']">
+                                                <option value=''>(Todas as Coordenações)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="input-filtro-torre">Centro de Resultado</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                            <select class="form-control" ng-model="filtroCR" ng-options="t for t in ['Centro de Resultado 1', 'Centro de Resultado 2', 'Centro de Resultado 3', 'Centro de Resultado 4']">
+                                                <option value=''>(Todos os CRs)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </form>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <ui-panel titulo="Recursos da Base" nome="panel-base">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="text-center">Matrícula</th>
+                                    <th class="text-center">Nome</th>
+                                    <th class="text-center">Cargo</th>
+                                    <th class="text-center">Salário</th>
+                                    <th class="text-center">Admissão</th>
+                                    <th class="text-center">Férias</th>
+                                    <th class="text-center">Desligamento</th>
+                                    <th class="text-center">Tipo de Aviso</th>
+                                    <th class="text-center" width="3%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form name="formPessoal">
+                                    <tr>
+                                        <td>1111111</td>
+                                        <td>Funcionário 1</td>
+                                        <td>Cargo 1</td>
+                                        <td>R$ 2000,00</td>
+                                        <td>10/01/2010</td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.mesFerias" ng-options="mes for mes in ['Jan/17', 'Fev/17', 'Mar/17', 'Abr/17', 'Mai/17', 'Jun/17', 'Jul/17', 'Ago/17', 'Set/17', 'Out/17', 'Nov/17', 'Dez/17']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.mesDesligamento" ng-options="mes for mes in ['Jan/17', 'Fev/17', 'Mar/17', 'Abr/17', 'Mai/17', 'Jun/17', 'Jul/17', 'Ago/17', 'Set/17', 'Out/17', 'Nov/17', 'Dez/17']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.tipoAviso" ng-options="tipo for tipo in ['Trabalhado', 'Indenizado']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btn-xs">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>222222</td>
+                                        <td>Funcionário 2</td>
+                                        <td>Cargo 2</td>
+                                        <td>R$ 4000,00</td>
+                                        <td>05/02/2013</td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.mesFerias" ng-options="mes for mes in ['Jan/17', 'Fev/17', 'Mar/17', 'Abr/17', 'Mai/17', 'Jun/17', 'Jul/17', 'Ago/17', 'Set/17', 'Out/17', 'Nov/17', 'Dez/17']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.mesDesligamento" ng-options="mes for mes in ['Jan/17', 'Fev/17', 'Mar/17', 'Abr/17', 'Mai/17', 'Jun/17', 'Jul/17', 'Ago/17', 'Set/17', 'Out/17', 'Nov/17', 'Dez/17']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm" ng-model="func.tipoAviso" ng-options="tipo for tipo in ['Trabalhado', 'Indenizado']">
+                                                <option value="">Selecione...</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-default btn-xs">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </form>
+                            </tbody>
+                        </table>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+
+                    </ui-panel>
+
+
+                    <ui-panel titulo="Recursos Novos" nome="panel-novos">
+
+                        <div class="btn-group">
+
+                            <button class="btn btn-default"><i class="fa fa-remove"></i></button>
+                            <button class="btn btn-default"><i class="fa fa-plus"></i></button>
+
+                        </div>
+
+                        <form name="formNovos">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th width="2%"></th>
+                                        <th width="15%"></th> <!-- Cidade -->
+                                        <th width="15%"></th>   <!-- Cargo -->
+                                        <th width="6%"></th>  <!-- Carga Horária -->
+                                        <th width="14%"></th>   <!-- Motivo da Contratação -->
+                                        <th class="text-center">Jan</th>
+                                        <th class="text-center">Fev</th>
+                                        <th class="text-center">Mar</th>
+                                        <th class="text-center">Abr</th>
+                                        <th class="text-center">Mai</th>
+                                        <th class="text-center">Jun</th>
+                                        <th class="text-center">Jul</th>
+                                        <th class="text-center">Ago</th>
+                                        <th class="text-center">Set</th>
+                                        <th class="text-center">Out</th>
+                                        <th class="text-center">Nov</th>
+                                        <th class="text-center">Dez</th>
+                                    </tr>
+
+                                    <tr ui-input-parent>
+                                        <th><input type="checkbox"></th>
+                                        <th>
+                                            <select class="form-control justified" ng-model="ct.cargoNovo.cidade" ng-options="cidade for cidade in ['Cidade 1', 'Cidade 2'] track by cidade">
+                                                <option value="">Cidade</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select class="form-control justified" ng-model="ct.cargoNovo.nome" ng-options="cargo for cargo in ['Cargo 1','Cargo 2']" ng-required="true">
+                                                <option value="">Cargo</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select class="form-control justified" ng-model="ct.cargoNovo.cargaHoraria" ng-options="ch for ch in ['200h', '180h']" ng-required="true">
+                                                <option value="">C.H.</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select class="form-control justified" ng-model="ct.cargoNovo.motivoCont" ng-options="motivo for motivo in ['Substituição','Aumento de Quadro']" ng-required="true">
+                                                <option value="">Motivo C.</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[0].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[1].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[2].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[3].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[4].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[5].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[6].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[7].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[8].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[9].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[10].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                        <th>
+                                            <input type="text" class="form-control text-center justified" ng-model="ct.cargoNovo.meses[11].qtda" ng-pattern="/^\d{1,3}$/" required ui-input-child>
+                                        </th>
+                                    </tr>
+                                   
+
+                                </thead>
+
+                                <tbody>
+                                    <tr ng-repeat="cargo in [{cidade:'Cidade 1', cargaHoraria:220, nome:'Cargo 1',motivoCont:'Substituição', meses:[{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1}]}, {cidade:'Cidade 2', cargaHoraria:200, nome:'Cargo 2',motivoCont:'Aumento de Quadro', meses:[{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1}]}, {cidade:'Cidade 2', cargaHoraria:200, nome:'Cargo 3',motivoCont:'Aumento de Quadro', meses:[{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1}]}, {cidade:'Cidade 2', cargaHoraria:200, nome:'Cargo 4',motivoCont:'Substituição', meses:[{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1},{qtda:1}]}]">
+
+                                        <td>
+                                            <input type="checkbox" ng-model="cargo.selecionado"/>
+                                        </td>
+
+                                        <td>
+                                            {{cargo.cidade}}
+                                        </td>
+
+                                        <td>
+                                            {{cargo.nome}}
+                                        </td>
+
+                                        <td style="text-overflow: ellipsis;overflow: hidden;">
+                                            {{cargo.cargaHoraria}}
+                                        </td>
+
+                                        <td>
+                                            {{cargo.motivoCont}}
+                                        </td> 
+
+                                        <td class="text-center">
+                                            {{cargo.meses[0].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[1].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[2].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[3].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[4].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[5].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[6].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[7].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[8].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[9].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[10].qtda}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{cargo.meses[11].qtda}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+
+                    </ui-panel>
+
+
+
+
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal-salvar-simulacao" tabindex="-1" role="dialog" aria-labelledby="tranferencia-cr-title" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="tranferencia-cr-title">Salvar Simulação</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label for="input-modal-nome-simulacao">Nome da Simulação</label>
+                                                        <input id="input-modal-nome-simulacao" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>                  
+                                </div>  
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->

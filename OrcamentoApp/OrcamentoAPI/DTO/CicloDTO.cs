@@ -8,6 +8,10 @@ namespace OrcamentoAPI.DTO
 {
     public class CicloDTO
     {
+        public CicloDTO()
+        {
+            Meses = new List<MesOrcamentoDTO>();
+        }
         public CicloDTO (Ciclo c)
         {
             if (c == null) return;
@@ -19,7 +23,12 @@ namespace OrcamentoAPI.DTO
             StatusNome = c.StatusCiclo.Nome;
             TipoCod = c.TipoCod;
             TipoNome = c.TipoCiclo.Nome;
-            Meses = c.MesesOrcamento.ToList().Select(x => new MesOrcamentoDTO(x));
+            if (c.MesesOrcamento != null)
+            {
+                Meses = new List<MesOrcamentoDTO>();
+                Meses = c.MesesOrcamento.ToList().Select(x => new MesOrcamentoDTO(x));
+            }
+            
         }
 
         public int Codigo { get; set; }

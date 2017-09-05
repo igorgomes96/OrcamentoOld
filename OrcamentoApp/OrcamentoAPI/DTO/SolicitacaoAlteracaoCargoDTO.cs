@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class SolicitacaoAlteracaoCargoDTO
     {
+        public SolicitacaoAlteracaoCargoDTO() { }
         public SolicitacaoAlteracaoCargoDTO(SolicitacaoAlteracaoCargo s)
         {
             if (s == null) return;

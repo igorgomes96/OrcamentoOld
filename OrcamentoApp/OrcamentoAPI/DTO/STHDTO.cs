@@ -8,6 +8,7 @@ namespace OrcamentoAPI.DTO
 {
     public class STHDTO
     {
+        public STHDTO() { }
         public STHDTO(STH s)
         {
             if (s == null) return;

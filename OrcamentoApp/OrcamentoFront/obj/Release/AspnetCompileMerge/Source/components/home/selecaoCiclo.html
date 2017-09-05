@@ -1,0 +1,203 @@
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="c in ct.ciclosAbertos">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-unlock fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Ciclo {{c.Codigo}}</div>
+                        <div>{{c.DataInicio | date:'dd/MMM/yy'}} - {{c.DataFim | date:'dd/MMM/yy'}}</div>
+                    </div>
+                </div>
+            </div>
+            <a href ng-click="ct.irParaOrcamento(c)">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para orçamento, ciclo {{c.Codigo}}</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="c in ct.ciclosFechados | limitTo:ct.qtdaFechadosVisivel">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-lock fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Ciclo {{c.Codigo}}</div>
+                        <div>{{c.DataInicio | date:'dd/MMM/yy'}} - {{c.DataFim | date:'dd/MMM/yy'}}</div>
+                    </div>
+                </div>
+            </div>
+            <a href ng-click="ct.irParaOrcamento(c)">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para orçamento, ciclo {{c.Codigo}}</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a ui-sref="containerHome.home">
+            <i class="fa fa-arrow-circle-left"></i> Voltar
+        </a>
+    </div>
+</div>
+
+<hr>
+
+<h3>Ciclos Anteriores</h3>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="input-ano">Ano</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group">
+            <select id="input-ano" class="form-control" ng-model="ct.ano" ng-options="a for a in ct.anos">
+                <option value="">(Selecionar)</option>
+            </select>
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 15px;">
+    <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="c in ct.ciclosFechados | filter:{'Ano':ct.ano}">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-lock fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">Ciclo {{c.Codigo}}</div>
+                        <div>{{c.DataInicio | date:'dd/MMM/yy'}} - {{c.DataFim | date:'dd/MMM/yy'}}</div>
+                    </div>
+                </div>
+            </div>
+            <a href ng-click="ct.irParaOrcamento(c)">
+                <div class="panel-footer">
+                    <span class="pull-left">Ir para orçamento, ciclo {{c.Codigo}}</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h3>Novo Ciclo</h3>
+
+<form role="form" name="formNovoCiclo">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="select-tipo">Tipo</label>
+                <select class="form-control" ng-model="ct.novoCiclo.TipoCod" ng-options="t.Codigo as t.Nome for t in ct.tipos" name="select-tipo" required>
+                    <option value="">(Selecione)</option>
+                </select>
+            </div>
+        </div>
+   </div>
+
+   <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="input-data-inicio">Data Início</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="date" class="form-control" required name="input-data-inicio" id="input-data-inicio" ng-model="ct.novoCiclo.DataInicio">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <div class="col-md-3">
+            <div class="form-group" ng-class="{'has-error':ct.novoCiclo.DataFim < ct.novoCiclo.DataInicio}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputDataFim">Data Fim</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="date" class="form-control" required name="inputDataFim" id="inputDataFim" ng-model="ct.novoCiclo.DataFim">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="input-descrica">Descrição do Ciclo</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea class="form-control" required name="input-descricao" id="input-descricao" ng-model="ct.novoCiclo.Descricao"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-md-12">
+            <button class="btn btn-primary" ng-disabled="formNovoCiclo.$invalid || ct.novoCiclo.DataFim < ct.novoCiclo.DataInicio" ng-click="ct.salvarCiclo(ct.novoCiclo)">Salvar</button>
+        </div>
+    </div>
+
+    
+
+</form>
+
+
+
+
+
+

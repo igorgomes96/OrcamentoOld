@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class AfastamentoDTO
     {
+        public AfastamentoDTO() { }
         public AfastamentoDTO (Afastamento a)
         {
             if (a == null) return;

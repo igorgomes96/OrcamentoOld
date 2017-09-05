@@ -7,6 +7,7 @@ namespace OrcamentoAPI.DTO
     
     public partial class FilialDTO
     {
+        public FilialDTO() { }
         public FilialDTO(Filial f)
         {
             if (f == null) return;

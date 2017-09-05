@@ -1,0 +1,140 @@
+<div class="row">
+
+    <!-- Listagem -->
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Listagem de Usuários
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body" style="max-height:600px;position:static;overflow-y:auto;">
+
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" class="form-control" name="input-filtro-usuario" id="input-filtro-cargo" ng-model="ct.filtroUsuario" ng-model-options="{debounce: 500}" placeholder="Filtro de Usuários">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group">
+
+                    <a href class="list-group-item" ng-click="ct.selecionar(u)" ng-repeat="u in ct.usuarios | filter:{'Nome':ct.filtroUsuario}" ng-class="{'active': u.Login == ct.usuario.Login}">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong>{{u.Nome}}</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="text-muted small">
+                                    <em>{{u.Login}} - {{u.Email}} - {{u.Perfil}}</em>
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </a>
+                    
+                </div>
+                <!-- /.list-group -->
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+
+
+    <!-- Formulário -->
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Formulário
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                
+                <form role="form" name="form" novalidate>
+                    
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="input-login">Login do Usuário</label>
+                                <input id="input-login" type="text" class="form-control" ng-model="ct.usuario.Login" ng-disabled="!ct.novo" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label for="input-nome">Nome do Usuário</label>
+                                <input id="input-nome" type="text" class="form-control" ng-model="ct.usuario.Nome" required ng-disabled="!ct.editando">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="input-email">Email</label>
+                                <input id="input-email" type="text" class="form-control" ng-model="ct.usuario.Email" required ng-disabled="!ct.editando">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="input-ramal">Ramal</label>
+                                <input id="input-ramal" type="text" class="form-control" ng-model="ct.usuario.Ramal" ng-disabled="!ct.editando">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="select-perfil">Perfil</label>
+                                <select id="select-perfil" class="form-control" ng-model="ct.usuario.Perfil" ng-options="p.NomePerfil as p.NomePerfil for p in ct.perfis" ng-change="ct.buscaPerfil(ct.usuario.Perfil)" required ng-disabled="!ct.editando"></select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="select-setor">Setor</label>
+                                <select id="select-setor" class="form-control" ng-model="ct.usuario.SetorCod" ng-options="s.Codigo as (s.Codigo + ' - ' + s.NomeSetor) for s in ct.setores" required ng-disabled="!ct.editando"></select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        
+                        <div class="col-md-12">
+                            <label for="input-descricao-perfil">Descrição do Perfil</label>
+                            <textarea class="form-control" id="input-descricao-perfil" name="input-descricao-perfil" ng-model="ct.usuario.PerfilObj.Descricao" rows="3" disabled>
+                            </textarea>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <button class="btn btn-primary" ng-show="ct.usuario && !ct.editando" ng-click="ct.editar()">Editar</button>
+                    <button class="btn btn-primary" ng-show="ct.editando" ng-click="ct.saveUsuario(ct.usuario)" ng-disabled="form.$invalid">Salvar</button>
+                    <button class="btn btn-success" ng-hide="ct.editando" ng-click="ct.novoUsuario()">Novo</button>
+                    <button class="btn btn-danger" ng-show="ct.usuario && !ct.editando" ng-click="ct.deleteUsuario(ct.usuario.Login)">Excluir</button>
+                    <button class="btn btn-default" ng-show="ct.editando" ng-click="ct.cancelarEdicao()">Cancelar</button>
+
+                </form>
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+
+</div>
