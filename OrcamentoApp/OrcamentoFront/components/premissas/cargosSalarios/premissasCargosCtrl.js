@@ -80,7 +80,6 @@ angular.module('orcamentoApp').controller('premissasCargosCtrl', ['$scope', 'car
 	}
 
 	self.saveAll = function(lista) {
-		console.log(lista);
 		salariosAPI.postSalarioSaveAll(lista)
 		.then(function(dado) {
 			messagesService.exibeMensagemSucesso("Informações salvas com sucesso!");
@@ -95,7 +94,7 @@ angular.module('orcamentoApp').controller('premissasCargosCtrl', ['$scope', 'car
 
 	self.changePage = function(page) {
 		if (self.pageAtual == page) return;
-		salariosAPI.postSalarioSaveAll(ct.salarios);
+		salariosAPI.postSalarioSaveAll(self.salarios);
 		if (page > self.pages.length || page < 1) return;
 		self.pageAtual = page;
 		self.loadSalarios(self.pageAtual, self.pageSize, null, self.filtroCidade, self.filtroEmpresa, self.filtroNomeCargo);
